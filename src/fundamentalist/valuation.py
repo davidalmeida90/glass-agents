@@ -21,7 +21,7 @@ from typing import Any
 
 from fundamentalist import dcf
 from fundamentalist.edgar import sec_get
-from fundamentalist.market import beta, bottom_up_beta, risk_free, synthetic_rating
+from fundamentalist.market import beta, bottom_up_beta, industry_ev_ebit, industry_pbv, risk_free, synthetic_rating
 from fundamentalist.parameters import value as param
 
 REVENUE = ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet",
@@ -60,6 +60,10 @@ INTANGIBLES = ["IntangibleAssetsNetExcludingGoodwill", "FiniteLivedIntangibleAss
 PREFERRED = ["PreferredStockValue", "PreferredStockValueOutstanding"]
 NI_COMMON = ["NetIncomeLossAvailableToCommonStockholdersBasic", "NetIncomeLoss"]
 BANK_SIC = {"6021", "6022", "6029", "6035", "6036", "6211"}  # commercial and savings banks, broker-dealers
+INSURANCE_SIC = {"6311", "6321", "6331", "6351", "6361", "6399"}
+DDM_SIC = {"6798", "4911", "4931", "4932", "4941"}  # REITs, electric and gas utilities, water
+DIVIDENDS = ["PaymentsOfDividendsCommonStock", "PaymentsOfDividends", "DividendsCommonStockCash", "DividendsCommonStock"]
+DPS = ["CommonStockDividendsPerShareDeclared", "CommonStockDividendsPerShareCashPaid"]
 
 
 # ------------------------------------------------------------------ SEC XBRL (adapted from Glassbench)
@@ -355,6 +359,10 @@ def cost_of_capital(ticker: str, f: dict, market_cap: float, as_of: str) -> dict
     b = dict(bottom_up or regression, regression=regression["used"], regression_raw=regression["raw"])
     if not bottom_up:
         b["method"] = "regression (no industry mapping for this ticker)"
+    elif abs(bottom_up["used"] - regression["used"]) > param("beta_disagreement"):
+        b["used"] = round((bottom_up["used"] + regression["used"]) / 2, 3)
+        b["method"] = (f"average of bottom-up {bottom_up['used']} and regression {regression['used']} (they differ by more "
+                       f"than {param('beta_disagreement')})")
     erp = param("equity_risk_premium")
     ke = rf + b["used"] * erp
     rating = synthetic_rating(_v(f, "ebit"), _v(f, "interest"))
@@ -401,19 +409,28 @@ def bank_value(ticker: str, as_of: str, price: float, price_date: str, sic: str)
     rf, rf_date = risk_free()
     regression = beta(ticker, as_of)
     b = bottom_up_beta(ticker, 0.0, bank=True) or regression
+    if b is not regression and abs(b["used"] - regression["used"]) > param("beta_disagreement"):
+        b = dict(b, used=round((b["used"] + regression["used"]) / 2, 3), method="average of industry and regression betas")
     b = dict(b, regression=regression["used"], regression_raw=regression["raw"])
     ke = rf + b["used"] * param("equity_risk_premium")
-    g = min(rf, param("terminal_growth_cap"))
+    g = min(rf, param("terminal_growth_cap"), ke - param("min_terminal_spread"))
     common = equity["val"] - (preferred["val"] if preferred and preferred["end"] == equity["end"] else 0)
-    roe, bvps = ni["value"] / common, common / count
+    roe_latest, bvps = ni["value"] / common, common / count
     history = roe_history(data, as_of)
+    roe = roe_latest
+    if param("normalized_financial_roe") and len(history) >= 3:
+        roe = sum(h["roe"] for h in history) / len(history)
     share, moat_why = moat([{"roic": h["roe"]} for h in history], ke)
+    cap_share = param("financial_moat_cap")
+    if share > cap_share:
+        share, moat_why = cap_share, f"{moat_why}; capped at {cap_share} for a financial firm (cyclical returns)"
     fair = {}
     for name, (d_roe, d_ke, d_share) in {"bear": (-0.02, 0.005, 0.0), "base": (0.0, 0.0, None),
                                          "bull": (0.02, -0.005, 1.0)}.items():
         fair[name] = round(excess_return_value(bvps, roe + d_roe, ke + d_ke, g,
-                                               share if d_share is None else d_share), 2)
-    out.update(fair_value=fair, roe=round(roe, 4), book_value_per_share=round(bvps, 2), cost_of_equity=round(ke, 4),
+                                               share if d_share is None else min(d_share, cap_share)), 2)
+    out.update(fair_value=fair, roe=round(roe, 4), roe_latest=round(roe_latest, 4), book_value_per_share=round(bvps, 2),
+               cost_of_equity=round(ke, 4),
                implied_roe=round(price / bvps * (ke - g) + g, 4), terminal_growth=g, shares_outstanding=count,
                moat=moat_why, roe_history=history,
                shares_source=count_source, cash_conversion=None,
@@ -421,6 +438,11 @@ def bank_value(ticker: str, as_of: str, price: float, price_date: str, sic: str)
                         "erp": param("equity_risk_premium"), "cost_of_equity": round(ke, 4)},
                valuation_period=f"net income to common, twelve months to {ni['end']}; equity at {equity['end']}; "
                                 f"the readers' evidence comes from the latest 10-K only")
+    peer_industry, peer = industry_pbv(ticker)
+    if peer and peer["roe"] > 0 and roe > 0:
+        per_share = bvps * peer["pbv"] * (roe / peer["roe"])
+        out["multiples_check"] = {"industry": peer_industry, "pbv": round(peer["pbv"], 2), "industry_roe": round(peer["roe"], 4),
+                                  "value_per_share": round(per_share, 2), "dcf_to_multiples": round(fair["base"] / per_share, 3)}
     issues = []
     ratio = fair["base"] / price
     lo, hi = param("sanity")["fair_to_price"]
@@ -438,6 +460,19 @@ def roe_history(data: dict, as_of: str, years: int = 5) -> list[dict[str, float]
             if equity.get(end, 0) > 0]
 
 
+def revenue_cagr(data: dict, concept: str, as_of: str, years: int = 3) -> float | None:
+    """Fiscal-year revenue CAGR over *years*, from one XBRL concept, or None without the history."""
+    annual = _annual(data, [concept], as_of)
+    if not annual:
+        return None
+    last = max(annual)
+    target = date.fromisoformat(last) - timedelta(days=365 * years)
+    start = [e for e in annual if abs((date.fromisoformat(e) - target).days) <= 20]
+    if not start or annual[start[0]] <= 0:
+        return None
+    return (annual[last] / annual[start[0]]) ** (1 / years) - 1
+
+
 def excess_return_value(bvps: float, roe: float, ke: float, g: float, moat_share: float, years: int = 10) -> float:
     """Book value per share plus the present value of excess returns, ROE fading to Ke + share x (ROE - Ke)."""
     roe_end = ke + moat_share * (roe - ke)
@@ -450,13 +485,96 @@ def excess_return_value(bvps: float, roe: float, ke: float, g: float, moat_share
     return value + (roe_end - ke) * bv / (ke - g) * discount
 
 
+def dividend_value(ticker: str, as_of: str, price: float, price_date: str, sic: str) -> dict[str, Any]:
+    """Two-stage dividend discount model for REITs and utilities."""
+    data = company_facts(ticker)
+    cfg = param("ddm")
+    count, count_source = checked_shares(ticker, _shares(data, as_of), as_of)
+    dividends = _ttm(data, DIVIDENDS, as_of)
+    out: dict[str, Any] = {"ticker": ticker.upper(), "as_of": as_of, "price": price, "price_date": price_date, "sic": sic,
+                           "fair_value": None, "note": None, "model": "ddm",
+                           "method": "two-stage dividend discount: dividends per share grow at the revenue growth blend "
+                                     "(bounded -5% to 8%) for 5 years, fading to terminal growth = risk-free rate, at the "
+                                     "CAPM cost of equity; bear/bull growth -/+2 points, cost of equity +/-0.5 points"}
+    f = fundamentals(ticker, as_of)
+    if not (dividends and count and f.get("revenue") and f.get("revenue_year_ago")):
+        out["note"] = "dividends, share count or revenue history not available from XBRL"
+        return out
+    rf, rf_date = risk_free()
+    debt = _v(f, "debt") + _v(f, "leases")
+    regression = beta(ticker, as_of)
+    b = bottom_up_beta(ticker, debt / (price * count)) or regression
+    if b is not regression and abs(b["used"] - regression["used"]) > param("beta_disagreement"):
+        b = dict(b, used=round((b["used"] + regression["used"]) / 2, 3), method="average of bottom-up and regression betas")
+    b = dict(b, regression=regression["used"])
+    ke = rf + b["used"] * param("equity_risk_premium")
+    dps_growth = dps_cagr(data, as_of)
+    if dps_growth is not None:
+        g1, growth_source = dps_growth, "3-year dividend per share CAGR"
+    else:
+        growth_ttm = _v(f, "revenue") / _v(f, "revenue_year_ago") - 1
+        cagr = revenue_cagr(data, f["revenue"]["concept"], as_of)
+        w = param("growth_blend")
+        g1 = growth_ttm if cagr is None else w["ttm"] * growth_ttm + w["cagr_3y"] * cagr
+        growth_source = "revenue growth blend (no dividend per share history)"
+    lo, hi = cfg["growth_bounds"]
+    g1 = min(max(g1, lo), hi)
+    g_t = min(rf, param("terminal_growth_cap"), max(g1, 0.0), ke - param("min_terminal_spread"))  # own dividend growth, spread
+    d0 = dividends["value"] / count
+    dg, dk = cfg["bear_bull"]
+    fair = {name: round(ddm_value(d0, g1 + sg * dg, g_t, ke + sk * dk, cfg["stage1_years"]), 2)
+            for name, (sg, sk) in {"bear": (-1, 1), "base": (0, 0), "bull": (1, -1)}.items()}
+    out.update(fair_value=fair, dividend_per_share=round(d0, 4), growth_used=round(g1, 4), growth_source=growth_source,
+               terminal_growth=g_t,
+               cost_of_equity=round(ke, 4), dividend_yield=round(d0 / price, 4), shares_outstanding=count,
+               shares_source=count_source, cash_conversion=None,
+               capital={"risk_free": round(rf, 4), "risk_free_date": rf_date, "beta": b,
+                        "erp": param("equity_risk_premium"), "cost_of_equity": round(ke, 4)},
+               valuation_period=f"dividends paid, twelve months to {dividends['end']}")
+    lo_s, hi_s = param("sanity")["fair_to_price"]
+    ratio = fair["base"] / price
+    if not lo_s <= ratio <= hi_s:
+        out.update(fair_value=None, fair_value_raw=fair, review=[f"base value is {ratio:.2f}x the price"],
+                   note=f"not rated, review: base value is {ratio:.2f}x the price, outside {lo_s}x to {hi_s}x")
+    return out
+
+
+def dps_cagr(data: dict, as_of: str, years: int = 3) -> float | None:
+    """Fiscal-year dividend per share CAGR over *years*, or None without the history."""
+    concept, rows = _facts(data, DPS, as_of, unit="USD/shares")
+    annual = {r["end"]: r["val"] for r in rows if r.get("start") and 350 <= _days(r) <= 380}
+    if not annual:
+        return None
+    last = max(annual)
+    target = date.fromisoformat(last) - timedelta(days=365 * years)
+    start = [e for e in annual if abs((date.fromisoformat(e) - target).days) <= 20]
+    if not start or annual[start[0]] <= 0:
+        return None
+    return (annual[last] / annual[start[0]]) ** (1 / years) - 1
+
+
+def ddm_value(d0: float, g1: float, g_t: float, ke: float, years: int = 5) -> float:
+    """Dividends growing at g1 for *years*, fading linearly to g_t over another *years*, then a Gordon terminal value."""
+    value, d, discount = 0.0, d0, 1.0
+    for t in range(1, 2 * years + 1):
+        g = g1 if t <= years else g1 + (g_t - g1) * (t - years) / years
+        d *= 1 + g
+        discount /= 1 + ke
+        value += d * discount
+    return value + d * (1 + g_t) / (ke - g_t) * discount
+
+
 def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     """Fair value range per share, the WACC and inputs behind it, and why it is missing when it is."""
     as_of = as_of or date.today().isoformat()
     price, price_date = last_price(ticker, as_of)
     sic, _ = industry(ticker)
-    if sic in BANK_SIC:
-        return bank_value(ticker, as_of, price, price_date, sic)
+    if sic in BANK_SIC or sic in INSURANCE_SIC:
+        out = bank_value(ticker, as_of, price, price_date, sic)
+        out["model"] = "bank" if sic in BANK_SIC else "insurer"
+        return out
+    if sic in DDM_SIC:
+        return dividend_value(ticker, as_of, price, price_date, sic)
     f = fundamentals(ticker, as_of)
     data_notes = complete(ticker, f)
     count, count_source = checked_shares(ticker, f["shares"], as_of)
@@ -507,7 +625,10 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
         rd_note = (f"R&D capitalized over {life} years: research asset {asset / 1e9:,.1f}B, EBIT +{(rd_ttm - amortization) / 1e9:,.1f}B "
                    f"(R&D {rd_ttm / 1e9:,.1f}B - amortization {amortization / 1e9:,.1f}B)")
         data_notes.append(rd_note)
-    growth_raw = revenue / _v(f, "revenue_year_ago") - 1
+    growth_ttm = revenue / _v(f, "revenue_year_ago") - 1
+    cagr = revenue_cagr(company_facts(ticker), f["revenue"]["concept"], as_of)
+    weights = param("growth_blend")
+    growth_raw = growth_ttm if cagr is None else weights["ttm"] * growth_ttm + weights["cagr_3y"] * cagr
     lo, hi = param("growth_bounds")
     market_cap = price * count
     capital = cost_of_capital(ticker, f, market_cap, as_of)
@@ -517,7 +638,9 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     x = dcf.Inputs(
         revenue=revenue, ebit=ebit, effective_tax=effective, marginal_tax=param("marginal_tax"),
         invested_capital=invested, operating_capital=operating, growth=min(max(growth_raw, lo), hi),
-        terminal_growth=min(rf, param("terminal_growth_cap")), wacc=wacc,
+        terminal_growth=min(rf, param("terminal_growth_cap"),
+                            (capital["mature_wacc"] if param("mature_wacc") else wacc) - param("min_terminal_spread")),
+        wacc=wacc,
         terminal_excess_return=excess,
         mature_wacc=capital["mature_wacc"] if param("mature_wacc") else None, year5_growth_cap=param("year5_growth_cap"),
         high_growth_years=param("high_growth_years"),
@@ -530,6 +653,7 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     implied = dcf.implied_growth(x, price)
     out.update(
         fair_value=fair, capital=capital, wacc=wacc, revenue_growth=round(growth_raw, 4), growth_used=round(x.growth, 4),
+        revenue_growth_ttm=round(growth_ttm, 4), revenue_cagr_3y=round(cagr, 4) if cagr is not None else None,
         implied_growth=round(implied, 4) if implied is not None else None, operating_margin=round(x.margin, 4),
         operating_margin_reported=round(reported_margin, 4), rd_margin_adjustment=round(rd_margin_adjustment, 4),
         roic=round(x.roic, 4), sales_to_capital=round(x.sales_to_capital, 3), effective_tax=round(effective, 4),
@@ -544,6 +668,12 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
         valuation_period=(f"trailing twelve months to {f['ebit']['end']} (revenue growth: twelve months to "
                           f"{f['revenue']['end']} vs to {f['revenue_year_ago']['end']}), from 10-K and 10-Q XBRL; "
                           f"the readers' evidence comes from the latest 10-K only"))
+    peer_industry, multiple = industry_ev_ebit(ticker)
+    if multiple:
+        reported_ebit = revenue * reported_margin
+        per_share = (multiple * reported_ebit - debt - _v(f, "minority") + cash) / count
+        out["multiples_check"] = {"industry": peer_industry, "ev_to_ebit": round(multiple, 1), "value_per_share": round(per_share, 2),
+                                  "dcf_to_multiples": round(fair["base"] / per_share, 3) if per_share > 0 else None}
     issues = _sane(out, base, price, wacc)
     if issues:
         out.update(fair_value=None, fair_value_raw=fair, review=issues, note="not rated, review: " + "; ".join(issues))

@@ -49,7 +49,11 @@ def pct(v: float | None, sign: bool = False) -> str:
 def valuation_line(val: dict) -> str:
     cap = val.get("capital") or {}
     b = cap.get("beta") or {}
-    if val.get("model") == "bank":
+    if val.get("model") == "ddm":
+        return (f"dividend discount: dividend per share {val['dividend_per_share']:.2f} (yield {pct(val['dividend_yield'])}),"
+                f" growth {pct(val['growth_used'])} fading to {pct(val['terminal_growth'])}, cost of equity"
+                f" {pct(val['cost_of_equity'])} = rf {pct(cap.get('risk_free'))} + beta {b.get('used')} x ERP {pct(cap.get('erp'))}")
+    if val.get("model") in ("bank", "insurer"):
         return (f"bank: ROE {pct(val['roe'])}, price implies ROE {pct(val['implied_roe'])}, book value per share"
                 f" {val['book_value_per_share']:,.2f}; cost of equity {pct(val['cost_of_equity'])} = rf"
                 f" {pct(cap.get('risk_free'))} + beta {b.get('used')} x ERP {pct(cap.get('erp'))}")
@@ -229,7 +233,9 @@ async def main() -> int:
     print(f"\n{'ticker':<6} {'rating':<11} {'agree':>5} {'weight':>6} {'price':>9} {'bear':>9} {'base':>9} {'bull':>9} {'upside':>7}  key figure")
     for m in memos:
         v, fv = m["valuation"], m["valuation"].get("fair_value") or {}
-        key = (f"ROE {pct(v.get('roe'))} vs implied {pct(v.get('implied_roe'))}" if v.get("model") == "bank" and fv else
+        key = (f"ROE {pct(v.get('roe'))} vs implied {pct(v.get('implied_roe'))}" if v.get("model") in ("bank", "insurer") and fv else
+               f"DDM: yield {pct(v.get('dividend_yield'))}, growth {pct(v.get('growth_used'))}, Ke {pct(v.get('cost_of_equity'))}"
+               if v.get("model") == "ddm" and fv else
                f"WACC {pct(v.get('wacc'))}, growth {pct(v.get('growth_used'))} vs implied {pct(v.get('implied_growth'), True)}"
                if fv else (v.get("note") or "")[:60])
         up = fv["base"] / v["price"] - 1 if fv else None
@@ -238,7 +244,11 @@ async def main() -> int:
               + f"  {key}")
     out = HERE / "runs"
     out.mkdir(exist_ok=True)
-    path = out / f"memo-{time.strftime('%Y%m%d-%H%M%S')}.json"
+    stamp = time.strftime('%Y%m%d-%H%M%S')
+    path = out / f"memo-{stamp}.json"
+    if not args.valuation_only:
+        from track import record
+        print(f"track record: {record(stamp, memos)} ratings added to data/track_record.csv (score with: python track.py score)")
     path.write_text(json.dumps({"batch": bs, "budget_usd": args.budget_usd, "repeats": args.repeats, "memos": memos},
                                indent=1, default=str), encoding="utf-8")
     print(f"\nsaved {path.relative_to(HERE)}")

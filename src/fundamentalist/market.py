@@ -91,6 +91,46 @@ def _ticker_industries() -> dict[str, str]:
         return {r["ticker"].upper(): r["Industry Group"].strip() for r in csv.DictReader(fh)}
 
 
+@lru_cache(maxsize=1)
+def _industry_multiples() -> dict[str, dict[str, float]]:
+    with open(DATA / "damodaran_industry_multiples_2026-01.csv", encoding="utf-8") as fh:
+        rows = {}
+        for r in csv.DictReader(fh):
+            try:
+                rows[r["Industry Name"].strip()] = {"ev_ebit": float(r["EV/EBIT"]), "ev_ebitda": float(r["EV/EBITDA"]),
+                                                    "firms": int(float(r["Number of firms"]))}
+            except (TypeError, ValueError):
+                continue
+        return rows
+
+
+@lru_cache(maxsize=1)
+def _industry_pbv() -> dict[str, dict[str, float]]:
+    with open(DATA / "damodaran_industry_pbv_2026-01.csv", encoding="utf-8") as fh:
+        rows = {}
+        for r in csv.DictReader(fh):
+            try:
+                rows[r["Industry Name"].strip()] = {"pbv": float(r["PBV"]), "roe": float(r["ROE"])}
+            except (TypeError, ValueError):
+                continue
+        return rows
+
+
+def industry_pbv(ticker: str) -> tuple[str | None, dict[str, float] | None]:
+    industry = industry_of(ticker)
+    return industry, _industry_pbv().get(industry or "")
+
+
+def industry_of(ticker: str) -> str | None:
+    return _ticker_industries().get(ticker.upper())
+
+
+def industry_ev_ebit(ticker: str) -> tuple[str | None, float | None]:
+    industry = industry_of(ticker)
+    row = _industry_multiples().get(industry or "")
+    return industry, (row["ev_ebit"] if row and row["ev_ebit"] > 0 else None)
+
+
 def bottom_up_beta(ticker: str, debt_to_equity: float, bank: bool = False) -> dict[str, Any] | None:
     """Industry unlevered beta (cash-corrected), relevered at the firm's market D/E: bu x (1 + (1 - t) x D/E).
 
@@ -104,7 +144,7 @@ def bottom_up_beta(ticker: str, debt_to_equity: float, bank: bool = False) -> di
         return {"industry": industry, "firms": row["firms"], "used": round(row["levered"], 3),
                 "method": "industry levered beta (bank)"}
     levered = row["unlevered_cash_corrected"] * (1 + (1 - param("marginal_tax")) * debt_to_equity)
-    lo, hi = param("beta_bounds")
+    lo, hi = param("beta_bounds_bottom_up")
     return {"industry": industry, "firms": row["firms"], "unlevered": round(row["unlevered_cash_corrected"], 3),
             "debt_to_equity": round(debt_to_equity, 3), "used": round(min(max(levered, lo), hi), 3),
             "method": "bottom-up: industry unlevered beta (cash-corrected) relevered at market D/E"}

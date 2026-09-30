@@ -39,6 +39,8 @@ def audit(memo: dict[str, Any]) -> list[str]:
         wacc = w * cap["cost_of_equity"] + (1 - w) * cap["cost_of_debt_pre_tax"] * (1 - cap["tax_shield_rate"])
         if abs(wacc - cap["wacc"]) > 0.0005:
             issues.append(f"WACC does not recompute: {wacc:.4f} vs {cap['wacc']:.4f}")
+    if str(val.get("note") or "").startswith("valuation failed"):
+        issues.append(f"valuation did not run: {val['note']}")
     if rating not in RATINGS and rating != "No rating":
         issues.append(f"unknown rating {rating}")
     if fv and rating == "No rating":
@@ -68,7 +70,7 @@ def write_memo(memo: dict[str, Any], out_dir: Path, as_of: str) -> Path:
     fv, cap = val.get("fair_value") or {}, val.get("capital") or {}
     b, rating_info = cap.get("beta") or {}, cap.get("rating") or {}
     lines = [f"# {t}: {memo['rating']}", "",
-             f"Desk memo, {as_of}. Price {val.get('price', 0):,.2f} ({val.get('price_date')}). Noise meter agreement "
+             f"Desk memo, {as_of}. Price {val.get('price') or 0:,.2f} ({val.get('price_date')}). Noise meter agreement "
              f"{memo['confidence']:.0%} ({', '.join(r['final']['rating'] for r in memo['repeats'])}). Target weight "
              f"{memo['sizing']['weight']:.1%}.", ""]
     lines += ["## Why", ""] + [f"- {w}" for w in first["final"]["why"]] + [""]
@@ -78,8 +80,17 @@ def write_memo(memo: dict[str, Any], out_dir: Path, as_of: str) -> Path:
         lines += ["## Valuation", "", f"Method: {val.get('method')}", "",
                   "| Bear | Base | Bull | Price / base |", "|---:|---:|---:|---:|",
                   f"| {fv['bear']:,.2f} | {fv['base']:,.2f} | {fv['bull']:,.2f} | {val['price'] / fv['base']:.2f} |", ""]
-        if val.get("model") == "bank":
-            lines += [f"- ROE {_pct(val['roe'])}; the price implies {_pct(val['implied_roe'])}; book value per share "
+        if val.get("model") == "ddm":
+            lines += [f"- Dividend per share {val['dividend_per_share']:.2f} (yield {_pct(val['dividend_yield'])}), growth "
+                      f"{_pct(val['growth_used'])} fading to {_pct(val['terminal_growth'])}, cost of equity "
+                      f"{_pct(val['cost_of_equity'])}", ""]
+        elif val.get("model") in ("bank", "insurer"):
+            mc = val.get("multiples_check")
+            if mc:
+                lines += [f"- Industry check: {mc['industry']} P/B {mc['pbv']}x at ROE {_pct(mc['industry_roe'])}, ROE-adjusted "
+                          f"{mc['value_per_share']:,.2f} per share; model / multiples {mc['dcf_to_multiples']}"]
+            lines += [f"- ROE {_pct(val['roe'])} (5-year average; latest {_pct(val.get('roe_latest'))}); the price implies "
+                      f"{_pct(val['implied_roe'])}; book value per share "
                       f"{val['book_value_per_share']:,.2f}; cost of equity {_pct(val['cost_of_equity'])}; {val.get('moat')}", ""]
         else:
             lines += ["| Cost of capital | Value |", "|---|---:|",
@@ -91,12 +102,16 @@ def write_memo(memo: dict[str, Any], out_dir: Path, as_of: str) -> Path:
                       f"| Cost of debt, pre-tax | {_pct(cap.get('cost_of_debt_pre_tax'))} |",
                       f"| Equity weight | {_pct(cap.get('weight_equity'))} |",
                       f"| **WACC** (maturing to {_pct(cap.get('mature_wacc'))}) | **{_pct(cap.get('wacc'))}** |", "",
-                      f"- Revenue growth {_pct(val['revenue_growth'])} (used {_pct(val['growth_used'])}); the price implies "
-                      f"{_pct(val['implied_growth'])}",
+                      f"- Revenue growth: last twelve months {_pct(val.get('revenue_growth_ttm'))}, 3-year CAGR "
+                      f"{_pct(val.get('revenue_cagr_3y'))}, blend {_pct(val['revenue_growth'])} (used {_pct(val['growth_used'])});"
+                      f" the price implies {_pct(val['implied_growth'])}",
                       f"- Operating margin {_pct(val['operating_margin'])} (reported {_pct(val.get('operating_margin_reported'))}"
                       f" + R&D adjustment {_pct(val.get('rd_margin_adjustment'))}), ROIC {_pct(val['roic'])}, sales-to-capital "
                       f"{val['sales_to_capital']}, SBC {_pct(val['sbc_to_revenue'])} of revenue",
                       f"- Moat: {val.get('moat')}",
+                      (f"- Industry multiples check: {val['multiples_check']['industry']} EV/EBIT {val['multiples_check']['ev_to_ebit']}x "
+                       f"gives {val['multiples_check']['value_per_share']:,.2f} per share; DCF / multiples "
+                       f"{val['multiples_check']['dcf_to_multiples']}" if val.get("multiples_check") else "- Industry multiples check: n/a"),
                       f"- Terminal value {_pct(val['terminal_share'])} of enterprise value; EV/EBIT at base {val['ev_to_ebit']}x "
                       f"vs market {val['market_ev_to_ebit']}x", f"- Period: {val.get('valuation_period')}", ""]
             grid = (val.get("sensitivity") or {}).get("grid") or {}

@@ -295,3 +295,21 @@ def test_research_asset_straight_line():
     annual = {f"20{y}-12-31": 10.0 for y in range(10, 26)}
     asset, amortization = research_asset(10.0, annual, 5)
     assert abs(asset - 30.0) < 1e-9 and abs(amortization - 10.0) < 1e-9
+
+
+
+def test_methods_disagreeing_raises_uncertainty():
+    from fundamentalist.decision import uncertainty
+
+    fv = {"bear": 90.0, "base": 100.0, "bull": 110.0}
+    assert uncertainty(0.15, fv, 1.0)[0] == "Low"
+    assert uncertainty(0.15, fv, 2.0)[0] == "Medium"      # DCF twice the multiples value
+    assert uncertainty(0.15, fv, 0.5)[0] == "Medium"
+
+
+
+def test_ddm_matches_gordon_when_growth_is_flat():
+    from fundamentalist.valuation import ddm_value
+
+    # constant 3% growth at 8%: Gordon value D0 x 1.03 / (0.08 - 0.03)
+    assert abs(ddm_value(2.0, 0.03, 0.03, 0.08) - 2.0 * 1.03 / 0.05) < 1e-9

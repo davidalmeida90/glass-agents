@@ -44,12 +44,15 @@ def flags(value: dict[str, Any], evidence: dict[str, list[dict]], risk_stats: di
 LEVELS = ["Low", "Medium", "High", "Very High", "Extreme"]
 
 
-def uncertainty(vol: float | None, fair: dict[str, float]) -> tuple[str, float]:
-    """Uncertainty level from volatility (High when unknown), one level up for a wide fair value range."""
+def uncertainty(vol: float | None, fair: dict[str, float], dcf_to_multiples: float | None = None) -> tuple[str, float]:
+    """Uncertainty from volatility (High when unknown); one level up for a wide range, one for methods disagreeing."""
     cfg = param("uncertainty")
     level = 2 if vol is None else next((i for i, c in enumerate(cfg["volatility"]) if vol < c), len(cfg["volatility"]))
     width = (fair["bull"] - fair["bear"]) / fair["base"] if fair["base"] > 0 else float("inf")
     if width > cfg["range_overlay"]:
+        level = min(level + 1, len(LEVELS) - 1)
+    lo, hi = param("multiples_check")["agree"]
+    if dcf_to_multiples is not None and not lo <= dcf_to_multiples <= hi:
         level = min(level + 1, len(LEVELS) - 1)
     return LEVELS[level], width
 
@@ -58,14 +61,16 @@ def decide(value: dict[str, Any], flag_set: dict[str, list[str]], vol: float | N
     fv, price = value.get("fair_value"), value["price"]
     if not fv:
         return {"rating": "No rating", "why": [value.get("note") or "no fair value"], "upside_to_base": None}
-    level, width = uncertainty(vol, fv)
+    ratio = (value.get("multiples_check") or {}).get("dcf_to_multiples")
+    level, width = uncertainty(vol, fv, ratio)
     buy, sell = param("rating_bands")[level]
     overweight, underweight = 1 - (1 - buy) / 4, 1 + (sell - 1) / 5
     pfv = price / fv["base"]
     step = 4 if pfv <= buy else 3 if pfv <= overweight else 2 if pfv < underweight else 1 if pfv < sell else 0
     vol_text = "volatility unknown" if vol is None else f"volatility {vol:.0%}"
-    why = [f"price / base fair value {pfv:.2f} at {level} uncertainty ({vol_text}, range {width:.2f}x base): Buy at or "
-           f"below {buy:.2f}, Overweight to {overweight:.2f}, Underweight from {underweight:.2f}, Sell from {sell:.2f}"]
+    methods = "" if ratio is None else f", DCF / industry multiples {ratio:.2f}"
+    why = [f"price / base fair value {pfv:.2f} at {level} uncertainty ({vol_text}, range {width:.2f}x base{methods}): Buy "
+           f"at or below {buy:.2f}, Overweight to {overweight:.2f}, Underweight from {underweight:.2f}, Sell from {sell:.2f}"]
     if flag_set["red"]:
         step = min(step, 1)
         why.append("red flag caps the rating at Underweight")
