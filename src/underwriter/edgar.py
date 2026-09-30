@@ -190,6 +190,19 @@ def load_index(ticker: str, corpus: str = "10-K") -> FilingIndex:
     if corpus == "10-K":
         meta = latest_filing(ticker, "10-K")
         _INDEXES[key] = FilingIndex.from_text(meta, filing_text(meta))
+    elif corpus == "10-K+10-Q":
+        # the latest 10-Q joins the 10-K so the evidence covers the same recent period as the valuation's TTM figures
+        k = load_index(ticker, "10-K")
+        passages, source = list(k.passages), k.meta["source"]
+        try:
+            q = latest_filing(ticker, "10-Q")
+        except ValueError:
+            q = None
+        if q and q["period"] > k.meta["period"]:
+            qi = FilingIndex.from_text(q, filing_text(q), prefix="Q")
+            passages += qi.passages
+            source += f"; plus the 10-Q for the quarter ended {q['period']}, filed {q['filed']} (passages Q000 onward)"
+        _INDEXES[key] = FilingIndex(meta=dict(k.meta, source=source), passages=passages)
     elif corpus == "risk_changes":
         now_meta, prior_meta = latest_filing(ticker, "10-K"), latest_filing(ticker, "10-K", skip=1)
         diff = risk_changes(filing_text(now_meta), filing_text(prior_meta))

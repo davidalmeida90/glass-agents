@@ -49,11 +49,13 @@ class Reader:
 READERS: dict[str, Reader] = {
     "performance": Reader(
         name="performance",
-        task=("Collect the company's financial performance for its latest fiscal year. Cover each of these once "
-              "before adding anything else: total revenue, revenue growth, gross or operating margin, net income, "
-              "operating cash flow, then the largest segments' revenue or operating income."),
+        task=("Collect the company's financial performance for its latest fiscal year and, when a 10-Q is included, "
+              "its latest year-to-date period. Cover each of these once before adding anything else: total revenue, "
+              "revenue growth, gross or operating margin, net income, operating cash flow, the latest year-to-date "
+              "revenue growth from the 10-Q, then the largest segments' revenue or operating income."),
         schema=evidence_schema(["revenue", "growth", "margin", "net_income", "cash_flow", "segment", "other"], 10),
         min_verified=4,
+        corpus="10-K+10-Q",
     ),
     "accounting": Reader(
         name="accounting",

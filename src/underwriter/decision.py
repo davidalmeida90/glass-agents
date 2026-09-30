@@ -33,7 +33,7 @@ def flags(value: dict[str, Any], evidence: dict[str, list[dict]], risk_stats: di
             red.append(f"{c.get('topic')}: {c.get('quote', '')[:120]}")
     conv = value.get("cash_conversion")
     if conv is not None and conv < 0.8:
-        caution.append(f"cash conversion {conv:.2f} (operating cash flow / net income under 0.8)")
+        caution.append(f"cash conversion {conv:.2f} (operating cash flow / NOPAT under 0.8)")
     if risk_stats and risk_stats.get("sentences_now"):
         changed = risk_stats["new_count"] / risk_stats["sentences_now"]
         if changed > 0.25:

@@ -157,7 +157,9 @@ async def main() -> int:
                     x = val.get("dcf_inputs")
                     if fixes and x is not None:
                         g_lo, g_hi = param("growth_bounds")  # corrections pass through the same bounds as every input
-                        margin = min(max(fixes.get("operating_margin", x.margin), 0.0), 0.8)
+                        # a margin correction is on the reported basis; add back the R&D capitalization adjustment
+                        margin = min(max(fixes["operating_margin"] + val.get("rd_margin_adjustment", 0.0), 0.0), 0.8) \
+                            if "operating_margin" in fixes else x.margin
                         y = replace(x, growth=min(max(fixes.get("growth", x.growth), g_lo), g_hi), ebit=x.revenue * margin)
                         fv = {n: round(dcf.value_per_share(dcf.scenario(y, n))["per_share"], 2) for n in ("bear", "base", "bull")}
                         revalued = decide(dict(val, fair_value=fv), fl, vol)

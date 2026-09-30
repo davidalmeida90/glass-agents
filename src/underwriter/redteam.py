@@ -26,6 +26,7 @@ from underwriter.utils import init_model
 from underwriter.parameters import PARAMS
 
 VALUATION_FIELDS = ["price", "fair_value", "growth_used", "revenue_growth", "implied_growth", "wacc", "operating_margin",
+                    "operating_margin_reported", "rd_margin_adjustment",
                     "roic", "sales_to_capital", "effective_tax", "terminal_growth", "terminal_roic", "terminal_share",
                     "ev_to_ebit", "market_ev_to_ebit", "net_debt", "cash_conversion", "sbc_to_revenue", "roe",
                     "implied_roe", "book_value_per_share", "cost_of_equity", "valuation_period"] + list(PARAMS)
@@ -76,6 +77,8 @@ Rules:
 - Criticism of the valuation method or its fixed assumptions (discount rate, growth cap, the fade, how owner earnings are defined) is type "method": it applies to every company alike and goes to the desk's method review.
 - Severity "high" only when the objection alone should change the rating and the cited evidence supports it. Otherwise "medium" or "low".
 - When the evidence supports a specific different number for starting revenue growth or operating margin, put it in "correction" as a decimal. The desk revalues with it; the direction label is informational.
+- operating_margin is R&D-adjusted when R&D is capitalized (operating_margin = operating_margin_reported + rd_margin_adjustment). A margin correction is read on the reported (GAAP) basis, so a reported margin that matches operating_margin_reported is not a correction.
+- growth_used is the latest twelve months; passages with IDs starting with Q come from the latest 10-Q and cover that recent period. A 10-K fiscal-year growth figure is older and is not a correction to growth_used.
 - No outside knowledge, no news, no prices other than the one given.
 - Submit with the Objections tool.
 

@@ -494,13 +494,14 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     operating = invested
     if param("capital_for_reinvestment") == "operating":
         operating = max(invested - _v(f, "goodwill") - _v(f, "intangibles"), 0.2 * revenue)
-    rd_note = None
+    rd_note, rd_margin_adjustment, reported_margin = None, 0.0, ebit / revenue
     rd_ttm = _v(f, "rd_ttm")
     if rd_ttm > param("capitalize_rd")["min_share_of_revenue"] * revenue and f.get("rd_annual"):
         from underwriter.market import _ticker_industries
         life = rd_life(_ticker_industries().get(ticker.upper()))
         asset, amortization = research_asset(rd_ttm, f["rd_annual"], life)
         ebit += rd_ttm - amortization
+        rd_margin_adjustment = (rd_ttm - amortization) / revenue
         invested += asset
         operating += asset
         rd_note = (f"R&D capitalized over {life} years: research asset {asset / 1e9:,.1f}B, EBIT +{(rd_ttm - amortization) / 1e9:,.1f}B "
@@ -530,6 +531,7 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     out.update(
         fair_value=fair, capital=capital, wacc=wacc, revenue_growth=round(growth_raw, 4), growth_used=round(x.growth, 4),
         implied_growth=round(implied, 4) if implied is not None else None, operating_margin=round(x.margin, 4),
+        operating_margin_reported=round(reported_margin, 4), rd_margin_adjustment=round(rd_margin_adjustment, 4),
         roic=round(x.roic, 4), sales_to_capital=round(x.sales_to_capital, 3), effective_tax=round(effective, 4),
         terminal_growth=x.terminal_growth, terminal_roic=round(base["terminal_roic"], 4),
         terminal_share=round(base["terminal_share"], 3) if base["terminal_share"] else None,

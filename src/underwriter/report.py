@@ -93,7 +93,8 @@ def write_memo(memo: dict[str, Any], out_dir: Path, as_of: str) -> Path:
                       f"| **WACC** (maturing to {_pct(cap.get('mature_wacc'))}) | **{_pct(cap.get('wacc'))}** |", "",
                       f"- Revenue growth {_pct(val['revenue_growth'])} (used {_pct(val['growth_used'])}); the price implies "
                       f"{_pct(val['implied_growth'])}",
-                      f"- Operating margin {_pct(val['operating_margin'])}, ROIC {_pct(val['roic'])}, sales-to-capital "
+                      f"- Operating margin {_pct(val['operating_margin'])} (reported {_pct(val.get('operating_margin_reported'))}"
+                      f" + R&D adjustment {_pct(val.get('rd_margin_adjustment'))}), ROIC {_pct(val['roic'])}, sales-to-capital "
                       f"{val['sales_to_capital']}, SBC {_pct(val['sbc_to_revenue'])} of revenue",
                       f"- Moat: {val.get('moat')}",
                       f"- Terminal value {_pct(val['terminal_share'])} of enterprise value; EV/EBIT at base {val['ev_to_ebit']}x "
