@@ -1,0 +1,493 @@
+{
+ "batch": {
+  "calls": 0,
+  "input": 0,
+  "cached": 0,
+  "output": 0,
+  "reasoning": 0,
+  "tokens": 0,
+  "usd": 0,
+  "max_tokens": 1000000000,
+  "max_usd": 0.5
+ },
+ "budget_usd": 0.5,
+ "memos": [
+  {
+   "ticker": "MSFT",
+   "valuation": {
+    "ticker": "MSFT",
+    "as_of": "2026-09-30",
+    "price": 512.9000244140625,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 331839000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 281724000000,
+      "end": "2025-06-30",
+      "method": "fiscal year",
+      "filed": "2025-07-30",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "net_income": {
+      "value": 133749000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 182935000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 115948000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "shares": {
+      "end": "2026-07-23",
+      "val": 7425545491,
+      "accn": "0001193125-26-323660",
+      "fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 40294000000,
+     "cash_and_securities": 76843000000
+    },
+    "fair_value": {
+     "bear": 156.34,
+     "base": 218.98,
+     "bull": 314.0
+    },
+    "note": null,
+    "fcf": 66987000000,
+    "revenue_growth": 0.1779,
+    "net_debt": -36549000000,
+    "shares_outstanding": 7425545491,
+    "cash_conversion": 1.368
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "Sell",
+    "why": [
+     "price 512.90 is more than 25% above the bull value (bear 156.34, base 218.98, bull 314.00)"
+    ],
+    "upside_to_base": -0.5731
+   },
+   "evidence": {},
+   "costs": {}
+  },
+  {
+   "ticker": "AAPL",
+   "valuation": {
+    "ticker": "AAPL",
+    "as_of": "2026-09-30",
+    "price": 333.0199890136719,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 466823000000,
+      "end": "2026-06-27",
+      "method": "FY to 2025-09-27 + 9-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 408625000000,
+      "end": "2025-06-28",
+      "method": "FY to 2024-09-28 + 9-month YTD - prior YTD",
+      "filed": "2025-08-01",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "net_income": {
+      "value": 128930000000,
+      "end": "2026-06-27",
+      "method": "FY to 2025-09-27 + 9-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 146724000000,
+      "end": "2026-06-27",
+      "method": "FY to 2025-09-27 + 9-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 10041000000,
+      "end": "2026-06-27",
+      "method": "FY to 2025-09-27 + 9-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "shares": {
+      "end": "2026-07-17",
+      "val": 14594180000,
+      "accn": "0000320193-26-000020",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 84344000000,
+     "cash_and_securities": 62399000000
+    },
+    "fair_value": {
+     "bear": 149.67,
+     "base": 204.7,
+     "bull": 286.56
+    },
+    "note": null,
+    "fcf": 136683000000,
+    "revenue_growth": 0.1424,
+    "net_debt": 21945000000,
+    "shares_outstanding": 14594180000,
+    "cash_conversion": 1.138
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "Underweight",
+    "why": [
+     "price 333.02 is up to 25% above the bull value (bear 149.67, base 204.70, bull 286.56)"
+    ],
+    "upside_to_base": -0.3853
+   },
+   "evidence": {},
+   "costs": {}
+  },
+  {
+   "ticker": "NVDA",
+   "valuation": {
+    "ticker": "NVDA",
+    "as_of": "2026-09-30",
+    "price": 228.3800048828125,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 302970000000,
+      "end": "2026-07-26",
+      "method": "FY to 2026-01-25 + 6-month YTD - prior YTD",
+      "filed": "2026-08-26",
+      "concept": "Revenues"
+     },
+     "revenue_year_ago": {
+      "value": 165218000000,
+      "end": "2025-07-27",
+      "method": "FY to 2025-01-26 + 6-month YTD - prior YTD",
+      "filed": "2025-08-27",
+      "concept": "Revenues"
+     },
+     "net_income": {
+      "value": 192880000000,
+      "end": "2026-07-26",
+      "method": "FY to 2026-01-25 + 6-month YTD - prior YTD",
+      "filed": "2026-08-26",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 134360000000,
+      "end": "2026-07-26",
+      "method": "FY to 2026-01-25 + 6-month YTD - prior YTD",
+      "filed": "2026-08-26",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 7354000000,
+      "end": "2026-07-26",
+      "method": "FY to 2026-01-25 + 6-month YTD - prior YTD",
+      "filed": "2026-08-26",
+      "concept": "PaymentsToAcquireProductiveAssets"
+     },
+     "shares": {
+      "end": "2026-08-21",
+      "val": 24100000000,
+      "accn": "0001045810-26-000075",
+      "fy": 2027,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-26",
+      "frame": "CY2026Q3I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 33366000000,
+     "cash_and_securities": 22443000000
+    },
+    "fair_value": {
+     "bear": 100.4,
+     "base": 144.46,
+     "bull": 211.9
+    },
+    "note": null,
+    "fcf": 127006000000,
+    "revenue_growth": 0.8338,
+    "net_debt": 10923000000,
+    "shares_outstanding": 24100000000,
+    "cash_conversion": 0.697
+   },
+   "flags": {
+    "red": [],
+    "caution": [
+     "cash conversion 0.70 (operating cash flow / net income under 0.8)"
+    ]
+   },
+   "decision": {
+    "rating": "Sell",
+    "why": [
+     "price 228.38 is up to 25% above the bull value (bear 100.40, base 144.46, bull 211.90)",
+     "one notch off: cash conversion 0.70 (operating cash flow / net income under 0.8)"
+    ],
+    "upside_to_base": -0.3675
+   },
+   "evidence": {},
+   "costs": {}
+  },
+  {
+   "ticker": "AMZN",
+   "valuation": {
+    "ticker": "AMZN",
+    "as_of": "2026-09-30",
+    "price": 249.14999389648438,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 775680000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 670038000000,
+      "end": "2025-06-30",
+      "method": "FY to 2024-12-31 + 6-month YTD - prior YTD",
+      "filed": "2025-08-01",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "net_income": {
+      "value": 135281000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-31",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 161403000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-31",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 173028000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-31",
+      "concept": "PaymentsToAcquireProductiveAssets"
+     },
+     "shares": {
+      "end": "2026-07-22",
+      "val": 10786313572,
+      "accn": "0001018724-26-000026",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 132549000000,
+     "cash_and_securities": 122988000000
+    },
+    "fair_value": null,
+    "note": "free cash flow is negative (-11,625,000,000): a cash flow DCF does not apply"
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "No rating",
+    "why": [
+     "free cash flow is negative (-11,625,000,000): a cash flow DCF does not apply"
+    ],
+    "upside_to_base": null
+   },
+   "evidence": {},
+   "costs": {}
+  },
+  {
+   "ticker": "JPM",
+   "valuation": {
+    "ticker": "JPM",
+    "as_of": "2026-09-30",
+    "price": 330.8299865722656,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 182447000000,
+      "end": "2025-12-31",
+      "method": "fiscal year",
+      "filed": "2026-02-13",
+      "concept": "Revenues"
+     },
+     "revenue_year_ago": {
+      "value": 177556000000,
+      "end": "2024-12-31",
+      "method": "fiscal year",
+      "filed": "2025-02-14",
+      "concept": "Revenues"
+     },
+     "net_income": {
+      "value": 65019000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-06",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": -162534000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-06",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": null,
+     "shares": {
+      "end": "2026-06-30",
+      "val": 2658186195,
+      "accn": "0001628280-26-054343",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-06",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 72430000000,
+     "cash_and_securities": 309811000000
+    },
+    "fair_value": null,
+    "note": "free cash flow not available from XBRL (typical for banks)"
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "No rating",
+    "why": [
+     "free cash flow not available from XBRL (typical for banks)"
+    ],
+    "upside_to_base": null
+   },
+   "evidence": {},
+   "costs": {}
+  },
+  {
+   "ticker": "KO",
+   "valuation": {
+    "ticker": "KO",
+    "as_of": "2026-09-30",
+    "price": 86.08000183105469,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 49284000000,
+      "end": "2026-04-03",
+      "method": "FY to 2025-12-31 + 3-month YTD - prior YTD",
+      "filed": "2026-04-30",
+      "concept": "Revenues"
+     },
+     "revenue_year_ago": {
+      "value": 47062000000,
+      "end": "2025-06-27",
+      "method": "FY to 2024-12-31 + 6-month YTD - prior YTD",
+      "filed": "2025-07-24",
+      "concept": "Revenues"
+     },
+     "net_income": {
+      "value": 13701000000,
+      "end": "2026-04-03",
+      "method": "FY to 2025-12-31 + 3-month YTD - prior YTD",
+      "filed": "2026-04-30",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 14631000000,
+      "end": "2026-04-03",
+      "method": "FY to 2025-12-31 + 3-month YTD - prior YTD",
+      "filed": "2026-04-30",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 2069000000,
+      "end": "2026-04-03",
+      "method": "FY to 2025-12-31 + 3-month YTD - prior YTD",
+      "filed": "2026-04-30",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "shares": {
+      "end": "2026-04-28",
+      "val": 4302482418,
+      "accn": "0001628280-26-028802",
+      "fy": 2026,
+      "fp": "Q1",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "frame": "CY2026Q1I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 250000000,
+     "cash_and_securities": 10574000000
+    },
+    "fair_value": {
+     "bear": 44.74,
+     "base": 54.53,
+     "bull": 68.43
+    },
+    "note": null,
+    "fcf": 12562000000,
+    "revenue_growth": 0.0472,
+    "net_debt": -10324000000,
+    "shares_outstanding": 4302482418,
+    "cash_conversion": 1.068
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "Sell",
+    "why": [
+     "price 86.08 is more than 25% above the bull value (bear 44.74, base 54.53, bull 68.43)"
+    ],
+    "upside_to_base": -0.3665
+   },
+   "evidence": {},
+   "costs": {}
+  }
+ ]
+}

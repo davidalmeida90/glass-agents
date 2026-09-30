@@ -118,3 +118,35 @@ def test_risk_changes_keeps_only_new_sentences():
     out = risk_changes(new, old)
     assert out["new"] == ["New export controls on advanced chips could restrict our sales to certain countries."]
     assert out["removed"] == [] and out["sentences_now"] == 3
+
+
+def test_dcf_matches_a_hand_computation():
+    from underwriter.valuation import dcf_per_share
+
+    # no growth anywhere: five years of 100 then a perpetuity of 100 at 10%, minus 0 net debt, 1 share = 1,000
+    assert abs(dcf_per_share(100, 0.0, 0.10, 0.0, 1.0, terminal=0.0) - 1000.0) < 1e-6
+
+
+def test_decision_bands_and_flags():
+    from underwriter.decision import decide, flags
+
+    val = {"price": 100.0, "fair_value": {"bear": 110.0, "base": 130.0, "bull": 150.0}, "cash_conversion": 1.2}
+    none = {"red": [], "caution": []}
+    assert decide(val, none)["rating"] == "Buy"
+    assert decide(dict(val, price=140.0), none)["rating"] == "Hold"
+    assert decide(dict(val, price=200.0), none)["rating"] == "Sell"
+    ok = {"status": "verified"}
+    ev = {"accounting": [{"topic": "internal_control", "quote": "our internal control was not effective", "check": ok},
+                         {"topic": "internal_control", "quote": "there were no material weaknesses", "check": ok}]}
+    f = flags(dict(val, cash_conversion=0.5), ev, {"sentences_now": 100, "new_count": 30})
+    assert len(f["red"]) == 1 and len(f["caution"]) == 2
+    assert decide(val, f)["rating"] == "Sell"  # Buy capped at Underweight by the red flag, then 2 notches off
+    assert decide(val, none)["upside_to_base"] == 0.3
+    assert decide({"price": 10.0, "fair_value": None, "note": "banks"}, none)["rating"] == "No rating"
+
+
+def test_implied_growth_inverts_the_present_value():
+    from underwriter.valuation import implied_growth, present_value
+
+    for g in (0.0, 0.08, 0.2):
+        assert abs(implied_growth(100.0, present_value(100.0, g)) - g) < 1e-6
