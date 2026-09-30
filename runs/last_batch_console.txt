@@ -1,0 +1,283 @@
+batch: 6 companies x 3 readers, model deepseek/deepseek-flash, thinking off
+budget: $0.50 for the batch, 40,000 tokens per reader run
+
+  call  1 preflight        in    276 (cached   128)  out    32  $0.00005   0.8s  Ping                  | run    308 tok $0.0000 of $0.50
+  preflight: forced tool call accepted
+
+MICROSOFT CORP 10-K period 2026-06-30, filed 2026-07-29: 216 passages
+ reader performance
+  call  1 call_agent_model in  1,295 (cached   128)  out   108  $0.00021   1.1s  search_filing,search_filing,search_filing| run  1,403 tok $0.0002 of $0.50
+  call  2 call_agent_model in  5,709 (cached     0)  out   841  $0.00103   3.0s  Info                  | run  7,953 tok $0.0012 of $0.50
+   done: 2 calls, 7,953 tokens, $0.0012, 4.2s | claims 10, checked 10 (verified 10) | batch $0.0013 of $0.50
+
+ reader accounting
+  call  1 call_agent_model in  1,359 (cached   128)  out   124  $0.00022   1.3s  search_filing,search_filing,search_filing| run  1,483 tok $0.0002 of $0.50
+  call  2 call_agent_model in  5,407 (cached     0)  out   878  $0.00100   3.8s  Info                  | run  7,768 tok $0.0012 of $0.50
+   done: 2 calls, 7,768 tokens, $0.0012, 5.2s | claims 8, checked 8 (verified 8) | batch $0.0025 of $0.50
+
+ reader capital
+  call  1 call_agent_model in  1,300 (cached   128)  out    79  $0.00020   1.1s  search_filing,search_filing| run  1,379 tok $0.0002 of $0.50
+  call  2 call_agent_model in  4,685 (cached 1,280)  out    49  $0.00067   1.1s  search_filing         | run  6,113 tok $0.0009 of $0.50
+  call  3 call_agent_model in  6,243 (cached   128)  out   845  $0.00111   3.1s  Info                  | run 13,201 tok $0.0020 of $0.50
+   done: 3 calls, 13,201 tokens, $0.0020, 5.4s | claims 8, checked 8 (number in passage 1, verified 7) | batch $0.0045 of $0.50
+
+Apple Inc. 10-K period 2025-09-27, filed 2025-10-31: 138 passages
+ reader performance
+  call  1 call_agent_model in  1,292 (cached   384)  out   116  $0.00021   1.2s  search_filing,search_filing,search_filing| run  1,408 tok $0.0002 of $0.50
+  call  2 call_agent_model in  6,271 (cached   384)  out   891  $0.00113   3.6s  Info                  | run  8,570 tok $0.0013 of $0.50
+   done: 2 calls, 8,570 tokens, $0.0013, 4.8s | claims 10, checked 10 (verified 10) | batch $0.0058 of $0.50
+
+ reader accounting
+  call  1 call_agent_model in  1,356 (cached   512)  out   114  $0.00022   1.1s  search_filing,search_filing,search_filing| run  1,470 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,962 (cached   384)  out   848  $0.00107   3.3s  Info                  | run  8,280 tok $0.0013 of $0.49
+   done: 2 calls, 8,280 tokens, $0.0013, 4.5s | claims 8, checked 8 (verified 8) | batch $0.0071 of $0.50
+
+ reader capital
+  call  1 call_agent_model in  1,297 (cached   384)  out   111  $0.00021   1.2s  search_filing,search_filing,search_filing| run  1,408 tok $0.0002 of $0.49
+  call  2 call_agent_model in  6,169 (cached   384)  out   845  $0.00110   3.1s  Info                  | run  8,422 tok $0.0013 of $0.49
+   done: 2 calls, 8,422 tokens, $0.0013, 4.4s | claims 8, checked 8 (verified 8) | batch $0.0085 of $0.50
+
+NVIDIA CORP 10-K period 2026-01-25, filed 2026-02-25: 227 passages
+ reader performance
+  call  1 call_agent_model in  1,292 (cached   384)  out   108  $0.00021   1.1s  search_filing,search_filing,search_filing| run  1,400 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,651 (cached   384)  out   771  $0.00101   2.8s  Info                  | run  7,822 tok $0.0012 of $0.49
+   done: 2 calls, 7,822 tokens, $0.0012, 4.0s | claims 9, checked 9 (verified 9) | batch $0.0097 of $0.50
+
+ reader accounting
+  call  1 call_agent_model in  1,356 (cached   512)  out   118  $0.00022   1.2s  search_filing,search_filing,search_filing| run  1,474 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,677 (cached   384)  out   749  $0.00100   2.9s  Info                  | run  7,900 tok $0.0012 of $0.49
+   done: 2 calls, 7,900 tokens, $0.0012, 4.2s | claims 8, checked 8 (verified 8) | batch $0.0109 of $0.50
+
+ reader capital
+  call  1 call_agent_model in  1,297 (cached   384)  out   115  $0.00021   1.3s  search_filing,search_filing,search_filing| run  1,412 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,806 (cached   384)  out   895  $0.00106   3.1s  Info                  | run  8,113 tok $0.0013 of $0.49
+   done: 2 calls, 8,113 tokens, $0.0013, 4.4s | claims 8, checked 8 (verified 8) | batch $0.0122 of $0.50
+
+AMAZON COM INC 10-K period 2025-12-31, filed 2026-02-06: 189 passages
+ reader performance
+  call  1 call_agent_model in  1,294 (cached   384)  out   104  $0.00021   1.1s  search_filing,search_filing,search_filing| run  1,398 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,379 (cached   384)  out   836  $0.00099   3.0s  Info                  | run  7,613 tok $0.0012 of $0.49
+   done: 2 calls, 7,613 tokens, $0.0012, 4.2s | claims 10, checked 10 (number in passage 1, verified 9) | batch $0.0134 of $0.50
+
+ reader accounting
+  call  1 call_agent_model in  1,358 (cached   512)  out    84  $0.00021   1.1s  search_filing,search_filing| run  1,442 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,002 (cached 1,408)  out    47  $0.00057   1.2s  search_filing         | run  5,491 tok $0.0008 of $0.49
+  call  3 call_agent_model in  5,144 (cached   384)  out   844  $0.00096   3.1s  Info                  | run 11,479 tok $0.0017 of $0.49
+   done: 3 calls, 11,479 tokens, $0.0017, 5.6s | claims 8, checked 8 (verified 8) | batch $0.0151 of $0.50
+
+ reader capital
+  call  1 call_agent_model in  1,299 (cached   384)  out   111  $0.00021   0.9s  search_filing,search_filing,search_filing| run  1,410 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,866 (cached   384)  out   749  $0.00103   2.8s  Info                  | run  8,025 tok $0.0012 of $0.48
+   done: 2 calls, 8,025 tokens, $0.0012, 3.9s | claims 8, checked 8 (verified 8) | batch $0.0164 of $0.50
+
+JPMORGAN CHASE & CO 10-K period 2025-12-31, filed 2026-02-13: 785 passages
+ reader performance
+  call  1 call_agent_model in  1,297 (cached   384)  out   123  $0.00022   1.1s  search_filing,search_filing,search_filing| run  1,420 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,977 (cached   384)  out 1,024  $0.00112   3.5s  Info                  | run  8,421 tok $0.0013 of $0.48
+   done: 2 calls, 8,421 tokens, $0.0013, 4.9s | claims 10, checked 10 (verified 10) | batch $0.0177 of $0.50
+
+ reader accounting
+  call  1 call_agent_model in  1,361 (cached   512)  out   125  $0.00023   1.0s  search_filing,search_filing,search_filing| run  1,486 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,223 (cached   384)  out   852  $0.00097   3.3s  Info                  | run  7,561 tok $0.0012 of $0.48
+   done: 2 calls, 7,561 tokens, $0.0012, 4.8s | claims 8, checked 8 (verified 8) | batch $0.0189 of $0.50
+
+ reader capital
+  call  1 call_agent_model in  1,302 (cached   384)  out   120  $0.00022   1.2s  search_filing,search_filing,search_filing| run  1,422 tok $0.0002 of $0.48
+  call  2 call_agent_model in  6,055 (cached   384)  out   876  $0.00109   3.3s  Info                  | run  8,353 tok $0.0013 of $0.48
+  call  3 call_agent_model in  7,003 (cached 6,016)  out   864  $0.00122   2.9s  Info                  | run 16,220 tok $0.0025 of $0.48
+   done: 3 calls, 16,220 tokens, $0.0025, 7.8s | claims 8, checked 8 (verified 8) | batch $0.0214 of $0.50
+
+COCA COLA CO 10-K period 2025-12-31, filed 2026-02-20: 401 passages
+ reader performance
+  call  1 call_agent_model in  1,293 (cached   384)  out   108  $0.00021   1.1s  search_filing,search_filing,search_filing| run  1,401 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,143 (cached   384)  out   724  $0.00092   4.3s  Info                  | run  7,268 tok $0.0011 of $0.48
+   done: 2 calls, 7,268 tokens, $0.0011, 5.6s | claims 8, checked 8 (verified 8) | batch $0.0226 of $0.50
+
+ reader accounting
+  call  1 call_agent_model in  1,357 (cached   512)  out   117  $0.00022   0.9s  search_filing,search_filing,search_filing| run  1,474 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,153 (cached   384)  out   811  $0.00095   5.2s  Info                  | run  7,438 tok $0.0012 of $0.48
+   done: 2 calls, 7,438 tokens, $0.0012, 6.3s | claims 8, checked 8 (verified 8) | batch $0.0237 of $0.50
+
+ reader capital
+  call  1 call_agent_model in  1,298 (cached   384)  out   123  $0.00022   1.2s  search_filing,search_filing,search_filing| run  1,421 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,802 (cached   384)  out   903  $0.00107   3.1s  Info                  | run  8,126 tok $0.0013 of $0.48
+   done: 2 calls, 8,126 tokens, $0.0013, 4.5s | claims 8, checked 8 (number in passage 2, verified 6) | batch $0.0250 of $0.50
+
+batch finished in 93s
+
+ticker reader      calls  tokens  cached        $   sec claims  ok  stopped
+MSFT   performance     2   7,953     128   0.0012   4.2     10  10  
+MSFT   accounting      2   7,768     128   0.0012   5.2      8   8  
+MSFT   capital         3  13,201   1,536   0.0020   5.4      8   8  
+AAPL   performance     2   8,570     768   0.0013   4.8     10  10  
+AAPL   accounting      2   8,280     896   0.0013   4.5      8   8  
+AAPL   capital         2   8,422     768   0.0013   4.4      8   8  
+NVDA   performance     2   7,822     768   0.0012   4.0      9   9  
+NVDA   accounting      2   7,900     896   0.0012   4.2      8   8  
+NVDA   capital         2   8,113     768   0.0013   4.4      8   8  
+AMZN   performance     2   7,613     768   0.0012   4.2     10  10  
+AMZN   accounting      3  11,479   2,304   0.0017   5.6      8   8  
+AMZN   capital         2   8,025     768   0.0012   3.9      8   8  
+JPM    performance     2   8,421     768   0.0013   4.9     10  10  
+JPM    accounting      2   7,561     896   0.0012   4.8      8   8  
+JPM    capital         3  16,220   6,784   0.0025   7.8      8   8  
+KO     performance     2   7,268     768   0.0011   5.6      8   8  
+KO     accounting      2   7,438     896   0.0012   6.3      8   8  
+KO     capital         2   8,126     768   0.0013   4.5      8   8  
+
+total: 40 calls incl. preflight, 160,488 tokens (21,504 cached), $0.0250 of $0.50
+  MSFT  performance [verified         ] revenue               331839 USD millions P130: Total revenue for fiscal 2026 was $331,839 million.
+  MSFT  performance [verified         ] growth                18 % P104: Total revenue increased 18% in fiscal 2026 compared with fiscal 2025.
+  MSFT  performance [verified         ] margin                225465 USD millions P130: Gross margin for fiscal 2026 was $225,465 million.
+  MSFT  performance [verified         ] margin                155237 USD millions P130: Operating income for fiscal 2026 was $155,237 million.
+  MSFT  performance [verified         ] net_income            133749 USD millions P130: Net income for fiscal 2026 was $133,749 million.
+  MSFT  performance [verified         ] cash_flow             182935 USD millions P132: Net cash from operations for fiscal 2026 was $182,935 million.
+  MSFT  performance [verified         ] segment               139996 USD millions P190: Productivity and Business Processes segment revenue was $139,996 milli
+  MSFT  performance [verified         ] segment               137791 USD millions P190: Intelligent Cloud segment revenue was $137,791 million in fiscal 2026.
+  MSFT  performance [verified         ] segment               56972 USD millions P190: Intelligent Cloud segment operating income was $56,972 million in fisc
+  MSFT  performance [verified         ] segment               54052 USD millions P190: More Personal Computing segment revenue was $54,052 million in fiscal 
+  MSFT  accounting  [verified         ] net_income            133749 USD millions P130: Microsoft reported net income of $133,749 million for fiscal 2026.
+  MSFT  accounting  [verified         ] cash_flow             182935 USD millions P132: Net cash from operations was $182,935 million for fiscal 2026.
+  MSFT  accounting  [verified         ] audit_opinion         None  P193: The auditor expressed an unqualified opinion that the financial statem
+  MSFT  accounting  [verified         ] internal_control      None  P200: The auditor expressed an unqualified opinion that the Company maintain
+  MSFT  accounting  [verified         ] internal_control      None  P200: Management concluded the Company's internal control over financial rep
+  MSFT  accounting  [verified         ] critical_audit_matter None  P194: The auditor communicated critical audit matters, including one on reve
+  MSFT  accounting  [verified         ] critical_audit_matter None  P196: A second critical audit matter related to income taxes – uncertain tax
+  MSFT  accounting  [verified         ] revenue_recognition   None  P119: Revenue recognition is identified as a critical accounting estimate ar
+  MSFT  capital     [verified         ] cash                  76.8 USD billions P113: Cash, cash equivalents, and short-term investments totaled $76.8 billi
+  MSFT  capital     [verified         ] cash                  76843 USD millions P130: Balance sheet reported total cash, cash equivalents, and short-term in
+  MSFT  capital     [number in passage] debt                  31067 USD millions P131: Long-term debt was $31,067 million and current portion of long-term de
+  MSFT  capital     [verified         ] buyback               16.7 USD billions P118: Microsoft repurchased 36 million shares for $16.7 billion in fiscal 20
+  MSFT  capital     [verified         ] dividend              27.0 USD billions P118: The Board declared dividends totaling $27.0 billion in fiscal 2026.
+  MSFT  capital     [verified         ] dividend              26445 USD millions P132: Cash dividends paid were $26,445 million in fiscal 2026.
+  MSFT  capital     [verified         ] capex                 115948 USD millions P132: Additions to property and equipment were $115,948 million in fiscal 20
+  MSFT  capital     [verified         ] shares                7427 USD millions (shares) P131: Common stock outstanding was 7,427 million shares at June 30, 2026 ver
+  AAPL  performance [verified         ] revenue               416161 USD millions P084: Total net sales for fiscal 2025 were $416,161 million.
+  AAPL  performance [verified         ] growth                6 % P072: Total net sales increased 6% in 2025 compared to 2024.
+  AAPL  performance [verified         ] margin                46.9 % P073: Total gross margin percentage was 46.9% in 2025.
+  AAPL  performance [verified         ] margin                195201 USD millions P084: Total gross margin was $195,201 million in 2025.
+  AAPL  performance [verified         ] net_income            112010 USD millions P084: Net income for fiscal 2025 was $112,010 million.
+  AAPL  performance [verified         ] cash_flow             111482 USD millions P088: Cash generated by operating activities was $111,482 million in 2025.
+  AAPL  performance [verified         ] segment               178353 USD millions P116: Americas segment net sales were $178,353 million in 2025, the largest 
+  AAPL  performance [verified         ] segment               72480 USD millions P116: Americas segment operating income was $72,480 million in 2025.
+  AAPL  performance [verified         ] segment               111032 USD millions P072: Europe segment net sales were $111,032 million in 2025.
+  AAPL  performance [verified         ] revenue               109158 USD millions P094: Services net sales were $109,158 million in 2025.
+  AAPL  accounting  [verified         ] net_income            112010 USD millions P084: Apple reported net income of $112,010 million for fiscal 2025.
+  AAPL  accounting  [verified         ] cash_flow             111482 USD millions P088: Cash generated by operating activities was $111,482 million in fiscal 
+  AAPL  accounting  [verified         ] audit_opinion         None  P118: Ernst & Young LLP expressed an unqualified opinion that the financial 
+  AAPL  accounting  [verified         ] internal_control      None  P121: The auditor opined that Apple maintained, in all material respects, ef
+  AAPL  accounting  [verified         ] internal_control      None  P126: Management concluded that its internal control over financial reportin
+  AAPL  accounting  [verified         ] critical_audit_matter None  P121: The auditor described a critical audit matter involving uncertain tax 
+  AAPL  accounting  [verified         ] revenue_recognition   None  P090: The Company records revenue net of taxes collected from customers that
+  AAPL  accounting  [verified         ] policy_change         None  P090: Beginning with the 2025 annual reporting period, Apple adopted ASU No.
+  AAPL  capital     [verified         ] cash                  132.4 USD billions P076: Cash, cash equivalents and marketable securities totaled $132.4 billio
+  AAPL  capital     [verified         ] debt                  91.3 USD billions P076: Outstanding fixed-rate notes had an aggregate principal amount of $91.
+  AAPL  capital     [verified         ] debt                  8.0 USD billions P076: Commercial paper outstanding was $8.0 billion as of September 27, 2025
+  AAPL  capital     [verified         ] buyback               89.3 USD billions P110: During 2025 the company repurchased 402 million shares of its common s
+  AAPL  capital     [verified         ] dividend              15421 USD millions P088: Payments for dividends and dividend equivalents were $15,421 million i
+  AAPL  capital     [verified         ] capex                 12715 USD millions P088: Payments for acquisition of property, plant and equipment were $12,715
+  AAPL  capital     [verified         ] shares                14773260 thousands of shares P086: Shares issued and outstanding were 14,773,260 thousand as of September
+  AAPL  capital     [verified         ] buyback               90711 USD millions P088: Repurchases of common stock in the cash flow statement were $90,711 mi
+  NVDA  performance [verified         ] revenue               215938 USD millions P134: Total revenue for fiscal 2026 was $215,938 million.
+  NVDA  performance [verified         ] growth                65 % P134: Total revenue grew 65% year over year in fiscal 2026.
+  NVDA  performance [verified         ] margin                71.1 % P137: Gross margin decreased to 71.1% in fiscal 2026 from 75.0% in fiscal 20
+  NVDA  performance [verified         ] margin                60.4 % P134: Operating income was 60.4% of revenue in fiscal 2026.
+  NVDA  performance [verified         ] net_income            120067 USD millions P164: Net income for fiscal 2026 was $120,067 million.
+  NVDA  performance [verified         ] cash_flow             102718 USD millions P140: Net cash provided by operating activities was $102,718 million in fisc
+  NVDA  performance [verified         ] segment               193479 USD millions P215: Compute & Networking segment revenue was $193,479 million in fiscal 20
+  NVDA  performance [verified         ] segment               130141 USD millions P215: Compute & Networking segment operating income was $130,141 million in 
+  NVDA  performance [verified         ] segment               22459 USD millions P134: Graphics segment revenue was $22,459 million in fiscal 2026.
+  NVDA  accounting  [verified         ] net_income            120067 USD millions P161: NVIDIA reported net income of $120,067 million for fiscal year 2026.
+  NVDA  accounting  [verified         ] cash_flow             102718 USD millions P140: Net cash provided by operating activities was $102,718 million for fis
+  NVDA  accounting  [verified         ] audit_opinion         None  P156: PricewaterhouseCoopers LLP opined that the consolidated financial stat
+  NVDA  accounting  [verified         ] internal_control      None  P156: The auditor stated that the Company maintained, in all material respec
+  NVDA  accounting  [verified         ] internal_control      None  P149: Management concluded that internal control over financial reporting wa
+  NVDA  accounting  [verified         ] critical_audit_matter None  P158: The audit report includes a critical audit matter communicated in the 
+  NVDA  accounting  [verified         ] net_income            4.9 USD per share P127: Net income per diluted share was $4.90 for fiscal year 2026.
+  NVDA  accounting  [verified         ] other                 215938 USD millions P127: Revenue for fiscal year 2026 was $215,938 million, up 65% from a year 
+  NVDA  capital     [verified         ] cash                  62.6 USD billions P141: As of January 25, 2026, the company had $62.6 billion in cash, cash eq
+  NVDA  capital     [verified         ] cash                  10605 USD millions P162: Cash and cash equivalents on the balance sheet were $10,605 million as
+  NVDA  capital     [verified         ] debt                  8468 USD millions P143: Net carrying amount of aggregate debt was $8,468 million as of January
+  NVDA  capital     [verified         ] buyback               40.4 USD billions P120: In fiscal year 2026, the company repurchased 282 million shares of com
+  NVDA  capital     [verified         ] dividend              974 USD millions P120: In fiscal year 2026, the company paid cash dividends to shareholders o
+  NVDA  capital     [verified         ] shares                24304 USD millions (shares) P163: Common shares issued and outstanding declined to 24,304 million as of 
+  NVDA  capital     [verified         ] capex                 101 USD millions P166: Principal payments on property and equipment and intangible assets wer
+  NVDA  capital     [verified         ] acquisition           20832 USD millions P162: Goodwill rose to $20,832 million as of January 25, 2026 from $5,188 mi
+  AMZN  performance [verified         ] revenue               716924 USD millions P074: Consolidated net sales were $716,924 million in 2025.
+  AMZN  performance [verified         ] growth                12 % P074: Consolidated net sales grew 12% year over year in 2025.
+  AMZN  performance [verified         ] margin                79975 USD millions P081: Consolidated operating income was $79,975 million in 2025.
+  AMZN  performance [verified         ] margin                80.0 USD billions P081: Operating income was $80.0 billion for 2025.
+  AMZN  performance [verified         ] cash_flow             139514 USD millions P068: Net cash provided by operating activities was $139,514 million in 2025
+  AMZN  performance [verified         ] cash_flow             139.5 USD billions P068: Cash provided by operating activities was $139.5 billion in 2025.
+  AMZN  performance [verified         ] segment               426305 USD millions P169: North America segment net sales were $426,305 million in 2025.
+  AMZN  performance [number in passage] segment               45606 USD millions P081: AWS segment operating income was $45,606 million in 2025.
+  AMZN  performance [verified         ] segment               128725 USD millions P074: AWS segment net sales were $128,725 million in 2025.
+  AMZN  performance [verified         ] segment               161894 USD millions P169: International segment net sales were $161,894 million in 2025.
+  AMZN  accounting  [verified         ] net_income            77670 USD millions P097: Net income for fiscal 2025 was $77,670 million.
+  AMZN  accounting  [verified         ] cash_flow             139514 USD millions P097: Net cash provided by operating activities was $139,514 million in fisc
+  AMZN  accounting  [verified         ] cash_flow             139.5 USD billions P068: Cash provided by operating activities was $139.5 billion in 2025, up f
+  AMZN  accounting  [verified         ] audit_opinion         None  P093: The auditor expressed an unqualified opinion that the consolidated fin
+  AMZN  accounting  [verified         ] critical_audit_matter 6.6 USD billions P095: The critical audit matter was Uncertain Tax Positions, with accrued li
+  AMZN  accounting  [verified         ] internal_control      None  P176: The auditor concluded that the Company maintained, in all material res
+  AMZN  accounting  [verified         ] revenue_recognition   None  P107: Revenue for consumer products is recognized when control of the goods 
+  AMZN  accounting  [verified         ] revenue_recognition   None  P107: Advertising services revenue is recognized as ads are delivered based 
+  AMZN  capital     [verified         ] cash                  123029 USD millions P137: Total cash, cash equivalents, and marketable securities were $123,029 
+  AMZN  capital     [verified         ] debt                  65648 USD millions P145: Long-term debt was $65,648 million as of December 31, 2025.
+  AMZN  capital     [verified         ] debt                  68836 USD millions P146: Total face value of long-term debt was $68,836 million as of December 
+  AMZN  capital     [verified         ] capex                 128.3 USD billions P069: Cash capital expenditures were $128.3 billion in 2025.
+  AMZN  capital     [verified         ] capex                 128320 USD millions P085: Purchases of property and equipment, net of proceeds from sales and in
+  AMZN  capital     [verified         ] acquisition           3.8 USD billions P069: Cash payments, net of acquired cash, related to acquisition and other 
+  AMZN  capital     [verified         ] other                 2.7 USD billions P070: Investments in convertible notes from Anthropic included $2.7 billion 
+  AMZN  capital     [verified         ] debt                  15673 USD millions P098: Proceeds from long-term debt were $15,673 million in 2025.
+  JPM   performance [verified         ] revenue               182447 USD millions P137: Total net revenue for the year ended December 31, 2025 was $182,447 mi
+  JPM   performance [verified         ] growth                3 % P137: Total net revenue increased 3% in 2025 compared with 2024.
+  JPM   performance [verified         ] net_income            57048 USD millions P137: Net income for the year ended December 31, 2025 was $57,048 million.
+  JPM   performance [verified         ] margin                86807 USD millions P137: Pre-provision profit for the year ended December 31, 2025 was $86,807 
+  JPM   performance [verified         ] cash_flow             -147782 USD millions P159: Net cash used in operating activities was $147,782 million for the yea
+  JPM   performance [verified         ] segment               76029 USD millions P738: Consumer & Community Banking total net revenue was $76,029 million for
+  JPM   performance [verified         ] segment               78454 USD millions P738: Commercial & Investment Bank total net revenue was $78,454 million for
+  JPM   performance [verified         ] segment               27761 USD millions P738: Commercial & Investment Bank net income was $27,761 million for the ye
+  JPM   performance [verified         ] segment               24073 USD millions P738: Asset & Wealth Management total net revenue was $24,073 million for th
+  JPM   performance [verified         ] segment               18245 USD millions P738: Consumer & Community Banking net income was $18,245 million for the ye
+  JPM   accounting  [verified         ] net_income            57048 USD millions P411: Consolidated net income for 2025 was $57,048 million.
+  JPM   accounting  [verified         ] cash_flow             -147782 USD millions P411: Net cash used in operating activities on the consolidated statement of
+  JPM   accounting  [verified         ] cash_flow             -147782 USD millions P159: Net cash used in operating activities was $147,782 million in 2025 ver
+  JPM   accounting  [verified         ] audit_opinion         None  P397: PwC's opinion states the consolidated financial statements present fai
+  JPM   accounting  [verified         ] internal_control      None  P397: The auditor opined that the Firm maintained, in all material respects,
+  JPM   accounting  [verified         ] critical_audit_matter None  P404: The auditor reported critical audit matters, including the fair value 
+  JPM   accounting  [verified         ] revenue_recognition   None  P418: The Firm recognizes interest income on loans, debt securities and othe
+  JPM   accounting  [verified         ] policy_change         446 USD millions P423: Adoption of the TDR credit losses guidance under the modified retrospe
+  JPM   capital     [verified         ] buyback               31591 USD millions P412: Treasury stock repurchased in 2025 totaled $31,591 million.
+  JPM   capital     [verified         ] dividend              16625 USD millions P412: Dividends paid in 2025 totaled $16,625 million.
+  JPM   capital     [verified         ] buyback               114.4 millions of shares P246: The Firm repurchased 114.4 million common shares for an aggregate purc
+  JPM   capital     [verified         ] buyback               50 USD billions P108: On July 1, 2025 the Board authorized a new $50 billion common share re
+  JPM   capital     [verified         ] debt                  120761 USD millions P412: Proceeds from long-term borrowings were $120,761 million and payments 
+  JPM   capital     [verified         ] shares                2776.5 millions of shares P678: Total weighted-average basic shares outstanding were 2,776.5 million i
+  JPM   capital     [verified         ] cash                  9790 USD millions P743: Cash and due from banks and deposits with banking subsidiaries at the 
+  JPM   capital     [verified         ] cash                  29.0 USD billions P691: Total restricted cash was $29.0 billion at December 31, 2025.
+  KO    performance [verified         ] cash_flow             7408 USD millions P190: Net cash provided by operating activities was $7,408 million in 2025.
+  KO    performance [verified         ] cash_flow             9 % P190: Net cash provided by operating activities increased $603 million, or 9
+  KO    performance [verified         ] margin                61.6 % P171: Gross profit margin increased to 61.6% in 2025 from 61.1% in 2024.
+  KO    performance [verified         ] net_income            13137 USD millions P213: Consolidated net income was $13,137 million in 2025.
+  KO    performance [verified         ] segment               40.8 % P170: North America accounted for 40.8% of Company net operating revenues in
+  KO    performance [verified         ] segment               22.6 % P170: EMEA accounted for 22.6% of Company net operating revenues in 2025.
+  KO    performance [verified         ] segment               13.2 % P170: Latin America accounted for 13.2% of Company net operating revenues in
+  KO    performance [verified         ] segment               12.0 % P171: Bottling Investments accounted for 12.0% of Company net operating reve
+  KO    accounting  [verified         ] net_income            13137 USD millions P213: Consolidated net income for fiscal 2025 was $13,137 million.
+  KO    accounting  [verified         ] cash_flow             7408 USD millions P213: Net cash provided by operating activities for fiscal 2025 was $7,408 m
+  KO    accounting  [verified         ] cash_flow             603 USD millions P190: Net cash provided by operating activities increased $603 million, or 9
+  KO    accounting  [verified         ] audit_opinion         None  P363: The auditor expressed an unqualified opinion on the consolidated finan
+  KO    accounting  [verified         ] internal_control      None  P362: The auditor concluded the Company maintained effective internal contro
+  KO    accounting  [verified         ] critical_audit_matter 857 USD millions P359: A critical audit matter was the accounting for uncertain tax positions
+  KO    accounting  [verified         ] revenue_recognition   None  P220: Revenue is recognized when performance obligations under customer cont
+  KO    accounting  [verified         ] internal_control      None  P365: Management concluded the Company's disclosure controls and procedures 
+  KO    capital     [verified         ] cash                  10270 USD millions P212: Cash and cash equivalents were $10,270 million at December 31, 2025.
+  KO    capital     [verified         ] cash                  13872 USD millions P212: Total cash, cash equivalents and short-term investments were $13,872 m
+  KO    capital     [verified         ] cash                  15.8 USD billions P185: Cash, cash equivalents, short-term investments and marketable securiti
+  KO    capital     [number in passage] debt                  42119 USD millions P212: Long-term debt was $42,119 million at December 31, 2025, with current 
+  KO    capital     [verified         ] debt                  43941 USD millions P342: The carrying value of long-term debt including the current portion was
+  KO    capital     [number in passage] buyback               634 USD millions P197: The Company repurchased 9.4 million shares of common stock under the 2
+  KO    capital     [verified         ] dividend              8779 USD millions P197: The Company paid dividends of $8,779 million during the year ended Dec
+  KO    capital     [verified         ] capex                 2112 USD millions P192: Purchases of property, plant and equipment were $2,112 million in 2025
+
+saved runs\batch-20260930-215510.json
