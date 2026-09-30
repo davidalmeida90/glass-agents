@@ -167,11 +167,14 @@ def test_red_team_moves_a_rating_only_with_supported_high_objections():
     from underwriter.redteam import adjustment
 
     base = {"rating": "Buy", "why": ["x"], "upside_to_base": 0.3}
-    weak = {"verdict": "rating too high", "objections": [
-        {"severity": "high", "supported": False, "argument": "cites nothing real"},
-        {"severity": "medium", "supported": True, "argument": "minor"}]}
-    assert adjustment(weak) == (0, None)
-    strong = {"verdict": "rating too high", "objections": [{"severity": "high", "supported": True, "argument": "capex"}]}
+    def o(**kw):
+        return dict({"type": "business", "direction": "rating too high", "severity": "high", "supported": True,
+                     "cites_evidence": True, "argument": "a"}, **kw)
+    weak = {"objections": [o(supported=False), o(severity="medium"), o(type="method"), o(cites_evidence=False)]}
+    assert adjustment(weak) == (0, None)                      # unsupported, medium, method, no filing fact cited
+    balanced = {"objections": [o(), o(direction="rating too low")]}
+    assert adjustment(balanced) == (0, None)                  # opposite directions cancel
+    strong = {"objections": [o(argument="capex"), o(type="data_conflict")]}
     step, reason = adjustment(strong)
     assert step == -1 and adjust(base, step, reason)["rating"] == "Overweight"
     assert adjust(dict(base, rating="Sell"), -1, "r")["rating"] == "Sell"  # never below the scale

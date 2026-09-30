@@ -66,7 +66,7 @@ async def main() -> int:
     from underwriter.budget import BudgetExceeded, TokenLedger
     from underwriter.decision import RATINGS, adjust, decide, flags
     from underwriter.edgar import RISK_STATS, load_index
-    from underwriter.redteam import adjustment, red_team
+    from underwriter.redteam import adjustment, counts, method_review, red_team
     from underwriter.schemas import READERS
     from underwriter.sizing import annual_volatility, size
     from underwriter.valuation import value
@@ -157,9 +157,10 @@ async def main() -> int:
             print(f"    - {w}")
         if first["red_team"]:
             rt = first["red_team"]
-            strong = [o for o in rt["objections"] if o.get("supported") and o.get("severity") == "high"]
-            print(f"    red team: {rt['verdict']}, {len(rt['objections'])} objections, {len(strong)} supported high"
-                  f" ({sum(not o.get('supported') for o in rt['objections'])} unsupported)")
+            by_type = Counter(o.get("type") for o in rt["objections"])
+            moving = [o for o in rt["objections"] if counts(o)]
+            print(f"    red team: {len(rt['objections'])} objections ({', '.join(f'{k} {n}' for k, n in by_type.items())}),"
+                  f" {len(moving)} can move the rating ({', '.join(o['direction'] for o in moving) or 'none'})")
         spent = sum(c["usd"] for c in costs.values())
         toks = sum(c["tokens"] for c in costs.values())
         print(f"    model spend {toks:,} tokens, ${spent:.4f} | batch ${batch.usd:.4f} of ${args.budget_usd:.2f}\n")
@@ -167,6 +168,12 @@ async def main() -> int:
             print("batch dollar cap reached")
             break
 
+    reviews = [(m["ticker"], a) for m in memos for r in m["repeats"] if r["red_team"] for a in method_review(r["red_team"])]
+    if reviews:
+        print(f"method review ({len(reviews)} points raised by the red team; they never move a rating):")
+        for t, a in reviews[:12]:
+            print(f"  {t}: {a[:150]}")
+        print()
     bs = batch.summary()
     print(f"batch: {len(memos)} companies in {time.time() - t_batch:.0f}s, {bs['calls']} model calls, {bs['tokens']:,} tokens"
           f" ({bs['cached']:,} cached), ${bs['usd']:.4f} of ${args.budget_usd:.2f}")

@@ -1,9 +1,14 @@
 """Red team: one model call that argues against the desk's rating, using only the evidence the desk verified.
 
-Every objection must cite evidence IDs (e.g. CAP-2) or valuation figures by name. Code then checks the
-citations: an objection whose citations do not all exist is ignored. Only a supported objection of high
-severity can move the rating, by one notch at most, in the direction of the red team's verdict. The model
-argues; the rule decides.
+Every objection has a type, a direction and citations: evidence IDs (e.g. CAP-2) or valuation figures by
+name. Code checks the citations. Criticism of the method itself (discount rate, growth cap, fade, how owner
+earnings are defined) applies to every company alike, so it goes to a method review list and never moves a
+single rating. A data conflict or business objection moves the rating only when it is high severity, all
+its citations exist and at least one is a verified filing fact; the net direction of those decides, one
+notch at most. The model argues; the rule decides.
+
+First version (2026-09-30) used one overall verdict and let any supported high objection move the rating:
+it said "too high" on 5 of 6 companies, mostly over the method, and once contradicted its own objections.
 """
 
 from __future__ import annotations
@@ -15,7 +20,8 @@ from langchain_core.messages import HumanMessage
 from underwriter.utils import init_model
 
 VALUATION_FIELDS = ["price", "fair_value", "growth_used", "revenue_growth", "implied_growth", "owner_earnings",
-                    "net_debt", "cash_conversion", "roe", "implied_roe", "book_value_per_share"]
+                    "net_debt", "cash_conversion", "roe", "implied_roe", "book_value_per_share", "valuation_period"]
+EVIDENCE_PREFIXES = ("PERF-", "ACC-", "CAP-", "RISK-")
 
 OBJECTIONS_TOOL = {
     "name": "Objections",
@@ -29,19 +35,21 @@ OBJECTIONS_TOOL = {
                 "items": {
                     "type": "object",
                     "properties": {
-                        "category": {"type": "string",
-                                      "enum": ["valuation", "growth", "accounting", "risk", "capital", "data_gap"]},
+                        "type": {"type": "string", "enum": ["data_conflict", "business", "method"],
+                                 "description": "data_conflict: a figure the desk used disagrees with the evidence; "
+                                                "business: evidence about the business the rating ignores; method: the "
+                                                "valuation method or its fixed assumptions."},
+                        "direction": {"type": "string", "enum": ["rating too high", "rating too low"]},
                         "severity": {"type": "string", "enum": ["low", "medium", "high"]},
                         "argument": {"type": "string", "description": "At most 60 words."},
                         "cites": {"type": "array", "items": {"type": "string"},
                                   "description": "Evidence IDs such as PERF-1, or valuation figure names such as implied_growth."},
                     },
-                    "required": ["category", "severity", "argument", "cites"],
+                    "required": ["type", "direction", "severity", "argument", "cites"],
                 },
             },
-            "verdict": {"type": "string", "enum": ["rating stands", "rating too high", "rating too low"]},
         },
-        "required": ["objections", "verdict"],
+        "required": ["objections"],
     },
 }
 
@@ -49,6 +57,8 @@ PROMPT = """You are the red team on an equity research desk. Argue against the d
 
 Rules:
 - Use only the evidence lines and valuation figures given here. Cite evidence by its ID (for example CAP-2) and valuation figures by their name (for example implied_growth).
+- Give each objection its own direction. Look for reasons the rating is too low as hard as for reasons it is too high.
+- Criticism of the valuation method or its fixed assumptions (discount rate, growth cap, the fade, how owner earnings are defined) is type "method": it applies to every company alike and goes to the desk's method review.
 - Severity "high" only when the objection alone should change the rating and the cited evidence supports it. Otherwise "medium" or "low".
 - No outside knowledge, no news, no prices other than the one given.
 - Submit with the Objections tool.
@@ -78,14 +88,27 @@ async def red_team(ticker: str, valuation: dict[str, Any], decision: dict[str, A
     for o in args.get("objections") or []:
         cites = [str(c).strip() for c in o.get("cites") or []]
         o["supported"] = bool(cites) and all(c in known for c in cites)
+        o["cites_evidence"] = any(c.startswith(EVIDENCE_PREFIXES) and c in evidence_ids for c in cites)
         objections.append(o)
-    return {"objections": objections, "verdict": args.get("verdict", "rating stands")}
+    return {"objections": objections}
+
+
+def counts(o: dict[str, Any]) -> bool:
+    """Can this objection move the rating?"""
+    return bool(o.get("type") in ("data_conflict", "business") and o.get("severity") == "high"
+                and o.get("supported") and o.get("cites_evidence"))
 
 
 def adjustment(result: dict[str, Any]) -> tuple[int, str | None]:
-    """+1, 0 or -1 notch: only a supported high-severity objection, in the verdict's direction."""
-    strong = [o for o in result["objections"] if o.get("supported") and o.get("severity") == "high"]
-    if not strong or result["verdict"] == "rating stands":
+    """+1, 0 or -1 notch: the net direction of the objections that count."""
+    strong = [o for o in result["objections"] if counts(o)]
+    net = sum(1 if o.get("direction") == "rating too low" else -1 for o in strong)
+    if net == 0:
         return 0, None
-    step = -1 if result["verdict"] == "rating too high" else 1
-    return step, f"red team ({result['verdict']}): {strong[0]['argument'][:140]}"
+    step = 1 if net > 0 else -1
+    lead = next(o for o in strong if (o.get("direction") == "rating too low") == (step > 0))
+    return step, f"red team ({lead['direction']}, {lead['type']}): {lead['argument'][:140]}"
+
+
+def method_review(result: dict[str, Any]) -> list[str]:
+    return [o["argument"] for o in result["objections"] if o.get("type") == "method"]

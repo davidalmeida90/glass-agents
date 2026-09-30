@@ -215,6 +215,8 @@ def bank_value(ticker: str, as_of: str, price: float, price_date: str, sic: str)
     for name, (d_roe, r) in BANK_SCENARIOS.items():
         pb = max((roe + d_roe - TERMINAL_GROWTH) / (r - TERMINAL_GROWTH), 0.0)
         fair[name] = round(bvps * pb, 2)
+    out["valuation_period"] = (f"net income to common, twelve months to {ni['end']}; equity at {equity['end']}; "
+                               f"the readers' evidence comes from the latest 10-K only")
     out.update(fair_value=fair, roe=round(roe, 4), book_value_per_share=round(bvps, 2),
                implied_roe=round(price / bvps * (0.10 - TERMINAL_GROWTH) + TERMINAL_GROWTH, 4),
                shares_outstanding=shares["val"], cash_conversion=None,
@@ -255,6 +257,9 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     net_debt = (f["debt"] or 0) - (f["cash_and_securities"] or 0)
     fair = {name: round(dcf_per_share(owner, max(base_growth + shift, 0.0), DISCOUNT, net_debt, shares["val"]), 2)
             for name, shift in SCENARIOS.items()}
+    out["valuation_period"] = (f"trailing twelve months to {ocf['end']} (revenue growth: twelve months to "
+                               f"{rev['end'] if rev else '?'} vs to {rev_ago['end'] if rev_ago else '?'}), from 10-K and "
+                               f"10-Q XBRL; the readers' evidence comes from the latest 10-K only")
     out.update(fair_value=fair, owner_earnings=owner, owner_earnings_basis=basis, revenue_growth=round(growth, 4),
                growth_used=round(base_growth, 4), net_debt=net_debt, shares_outstanding=shares["val"],
                implied_growth=round(implied_growth(owner, price * shares["val"] + net_debt), 4),
