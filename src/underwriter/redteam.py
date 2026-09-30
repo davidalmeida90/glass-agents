@@ -19,8 +19,12 @@ from langchain_core.messages import HumanMessage
 
 from underwriter.utils import init_model
 
-VALUATION_FIELDS = ["price", "fair_value", "growth_used", "revenue_growth", "implied_growth", "owner_earnings",
-                    "net_debt", "cash_conversion", "roe", "implied_roe", "book_value_per_share", "valuation_period"]
+from underwriter.parameters import PARAMS
+
+VALUATION_FIELDS = ["price", "fair_value", "growth_used", "revenue_growth", "implied_growth", "wacc", "operating_margin",
+                    "roic", "sales_to_capital", "effective_tax", "terminal_growth", "terminal_roic", "terminal_share",
+                    "ev_to_ebit", "market_ev_to_ebit", "net_debt", "cash_conversion", "sbc_to_revenue", "roe",
+                    "implied_roe", "book_value_per_share", "cost_of_equity", "valuation_period"] + list(PARAMS)
 EVIDENCE_PREFIXES = ("PERF-", "ACC-", "CAP-", "RISK-")
 
 OBJECTIONS_TOOL = {
@@ -71,8 +75,14 @@ def memo_text(ticker: str, valuation: dict[str, Any], decision: dict[str, Any], 
     figures = [f"{k}: {valuation[k]}" for k in VALUATION_FIELDS if k in valuation and k != "fair_value"]
     if fv:
         figures.append(f"fair_value: bear {fv['bear']}, base {fv['base']}, bull {fv['bull']}")
+    cap = valuation.get("capital") or {}
+    if cap:
+        figures.append(f"capital (cost of capital build-up): {cap}")
+    params = [f"{p.name}: {p.value} ({p.method}; source {p.source}{'' if p.verified else '; not yet verified'})"
+              for p in PARAMS.values()]
     return (f"Company: {ticker}\nDesk rating: {decision['rating']}\nWhy: {'; '.join(decision['why'])}\n"
             f"Method: {valuation.get('method', '')}\n\nValuation figures:\n" + "\n".join(figures) +
+            "\n\nParameters (cite by name in method objections):\n" + "\n".join(params) +
             "\n\nEvidence (verified against the 10-K):\n" + "\n".join(lines))
 
 

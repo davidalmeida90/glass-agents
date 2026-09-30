@@ -42,13 +42,26 @@ def evidence_lines(evidence: dict[str, list[dict]]) -> tuple[list[str], set[str]
     return lines, ids
 
 
+def pct(v: float | None, sign: bool = False) -> str:
+    return "n/a" if v is None else (f"{v:+.1%}" if sign else f"{v:.1%}")
+
+
 def valuation_line(val: dict) -> str:
-    if "roe" in val:
-        return (f"bank: ROE {val['roe']:.1%}, price implies ROE {val['implied_roe']:.1%}, book value per share"
-                f" {val['book_value_per_share']:,.2f}")
-    return (f"owner earnings {money(val['owner_earnings'])}, FCF {money(val.get('fcf'))}, revenue growth"
-            f" {val['revenue_growth']:+.1%} (used {val['growth_used']:.1%}), price implies {val['implied_growth']:+.1%},"
-            f" net debt {money(val['net_debt'])}, cash conversion {val['cash_conversion']}")
+    cap = val.get("capital") or {}
+    b = cap.get("beta") or {}
+    if val.get("model") == "bank":
+        return (f"bank: ROE {pct(val['roe'])}, price implies ROE {pct(val['implied_roe'])}, book value per share"
+                f" {val['book_value_per_share']:,.2f}; cost of equity {pct(val['cost_of_equity'])} = rf"
+                f" {pct(cap.get('risk_free'))} + beta {b.get('used')} x ERP {pct(cap.get('erp'))}")
+    rating = cap.get("rating") or {}
+    return (f"WACC {pct(val['wacc'])} (rf {pct(cap['risk_free'])} {cap['risk_free_date']}, beta {b.get('used')}"
+            f" [{b.get('industry') or 'regression'}; regression {b.get('regression')}], ERP {pct(cap['erp'])},"
+            f" Ke {pct(cap['cost_of_equity'])}, rating {rating.get('rating')}"
+            f" at coverage {rating.get('coverage')}, Kd {pct(cap['cost_of_debt_pre_tax'])}, E/V {pct(cap['weight_equity'])})\n"
+            f"    growth {pct(val['revenue_growth'], True)} (used {pct(val['growth_used'])}), price implies"
+            f" {pct(val['implied_growth'], True)}; margin {pct(val['operating_margin'])}, ROIC {pct(val['roic'])},"
+            f" sales/capital {val['sales_to_capital']}, SBC {pct(val['sbc_to_revenue'])} of revenue; terminal"
+            f" {pct(val['terminal_share'])} of EV; EV/EBIT at base {val['ev_to_ebit']}x vs market {val['market_ev_to_ebit']}x")
 
 
 async def main() -> int:
@@ -126,7 +139,7 @@ async def main() -> int:
         for i in range(max(len(accounting_runs), 1)):
             evidence = dict(once, accounting=accounting_runs[i]) if accounting_runs else dict(once)
             fl = flags(val, evidence, RISK_STATS.get(ticker)) if val.get("price") else {"red": [], "caution": []}
-            base = decide(val, fl) if val.get("price") else {"rating": "No rating", "why": [val["note"]], "upside_to_base": None}
+            base = decide(val, fl, vol) if val.get("price") else {"rating": "No rating", "why": [val["note"]], "upside_to_base": None}
             rt, final = None, base
             if base["rating"] in RATINGS and not args.valuation_only and room():
                 lines, ids = evidence_lines(evidence)
@@ -184,8 +197,9 @@ async def main() -> int:
     print(f"\n{'ticker':<6} {'rating':<11} {'agree':>5} {'weight':>6} {'price':>9} {'bear':>9} {'base':>9} {'bull':>9} {'upside':>7}  key figure")
     for m in memos:
         v, fv = m["valuation"], m["valuation"].get("fair_value") or {}
-        key = (f"ROE {v['roe']:.1%} vs implied {v['implied_roe']:.1%}" if "roe" in v else
-               f"growth {v['growth_used']:.1%} vs implied {v['implied_growth']:+.1%}" if fv else (v.get("note") or "")[:40])
+        key = (f"ROE {pct(v.get('roe'))} vs implied {pct(v.get('implied_roe'))}" if v.get("model") == "bank" and fv else
+               f"WACC {pct(v.get('wacc'))}, growth {pct(v.get('growth_used'))} vs implied {pct(v.get('implied_growth'), True)}"
+               if fv else (v.get("note") or "")[:60])
         up = fv["base"] / v["price"] - 1 if fv else None
         print(f"{m['ticker']:<6} {m['rating']:<11} {m['confidence']:>5.0%} {m['sizing']['weight']:>6.1%} {v.get('price') or 0:>9,.2f} "
               + (f"{fv['bear']:>9,.2f} {fv['base']:>9,.2f} {fv['bull']:>9,.2f} {up:>+7.0%}" if fv else f"{'':>9} {'':>9} {'':>9} {'':>7}")

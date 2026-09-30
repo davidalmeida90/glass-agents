@@ -1,48 +1,60 @@
-"""Valuation in code: point-in-time figures from SEC XBRL, then a fair value range and the growth the price implies.
+"""Valuation in code: point-in-time figures from SEC XBRL, a company WACC, and an FCFF DCF.
 
 The XBRL functions are adapted from David's own Glassbench (desk/backend/deskapp/edgar.py): facts filed
 before the as-of date, trailing twelve months built from the fiscal year and year-to-date filings, and the
-share count from the cover page. The valuation is new here and deliberately plain, so every number can
-be recomputed by hand. It values owner earnings (operating cash flow minus depreciation, the usual proxy
-for maintenance capital spending, so a capex build-out does not read as lost value) over ten years, growth
-fading linearly to 3%, discounted at 9%. Bear, base and bull use the company's own revenue growth, capped
-at 25%, minus 5 points, as is, and plus 5 points. Next to it sits the reverse DCF: the starting growth the
-current price implies under the same assumptions (Mauboussin and Rappaport's expectations investing).
-A plain five-year DCF on trailing free cash flow was tried first and rejected: it rated every large cap
-tested a Sell, so it could not tell companies apart.
+share count checked against Yahoo. The valuation follows Damodaran's FCFF structure (dcf.py): revenue growth
+paid for by reinvestment through sales-to-capital, stock-based compensation as an expense, leases as debt, a
+WACC from CAPM (FRED risk-free rate, regression beta, implied ERP) and a synthetic-rating cost of debt, and a
+terminal value that keeps a stated share of today's excess return. Every parameter lives in parameters.py.
+
+History, kept so the choices can be questioned: a plain five-year DCF on trailing free cash flow rated every
+large cap a Sell; an owner earnings DCF at a flat 9% then made capex-heavy companies look very cheap (Meta
++141%) and counted debt twice (after-interest cash flow minus net debt). Both were replaced by this one.
 """
 
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from datetime import date, timedelta
 from typing import Any
 
+from underwriter import dcf
 from underwriter.edgar import sec_get
+from underwriter.market import beta, bottom_up_beta, risk_free, synthetic_rating
+from underwriter.parameters import value as param
 
 REVENUE = ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet",
            "RevenueFromContractWithCustomerIncludingAssessedTax"]
 NET_INCOME = ["NetIncomeLoss", "ProfitLoss"]
+EBIT = ["OperatingIncomeLoss"]
+PRETAX = ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+          "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+          "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic"]
+TAX = ["IncomeTaxExpenseBenefit"]
+NONOPERATING = ["NonoperatingIncomeExpense", "OtherNonoperatingIncomeExpense"]
+EQUITY_WITH_NCI = ["StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"]
+INTEREST = ["InterestExpense", "InterestExpenseNonoperating", "InterestExpenseDebt", "InterestAndDebtExpense",
+            "InterestCostsIncurred"]
+INTEREST_PAID = ["InterestPaidNet", "InterestPaid"]
+SBC = ["ShareBasedCompensation", "AllocatedShareBasedCompensationExpense"]
 OCF = ["NetCashProvidedByUsedInOperatingActivities", "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"]
 CAPEX = ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"]
-DA = ["DepreciationDepletionAndAmortization", "DepreciationAmortizationAndAccretionNet", "DepreciationAndAmortization",
-      "Depreciation"]
 CASH = ["CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"]
 SECURITIES = ["MarketableSecuritiesCurrent", "AvailableForSaleSecuritiesDebtSecuritiesCurrent", "ShortTermInvestments"]
-DEBT_PARTS = [["LongTermDebtNoncurrent"], ["LongTermDebtCurrent"], ["CommercialPaper"], ["ShortTermBorrowings"]]
-DEBT_TOTAL = ["LongTermDebt", "DebtInstrumentCarryingAmount"]
-
+DEBT_PARTS = [["LongTermDebtNoncurrent", "LongTermDebtAndCapitalLeaseObligations"],
+              ["LongTermDebtCurrent", "LongTermDebtAndCapitalLeaseObligationsCurrent", "DebtCurrent"],
+              ["CommercialPaper"], ["ShortTermBorrowings"]]
+DEBT_TOTAL = ["LongTermDebt", "DebtAndCapitalLeaseObligations", "DebtInstrumentCarryingAmount"]
+LEASES = [["OperatingLeaseLiabilityNoncurrent"], ["OperatingLeaseLiabilityCurrent"]]
+LEASE_TOTAL = ["OperatingLeaseLiability"]
+MINORITY = ["MinorityInterest"]
 EQUITY = ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"]
+GOODWILL = ["Goodwill"]
+INTANGIBLES = ["IntangibleAssetsNetExcludingGoodwill", "FiniteLivedIntangibleAssetsNet"]
 PREFERRED = ["PreferredStockValue", "PreferredStockValueOutstanding"]
 NI_COMMON = ["NetIncomeLossAvailableToCommonStockholdersBasic", "NetIncomeLoss"]
 BANK_SIC = {"6021", "6022", "6029", "6035", "6036", "6211"}  # commercial and savings banks, broker-dealers
-BANK_SCENARIOS = {"bear": (-0.02, 0.11), "base": (0.0, 0.10), "bull": (0.02, 0.09)}  # ROE points, cost of equity
-
-SCENARIOS = {"bear": -0.05, "base": 0.0, "bull": 0.05}  # points added to the company's own growth
-GROWTH_CAP = 0.25
-DISCOUNT = 0.09
-TERMINAL_GROWTH = 0.03
-YEARS = 10
 
 
 # ------------------------------------------------------------------ SEC XBRL (adapted from Glassbench)
@@ -144,11 +156,7 @@ def _ttm(data: dict, concepts: list[str], as_of: str, near_end: str | None = Non
 
 
 def _shares(data: dict, as_of: str) -> dict | None:
-    """Cover-page count, else balance sheet count, else diluted weighted average of the latest period.
-
-    Companies with several share classes (Meta: A and B) report the cover count per class only, which
-    the XBRL API leaves out, so the diluted weighted average is the last resort.
-    """
+    """Cover-page count, else balance sheet count, else diluted weighted average of the latest period."""
     found = (_instant(data, ["EntityCommonStockSharesOutstanding"], as_of, taxonomy="dei", unit="shares")
              or _instant(data, ["CommonStockSharesOutstanding"], as_of, unit="shares"))
     if found:
@@ -198,131 +206,301 @@ def last_price(ticker: str, as_of: str) -> tuple[float, str]:
     return float(hist["Close"].iloc[-1]), hist.index[-1].date().isoformat()
 
 
+def _sum_instants(data: dict, groups: list[list[str]], total: list[str], as_of: str) -> dict | None:
+    """Sum of component instants at their latest common date, else the total concept."""
+    parts = [p for p in (_instant(data, c, as_of) for c in groups) if p]
+    if parts:
+        end = max(p["end"] for p in parts)
+        same = [p for p in parts if p["end"] == end]
+        return {"val": sum(p["val"] for p in same), "end": end, "concept": " + ".join(p["concept"] for p in same)}
+    return _instant(data, total, as_of)
+
+
+# ------------------------------------------------------------------ inputs
 def fundamentals(ticker: str, as_of: str) -> dict[str, Any]:
-    """The figures the DCF and the flags need, each with the filing it came from."""
+    """Every figure the valuation uses, each with its concept and period."""
     data = company_facts(ticker)
-    cash = _instant(data, CASH, as_of)
-    securities = _instant(data, SECURITIES, as_of)
-    parts = [p for p in (_instant(data, c, as_of) for c in DEBT_PARTS) if p and cash and p["end"] == cash["end"]]
-    total_debt = _instant(data, DEBT_TOTAL, as_of)
-    debt = sum(p["val"] for p in parts) if parts else (total_debt["val"] if total_debt else None)
-    liquid = (cash["val"] if cash else 0) + (
-        securities["val"] if securities and cash and securities["end"] == cash["end"] else 0)
     revenue = _ttm(data, REVENUE, as_of)
     revenue_year_ago = None
     if revenue:
         prior_end = (date.fromisoformat(revenue["end"]) - timedelta(days=364)).isoformat()
         revenue_year_ago = _ttm(data, [revenue["concept"]], as_of, near_end=prior_end)
+    cash = _instant(data, CASH, as_of)
+    securities = _instant(data, SECURITIES, as_of)
+    debt_parts = [p for p in (_instant(data, c, as_of) for c in DEBT_PARTS) if p and cash and p["end"] == cash["end"]]
+    total_debt = _instant(data, DEBT_TOTAL, as_of)
     return {
-        "revenue": revenue, "revenue_year_ago": revenue_year_ago,
-        "net_income": _ttm(data, NET_INCOME, as_of), "operating_cash_flow": _ttm(data, OCF, as_of),
-        "capex": _ttm(data, CAPEX, as_of), "d_and_a": _ttm(data, DA, as_of), "shares": _shares(data, as_of),
-        "debt": debt,
-        "cash_and_securities": liquid if cash else None,
+        "revenue": revenue, "revenue_year_ago": revenue_year_ago, "ebit": _ttm(data, EBIT, as_of),
+        "pretax": _ttm(data, PRETAX, as_of), "tax": _ttm(data, TAX, as_of),
+        "interest": _ttm(data, INTEREST, as_of) or _ttm(data, INTEREST_PAID, as_of),
+        "sbc": _ttm(data, SBC, as_of), "net_income": _ttm(data, NET_INCOME, as_of),
+        "operating_cash_flow": _ttm(data, OCF, as_of), "capex": _ttm(data, CAPEX, as_of),
+        "cash": cash, "securities": securities if securities and cash and securities["end"] == cash["end"] else None,
+        "debt": {"val": sum(p["val"] for p in debt_parts), "end": cash["end"],
+                 "concept": " + ".join(p["concept"] for p in debt_parts)} if debt_parts else total_debt,
+        "leases": _sum_instants(data, LEASES, LEASE_TOTAL, as_of), "minority": _instant(data, MINORITY, as_of),
+        "equity": _instant(data, EQUITY, as_of), "preferred": _instant(data, PREFERRED, as_of),
+        "ni_common": _ttm(data, NI_COMMON, as_of), "shares": _shares(data, as_of),
+        "goodwill": _instant(data, GOODWILL, as_of), "intangibles": _instant(data, INTANGIBLES, as_of),
+        "nonoperating": _ttm(data, NONOPERATING, as_of), "equity_with_nci": _instant(data, EQUITY_WITH_NCI, as_of),
+        "roic_history": roic_history(data, as_of),
     }
 
 
-# ------------------------------------------------------------------ DCF
-def present_value(cash_flow: float, growth: float, discount: float = DISCOUNT, terminal: float = TERMINAL_GROWTH,
-                  years: int = YEARS) -> float:
-    """Cash flow for *years*, growth fading linearly from *growth* to the terminal rate, plus a Gordon terminal value."""
-    pv, flow = 0.0, cash_flow
-    for t in range(1, years + 1):
-        g = growth + (terminal - growth) * (t - 1) / (years - 1)
-        flow *= 1 + g
-        pv += flow / (1 + discount) ** t
-    return pv + flow * (1 + terminal) / (discount - terminal) / (1 + discount) ** years
+def _annual(data: dict, concepts: list[str], as_of: str) -> dict[str, float]:
+    """Fiscal-year values by period end, filed before as_of."""
+    _, rows = _facts(data, concepts, as_of)
+    return {r["end"]: r["val"] for r in rows if r.get("start") and 350 <= _days(r) <= 380}
 
 
-def dcf_per_share(cash_flow: float, growth: float, discount: float, net_debt: float, shares: float,
-                  terminal: float = TERMINAL_GROWTH, years: int = YEARS) -> float:
-    return (present_value(cash_flow, growth, discount, terminal, years) - net_debt) / shares
+def _at_ends(data: dict, concepts: list[str], as_of: str) -> dict[str, float]:
+    _, rows = _facts(data, concepts, as_of)
+    return {r["end"]: r["val"] for r in rows if not r.get("start")}
 
 
-def implied_growth(cash_flow: float, enterprise_value: float, discount: float = DISCOUNT) -> float:
-    """Starting growth at which present_value equals the enterprise value (bisection)."""
-    lo, hi = -0.5, 1.5
-    for _ in range(100):
-        mid = (lo + hi) / 2
-        lo, hi = (mid, hi) if present_value(cash_flow, mid, discount) < enterprise_value else (lo, mid)
-    return (lo + hi) / 2
+def roic_history(data: dict, as_of: str, years: int = 5) -> list[dict[str, float]]:
+    """After-tax ROIC for the last fiscal years: EBIT x (1 - 25%) / (equity + debt - cash) at the year end."""
+    ebit = _annual(data, EBIT, as_of)
+    equity, cash = _at_ends(data, EQUITY, as_of), _at_ends(data, CASH, as_of)
+    debt_total = _at_ends(data, DEBT_TOTAL, as_of)
+    parts = [_at_ends(data, group, as_of) for group in DEBT_PARTS]
+
+    def debt_at(end: str) -> float:
+        return debt_total[end] if end in debt_total else sum(p.get(end, 0.0) for p in parts)
+
+    out = []
+    for end in sorted(ebit, reverse=True)[:years]:
+        if end in equity:
+            ic = equity[end] + debt_at(end) - cash.get(end, 0.0)
+            if ic > 0:
+                out.append({"end": end, "roic": round(ebit[end] * (1 - 0.25) / ic, 4)})
+    return out
+
+
+def moat(history: list[dict[str, float]], wacc: float) -> tuple[float, str]:
+    """Terminal excess return share from ROIC history: 1.0 wide, 0.5 narrow, 0 none."""
+    if len(history) < 3:
+        return 0.5, f"only {len(history)} years of ROIC history: narrow by default"
+    spreads = [h["roic"] - wacc for h in history]
+    margin = param("moat_margin")
+    if all(s >= margin for s in spreads):
+        return 1.0, f"wide: ROIC beat WACC by {margin:.0%}+ in all {len(spreads)} years (min {min(spreads):+.1%})"
+    if sum(spreads) / len(spreads) > 0:
+        return 0.5, f"narrow: ROIC beat WACC on average over {len(spreads)} years ({sum(spreads) / len(spreads):+.1%})"
+    return 0.0, f"none: ROIC averaged {sum(spreads) / len(spreads):+.1%} against WACC"
+
+
+def complete(ticker: str, f: dict[str, Any]) -> list[str]:
+    """Fill gaps that XBRL leaves: EBIT from pre-tax income + interest, debt checked against Yahoo."""
+    notes = []
+    if not f.get("ebit") and f.get("pretax"):
+        if f.get("nonoperating"):  # non-operating income includes interest, so pre-tax minus it is operating income
+            f["ebit"] = {"value": _v(f, "pretax") - _v(f, "nonoperating"), "end": f["pretax"]["end"],
+                         "concept": "pre-tax income - NonoperatingIncomeExpense (no OperatingIncomeLoss)"}
+        else:
+            f["ebit"] = {"value": _v(f, "pretax") + _v(f, "interest"), "end": f["pretax"]["end"],
+                         "concept": "pre-tax income + interest expense (no OperatingIncomeLoss)"}
+        notes.append(f"EBIT built as {f['ebit']['concept']}")
+    if not f.get("minority") and f.get("equity_with_nci") and f.get("equity"):
+        nci = f["equity_with_nci"]["val"] - f["equity"]["val"]
+        if nci > 0:
+            f["minority"] = {"val": nci, "end": f["equity"]["end"], "concept": "equity incl. NCI - parent equity"}
+    try:
+        import yfinance as yf
+
+        yahoo_debt = yf.Ticker(ticker).info.get("totalDebt")
+    except Exception:  # noqa: BLE001 - Yahoo is only the cross-check
+        yahoo_debt = None
+    xbrl_debt = _v(f, "debt") + _v(f, "leases")
+    if yahoo_debt and yahoo_debt > 1.5 * xbrl_debt + 1e9:
+        f["debt"] = {"val": yahoo_debt - _v(f, "leases"), "end": "latest", "concept": "Yahoo totalDebt minus leases"}
+        notes.append(f"debt from Yahoo totalDebt ({yahoo_debt / 1e9:,.1f}B): XBRL tags gave {xbrl_debt / 1e9:,.1f}B")
+    return notes
+
+
+def _v(f: dict, key: str) -> float:
+    item = f.get(key)
+    return float(item.get("value", item.get("val", 0.0))) if item else 0.0
+
+
+def cost_of_capital(ticker: str, f: dict, market_cap: float, as_of: str) -> dict[str, Any]:
+    """WACC build-up: CAPM cost of equity, synthetic-rating cost of debt, market-value weights."""
+    rf, rf_date = risk_free()
+    t = param("marginal_tax")
+    debt = _v(f, "debt") + (_v(f, "leases") if param("leases_as_debt") else 0.0)
+    regression = beta(ticker, as_of)
+    bottom_up = bottom_up_beta(ticker, debt / market_cap if market_cap > 0 else 0.0)
+    b = dict(bottom_up or regression, regression=regression["used"], regression_raw=regression["raw"])
+    if not bottom_up:
+        b["method"] = "regression (no industry mapping for this ticker)"
+    erp = param("equity_risk_premium")
+    ke = rf + b["used"] * erp
+    rating = synthetic_rating(_v(f, "ebit"), _v(f, "interest"))
+    kd_pre = rf + rating["spread"]
+    weight_e = market_cap / (market_cap + debt) if market_cap + debt > 0 else 1.0
+    wacc = weight_e * ke + (1 - weight_e) * kd_pre * (1 - t)
+    mature_beta = min(b["used"], 1.0) if param("mature_beta") == "toward_one_from_above" else 1.0
+    mature = weight_e * (rf + mature_beta * erp) + (1 - weight_e) * kd_pre * (1 - t)
+    return {"risk_free": round(rf, 4), "risk_free_date": rf_date, "beta": b, "erp": erp, "cost_of_equity": round(ke, 4),
+            "rating": rating, "cost_of_debt_pre_tax": round(kd_pre, 4), "tax_shield_rate": t,
+            "weight_equity": round(weight_e, 4), "debt_incl_leases": debt, "wacc": round(wacc, 4),
+            "mature_wacc": round(mature, 4)}
+
+
+# ------------------------------------------------------------------ valuation
+def _sane(out: dict[str, Any], base: dict[str, Any], price: float, wacc: float) -> list[str]:
+    bounds = param("sanity")
+    issues = []
+    lo, hi = bounds["fair_to_price"]
+    ratio = base["per_share"] / price
+    if not lo <= ratio <= hi:
+        issues.append(f"base value is {ratio:.2f}x the price, outside {lo}x to {hi}x")
+    if not bounds["wacc"][0] <= wacc <= bounds["wacc"][1]:
+        issues.append(f"WACC {wacc:.1%} outside {bounds['wacc'][0]:.0%} to {bounds['wacc'][1]:.0%}")
+    if base["terminal_share"] is not None and base["terminal_share"] > bounds["terminal_share"]:
+        issues.append(f"terminal value is {base['terminal_share']:.0%} of enterprise value")
+    return issues
 
 
 def bank_value(ticker: str, as_of: str, price: float, price_date: str, sic: str) -> dict[str, Any]:
-    """Justified price-to-book for banks: P/B = (ROE - g) / (r - g) on common equity."""
+    """Justified price-to-book: P/B = (ROE - g) / (cost of equity - g), cost of equity from CAPM."""
     data = company_facts(ticker)
     equity, preferred = _instant(data, EQUITY, as_of), _instant(data, PREFERRED, as_of)
     ni = _ttm(data, NI_COMMON, as_of)
     count, count_source = checked_shares(ticker, _shares(data, as_of), as_of)
-    shares = {"val": count, "source": count_source} if count else None
     out: dict[str, Any] = {"ticker": ticker.upper(), "as_of": as_of, "price": price, "price_date": price_date,
-                           "sic": sic, "fair_value": None, "note": None,
-                           "method": "justified price-to-book: P/B = (ROE - 3%) / (cost of equity - 3%), ROE +/-2 points "
-                                     "and cost of equity 11/10/9% for bear/base/bull"}
-    if not (equity and ni and shares):
+                           "sic": sic, "fair_value": None, "note": None, "model": "bank",
+                           "method": "justified price-to-book on common equity: P/B = (ROE - g) / (cost of equity - g), "
+                                     "cost of equity = risk-free + beta x ERP; bear/bull: ROE -/+2 points, cost of "
+                                     "equity +/-0.5 points"}
+    if not (equity and ni and count):
         out["note"] = "equity, net income or share count not available from XBRL"
         return out
+    rf, rf_date = risk_free()
+    regression = beta(ticker, as_of)
+    b = bottom_up_beta(ticker, 0.0, bank=True) or regression
+    b = dict(b, regression=regression["used"], regression_raw=regression["raw"])
+    ke = rf + b["used"] * param("equity_risk_premium")
+    g = min(rf, param("terminal_growth_cap"))
     common = equity["val"] - (preferred["val"] if preferred and preferred["end"] == equity["end"] else 0)
-    roe = ni["value"] / common
-    bvps = common / shares["val"]
+    roe, bvps = ni["value"] / common, common / count
+    history = roe_history(data, as_of)
+    share, moat_why = moat([{"roic": h["roe"]} for h in history], ke)
     fair = {}
-    for name, (d_roe, r) in BANK_SCENARIOS.items():
-        pb = max((roe + d_roe - TERMINAL_GROWTH) / (r - TERMINAL_GROWTH), 0.0)
-        fair[name] = round(bvps * pb, 2)
-    out["valuation_period"] = (f"net income to common, twelve months to {ni['end']}; equity at {equity['end']}; "
-                               f"the readers' evidence comes from the latest 10-K only")
-    out.update(fair_value=fair, roe=round(roe, 4), book_value_per_share=round(bvps, 2),
-               implied_roe=round(price / bvps * (0.10 - TERMINAL_GROWTH) + TERMINAL_GROWTH, 4),
-               shares_outstanding=shares["val"], cash_conversion=None,
-               inputs={"common_equity": common, "net_income_to_common": ni, "equity": equity, "preferred": preferred})
+    for name, (d_roe, d_ke, d_share) in {"bear": (-0.02, 0.005, 0.0), "base": (0.0, 0.0, None),
+                                         "bull": (0.02, -0.005, 1.0)}.items():
+        fair[name] = round(excess_return_value(bvps, roe + d_roe, ke + d_ke, g,
+                                               share if d_share is None else d_share), 2)
+    out.update(fair_value=fair, roe=round(roe, 4), book_value_per_share=round(bvps, 2), cost_of_equity=round(ke, 4),
+               implied_roe=round(price / bvps * (ke - g) + g, 4), terminal_growth=g, shares_outstanding=count,
+               moat=moat_why, roe_history=history,
+               shares_source=count_source, cash_conversion=None,
+               capital={"risk_free": round(rf, 4), "risk_free_date": rf_date, "beta": b,
+                        "erp": param("equity_risk_premium"), "cost_of_equity": round(ke, 4)},
+               valuation_period=f"net income to common, twelve months to {ni['end']}; equity at {equity['end']}; "
+                                f"the readers' evidence comes from the latest 10-K only")
+    issues = []
+    ratio = fair["base"] / price
+    lo, hi = param("sanity")["fair_to_price"]
+    if not lo <= ratio <= hi:
+        issues.append(f"base value is {ratio:.2f}x the price, outside {lo}x to {hi}x")
+    if issues:
+        out.update(fair_value=None, note="not rated, review: " + "; ".join(issues), review=issues, fair_value_raw=fair)
     return out
 
 
+def roe_history(data: dict, as_of: str, years: int = 5) -> list[dict[str, float]]:
+    """ROE for the last fiscal years: net income to common / year-end equity."""
+    ni, equity = _annual(data, NI_COMMON, as_of), _at_ends(data, EQUITY, as_of)
+    return [{"end": end, "roe": round(ni[end] / equity[end], 4)} for end in sorted(ni, reverse=True)[:years]
+            if equity.get(end, 0) > 0]
+
+
+def excess_return_value(bvps: float, roe: float, ke: float, g: float, moat_share: float, years: int = 10) -> float:
+    """Book value per share plus the present value of excess returns, ROE fading to Ke + share x (ROE - Ke)."""
+    roe_end = ke + moat_share * (roe - ke)
+    value, bv, discount = bvps, bvps, 1.0
+    for t in range(1, years + 1):
+        r = roe + (roe_end - roe) * t / years
+        discount /= 1 + ke
+        value += (r - ke) * bv * discount
+        bv *= 1 + g
+    return value + (roe_end - ke) * bv / (ke - g) * discount
+
+
 def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
-    """Fair value range per share, the inputs behind it, and why it is missing when it is."""
+    """Fair value range per share, the WACC and inputs behind it, and why it is missing when it is."""
     as_of = as_of or date.today().isoformat()
     price, price_date = last_price(ticker, as_of)
     sic, _ = industry(ticker)
     if sic in BANK_SIC:
         return bank_value(ticker, as_of, price, price_date, sic)
     f = fundamentals(ticker, as_of)
-    out: dict[str, Any] = {"ticker": ticker.upper(), "as_of": as_of, "price": price, "price_date": price_date,
-                           "sic": sic, "inputs": f, "fair_value": None, "note": None,
-                           "method": "owner earnings (operating cash flow - D&A), 10 years fading to 3%, 9% discount; "
-                                     "bear/base/bull = own revenue growth capped at 25% -5/0/+5 points; "
-                                     "implied_growth = starting growth the price implies"}
-    ocf, capex, da = f["operating_cash_flow"], f["capex"], f["d_and_a"]
+    data_notes = complete(ticker, f)
     count, count_source = checked_shares(ticker, f["shares"], as_of)
-    shares = {"val": count, "source": count_source} if count else None
-    rev, rev_ago = f["revenue"], f["revenue_year_ago"]
-    missing = [n for n, v in (("operating cash flow", ocf), ("share count", shares),
-                               ("depreciation or capex", da or capex)) if not v]
+    out: dict[str, Any] = {"ticker": ticker.upper(), "as_of": as_of, "price": price, "price_date": price_date,
+                           "sic": sic, "inputs": f, "fair_value": None, "note": None, "model": "fcff",
+                           "method": "FCFF DCF at company WACC: revenue growth for 5 years, fading to terminal over 5; "
+                                     "reinvestment = change in revenue / sales-to-capital; SBC expensed; leases as debt; "
+                                     "terminal ROIC keeps a share of today's excess return; bear/base/bull shift growth "
+                                     "-/+4 points, margin -/+2 points, WACC +/-0.5 points, terminal excess 0/0.5/1"}
+    missing = [k for k in ("revenue", "revenue_year_ago", "ebit", "equity") if not f.get(k)]
+    if not count:
+        missing.append("share count")
     if missing:
         out["note"] = f"not available from XBRL: {', '.join(missing)}"
         return out
-    if da and da["end"] == ocf["end"]:
-        owner, basis = ocf["value"] - da["value"], "operating cash flow - depreciation and amortization"
-    elif capex and capex["end"] == ocf["end"]:
-        owner, basis = ocf["value"] - capex["value"], "operating cash flow - capex (no depreciation figure)"
-    else:
-        out["note"] = "cash flow figures from different periods"
+    revenue, ebit = _v(f, "revenue"), _v(f, "ebit")
+    if ebit <= 0:
+        out["note"] = f"operating income is negative ({ebit:,.0f}): not rated by this model"
         return out
-    if owner <= 0:
-        out["note"] = f"owner earnings are negative ({owner:,.0f}): a cash flow valuation does not apply"
-        return out
-    growth = (rev["value"] / rev_ago["value"] - 1) if rev and rev_ago and rev_ago["value"] else 0.0
-    base_growth = min(max(growth, 0.0), GROWTH_CAP)
-    net_debt = (f["debt"] or 0) - (f["cash_and_securities"] or 0)
-    fair = {name: round(dcf_per_share(owner, max(base_growth + shift, 0.0), DISCOUNT, net_debt, shares["val"]), 2)
-            for name, shift in SCENARIOS.items()}
-    out["valuation_period"] = (f"trailing twelve months to {ocf['end']} (revenue growth: twelve months to "
-                               f"{rev['end'] if rev else '?'} vs to {rev_ago['end'] if rev_ago else '?'}), from 10-K and "
-                               f"10-Q XBRL; the readers' evidence comes from the latest 10-K only")
-    out.update(fair_value=fair, owner_earnings=owner, owner_earnings_basis=basis, revenue_growth=round(growth, 4),
-               growth_used=round(base_growth, 4), net_debt=net_debt, shares_outstanding=shares["val"],
-               shares_source=shares["source"],
-               implied_growth=round(implied_growth(owner, price * shares["val"] + net_debt), 4),
-               fcf=(ocf["value"] - capex["value"]) if capex and capex["end"] == ocf["end"] else None,
-               cash_conversion=round(ocf["value"] / f["net_income"]["value"], 3)
-               if f["net_income"] and f["net_income"]["value"] > 0 else None)
+    pretax, tax = _v(f, "pretax"), _v(f, "tax")
+    effective = min(max(tax / pretax, 0.0), param("marginal_tax")) if pretax > 0 else param("marginal_tax")
+    debt = _v(f, "debt") + (_v(f, "leases") if param("leases_as_debt") else 0.0)
+    cash = _v(f, "cash") + _v(f, "securities")
+    invested = _v(f, "equity") + debt - cash
+    if invested <= 0.05 * revenue:  # buybacks can push book capital near zero; fall back to operating capital
+        invested = max(invested, 0.2 * revenue)
+        out["invested_capital_note"] = "book invested capital near zero or negative, floored at 20% of revenue"
+    operating = invested
+    if param("capital_for_reinvestment") == "operating":
+        operating = max(invested - _v(f, "goodwill") - _v(f, "intangibles"), 0.2 * revenue)
+    growth_raw = revenue / _v(f, "revenue_year_ago") - 1
+    lo, hi = param("growth_bounds")
+    market_cap = price * count
+    capital = cost_of_capital(ticker, f, market_cap, as_of)
+    wacc = capital["wacc"]
+    rf = capital["risk_free"]
+    excess, moat_why = moat(f["roic_history"], wacc)
+    x = dcf.Inputs(
+        revenue=revenue, ebit=ebit, effective_tax=effective, marginal_tax=param("marginal_tax"),
+        invested_capital=invested, operating_capital=operating, growth=min(max(growth_raw, lo), hi),
+        terminal_growth=min(rf, param("terminal_growth_cap")), wacc=wacc,
+        terminal_excess_return=excess,
+        mature_wacc=capital["mature_wacc"] if param("mature_wacc") else None, year5_growth_cap=param("year5_growth_cap"),
+        high_growth_years=param("high_growth_years"),
+        fade_years=param("fade_years"), mid_year=param("mid_year"), debt=debt, cash=cash,
+        minority=_v(f, "minority"), shares=count)
+    runs = {name: dcf.value_per_share(dcf.scenario(x, name)) for name in ("bear", "base", "bull")}
+    fair = {name: round(r["per_share"], 2) for name, r in runs.items()}
+    base = runs["base"]
+    implied = dcf.implied_growth(x, price)
+    out.update(
+        fair_value=fair, capital=capital, wacc=wacc, revenue_growth=round(growth_raw, 4), growth_used=round(x.growth, 4),
+        implied_growth=round(implied, 4) if implied is not None else None, operating_margin=round(x.margin, 4),
+        roic=round(x.roic, 4), sales_to_capital=round(x.sales_to_capital, 3), effective_tax=round(effective, 4),
+        terminal_growth=x.terminal_growth, terminal_roic=round(base["terminal_roic"], 4),
+        terminal_share=round(base["terminal_share"], 3) if base["terminal_share"] else None,
+        ev_to_ebit=round(base["ev_to_ebit"], 1) if base["ev_to_ebit"] else None,
+        market_ev_to_ebit=round((market_cap + debt + _v(f, "minority") - cash) / ebit, 1),
+        shares_outstanding=count, shares_source=count_source, net_debt=debt - cash, data_notes=data_notes,
+        moat=moat_why, terminal_excess_return=excess, roic_history=f["roic_history"],
+        cash_conversion=round(_v(f, "operating_cash_flow") / (ebit * (1 - effective)), 3) if ebit > 0 else None,
+        sbc_to_revenue=round(_v(f, "sbc") / revenue, 4), sensitivity=dcf.sensitivity(x),
+        valuation_period=(f"trailing twelve months to {f['ebit']['end']} (revenue growth: twelve months to "
+                          f"{f['revenue']['end']} vs to {f['revenue_year_ago']['end']}), from 10-K and 10-Q XBRL; "
+                          f"the readers' evidence comes from the latest 10-K only"))
+    issues = _sane(out, base, price, wacc)
+    if issues:
+        out.update(fair_value=None, fair_value_raw=fair, review=issues, note="not rated, review: " + "; ".join(issues))
     return out

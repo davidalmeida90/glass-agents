@@ -120,36 +120,70 @@ def test_risk_changes_keeps_only_new_sentences():
     assert out["removed"] == [] and out["sentences_now"] == 3
 
 
-def test_dcf_matches_a_hand_computation():
-    from underwriter.valuation import dcf_per_share
 
-    # no growth anywhere: five years of 100 then a perpetuity of 100 at 10%, minus 0 net debt, 1 share = 1,000
-    assert abs(dcf_per_share(100, 0.0, 0.10, 0.0, 1.0, terminal=0.0) - 1000.0) < 1e-6
+def _inputs(**kw):
+    from underwriter.dcf import Inputs
 
+    base = dict(revenue=100.0, ebit=20.0, effective_tax=0.0, marginal_tax=0.0, invested_capital=100.0,
+                operating_capital=100.0, growth=0.0,
+                terminal_growth=0.0, wacc=0.10, terminal_excess_return=0.0, high_growth_years=5, fade_years=5,
+                mid_year=False, debt=0.0, cash=0.0, minority=0.0, shares=1.0, mature_wacc=None)
+    return Inputs(**(base | kw))
+
+
+def test_fcff_dcf_matches_a_perpetuity():
+    from underwriter.dcf import value_per_share
+
+    # no growth, no reinvestment, no tax: 20 a year forever at 10% is 200
+    assert abs(value_per_share(_inputs())["per_share"] - 200.0) < 1e-6
+    # the equity bridge: debt 50 and cash 30 take 20 off
+    assert abs(value_per_share(_inputs(debt=50.0, cash=30.0))["per_share"] - 180.0) < 1e-6
+
+
+def test_growth_without_excess_return_adds_no_terminal_value():
+    from underwriter.dcf import value_per_share
+
+    # terminal ROIC = WACC: the terminal value is next year's NOPAT / WACC, whatever the terminal growth
+    for g in (0.0, 0.03):
+        out = value_per_share(_inputs(terminal_growth=g))
+        rev = 100.0
+        for k in range(1, 6):
+            rev *= 1 + g * k / 5
+        expected = rev * (1 + g) * 0.2 / 0.10
+        undiscounted = out["terminal_share"] * out["enterprise_value"] * 1.10 ** 10
+        assert abs(undiscounted - expected) < 1e-6
+
+
+def test_reverse_dcf_inverts_the_value():
+    from underwriter.dcf import implied_growth, value_per_share
+
+    x = _inputs(growth=0.12, terminal_growth=0.02)
+    price = value_per_share(x)["per_share"]
+    assert abs(implied_growth(_inputs(terminal_growth=0.02), price) - 0.12) < 1e-6
 
 def test_decision_bands_and_flags():
     from underwriter.decision import decide, flags
 
-    val = {"price": 100.0, "fair_value": {"bear": 110.0, "base": 130.0, "bull": 150.0}, "cash_conversion": 1.2}
+    fv = {"bear": 90.0, "base": 100.0, "bull": 110.0}           # narrow range: no overlay
     none = {"red": [], "caution": []}
-    assert decide(val, none)["rating"] == "Buy"
-    assert decide(dict(val, price=140.0), none)["rating"] == "Hold"
-    assert decide(dict(val, price=200.0), none)["rating"] == "Sell"
+    low = 0.15                                                    # Low uncertainty: Buy <= 0.80, Sell >= 1.25
+    assert decide({"price": 78.0, "fair_value": fv}, none, low)["rating"] == "Buy"
+    assert decide({"price": 92.0, "fair_value": fv}, none, low)["rating"] == "Overweight"   # <= 0.95
+    assert decide({"price": 100.0, "fair_value": fv}, none, low)["rating"] == "Hold"
+    assert decide({"price": 110.0, "fair_value": fv}, none, low)["rating"] == "Underweight"  # >= 1.05
+    assert decide({"price": 130.0, "fair_value": fv}, none, low)["rating"] == "Sell"
+    # Very High uncertainty needs a deeper discount: 0.65 of fair value is Overweight, not Buy
+    assert decide({"price": 65.0, "fair_value": fv}, none, 0.55)["rating"] == "Overweight"
+    # a wide range moves uncertainty up one level
+    wide = {"bear": 20.0, "base": 100.0, "bull": 190.0}      # width 1.7x base, above the 1.5x overlay
+    assert decide({"price": 78.0, "fair_value": wide}, none, low)["uncertainty"] == "Medium"
     ok = {"status": "verified"}
     ev = {"accounting": [{"topic": "internal_control", "quote": "our internal control was not effective", "check": ok},
                          {"topic": "internal_control", "quote": "there were no material weaknesses", "check": ok}]}
-    f = flags(dict(val, cash_conversion=0.5), ev, {"sentences_now": 100, "new_count": 30})
+    f = flags({"cash_conversion": 0.5}, ev, {"sentences_now": 100, "new_count": 30})
     assert len(f["red"]) == 1 and len(f["caution"]) == 2
-    assert decide(val, f)["rating"] == "Sell"  # Buy capped at Underweight by the red flag, then 2 notches off
-    assert decide(val, none)["upside_to_base"] == 0.3
+    assert decide({"price": 78.0, "fair_value": fv}, f, low)["rating"] == "Sell"  # Buy capped at Underweight, 2 notches off
     assert decide({"price": 10.0, "fair_value": None, "note": "banks"}, none)["rating"] == "No rating"
-
-
-def test_implied_growth_inverts_the_present_value():
-    from underwriter.valuation import implied_growth, present_value
-
-    for g in (0.0, 0.08, 0.2):
-        assert abs(implied_growth(100.0, present_value(100.0, g)) - g) < 1e-6
 
 
 def test_clean_control_wording_raises_no_red_flag():
@@ -194,3 +228,35 @@ def test_sizing_scales_by_volatility_and_confidence():
 def test_justified_price_to_book():
     # ROE 15%, g 3%, r 10%: P/B = 0.12 / 0.07
     assert abs((0.15 - 0.03) / (0.10 - 0.03) - 1.7142857) < 1e-6
+
+
+
+def test_moat_from_roic_history():
+    from underwriter.valuation import moat
+
+    wide = [{"roic": r} for r in (0.30, 0.28, 0.25, 0.27, 0.31)]
+    assert moat(wide, 0.09)[0] == 1.0
+    narrow = [{"roic": r} for r in (0.12, 0.08, 0.11, 0.10, 0.09)]
+    assert moat(narrow, 0.09)[0] == 0.5
+    none = [{"roic": r} for r in (0.05, 0.06, 0.04)]
+    assert moat(none, 0.09)[0] == 0.0
+
+
+
+def test_excess_return_model():
+    from underwriter.valuation import excess_return_value
+
+    # ROE equal to Ke: worth exactly book value
+    assert abs(excess_return_value(100.0, 0.10, 0.10, 0.03, 1.0) - 100.0) < 1e-9
+    # higher ROE adds value, and more when the excess survives (moat share 1 vs 0)
+    assert excess_return_value(100.0, 0.16, 0.10, 0.03, 1.0) > excess_return_value(100.0, 0.16, 0.10, 0.03, 0.0) > 100.0
+
+
+def test_high_growth_decays_by_year_five():
+    from underwriter.dcf import value_per_share
+
+    out = value_per_share(_inputs(growth=0.30, terminal_growth=0.03, year5_growth_cap=0.10))
+    growth = [row["growth"] for row in out["forecast"]]
+    assert abs(growth[0] - 0.30) < 1e-9 and abs(growth[4] - 0.10) < 1e-9 and abs(growth[-1] - 0.03) < 1e-9
+    slow = value_per_share(_inputs(growth=0.06, terminal_growth=0.03, year5_growth_cap=0.10))
+    assert all(abs(r["growth"] - 0.06) < 1e-9 for r in slow["forecast"][:5])  # plateau below the cap
