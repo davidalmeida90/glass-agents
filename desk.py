@@ -16,6 +16,7 @@ import asyncio
 import json
 import time
 from collections import Counter
+from pathlib import Path
 
 from run import HERE, load_keys, preflight, run_reader  # noqa: E402  (run.py sets up sys.path)
 
@@ -68,93 +69,116 @@ def valuation_line(val: dict) -> str:
             f" {pct(val['terminal_share'])} of EV; EV/EBIT at base {val['ev_to_ebit']}x vs market {val['market_ev_to_ebit']}x")
 
 
-async def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--tickers", required=True)
-    ap.add_argument("--repeats", type=int, default=3, help="noise meter: accounting reader and red team runs")
-    ap.add_argument("--budget-usd", type=float, default=0.50)
-    ap.add_argument("--max-tokens", type=int, default=40_000)
-    ap.add_argument("--model", default="deepseek/deepseek-flash")
-    ap.add_argument("--valuation-only", action="store_true")
-    args = ap.parse_args()
-    tickers = [t.strip().upper() for t in args.tickers.split(",") if t.strip()]
+class Desk:
+    """One batch: the model, the budgets and the steps. company() runs the whole desk on one ticker.
 
-    load_keys()
-    from fundamentalist.budget import BudgetExceeded, TokenLedger
-    from fundamentalist.decision import RATINGS, adjust, decide, flags
-    from fundamentalist.edgar import RISK_STATS, load_index
-    from dataclasses import replace
-    from fundamentalist import dcf
-    from fundamentalist.redteam import corrections, counts, method_review, red_team
-    from fundamentalist.schemas import READERS
-    from fundamentalist.sizing import annual_volatility, size
-    from fundamentalist.parameters import value as param
-    from fundamentalist.report import audit, write_memo
-    from fundamentalist.valuation import value
-    from fundamentalist.verifier import verify
+    on_step(kind, agent, visit, data) sees every step as it happens (kind "start" or "finish", data the step's
+    raw output); Glassbench's driver turns it into run events. Extra LangChain callbacks ride along on every
+    model call, next to the budget ledgers.
+    """
 
-    model = args.model.split("/")[-1]
-    batch = TokenLedger(model, max_tokens=10**9, max_usd=args.budget_usd, echo=False)
-    configurable = {"model": args.model}
-    if not args.valuation_only:
-        pre = await preflight([TokenLedger(model, args.max_tokens, args.budget_usd), batch], args.model)
-        print(f"  preflight: forced tool call {'accepted' if pre['tool_choice_any'] else 'NOT accepted'}\n")
+    def __init__(self, model: str = "deepseek/deepseek-flash", budget_usd: float = 0.50, max_tokens: int = 40_000,
+                 repeats: int = 3, valuation_only: bool = False, callbacks: list | None = None, on_step=None,
+                 log=print, echo: bool = True) -> None:
+        from fundamentalist.budget import TokenLedger
+
+        self.model_arg, self.model = model, model.split("/")[-1]
+        self.budget_usd, self.max_tokens, self.repeats = budget_usd, max_tokens, repeats
+        self.valuation_only, self.echo, self.log = valuation_only, echo, log
+        self.callbacks = list(callbacks or [])
+        self.on_step = on_step or (lambda *a, **k: None)
+        self.batch = TokenLedger(self.model, max_tokens=10**9, max_usd=budget_usd, echo=False)
+        self.configurable = {"model": model}
+
+    def room(self) -> bool:
+        return self.batch.usd < self.budget_usd
+
+    def ledger(self):
+        from fundamentalist.budget import TokenLedger
+
+        return TokenLedger(self.model, self.max_tokens, self.budget_usd - self.batch.usd, echo=self.echo)
+
+    async def preflight(self) -> dict:
+        pre = await preflight([self.ledger(), self.batch, *self.callbacks], self.model_arg)
         if not pre["tool_choice_any"]:
-            configurable["tool_choice"] = None
+            self.configurable["tool_choice"] = None
+        return pre
 
-    def room() -> bool:
-        return batch.usd < args.budget_usd
+    async def read(self, ticker: str, name: str, visit: int = 1) -> tuple[list[dict], dict]:
+        from fundamentalist.edgar import load_index
+        from fundamentalist.schemas import READERS
+        from fundamentalist.verifier import verify
 
-    async def read(ticker: str, name: str) -> tuple[list[dict], dict]:
         reader = READERS[name]
+        self.on_step("start", name, visit, None)
         corpus = load_index(ticker, reader.corpus)
-        ledger = TokenLedger(model, args.max_tokens, args.budget_usd - batch.usd)
-        print(f"  reader {name}")
-        last, stopped = await run_reader(ticker, reader, configurable, [ledger, batch])
+        ledger = self.ledger()
+        self.log(f"  reader {name}")
+        last, stopped = await run_reader(ticker, reader, self.configurable, [ledger, self.batch, *self.callbacks])
         check = verify(((last.get("info") or {}).get("claims")) or [], corpus.text_of)
         s = ledger.summary()
-        return check["claims"], {k: s[k] for k in ("calls", "tokens", "cached", "usd")} | {"stopped": stopped}
+        cost = {k: s[k] for k in ("calls", "tokens", "cached", "usd")} | {"stopped": stopped}
+        self.on_step("finish", name, visit, {"claims": check["claims"], "cost": cost})
+        return check["claims"], cost
 
-    memos, t_batch = [], time.time()
-    memo_dir = HERE / "runs" / "memos" / time.strftime("%Y%m%d-%H%M%S")
-    for ticker in tickers:
-        print(f"=== {ticker}")
+    async def company(self, ticker: str, memo_dir, as_of: str | None = None) -> dict:
+        """Readers, valuation, rating, red team, noise meter, sizing and audit on one company; returns the memo."""
+        from dataclasses import replace
+
+        from fundamentalist import dcf
+        from fundamentalist.budget import BudgetExceeded
+        from fundamentalist.decision import RATINGS, adjust, decide, flags
+        from fundamentalist.edgar import RISK_STATS
+        from fundamentalist.parameters import value as param
+        from fundamentalist.redteam import corrections, red_team
+        from fundamentalist.report import audit, write_memo
+        from fundamentalist.sizing import annual_volatility, size
+        from fundamentalist.valuation import value
+
         once, costs, accounting_runs = {}, {}, []
-        if not args.valuation_only:
+        if not self.valuation_only:
             for name in ONCE:
-                if not room():
+                if not self.room():
                     break
                 try:
-                    once[name], costs[name] = await read(ticker, name)
+                    once[name], costs[name] = await self.read(ticker, name)
                 except Exception as e:  # noqa: BLE001 - a missing filing skips that reader
-                    print(f"  {name}: skipped, {e}")
-            for i in range(args.repeats):
-                if not room():
+                    self.log(f"  {name}: skipped, {e}")
+                    self.on_step("finish", name, 1, {"error": str(e)})
+            for i in range(self.repeats):
+                if not self.room():
                     break
                 try:
-                    claims, cost = await read(ticker, "accounting")
+                    claims, cost = await self.read(ticker, "accounting", i + 1)
                 except Exception as e:  # noqa: BLE001 - e.g. no 10-K under this company's CIK
-                    print(f"  accounting: skipped, {e}")
+                    self.log(f"  accounting: skipped, {e}")
+                    self.on_step("finish", "accounting", i + 1, {"error": str(e)})
                     break
                 accounting_runs.append(claims)
                 costs[f"accounting_{i + 1}"] = cost
+        self.on_step("start", "valuation", 1, None)
         try:
-            val = value(ticker)
+            val = value(ticker, as_of)
             vol = annual_volatility(ticker)
         except Exception as e:  # noqa: BLE001 - no XBRL or no price: no rating
             val, vol = {"ticker": ticker, "price": None, "fair_value": None, "note": f"valuation failed: {e}"}, None
+        self.on_step("finish", "valuation", 1, {"valuation": val, "volatility": vol})
 
         repeats = []
         for i in range(max(len(accounting_runs), 1)):
             evidence = dict(once, accounting=accounting_runs[i]) if accounting_runs else dict(once)
             fl = flags(val, evidence, RISK_STATS.get(ticker)) if val.get("price") else {"red": [], "caution": []}
             base = decide(val, fl, vol) if val.get("price") else {"rating": "No rating", "why": [val["note"]], "upside_to_base": None}
+            if i == 0:
+                self.on_step("start", "rating", 1, None)
+                self.on_step("finish", "rating", 1, {"flags": fl, "base": base})
             rt, final = None, base
-            if base["rating"] in RATINGS and not args.valuation_only and room():
+            if base["rating"] in RATINGS and not self.valuation_only and self.room():
+                self.on_step("start", "red_team", i + 1, None)
                 lines, ids = evidence_lines(evidence)
-                ledger = TokenLedger(model, args.max_tokens, args.budget_usd - batch.usd)
-                cfg = {"configurable": dict(configurable, max_output_tokens=800), "callbacks": [ledger, batch],
-                       "metadata": {"purpose": "red_team"}}
+                ledger = self.ledger()
+                cfg = {"configurable": dict(self.configurable, max_output_tokens=800),
+                       "callbacks": [ledger, self.batch, *self.callbacks], "metadata": {"purpose": "red_team"}}
                 try:
                     rt = await red_team(ticker, val, base, lines, ids, cfg)
                     fixes = corrections(rt)
@@ -172,20 +196,60 @@ async def main() -> int:
                                                    f"P/FV {val['price'] / fv['base']:.2f}" if step else None)
                         rt["revalued"] = {"fixes": fixes, "fair_value": fv, "step": step}
                 except BudgetExceeded as e:
-                    print(f"  red team stopped: {e}")
+                    self.log(f"  red team stopped: {e}")
                 costs[f"red_team_{i + 1}"] = {k: ledger.summary()[k] for k in ("calls", "tokens", "cached", "usd")}
+                self.on_step("finish", "red_team", i + 1, {"red_team": rt, "base": base, "final": final,
+                                                           "cost": costs[f"red_team_{i + 1}"]})
             repeats.append({"flags": fl, "base": base, "red_team": rt, "final": final})
 
         ratings = [r["final"]["rating"] for r in repeats]
         ranked = sorted(ratings, key=lambda r: RATINGS.index(r) if r in RATINGS else -1)
         modal = ranked[(len(ranked) - 1) // 2]  # the median rating (lower middle for an even count)
         confidence = round(ratings.count(modal) / len(ratings), 2)
+        self.on_step("start", "noise", 1, None)
+        self.on_step("finish", "noise", 1, {"ratings": ratings, "rating": modal, "confidence": confidence})
+        self.on_step("start", "sizing", 1, None)
         sized = size(modal, confidence, vol)
+        self.on_step("finish", "sizing", 1, {"sizing": sized, "volatility": vol})
         memo = {"ticker": ticker, "rating": modal, "confidence": confidence, "sizing": sized, "valuation": val,
-                "repeats": repeats, "evidence": dict(once, accounting=accounting_runs), "costs": costs}
+                "volatility": vol, "repeats": repeats, "evidence": dict(once, accounting=accounting_runs), "costs": costs}
+        self.on_step("start", "audit", 1, None)
         memo["audit"] = audit(memo)
-        memo["memo_file"] = str(write_memo(memo, memo_dir, time.strftime("%Y-%m-%d")).relative_to(HERE))
+        memo["memo_file"] = str(write_memo(memo, memo_dir, time.strftime("%Y-%m-%d")))
+        self.on_step("finish", "audit", 1, {"audit": memo["audit"], "memo_file": memo["memo_file"]})
+        return memo
+
+
+async def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--tickers", required=True)
+    ap.add_argument("--repeats", type=int, default=3, help="noise meter: accounting reader and red team runs")
+    ap.add_argument("--budget-usd", type=float, default=0.50)
+    ap.add_argument("--max-tokens", type=int, default=40_000)
+    ap.add_argument("--model", default="deepseek/deepseek-flash")
+    ap.add_argument("--valuation-only", action="store_true")
+    args = ap.parse_args()
+    tickers = [t.strip().upper() for t in args.tickers.split(",") if t.strip()]
+
+    load_keys()
+    from fundamentalist.redteam import counts, method_review
+
+    desk = Desk(args.model, args.budget_usd, args.max_tokens, args.repeats, args.valuation_only)
+    batch = desk.batch
+    if not args.valuation_only:
+        pre = await desk.preflight()
+        print(f"  preflight: forced tool call {'accepted' if pre['tool_choice_any'] else 'NOT accepted'}\n")
+
+    memos, t_batch = [], time.time()
+    memo_dir = HERE / "runs" / "memos" / time.strftime("%Y%m%d-%H%M%S")
+    for ticker in tickers:
+        print(f"=== {ticker}")
+        memo = await desk.company(ticker, memo_dir)
+        memo["memo_file"] = str(Path(memo["memo_file"]).relative_to(HERE))
         memos.append(memo)
+        val, vol, repeats, costs = memo["valuation"], memo["volatility"], memo["repeats"], memo["costs"]
+        modal, confidence, sized = memo["rating"], memo["confidence"], memo["sizing"]
+        ratings = [r["final"]["rating"] for r in repeats]
 
         fv = val.get("fair_value") or {}
         first = repeats[0]
@@ -205,7 +269,7 @@ async def main() -> int:
         spent = sum(c["usd"] for c in costs.values())
         toks = sum(c["tokens"] for c in costs.values())
         print(f"    model spend {toks:,} tokens, ${spent:.4f} | batch ${batch.usd:.4f} of ${args.budget_usd:.2f}\n")
-        if not room():
+        if not desk.room():
             print("batch dollar cap reached")
             break
 
