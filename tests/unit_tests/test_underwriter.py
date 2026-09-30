@@ -285,3 +285,13 @@ def test_red_team_corrections_take_the_median_of_counting_objections():
                              dict(ok, correction={"field": "growth", "value": 0.10}),
                              dict(ok, severity="medium", correction={"field": "operating_margin", "value": 0.5})]}
     assert corrections(result) == {"growth": 0.08}
+
+
+
+def test_research_asset_straight_line():
+    from underwriter.valuation import research_asset
+
+    # flat R&D of 10 a year over a 5-year life: asset = 10 x (5+4+3+2+1)/5 = 30, amortization = 10
+    annual = {f"20{y}-12-31": 10.0 for y in range(10, 26)}
+    asset, amortization = research_asset(10.0, annual, 5)
+    assert abs(asset - 30.0) < 1e-9 and abs(amortization - 10.0) < 1e-9

@@ -51,6 +51,11 @@ LEASE_TOTAL = ["OperatingLeaseLiability"]
 MINORITY = ["MinorityInterest"]
 EQUITY = ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"]
 GOODWILL = ["Goodwill"]
+RD = ["ResearchAndDevelopmentExpense", "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
+      "ResearchAndDevelopmentExpenseSoftwareExcludingAcquiredInProcessCost"]
+FIN_RECEIVABLES = [["NotesAndLoansReceivableNetCurrent"], ["NotesAndLoansReceivableNetNoncurrent"],
+                   ["FinancingReceivableExcludingAccruedInterestAfterAllowanceForCreditLoss"]]
+ASSETS = ["Assets"]
 INTANGIBLES = ["IntangibleAssetsNetExcludingGoodwill", "FiniteLivedIntangibleAssetsNet"]
 PREFERRED = ["PreferredStockValue", "PreferredStockValueOutstanding"]
 NI_COMMON = ["NetIncomeLossAvailableToCommonStockholdersBasic", "NetIncomeLoss"]
@@ -243,7 +248,9 @@ def fundamentals(ticker: str, as_of: str) -> dict[str, Any]:
         "ni_common": _ttm(data, NI_COMMON, as_of), "shares": _shares(data, as_of),
         "goodwill": _instant(data, GOODWILL, as_of), "intangibles": _instant(data, INTANGIBLES, as_of),
         "nonoperating": _ttm(data, NONOPERATING, as_of), "equity_with_nci": _instant(data, EQUITY_WITH_NCI, as_of),
-        "roic_history": roic_history(data, as_of),
+        "roic_history": roic_history(data, as_of), "rd_ttm": _ttm(data, RD, as_of), "rd_annual": _annual(data, RD, as_of),
+        "finance_receivables": sum(p["val"] for p in (_instant(data, c, as_of) for c in FIN_RECEIVABLES) if p) or None,
+        "assets": _instant(data, ASSETS, as_of),
     }
 
 
@@ -323,11 +330,26 @@ def _v(f: dict, key: str) -> float:
     return float(item.get("value", item.get("val", 0.0))) if item else 0.0
 
 
+def rd_life(industry: str | None) -> int:
+    lives = param("capitalize_rd")["lives"]
+    return next((years for key, years in lives.items() if key != "default" and industry and key.lower() in industry.lower()),
+                lives["default"])
+
+
+def research_asset(rd_ttm: float, annual: dict[str, float], life: int) -> tuple[float, float]:
+    """Unamortized R&D (this year's in full, year t-k at (life - k) / life) and this year's amortization."""
+    past = [annual[e] for e in sorted(annual, reverse=True)]  # most recent fiscal year first
+    history = [rd_ttm] + past[1:life + 1] if past else [rd_ttm]
+    asset = sum(v * (life - k) / life for k, v in enumerate(history[:life]))
+    amortization = sum(v / life for v in history[1:life + 1])
+    return asset, amortization
+
+
 def cost_of_capital(ticker: str, f: dict, market_cap: float, as_of: str) -> dict[str, Any]:
     """WACC build-up: CAPM cost of equity, synthetic-rating cost of debt, market-value weights."""
     rf, rf_date = risk_free()
     t = param("marginal_tax")
-    debt = _v(f, "debt") + (_v(f, "leases") if param("leases_as_debt") else 0.0)
+    debt = _v(f, "debt") + (_v(f, "leases") if param("leases_as_debt") else 0.0) - f.get("captive_offset", 0.0)
     regression = beta(ticker, as_of)
     bottom_up = bottom_up_beta(ticker, debt / market_cap if market_cap > 0 else 0.0)
     b = dict(bottom_up or regression, regression=regression["used"], regression_raw=regression["raw"])
@@ -440,10 +462,13 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     count, count_source = checked_shares(ticker, f["shares"], as_of)
     out: dict[str, Any] = {"ticker": ticker.upper(), "as_of": as_of, "price": price, "price_date": price_date,
                            "sic": sic, "inputs": f, "fair_value": None, "note": None, "model": "fcff",
-                           "method": "FCFF DCF at company WACC: revenue growth for 5 years, fading to terminal over 5; "
-                                     "reinvestment = change in revenue / sales-to-capital; SBC expensed; leases as debt; "
-                                     "terminal ROIC keeps a share of today's excess return; bear/base/bull shift growth "
-                                     "-/+4 points, margin -/+2 points, WACC +/-0.5 points, terminal excess 0/0.5/1"}
+                           "method": "FCFF DCF at company WACC (maturing toward beta 1 from above): trailing revenue "
+                                     "growth held 5 years if at most 10%, otherwise decaying to 10% by year 5, then fading "
+                                     "to terminal growth = risk-free rate over 5 years; reinvestment = change in revenue / "
+                                     "operating sales-to-capital; SBC expensed; R&D capitalized where material; leases as "
+                                     "debt; terminal ROIC keeps the moat share (from 5-year ROIC history) of today's excess "
+                                     "return; bear/base/bull shift growth -/+4 points, margin -/+10% relative, WACC "
+                                     "+/-0.5 points, moat share 0/history/1"}
     missing = [k for k in ("revenue", "revenue_year_ago", "ebit", "equity") if not f.get(k)]
     if not count:
         missing.append("share count")
@@ -456,7 +481,11 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
         return out
     pretax, tax = _v(f, "pretax"), _v(f, "tax")
     effective = min(max(tax / pretax, 0.0), param("marginal_tax")) if pretax > 0 else param("marginal_tax")
-    debt = _v(f, "debt") + (_v(f, "leases") if param("leases_as_debt") else 0.0)
+    receivables, assets = f.get("finance_receivables") or 0.0, _v(f, "assets")
+    if assets and receivables > param("captive_finance")["min_share_of_assets"] * assets:
+        f["captive_offset"] = min(receivables, _v(f, "debt"))
+        data_notes.append(f"captive finance: {receivables / 1e9:,.1f}B of finance receivables netted against debt")
+    debt = _v(f, "debt") + (_v(f, "leases") if param("leases_as_debt") else 0.0) - f.get("captive_offset", 0.0)
     cash = _v(f, "cash") + _v(f, "securities")
     invested = _v(f, "equity") + debt - cash
     if invested <= 0.05 * revenue:  # buybacks can push book capital near zero; fall back to operating capital
@@ -465,6 +494,18 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     operating = invested
     if param("capital_for_reinvestment") == "operating":
         operating = max(invested - _v(f, "goodwill") - _v(f, "intangibles"), 0.2 * revenue)
+    rd_note = None
+    rd_ttm = _v(f, "rd_ttm")
+    if rd_ttm > param("capitalize_rd")["min_share_of_revenue"] * revenue and f.get("rd_annual"):
+        from underwriter.market import _ticker_industries
+        life = rd_life(_ticker_industries().get(ticker.upper()))
+        asset, amortization = research_asset(rd_ttm, f["rd_annual"], life)
+        ebit += rd_ttm - amortization
+        invested += asset
+        operating += asset
+        rd_note = (f"R&D capitalized over {life} years: research asset {asset / 1e9:,.1f}B, EBIT +{(rd_ttm - amortization) / 1e9:,.1f}B "
+                   f"(R&D {rd_ttm / 1e9:,.1f}B - amortization {amortization / 1e9:,.1f}B)")
+        data_notes.append(rd_note)
     growth_raw = revenue / _v(f, "revenue_year_ago") - 1
     lo, hi = param("growth_bounds")
     market_cap = price * count

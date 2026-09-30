@@ -88,6 +88,17 @@ PARAMS: dict[str, Parameter] = {p.name: p for p in [
     Parameter("sbc_as_expense", True, "stock-based compensation is a real cost: it stays in EBIT and is not added back "
               "to cash flow", "Damodaran; McKinsey Valuation", "add back (common in screeners), which inflates value "
               "for tech"),
+    Parameter("capitalize_rd", {"min_share_of_revenue": 0.02, "lives": {"Drug": 10, "Biotech": 10, "Software": 3,
+                                                                         "Semiconductor": 5, "Computer": 5, "Electronic": 5,
+                                                                         "Internet": 3, "Entertainment": 3, "default": 5}},
+              "R&D above 2% of revenue is capitalized: research asset = unamortized past R&D (straight line over the "
+              "industry life), EBIT + R&D - amortization, invested capital + research asset",
+              "Damodaran R&D converter (R&DConv.xls): Drug 10 years, software 3, semiconductors and computers 5; "
+              "industry names mapped by keyword to his current industries", "expense R&D as reported"),
+    Parameter("captive_finance", {"min_share_of_assets": 0.10}, "when finance receivables exceed 10% of total assets, "
+              "they are netted against debt: the financing arm's debt funds its receivables",
+              "common practice: net debt excluding financial services (industrial companies with captive finance arms)",
+              "count all debt; value the finance arm separately"),
     Parameter("leases_as_debt", True, "operating lease liabilities (ASC 842) count as debt in the weights and the "
               "equity bridge", "Damodaran; McKinsey", "ignore leases"),
     Parameter("mid_year", True, "cash flows arrive mid-year on average", "McKinsey Valuation", "end-of-year discounting"),

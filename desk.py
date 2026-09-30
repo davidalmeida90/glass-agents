@@ -85,6 +85,7 @@ async def main() -> int:
     from underwriter.schemas import READERS
     from underwriter.sizing import annual_volatility, size
     from underwriter.parameters import value as param
+    from underwriter.report import audit, write_memo
     from underwriter.valuation import value
     from underwriter.verifier import verify
 
@@ -111,6 +112,7 @@ async def main() -> int:
         return check["claims"], {k: s[k] for k in ("calls", "tokens", "cached", "usd")} | {"stopped": stopped}
 
     memos, t_batch = [], time.time()
+    memo_dir = HERE / "runs" / "memos" / time.strftime("%Y%m%d-%H%M%S")
     for ticker in tickers:
         print(f"=== {ticker}")
         once, costs, accounting_runs = {}, {}, []
@@ -173,8 +175,11 @@ async def main() -> int:
         modal = ranked[(len(ranked) - 1) // 2]  # the median rating (lower middle for an even count)
         confidence = round(ratings.count(modal) / len(ratings), 2)
         sized = size(modal, confidence, vol)
-        memos.append({"ticker": ticker, "rating": modal, "confidence": confidence, "sizing": sized, "valuation": val,
-                      "repeats": repeats, "evidence": dict(once, accounting=accounting_runs), "costs": costs})
+        memo = {"ticker": ticker, "rating": modal, "confidence": confidence, "sizing": sized, "valuation": val,
+                "repeats": repeats, "evidence": dict(once, accounting=accounting_runs), "costs": costs}
+        memo["audit"] = audit(memo)
+        memo["memo_file"] = str(write_memo(memo, memo_dir, time.strftime("%Y-%m-%d")).relative_to(HERE))
+        memos.append(memo)
 
         fv = val.get("fair_value") or {}
         first = repeats[0]
@@ -204,6 +209,18 @@ async def main() -> int:
         for t, a in reviews[:12]:
             print(f"  {t}: {a[:150]}")
         print()
+    passed = [m["ticker"] for m in memos if not m["audit"]]
+    print(f"audit: {len(passed)} of {len(memos)} memos add up")
+    for m in memos:
+        if m["audit"]:
+            print(f"  {m['ticker']}: {'; '.join(m['audit'])}")
+    ratios = sorted(m["valuation"]["price"] / m["valuation"]["fair_value"]["base"] for m in memos
+                    if (m["valuation"].get("fair_value") or {}).get("base"))
+    if ratios:
+        median = ratios[len(ratios) // 2] if len(ratios) % 2 else (ratios[len(ratios) // 2 - 1] + ratios[len(ratios) // 2]) / 2
+        verdict = "consistent with the market on average" if 0.8 <= median <= 1.25 else "check the ERP, rates or growth settings"
+        print(f"market consistency: median price / fair value {median:.2f} over {len(ratios)} companies ({verdict})")
+    print(f"memos: {memo_dir.relative_to(HERE)}")
     bs = batch.summary()
     print(f"batch: {len(memos)} companies in {time.time() - t_batch:.0f}s, {bs['calls']} model calls, {bs['tokens']:,} tokens"
           f" ({bs['cached']:,} cached), ${bs['usd']:.4f} of ${args.budget_usd:.2f}")

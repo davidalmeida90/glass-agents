@@ -1,0 +1,927 @@
+{
+ "batch": {
+  "calls": 0,
+  "input": 0,
+  "cached": 0,
+  "output": 0,
+  "reasoning": 0,
+  "tokens": 0,
+  "usd": 0,
+  "max_tokens": 1000000000,
+  "max_usd": 0.5
+ },
+ "budget_usd": 0.5,
+ "repeats": 3,
+ "memos": [
+  {
+   "ticker": "MSFT",
+   "rating": "Hold",
+   "confidence": 1.0,
+   "sizing": {
+    "weight": 0.0,
+    "base": 0.0,
+    "vol": 0.3228056463780123,
+    "scale": null,
+    "confidence": 1.0
+   },
+   "valuation": {
+    "ticker": "MSFT",
+    "as_of": "2026-10-01",
+    "price": 512.9000244140625,
+    "price_date": "2026-09-30",
+    "sic": "7372",
+    "inputs": {
+     "revenue": {
+      "value": 331839000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 281724000000,
+      "end": "2025-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "ebit": {
+      "value": 155237000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "OperatingIncomeLoss"
+     },
+     "pretax": {
+      "value": 165934000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+     },
+     "tax": {
+      "value": 32185000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "IncomeTaxExpenseBenefit"
+     },
+     "interest": {
+      "value": 3051000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "InterestExpenseNonoperating"
+     },
+     "sbc": {
+      "value": 12405000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "ShareBasedCompensation"
+     },
+     "net_income": {
+      "value": 133749000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 182935000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 115948000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "cash": {
+      "end": "2026-06-30",
+      "val": 20935000000,
+      "accn": "0001193125-26-323660",
+      "fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "frame": "CY2026Q2I",
+      "concept": "CashAndCashEquivalentsAtCarryingValue"
+     },
+     "securities": {
+      "end": "2026-06-30",
+      "val": 55908000000,
+      "accn": "0001193125-26-323660",
+      "fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "frame": "CY2026Q2I",
+      "concept": "ShortTermInvestments"
+     },
+     "debt": {
+      "val": 112280998656.0,
+      "end": "latest",
+      "concept": "Yahoo totalDebt minus leases"
+     },
+     "leases": {
+      "val": 16532000000,
+      "end": "2026-06-30",
+      "concept": "OperatingLeaseLiabilityNoncurrent"
+     },
+     "minority": null,
+     "equity": {
+      "end": "2026-06-30",
+      "val": 442387000000,
+      "accn": "0001193125-26-323660",
+      "fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "frame": "CY2026Q2I",
+      "concept": "StockholdersEquity"
+     },
+     "preferred": null,
+     "ni_common": {
+      "value": 133749000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "NetIncomeLoss"
+     },
+     "shares": {
+      "end": "2026-07-23",
+      "val": 7425545491,
+      "accn": "0001193125-26-323660",
+      "fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "goodwill": {
+      "end": "2026-06-30",
+      "val": 119651000000,
+      "accn": "0001193125-26-323660",
+      "fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "frame": "CY2026Q2I",
+      "concept": "Goodwill"
+     },
+     "intangibles": {
+      "end": "2026-06-30",
+      "val": 18609000000,
+      "accn": "0001193125-26-323660",
+      "fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "frame": "CY2026Q2I",
+      "concept": "FiniteLivedIntangibleAssetsNet"
+     },
+     "nonoperating": {
+      "value": 10697000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "NonoperatingIncomeExpense"
+     },
+     "equity_with_nci": null,
+     "roic_history": [
+      {
+       "end": "2026-06-30",
+       "roic": 0.2521
+      },
+      {
+       "end": "2025-06-30",
+       "roic": 0.2705
+      },
+      {
+       "end": "2024-06-30",
+       "roic": 0.2781
+      },
+      {
+       "end": "2023-06-30",
+       "roic": 0.3035
+      },
+      {
+       "end": "2022-06-30",
+       "roic": 0.309
+      }
+     ],
+     "rd_ttm": {
+      "value": 35562000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "ResearchAndDevelopmentExpense"
+     },
+     "rd_annual": {
+      "2008-06-30": 8164000000,
+      "2009-06-30": 9010000000,
+      "2010-06-30": 8714000000,
+      "2011-06-30": 9043000000,
+      "2012-06-30": 9811000000,
+      "2013-06-30": 10411000000,
+      "2014-06-30": 11381000000,
+      "2015-06-30": 12046000000,
+      "2016-06-30": 11988000000,
+      "2017-06-30": 13037000000,
+      "2018-06-30": 14726000000,
+      "2019-06-30": 16876000000,
+      "2020-06-30": 19269000000,
+      "2021-06-30": 20716000000,
+      "2022-06-30": 24512000000,
+      "2023-06-30": 27195000000,
+      "2024-06-30": 29510000000,
+      "2025-06-30": 32488000000,
+      "2026-06-30": 35562000000
+     },
+     "finance_receivables": null,
+     "assets": {
+      "end": "2026-06-30",
+      "val": 758376000000,
+      "accn": "0001193125-26-323660",
+      "fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "frame": "CY2026Q2I",
+      "concept": "Assets"
+     }
+    },
+    "fair_value": {
+     "bear": 268.41,
+     "base": 514.44,
+     "bull": 724.51
+    },
+    "note": null,
+    "model": "fcff",
+    "method": "FCFF DCF at company WACC: revenue growth for 5 years, fading to terminal over 5; reinvestment = change in revenue / sales-to-capital; SBC expensed; leases as debt; terminal ROIC keeps a share of today's excess return; bear/base/bull shift growth -/+4 points, margin -/+2 points, WACC +/-0.5 points, terminal excess 0/0.5/1",
+    "dcf_inputs": "Inputs(revenue=331839000000.0, ebit=161068000000.0, effective_tax=0.19396265985271252, marginal_tax=0.25, invested_capital=561414331989.3334, operating_capital=423154331989.3333, growth=0.17788686799846665, terminal_growth=0.0475, wacc=0.0985, terminal_excess_return=1.0, mature_wacc=0.0873, high_growth_years=5, fade_years=5, mid_year=True, debt=128812998656.0, cash=76843000000.0, minority=0.0, shares=7425545491, year5_growth_cap=0.1)",
+    "capital": {
+     "risk_free": 0.0475,
+     "risk_free_date": "2026-09-01 (rate in Damodaran's ERP computation)",
+     "beta": {
+      "industry": "Software (System & Application)",
+      "firms": 309,
+      "unlevered": 1.248,
+      "debt_to_equity": 0.034,
+      "used": 1.28,
+      "method": "bottom-up: industry unlevered beta (cash-corrected) relevered at market D/E",
+      "regression": 1.068,
+      "regression_raw": 1.102
+     },
+     "erp": 0.0414,
+     "cost_of_equity": 0.1005,
+     "rating": {
+      "coverage": 50.88,
+      "rating": "AAA",
+      "spread": 0.004
+     },
+     "cost_of_debt_pre_tax": 0.0515,
+     "tax_shield_rate": 0.25,
+     "weight_equity": 0.9673,
+     "debt_incl_leases": 128812998656.0,
+     "wacc": 0.0985,
+     "mature_wacc": 0.0873
+    },
+    "wacc": 0.0985,
+    "revenue_growth": 0.1779,
+    "growth_used": 0.1779,
+    "implied_growth": 0.1763,
+    "operating_margin": 0.4854,
+    "roic": 0.2312,
+    "sales_to_capital": 0.784,
+    "effective_tax": 0.194,
+    "terminal_growth": 0.0475,
+    "terminal_roic": 0.2312,
+    "terminal_share": 0.734,
+    "ev_to_ebit": 24.0,
+    "market_ev_to_ebit": 24.0,
+    "shares_outstanding": 7425545491,
+    "shares_source": "XBRL EntityCommonStockSharesOutstanding at 2026-07-23",
+    "net_debt": 51969998656.0,
+    "data_notes": [
+     "debt from Yahoo totalDebt (128.8B): XBRL tags gave 56.8B",
+     "R&D capitalized over 3 years: research asset 67.1B, EBIT +5.8B (R&D 35.6B - amortization 29.7B)"
+    ],
+    "moat": "wide: ROIC beat WACC by 5%+ in all 5 years (min +15.4%)",
+    "terminal_excess_return": 1.0,
+    "roic_history": [
+     {
+      "end": "2026-06-30",
+      "roic": 0.2521
+     },
+     {
+      "end": "2025-06-30",
+      "roic": 0.2705
+     },
+     {
+      "end": "2024-06-30",
+      "roic": 0.2781
+     },
+     {
+      "end": "2023-06-30",
+      "roic": 0.3035
+     },
+     {
+      "end": "2022-06-30",
+      "roic": 0.309
+     }
+    ],
+    "cash_conversion": 1.409,
+    "sbc_to_revenue": 0.0374,
+    "sensitivity": {
+     "grid": {
+      "wacc -1.0%": {
+       "g -0.5%": 501.78,
+       "g +0.0%": 543.86,
+       "g +0.5%": 597.8
+      },
+      "wacc +0.0%": {
+       "g -0.5%": 474.79,
+       "g +0.0%": 514.44,
+       "g +0.5%": 565.26
+      },
+      "wacc +1.0%": {
+       "g -0.5%": 449.5,
+       "g +0.0%": 486.88,
+       "g +0.5%": 534.78
+      }
+     },
+     "swings": {
+      "growth": [
+       -37.96,
+       40.26
+      ],
+      "margin": [
+       -68.39,
+       68.39
+      ],
+      "wacc": [
+       -14.0,
+       14.47
+      ],
+      "terminal_excess_return": [
+       -163.19,
+       0.0
+      ]
+     }
+    },
+    "valuation_period": "trailing twelve months to 2026-06-30 (revenue growth: twelve months to 2026-06-30 vs to 2025-06-30), from 10-K and 10-Q XBRL; the readers' evidence comes from the latest 10-K only"
+   },
+   "repeats": [
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Hold",
+      "why": [
+       "price / base fair value 1.00 at High uncertainty (volatility 32%, range 0.89x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.003,
+      "uncertainty": "High",
+      "price_to_fair": 0.997
+     },
+     "red_team": null,
+     "final": {
+      "rating": "Hold",
+      "why": [
+       "price / base fair value 1.00 at High uncertainty (volatility 32%, range 0.89x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.003,
+      "uncertainty": "High",
+      "price_to_fair": 0.997
+     }
+    }
+   ],
+   "evidence": {
+    "accounting": []
+   },
+   "costs": {},
+   "audit": [],
+   "memo_file": "runs\\memos\\20261001-002024\\MSFT.md"
+  },
+  {
+   "ticker": "META",
+   "rating": "Buy",
+   "confidence": 1.0,
+   "sizing": {
+    "weight": 0.0299,
+    "base": 0.05,
+    "vol": 0.4176,
+    "scale": 0.599,
+    "confidence": 1.0
+   },
+   "valuation": {
+    "ticker": "META",
+    "as_of": "2026-10-01",
+    "price": 725.1799926757812,
+    "price_date": "2026-09-30",
+    "sic": "7370",
+    "inputs": {
+     "revenue": {
+      "value": 228247000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 178804000000,
+      "end": "2025-06-30",
+      "method": "FY to 2024-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "ebit": {
+      "value": 86926000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "OperatingIncomeLoss"
+     },
+     "pretax": {
+      "value": 87524000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+     },
+     "tax": {
+      "value": 19426000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "IncomeTaxExpenseBenefit"
+     },
+     "interest": {
+      "value": 1917000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "InterestExpenseDebt"
+     },
+     "sbc": {
+      "value": 25136000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "ShareBasedCompensation"
+     },
+     "net_income": {
+      "value": 68098000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 130301000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 89325000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "cash": {
+      "end": "2026-06-30",
+      "val": 15462000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "frame": "CY2026Q2I",
+      "concept": "CashAndCashEquivalentsAtCarryingValue"
+     },
+     "securities": {
+      "end": "2026-06-30",
+      "val": 74798000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "frame": "CY2026Q2I",
+      "concept": "MarketableSecuritiesCurrent"
+     },
+     "debt": {
+      "val": 83664000000,
+      "end": "2026-06-30",
+      "concept": "LongTermDebtNoncurrent"
+     },
+     "leases": {
+      "val": 28654000000,
+      "end": "2026-06-30",
+      "concept": "OperatingLeaseLiabilityNoncurrent + OperatingLeaseLiabilityCurrent"
+     },
+     "minority": null,
+     "equity": {
+      "end": "2026-06-30",
+      "val": 261221000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "frame": "CY2026Q2I",
+      "concept": "StockholdersEquity"
+     },
+     "preferred": {
+      "end": "2012-12-31",
+      "val": 0,
+      "accn": "0001326801-13-000003",
+      "fy": 2012,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2013-02-01",
+      "frame": "CY2012Q4I",
+      "concept": "PreferredStockValue"
+     },
+     "ni_common": {
+      "value": 68098000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "NetIncomeLoss"
+     },
+     "shares": {
+      "start": "2026-01-01",
+      "end": "2026-06-30",
+      "val": 2565000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "concept": "WeightedAverageNumberOfDilutedSharesOutstanding"
+     },
+     "goodwill": {
+      "end": "2026-06-30",
+      "val": 23406000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "frame": "CY2026Q2I",
+      "concept": "Goodwill"
+     },
+     "intangibles": {
+      "end": "2025-12-31",
+      "val": 3692000000,
+      "accn": "0001628280-26-003942",
+      "fy": 2025,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-01-29",
+      "frame": "CY2025Q4I",
+      "concept": "IntangibleAssetsNetExcludingGoodwill"
+     },
+     "nonoperating": {
+      "value": 598000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "NonoperatingIncomeExpense"
+     },
+     "equity_with_nci": null,
+     "roic_history": [
+      {
+       "end": "2025-12-31",
+       "roic": 0.2601
+      },
+      {
+       "end": "2024-12-31",
+       "roic": 0.3105
+      },
+      {
+       "end": "2023-12-31",
+       "roic": 0.2704
+      },
+      {
+       "end": "2022-12-31",
+       "roic": 0.1795
+      },
+      {
+       "end": "2021-12-31",
+       "roic": 0.3238
+      }
+     ],
+     "rd_ttm": {
+      "value": 71634000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "ResearchAndDevelopmentExpense"
+     },
+     "rd_annual": {
+      "2010-12-31": 144000000,
+      "2011-12-31": 388000000,
+      "2012-12-31": 1399000000,
+      "2013-12-31": 1415000000,
+      "2014-12-31": 2666000000,
+      "2015-12-31": 4816000000,
+      "2016-12-31": 5919000000,
+      "2017-12-31": 7754000000,
+      "2018-12-31": 10273000000,
+      "2019-12-31": 13600000000,
+      "2020-12-31": 18447000000,
+      "2021-12-31": 24655000000,
+      "2022-12-31": 35338000000,
+      "2023-12-31": 38483000000,
+      "2024-12-31": 43873000000,
+      "2025-12-31": 57372000000
+     },
+     "finance_receivables": null,
+     "assets": {
+      "end": "2026-06-30",
+      "val": 449956000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "frame": "CY2026Q2I",
+      "concept": "Assets"
+     }
+    },
+    "fair_value": {
+     "bear": 696.19,
+     "base": 1407.17,
+     "bull": 2003.21
+    },
+    "note": null,
+    "model": "fcff",
+    "method": "FCFF DCF at company WACC: revenue growth for 5 years, fading to terminal over 5; reinvestment = change in revenue / sales-to-capital; SBC expensed; leases as debt; terminal ROIC keeps a share of today's excess return; bear/base/bull shift growth -/+4 points, margin -/+2 points, WACC +/-0.5 points, terminal excess 0/0.5/1",
+    "dcf_inputs": "Inputs(revenue=228247000000.0, ebit=119328666666.66666, effective_tax=0.22195055070609204, marginal_tax=0.25, invested_capital=396989333333.3334, operating_capital=369891333333.3334, growth=0.27652065949307625, terminal_growth=0.0475, wacc=0.0887, terminal_excess_return=1.0, mature_wacc=0.086, high_growth_years=5, fade_years=5, mid_year=True, debt=112318000000.0, cash=90260000000.0, minority=0.0, shares=2565000000, year5_growth_cap=0.1)",
+    "capital": {
+     "risk_free": 0.0475,
+     "risk_free_date": "2026-09-01 (rate in Damodaran's ERP computation)",
+     "beta": {
+      "industry": "Software (Entertainment)",
+      "firms": 77,
+      "unlevered": 1.021,
+      "debt_to_equity": 0.06,
+      "used": 1.067,
+      "method": "bottom-up: industry unlevered beta (cash-corrected) relevered at market D/E",
+      "regression": 1.124,
+      "regression_raw": 1.185
+     },
+     "erp": 0.0414,
+     "cost_of_equity": 0.0917,
+     "rating": {
+      "coverage": 45.34,
+      "rating": "AAA",
+      "spread": 0.004
+     },
+     "cost_of_debt_pre_tax": 0.0515,
+     "tax_shield_rate": 0.25,
+     "weight_equity": 0.9431,
+     "debt_incl_leases": 112318000000.0,
+     "wacc": 0.0887,
+     "mature_wacc": 0.086
+    },
+    "wacc": 0.0887,
+    "revenue_growth": 0.2765,
+    "growth_used": 0.2765,
+    "implied_growth": 0.0331,
+    "operating_margin": 0.5228,
+    "roic": 0.2339,
+    "sales_to_capital": 0.617,
+    "effective_tax": 0.222,
+    "terminal_growth": 0.0475,
+    "terminal_roic": 0.2339,
+    "terminal_share": 0.786,
+    "ev_to_ebit": 30.4,
+    "market_ev_to_ebit": 15.8,
+    "shares_outstanding": 2565000000,
+    "shares_source": "XBRL WeightedAverageNumberOfDilutedSharesOutstanding at 2026-06-30",
+    "net_debt": 22058000000.0,
+    "data_notes": [
+     "R&D capitalized over 3 years: research asset 113.7B, EBIT +32.4B (R&D 71.6B - amortization 39.2B)"
+    ],
+    "moat": "wide: ROIC beat WACC by 5%+ in all 5 years (min +9.1%)",
+    "terminal_excess_return": 1.0,
+    "roic_history": [
+     {
+      "end": "2025-12-31",
+      "roic": 0.2601
+     },
+     {
+      "end": "2024-12-31",
+      "roic": 0.3105
+     },
+     {
+      "end": "2023-12-31",
+      "roic": 0.2704
+     },
+     {
+      "end": "2022-12-31",
+      "roic": 0.1795
+     },
+     {
+      "end": "2021-12-31",
+      "roic": 0.3238
+     }
+    ],
+    "cash_conversion": 1.403,
+    "sbc_to_revenue": 0.1101,
+    "sensitivity": {
+     "grid": {
+      "wacc -1.0%": {
+       "g -0.5%": 1364.44,
+       "g +0.0%": 1490.73,
+       "g +0.5%": 1654.22
+      },
+      "wacc +0.0%": {
+       "g -0.5%": 1288.22,
+       "g +0.0%": 1407.17,
+       "g +0.5%": 1561.13
+      },
+      "wacc +1.0%": {
+       "g -0.5%": 1216.9,
+       "g +0.0%": 1328.98,
+       "g +0.5%": 1474.05
+      }
+     },
+     "swings": {
+      "growth": [
+       -98.34,
+       104.01
+      ],
+      "margin": [
+       -193.19,
+       193.19
+      ],
+      "wacc": [
+       -39.74,
+       41.09
+      ],
+      "terminal_excess_return": [
+       -487.91,
+       0.0
+      ]
+     }
+    },
+    "valuation_period": "trailing twelve months to 2026-06-30 (revenue growth: twelve months to 2026-06-30 vs to 2025-06-30), from 10-K and 10-Q XBRL; the readers' evidence comes from the latest 10-K only"
+   },
+   "repeats": [
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Buy",
+      "why": [
+       "price / base fair value 0.52 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.9404,
+      "uncertainty": "High",
+      "price_to_fair": 0.515
+     },
+     "red_team": null,
+     "final": {
+      "rating": "Buy",
+      "why": [
+       "price / base fair value 0.52 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.9404,
+      "uncertainty": "High",
+      "price_to_fair": 0.515
+     }
+    }
+   ],
+   "evidence": {
+    "accounting": []
+   },
+   "costs": {},
+   "audit": [],
+   "memo_file": "runs\\memos\\20261001-002024\\META.md"
+  },
+  {
+   "ticker": "JPM",
+   "rating": "Overweight",
+   "confidence": 1.0,
+   "sizing": {
+    "weight": 0.0333,
+    "base": 0.03,
+    "vol": 0.2253,
+    "scale": 1.11,
+    "confidence": 1.0
+   },
+   "valuation": {
+    "ticker": "JPM",
+    "as_of": "2026-10-01",
+    "price": 330.8299865722656,
+    "price_date": "2026-09-30",
+    "sic": "6021",
+    "fair_value": {
+     "bear": 176.19,
+     "base": 368.87,
+     "bull": 756.96
+    },
+    "note": null,
+    "model": "bank",
+    "method": "justified price-to-book on common equity: P/B = (ROE - g) / (cost of equity - g), cost of equity = risk-free + beta x ERP; bear/bull: ROE -/+2 points, cost of equity +/-0.5 points",
+    "roe": 0.1699,
+    "book_value_per_share": 140.92,
+    "cost_of_equity": 0.079,
+    "implied_roe": 0.1215,
+    "terminal_growth": 0.0475,
+    "shares_outstanding": 2658186195,
+    "moat": "narrow: ROIC beat WACC on average over 5 years (+7.0%)",
+    "roe_history": [
+     {
+      "end": "2025-12-31",
+      "roe": 0.1536
+     },
+     {
+      "end": "2024-12-31",
+      "roe": 0.165
+     },
+     {
+      "end": "2023-12-31",
+      "roe": 0.1457
+     },
+     {
+      "end": "2022-12-31",
+      "roe": 0.1228
+     },
+     {
+      "end": "2021-12-31",
+      "roe": 0.1581
+     }
+    ],
+    "shares_source": "XBRL EntityCommonStockSharesOutstanding at 2026-06-30",
+    "cash_conversion": null,
+    "capital": {
+     "risk_free": 0.0475,
+     "risk_free_date": "2026-09-01 (rate in Damodaran's ERP computation)",
+     "beta": {
+      "industry": "Bank (Money Center)",
+      "firms": 15,
+      "used": 0.761,
+      "method": "industry levered beta (bank)",
+      "regression": 1.018,
+      "regression_raw": 1.026
+     },
+     "erp": 0.0414,
+     "cost_of_equity": 0.079
+    },
+    "valuation_period": "net income to common, twelve months to 2026-06-30; equity at 2026-06-30; the readers' evidence comes from the latest 10-K only"
+   },
+   "repeats": [
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.90 at High uncertainty (volatility 23%, range 1.57x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.115,
+      "uncertainty": "High",
+      "price_to_fair": 0.897
+     },
+     "red_team": null,
+     "final": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.90 at High uncertainty (volatility 23%, range 1.57x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.115,
+      "uncertainty": "High",
+      "price_to_fair": 0.897
+     }
+    }
+   ],
+   "evidence": {
+    "accounting": []
+   },
+   "costs": {},
+   "audit": [],
+   "memo_file": "runs\\memos\\20261001-002024\\JPM.md"
+  }
+ ]
+}
