@@ -1,0 +1,110 @@
+{
+ "ticker": "MSFT",
+ "filing": {
+  "company": "MICROSOFT CORP",
+  "ticker": "MSFT",
+  "form": "10-K",
+  "key": "0001193125-26-323660",
+  "period": "2026-06-30",
+  "filed": "2026-07-29",
+  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+ },
+ "model": "deepseek/deepseek-flash",
+ "stopped": "OutputParserException: Unknown tool type: 'search_filing'. Available tools: InfoIsSatisfactory\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+ "preflight": {
+  "tool_choice_any": true,
+  "error": null
+ },
+ "ledger": {
+  "summary": {
+   "calls": 4,
+   "input": 13223,
+   "cached": 128,
+   "output": 909,
+   "reasoning": 0,
+   "tokens": 14132,
+   "usd": 0.002106,
+   "max_tokens": 40000,
+   "max_usd": 0.5
+  },
+  "calls": [
+   {
+    "n": 1,
+    "node": "preflight",
+    "input": 276,
+    "cached": 128,
+    "output": 32,
+    "reasoning": 0,
+    "usd": 4.7600000000000005e-05,
+    "seconds": 1.2,
+    "estimate_in": 8,
+    "tool_calls": [
+     "Ping"
+    ]
+   },
+   {
+    "n": 2,
+    "node": "call_agent_model",
+    "input": 1234,
+    "cached": 0,
+    "output": 121,
+    "reasoning": 0,
+    "usd": 0.00020664000000000001,
+    "seconds": 1.1,
+    "estimate_in": 703,
+    "tool_calls": [
+     "search_filing",
+     "search_filing",
+     "search_filing"
+    ]
+   },
+   {
+    "n": 3,
+    "node": "call_agent_model",
+    "input": 5502,
+    "cached": 0,
+    "output": 714,
+    "reasoning": 0,
+    "usd": 0.0009702000000000002,
+    "seconds": 2.7,
+    "estimate_in": 5249,
+    "tool_calls": [
+     "Info"
+    ]
+   },
+   {
+    "n": 4,
+    "node": "reflect",
+    "input": 6211,
+    "cached": 0,
+    "output": 42,
+    "reasoning": 0,
+    "usd": 0.0008813,
+    "seconds": 1.2,
+    "estimate_in": 5944,
+    "tool_calls": [
+     "search_filing"
+    ]
+   }
+  ]
+ },
+ "passages_served": [
+  "P095",
+  "P102",
+  "P103",
+  "P104",
+  "P105",
+  "P107",
+  "P108",
+  "P110",
+  "P113",
+  "P130",
+  "P155",
+  "P190"
+ ],
+ "verification": {
+  "claims": [],
+  "counts": {},
+  "total": 0
+ }
+}

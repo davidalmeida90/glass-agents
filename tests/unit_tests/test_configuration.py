@@ -1,4 +1,4 @@
-from enrichment_agent.configuration import Configuration
+from underwriter.configuration import Configuration
 
 
 def test_configuration_from_none() -> None:

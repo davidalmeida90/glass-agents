@@ -3,9 +3,9 @@ from typing import Any, Dict
 import pytest
 from langsmith import unit
 
-from enrichment_agent import graph
+from underwriter import graph
 
-pytestmark = pytest.mark.anyio
+pytestmark = [pytest.mark.anyio, pytest.mark.skip(reason="template web research test; the reader now searches SEC filings")]
 
 
 @pytest.fixture(scope="function")

@@ -16,8 +16,11 @@ from langgraph.graph import add_messages
 class InputState:
     """Input state defines the interface between the graph and the user (external API)."""
 
+    ticker: str
+    "The company whose latest 10-K the reader searches."
+
     topic: str
-    "The topic for which the agent is tasked to gather information."
+    "The reader's task, e.g. which financial performance evidence to collect."
 
     extraction_schema: dict[str, Any]
     "The json schema defines the information the agent is tasked with filling out."

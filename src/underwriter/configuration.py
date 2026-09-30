@@ -7,7 +7,7 @@ from typing import Annotated, Optional
 
 from langchain_core.runnables import RunnableConfig, ensure_config
 
-from enrichment_agent import prompts
+from underwriter import prompts
 
 
 @dataclass(kw_only=True)
@@ -15,7 +15,7 @@ class Configuration:
     """The configuration for the agent."""
 
     model: Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
-        default="anthropic/claude-haiku-4-5-20251001",
+        default="deepseek/deepseek-flash",
         metadata={
             "description": "The name of the language model to use for the agent. "
             "Should be in the form: provider/model-name."
@@ -25,29 +25,48 @@ class Configuration:
     prompt: str = field(
         default=prompts.MAIN_PROMPT,
         metadata={
-            "description": "The main prompt template to use for the agent's interactions. "
-            "Expects two f-string arguments: {info} and {topic}."
+            "description": "The main prompt template. Expects {info}, {topic}, {company}, "
+            "{ticker}, {period}, {filed} and {max_searches}."
         },
     )
 
-    max_search_results: int = field(
-        default=5,
+    passages_per_search: int = field(
+        default=4,
         metadata={
-            "description": "The maximum number of search results to return for each search query."
+            "description": "Passages returned by one search of the filing (about 350 tokens each)."
         },
     )
 
-    max_info_tool_calls: int = field(
+    max_searches: int = field(
         default=3,
         metadata={
-            "description": "The maximum number of times the Info tool can be called during a single interaction."
+            "description": "Searches allowed in one run. After that only the Info tool is offered."
         },
     )
 
     max_loops: int = field(
-        default=6,
+        default=4,
         metadata={
-            "description": "The maximum number of interaction loops allowed before the agent terminates."
+            "description": "Agent turns allowed. The last turn may only submit Info, "
+            "so a run always ends with the evidence it has."
+        },
+    )
+
+    max_output_tokens: int = field(
+        default=1500,
+        metadata={"description": "Output cap for every model call."},
+    )
+
+    min_verified: int = field(
+        default=4,
+        metadata={"description": "Claims that must check out against the filing before the evidence is accepted."},
+    )
+
+    tool_choice: Optional[str] = field(
+        default="any",
+        metadata={
+            "description": "Forced tool choice; None lets the model answer freely "
+            "(needed if the provider rejects tool_choice)."
         },
     )
 

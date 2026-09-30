@@ -1,0 +1,227 @@
+{
+ "ticker": "MSFT",
+ "filing": {
+  "company": "MICROSOFT CORP",
+  "ticker": "MSFT",
+  "form": "10-K",
+  "key": "0001193125-26-323660",
+  "period": "2026-06-30",
+  "filed": "2026-07-29",
+  "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+ },
+ "model": "deepseek/deepseek-flash",
+ "stopped": null,
+ "preflight": {
+  "tool_choice_any": true,
+  "error": null
+ },
+ "ledger": {
+  "summary": {
+   "calls": 3,
+   "input": 7012,
+   "cached": 6400,
+   "output": 867,
+   "reasoning": 0,
+   "tokens": 7879,
+   "usd": 0.001224,
+   "max_tokens": 40000,
+   "max_usd": 0.49
+  },
+  "calls": [
+   {
+    "n": 1,
+    "node": "preflight",
+    "input": 276,
+    "cached": 128,
+    "output": 32,
+    "reasoning": 0,
+    "usd": 4.7600000000000005e-05,
+    "seconds": 0.9,
+    "estimate_in": 8,
+    "tool_calls": [
+     "Ping"
+    ]
+   },
+   {
+    "n": 2,
+    "node": "call_agent_model",
+    "input": 1234,
+    "cached": 1024,
+    "output": 121,
+    "reasoning": 0,
+    "usd": 0.00020664000000000001,
+    "seconds": 1.2,
+    "estimate_in": 703,
+    "tool_calls": [
+     "search_filing",
+     "search_filing",
+     "search_filing"
+    ]
+   },
+   {
+    "n": 3,
+    "node": "call_agent_model",
+    "input": 5502,
+    "cached": 5248,
+    "output": 714,
+    "reasoning": 0,
+    "usd": 0.0009702000000000002,
+    "seconds": 2.6,
+    "estimate_in": 5249,
+    "tool_calls": [
+     "Info"
+    ]
+   }
+  ]
+ },
+ "passages_served": [
+  "P095",
+  "P102",
+  "P103",
+  "P104",
+  "P105",
+  "P107",
+  "P108",
+  "P110",
+  "P113",
+  "P130",
+  "P155",
+  "P190"
+ ],
+ "verification": {
+  "claims": [
+   {
+    "topic": "revenue",
+    "statement": "Total revenue for fiscal 2026 was $331,839 million.",
+    "value": 331839,
+    "unit": "USD millions",
+    "period": "fiscal 2026",
+    "passage_id": "P102",
+    "quote": "Revenue $ 331,839 $ 281,724 18%",
+    "check": {
+     "status": "verified",
+     "passage_id": "P102",
+     "quote_verbatim": true,
+     "value_in_quote": true,
+     "value_in_passage": true
+    }
+   },
+   {
+    "topic": "growth",
+    "statement": "Revenue increased $50.1 billion or 18% in fiscal 2026 compared with fiscal 2025.",
+    "value": 18,
+    "unit": "%",
+    "period": "fiscal 2026",
+    "passage_id": "P102",
+    "quote": "Revenue increased $50.1 billion or 18% driven by growth in Microsoft Cloud.",
+    "check": {
+     "status": "verified",
+     "passage_id": "P102",
+     "quote_verbatim": true,
+     "value_in_quote": true,
+     "value_in_passage": true
+    }
+   },
+   {
+    "topic": "margin",
+    "statement": "Gross margin for fiscal 2026 was $225,465 million, up 16%.",
+    "value": 225465,
+    "unit": "USD millions",
+    "period": "fiscal 2026",
+    "passage_id": "P102",
+    "quote": "Gross margin 225,465 193,893 16%",
+    "check": {
+     "status": "verified",
+     "passage_id": "P102",
+     "quote_verbatim": true,
+     "value_in_quote": true,
+     "value_in_passage": true
+    }
+   },
+   {
+    "topic": "margin",
+    "statement": "Operating income for fiscal 2026 was $155,237 million, up 21%.",
+    "value": 155237,
+    "unit": "USD millions",
+    "period": "fiscal 2026",
+    "passage_id": "P102",
+    "quote": "Operating income 155,237 128,528 21%",
+    "check": {
+     "status": "verified",
+     "passage_id": "P102",
+     "quote_verbatim": true,
+     "value_in_quote": true,
+     "value_in_passage": true
+    }
+   },
+   {
+    "topic": "net_income",
+    "statement": "Net income for fiscal 2026 was $133,749 million, up 31%.",
+    "value": 133749,
+    "unit": "USD millions",
+    "period": "fiscal 2026",
+    "passage_id": "P102",
+    "quote": "Net income 133,749 101,832 31%",
+    "check": {
+     "status": "verified",
+     "passage_id": "P102",
+     "quote_verbatim": true,
+     "value_in_quote": true,
+     "value_in_passage": true
+    }
+   },
+   {
+    "topic": "segment",
+    "statement": "Intelligent Cloud segment revenue was $137,791 million with operating income of $56,972 million in fiscal 2026.",
+    "value": 137791,
+    "unit": "USD millions",
+    "period": "fiscal 2026",
+    "passage_id": "P104",
+    "quote": "Intelligent Cloud Revenue $ 137,791 $ 106,265 30%",
+    "check": {
+     "status": "verified",
+     "passage_id": "P104",
+     "quote_verbatim": true,
+     "value_in_quote": true,
+     "value_in_passage": true
+    }
+   },
+   {
+    "topic": "segment",
+    "statement": "Productivity and Business Processes segment revenue was $139,996 million with operating income of $83,879 million in fiscal 2026.",
+    "value": 139996,
+    "unit": "USD millions",
+    "period": "fiscal 2026",
+    "passage_id": "P104",
+    "quote": "Productivity and Business Processes Revenue $ 139,996 $ 120,810 16%",
+    "check": {
+     "status": "verified",
+     "passage_id": "P104",
+     "quote_verbatim": true,
+     "value_in_quote": true,
+     "value_in_passage": true
+    }
+   },
+   {
+    "topic": "segment",
+    "statement": "More Personal Computing segment revenue was $54,052 million with operating income of $14,386 million in fiscal 2026.",
+    "value": 54052,
+    "unit": "USD millions",
+    "period": "fiscal 2026",
+    "passage_id": "P104",
+    "quote": "More Personal Computing Revenue $ 54,052 $ 54,649 (1)%",
+    "check": {
+     "status": "verified",
+     "passage_id": "P104",
+     "quote_verbatim": true,
+     "value_in_quote": true,
+     "value_in_passage": true
+    }
+   }
+  ],
+  "counts": {
+   "verified": 8
+  },
+  "total": 8
+ }
+}

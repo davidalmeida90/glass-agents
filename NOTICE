@@ -1,0 +1,7 @@
+Underwriting desk, by David Arias.
+
+Started on 2026-09-30 from LangChain's data-enrichment LangGraph template
+(https://github.com/langchain-ai/data-enrichment, MIT License, see LICENSE-langchain-template).
+The template's agent loop is kept; its web tools, prompts and LLM checker were replaced by a search
+over SEC filings, evidence prompts, turn and search limits, a token ledger and a code verifier.
+The EDGAR functions are adapted from the author's own jev-for-finance/jev_rag.py.
