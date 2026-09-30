@@ -150,3 +150,13 @@ def test_implied_growth_inverts_the_present_value():
 
     for g in (0.0, 0.08, 0.2):
         assert abs(implied_growth(100.0, present_value(100.0, g)) - g) < 1e-6
+
+
+def test_clean_control_wording_raises_no_red_flag():
+    from underwriter.decision import flags
+
+    ok = {"status": "verified"}
+    ev = {"accounting": [{"topic": "internal_control", "check": ok,
+                          "quote": "Management did not identify any material weaknesses in internal control"},
+                         {"topic": "internal_control", "check": ok, "quote": "there were no identified material weaknesses"}]}
+    assert flags({"cash_conversion": 1.1}, ev, None)["red"] == []

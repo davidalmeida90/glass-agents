@@ -14,6 +14,7 @@ from typing import Any
 
 RATINGS = ["Sell", "Underweight", "Hold", "Overweight", "Buy"]
 RED = re.compile(r"material weakness|not effective|ineffective|adverse opinion|going concern|restat", re.I)
+CLEAN = re.compile(r"(no|not identify any|did not identify|without any?|free of)\s+(\w+\s+){0,2}material weakness", re.I)
 OK_STATUSES = ("verified", "number in passage")
 
 
@@ -21,7 +22,7 @@ def flags(value: dict[str, Any], evidence: dict[str, list[dict]], risk_stats: di
     red, caution = [], []
     for c in evidence.get("accounting", []):
         text = f"{c.get('quote', '')} {c.get('statement', '')}"
-        if c["check"]["status"] in OK_STATUSES and RED.search(text) and not re.search(r"no material weakness", text, re.I):
+        if c["check"]["status"] in OK_STATUSES and RED.search(text) and not CLEAN.search(text):
             red.append(f"{c.get('topic')}: {c.get('quote', '')[:120]}")
     conv = value.get("cash_conversion")
     if conv is not None and conv < 0.8:

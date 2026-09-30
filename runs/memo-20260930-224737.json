@@ -1,0 +1,3896 @@
+{
+ "batch": {
+  "calls": 52,
+  "input": 157084,
+  "cached": 62592,
+  "output": 24948,
+  "reasoning": 0,
+  "tokens": 182032,
+  "usd": 0.028977,
+  "max_tokens": 1000000000,
+  "max_usd": 0.5
+ },
+ "budget_usd": 0.5,
+ "memos": [
+  {
+   "ticker": "MSFT",
+   "valuation": {
+    "ticker": "MSFT",
+    "as_of": "2026-09-30",
+    "price": 512.9000244140625,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 331839000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 281724000000,
+      "end": "2025-06-30",
+      "method": "fiscal year",
+      "filed": "2025-07-30",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "net_income": {
+      "value": 133749000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 182935000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 115948000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "d_and_a": {
+      "value": 34300000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-29",
+      "concept": "Depreciation"
+     },
+     "shares": {
+      "end": "2026-07-23",
+      "val": 7425545491,
+      "accn": "0001193125-26-323660",
+      "fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 40294000000,
+     "cash_and_securities": 76843000000
+    },
+    "fair_value": {
+     "bear": 519.47,
+     "base": 633.46,
+     "bull": 769.58
+    },
+    "note": null,
+    "owner_earnings": 148635000000,
+    "owner_earnings_basis": "operating cash flow - depreciation and amortization",
+    "revenue_growth": 0.1779,
+    "growth_used": 0.1779,
+    "net_debt": -36549000000,
+    "shares_outstanding": 7425545491,
+    "implied_growth": 0.1247,
+    "fcf": 66987000000,
+    "cash_conversion": 1.368
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "Buy",
+    "why": [
+     "price 512.90 is below the bear value (bear 519.47, base 633.46, bull 769.58)"
+    ],
+    "upside_to_base": 0.2351
+   },
+   "evidence": {
+    "performance": [
+     {
+      "topic": "revenue",
+      "statement": "Total revenue for fiscal 2026 was $331,839 million.",
+      "value": 331839,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P130",
+      "quote": "tal revenue 331,839 281,724 245,122",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Total revenue grew 18% in fiscal 2026 compared with fiscal 2025.",
+      "value": 18,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "P104",
+      "quote": "Total Revenue $ 331,839 $ 281,724 18%",
+      "check": {
+       "status": "verified",
+       "passage_id": "P104",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Gross margin for fiscal 2026 was $225,465 million.",
+      "value": 225465,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P130",
+      "quote": "Gross margin 225,465 193,893 171,008",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Operating income for fiscal 2026 was $155,237 million, up 21%.",
+      "value": 155237,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P130",
+      "quote": "Operating income 155,237 128,528 109,433",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income for fiscal 2026 was $133,749 million.",
+      "value": 133749,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P130",
+      "quote": "Net income $ 133,749 $ 101,832 $ 88,136",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash from operations for fiscal 2026 was $182,935 million.",
+      "value": 182935,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P132",
+      "quote": "Net cash from operations 182,935 136,162 118,548",
+      "check": {
+       "status": "verified",
+       "passage_id": "P132",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Intelligent Cloud revenue for fiscal 2026 was $137,791 million with operating income of $56,972 million.",
+      "value": 137791,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P190",
+      "quote": "Intelligent Cloud Revenue $ 137,791 $ 106,265 $ 87,464",
+      "check": {
+       "status": "verified",
+       "passage_id": "P190",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Productivity and Business Processes revenue for fiscal 2026 was $139,996 million with operating income of $83,879 million.",
+      "value": 139996,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P190",
+      "quote": "Productivity and Business Processes Revenue $ 139,996 $ 120,810 $ 106,820",
+      "check": {
+       "status": "verified",
+       "passage_id": "P190",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "More Personal Computing revenue for fiscal 2026 was $54,052 million with operating income of $14,386 million.",
+      "value": 54052,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P190",
+      "quote": "More Personal Computing Revenue $ 54,052 $ 54,649 $ 50,838",
+      "check": {
+       "status": "verified",
+       "passage_id": "P190",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "other",
+      "statement": "Microsoft Cloud revenue increased 27% to $214.4 billion in fiscal 2026.",
+      "value": 214.4,
+      "unit": "USD billions",
+      "period": "fiscal 2026",
+      "passage_id": "P095",
+      "quote": "Microsoft Cloud revenue increased 27% to $214.4 billion.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P095",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "accounting": [
+     {
+      "topic": "net_income",
+      "statement": "Microsoft reported net income of $133,749 million for fiscal 2026.",
+      "value": 133749,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P130",
+      "quote": "Net income $ 133,749 $ 101,832 $ 88,136",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash from operations was $182,935 million for fiscal 2026.",
+      "value": 182935,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P132",
+      "quote": "Net cash from operations 182,935 136,162 118,548",
+      "check": {
+       "status": "verified",
+       "passage_id": "P132",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "audit_opinion",
+      "statement": "The auditor expressed an unqualified opinion that the financial statements present fairly, in all material respects, the financial position and results of operations and cash flows in conformity with U.S. GAAP.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P193",
+      "quote": "opinion, the financial statements present fairly, in all material respects, the financial position of the Company as of June 30, 2026 and 2025, and the results of its operations and its cash flows for each of the three years in the period ended June 30, 2026, in conformity with accounting principles generally accepted in the United States of America.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P193",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "The auditor reported a critical audit matter relating to revenue recognition, referring to Note 1 to the financial statements.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P194",
+      "quote": "Critical Audit Matters The critical audit matters communicated below are matters arising from the current-period audit of the financial statements",
+      "check": {
+       "status": "verified",
+       "passage_id": "P194",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "The critical audit matter identified was Revenue Recognition, referring to Note 1 to the financial statements.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P194",
+      "quote": "Revenue Recognition \u2013 Refer to Note 1 to the financial statements Critical Audit Matter Description",
+      "check": {
+       "status": "verified",
+       "passage_id": "P194",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "Management concluded that the Company's internal control over financial reporting was effective as of June 30, 2026.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P200",
+      "quote": "management concluded that the Company\u2019s internal control over financial reporting was effective as of June 30, 2026",
+      "check": {
+       "status": "verified",
+       "passage_id": "P200",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "The auditor expressed an unqualified opinion that the Company maintained effective internal control over financial reporting as of June 30, 2026.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P200",
+      "quote": "In our opinion, the Company maintained, in all material respects, effective internal control over financial reporting as of June 30, 2026, based on criteria established in Internal Control \u2014 Integrated Framework (2013) issued by COSO.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P200",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "There were no changes in internal control over financial reporting during the quarter ended June 30, 2026 that materially affected, or were reasonably likely to materially affect, internal control over financial reporting.",
+      "value": null,
+      "unit": null,
+      "period": "quarter ended June 30, 2026",
+      "passage_id": "P200",
+      "quote": "There were no changes in our internal control over financial reporting during the quarter ended June 30, 2026 that have materially affected, or are reasonably likely to materially affect, our internal control over financial reporting.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P200",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "capital": [
+     {
+      "topic": "cash",
+      "statement": "Cash, cash equivalents, and short-term investments totaled $76.8 billion as of June 30, 2026.",
+      "value": 76.8,
+      "unit": "USD billions",
+      "period": "fiscal 2026",
+      "passage_id": "P113",
+      "quote": "Cash, cash equivalents, and short-term investments totaled $76.8 billion and $94.6 billion as of June 30, 2026 and 2025, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P113",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Equity and other investments were $36.3 billion as of June 30, 2026.",
+      "value": 36.3,
+      "unit": "USD billions",
+      "period": "fiscal 2026",
+      "passage_id": "P113",
+      "quote": "Equity and other investments were $36.3 billion and $15.4 billion as of June 30, 2026 and 2025, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P113",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Cash and cash equivalents were $20,935 million and short-term investments $55,908 million at June 30, 2026.",
+      "value": 20935,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P130",
+      "quote": "Cash and cash equivalents $ 20,935 $ 30,242 Short-term investments 55,908 64,323",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "In fiscal 2026 the company repurchased 36 million shares for $16.7 billion through its share repurchase program.",
+      "value": 16.7,
+      "unit": "USD billions",
+      "period": "fiscal 2026",
+      "passage_id": "P118",
+      "quote": "During fiscal years 2026 and 2025, we repurchased 36 million shares and 31 million shares of our common stock for $16.7 billion and $13.0 billion, respectively, through our share repurchase program.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P118",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "As of June 30, 2026, $40.6 billion remained of the $60 billion share repurchase program.",
+      "value": 40.6,
+      "unit": "USD billions",
+      "period": "fiscal 2026",
+      "passage_id": "P118",
+      "quote": "As of June 30, 2026, $40.6 billion remained of our $60 billion share repurchase program.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P118",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "Dividends declared by the Board totaled $27.0 billion in fiscal 2026.",
+      "value": 27.0,
+      "unit": "USD billions",
+      "period": "fiscal 2026",
+      "passage_id": "P118",
+      "quote": "During fiscal years 2026 and 2025, our Board of Directors declared dividends totaling $27.0 billion and $24.7 billion, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P118",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "Common stock cash dividends paid were $26,445 million in fiscal 2026.",
+      "value": 26445,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P132",
+      "quote": "Common stock cash dividends paid ( 26,445 ) ( 24,082 ) ( 21,771 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P132",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "capex",
+      "statement": "Additions to property and equipment were $115,948 million in fiscal 2026.",
+      "value": 115948,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P132",
+      "quote": "Additions to property and equipment ( 115,948 ) ( 64,551 ) ( 44,477 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P132",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "risks": [
+     {
+      "topic": "ai",
+      "statement": "Increasing use of AI in internal or third-party systems may create new attack surfaces or methods for adversaries.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R006",
+      "quote": "Increasing use of AI, including models, algorithms, copilots, and autonomous or semi-autonomous agents, in our internal or third-party systems may create new attack surfaces or methods for adversaries.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R006",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cybersecurity",
+      "statement": "Attackers, potentially with the assistance of artificial intelligence, may reconstruct and exploit product vulnerabilities before patching.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R006",
+      "quote": "if attackers, potentially with the assistance of artificial intelligence, reconstruct and exploit the vulnerabilities before patching",
+      "check": {
+       "status": "verified",
+       "passage_id": "R006",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "Expansion of vertically-integrated capabilities, including proprietary hardware, infrastructure, and AI models, could increase cost structure, reduce margins, and expose the company to operational risks.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R000",
+      "quote": "Expansion of our vertically-integrated capabilities, including developing proprietary hardware, infrastructure, and artificial intelligence (\u201cAI\u201d) models, could increase our cost structure, reduce margins, and expose us to operational risks.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "competition",
+      "statement": "Microsoft's AI offerings compete with AI products from hyperscalers, open-source offerings, and frontier model providers, some of which are also current or potential partners.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R000",
+      "quote": "Our AI offerings compete with AI products from hyperscalers, open-source offerings, and frontier model providers, some of which are also current or potential partners.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "Governments may impose restrictions on the development, deployment, availability, or cross-border access to advanced AI models based on safety, cybersecurity, or national security.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R012",
+      "quote": "governments may impose restrictions on the development, deployment, availability, or cross-border access to advanced AI models based on safety, cybersecurity, or national security",
+      "check": {
+       "status": "verified",
+       "passage_id": "R012",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "supply_chain",
+      "statement": "U.S. tariffs, shifting AI export controls policies, and disagreements among governments on sanctions policies toward third countries have increased and may continue to increase operational costs and create uncertainty in product continuity.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R012",
+      "quote": "U.S. tariffs, shifting AI export controls policies, and disagreements among governments on sanctions policies toward third countries, has and may continue to increase operational costs, create uncertainty in the continuity of our products",
+      "check": {
+       "status": "verified",
+       "passage_id": "R012",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ]
+   },
+   "costs": {
+    "performance": {
+     "calls": 2,
+     "tokens": 7191,
+     "cached": 1536,
+     "usd": 0.001143,
+     "stopped": null
+    },
+    "accounting": {
+     "calls": 2,
+     "tokens": 6770,
+     "cached": 512,
+     "usd": 0.001088,
+     "stopped": null
+    },
+    "capital": {
+     "calls": 2,
+     "tokens": 7723,
+     "cached": 512,
+     "usd": 0.001217,
+     "stopped": null
+    },
+    "risks": {
+     "calls": 2,
+     "tokens": 5847,
+     "cached": 1536,
+     "usd": 0.000927,
+     "stopped": null
+    }
+   }
+  },
+  {
+   "ticker": "AAPL",
+   "valuation": {
+    "ticker": "AAPL",
+    "as_of": "2026-09-30",
+    "price": 333.0199890136719,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 466823000000,
+      "end": "2026-06-27",
+      "method": "FY to 2025-09-27 + 9-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 408625000000,
+      "end": "2025-06-28",
+      "method": "FY to 2024-09-28 + 9-month YTD - prior YTD",
+      "filed": "2025-08-01",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "net_income": {
+      "value": 128930000000,
+      "end": "2026-06-27",
+      "method": "FY to 2025-09-27 + 9-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 146724000000,
+      "end": "2026-06-27",
+      "method": "FY to 2025-09-27 + 9-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 10041000000,
+      "end": "2026-06-27",
+      "method": "FY to 2025-09-27 + 9-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "d_and_a": {
+      "value": 13100000000,
+      "end": "2026-06-27",
+      "method": "FY to 2025-09-27 + 9-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "DepreciationDepletionAndAmortization"
+     },
+     "shares": {
+      "end": "2026-07-17",
+      "val": 14594180000,
+      "accn": "0000320193-26-000020",
+      "fy": 2026,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 84344000000,
+     "cash_and_securities": 62399000000
+    },
+    "fair_value": {
+     "bear": 202.21,
+     "base": 248.06,
+     "bull": 302.99
+    },
+    "note": null,
+    "owner_earnings": 133624000000,
+    "owner_earnings_basis": "operating cash flow - depreciation and amortization",
+    "revenue_growth": 0.1424,
+    "growth_used": 0.1424,
+    "net_debt": 21945000000,
+    "shares_outstanding": 14594180000,
+    "implied_growth": 0.2164,
+    "fcf": 136683000000,
+    "cash_conversion": 1.138
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "Underweight",
+    "why": [
+     "price 333.02 is up to 25% above the bull value (bear 202.21, base 248.06, bull 302.99)"
+    ],
+    "upside_to_base": -0.2551
+   },
+   "evidence": {
+    "performance": [
+     {
+      "passage_id": "P084",
+      "period": "fiscal 2025",
+      "quote": "Total net sales 416,161 391,035 383,285",
+      "statement": "Total net sales for fiscal 2025 were $416,161 million.",
+      "topic": "revenue",
+      "unit": "USD millions",
+      "value": 416161,
+      "check": {
+       "status": "verified",
+       "passage_id": "P084",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P072",
+      "period": "fiscal 2025",
+      "quote": "Total net sales $ 416,161 6 % $ 391,035 2 % $ 383,285",
+      "statement": "Total net sales grew 6% in fiscal 2025 compared to 2024.",
+      "topic": "growth",
+      "unit": "%",
+      "value": 6,
+      "check": {
+       "status": "verified",
+       "passage_id": "P072",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P084",
+      "period": "fiscal 2025",
+      "quote": "Gross margin 195,201 180,683 169,148",
+      "statement": "Total gross margin for fiscal 2025 was $195,201 million.",
+      "topic": "margin",
+      "unit": "USD millions",
+      "value": 195201,
+      "check": {
+       "status": "verified",
+       "passage_id": "P084",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P073",
+      "period": "fiscal 2025",
+      "quote": "Total gross margin percentage 46.9 % 46.2 % 44.1 %",
+      "statement": "Total gross margin percentage was 46.9% in fiscal 2025.",
+      "topic": "margin",
+      "unit": "%",
+      "value": 46.9,
+      "check": {
+       "status": "verified",
+       "passage_id": "P073",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P084",
+      "period": "fiscal 2025",
+      "quote": "Net income $ 112,010 $ 93,736 $ 96,995",
+      "statement": "Net income for fiscal 2025 was $112,010 million.",
+      "topic": "net_income",
+      "unit": "USD millions",
+      "value": 112010,
+      "check": {
+       "status": "verified",
+       "passage_id": "P084",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P088",
+      "period": "fiscal 2025",
+      "quote": "Cash generated by operating activities 111,482 118,254 110,543",
+      "statement": "Cash generated by operating activities in fiscal 2025 was $111,482 million.",
+      "topic": "cash_flow",
+      "unit": "USD millions",
+      "value": 111482,
+      "check": {
+       "status": "verified",
+       "passage_id": "P088",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P072",
+      "period": "fiscal 2025",
+      "quote": "Americas $ 178,353 7 % $ 167,045 3 % $ 162,560",
+      "statement": "Americas segment net sales were $178,353 million in fiscal 2025, the largest reportable segment.",
+      "topic": "segment",
+      "unit": "USD millions",
+      "value": 178353,
+      "check": {
+       "status": "verified",
+       "passage_id": "P072",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P072",
+      "period": "fiscal 2025",
+      "quote": "Europe 111,032 10 % 101,328 7 % 94,294",
+      "statement": "Europe segment net sales were $111,032 million in fiscal 2025.",
+      "topic": "segment",
+      "unit": "USD millions",
+      "value": 111032,
+      "check": {
+       "status": "verified",
+       "passage_id": "P072",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P073",
+      "period": "fiscal 2025",
+      "quote": "Services (1) 109,158 14 % 96,169 13 % 85,200",
+      "statement": "Services net sales were $109,158 million in fiscal 2025, up 14%.",
+      "topic": "segment",
+      "unit": "USD millions",
+      "value": 109158,
+      "check": {
+       "status": "verified",
+       "passage_id": "P073",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P084",
+      "period": "fiscal 2025",
+      "quote": "Operating income 133,050 123,216 114,301",
+      "statement": "Operating income for fiscal 2025 was $133,050 million.",
+      "topic": "margin",
+      "unit": "USD millions",
+      "value": 133050,
+      "check": {
+       "status": "verified",
+       "passage_id": "P084",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "accounting": [
+     {
+      "topic": "net_income",
+      "statement": "Apple reported net income of $112,010 million for fiscal 2025.",
+      "value": 112010,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P085",
+      "quote": "Net income $ 112,010 $ 93,736 $ 96,995",
+      "check": {
+       "status": "verified",
+       "passage_id": "P085",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Cash generated by operating activities was $111,482 million for fiscal 2025.",
+      "value": 111482,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P088",
+      "quote": "Cash generated by operating activities 111,482 118,254 110,543",
+      "check": {
+       "status": "verified",
+       "passage_id": "P088",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "audit_opinion",
+      "statement": "The auditor expressed an unqualified opinion on the consolidated financial statements.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P122",
+      "quote": "our report dated October 31, 2025 expressed an unqualified opinion thereon",
+      "check": {
+       "status": "verified",
+       "passage_id": "P122",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "The auditor concluded Apple maintained effective internal control over financial reporting as of September 27, 2025.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P121",
+      "quote": "In our opinion, Apple Inc. (the \u201cCompany\u201d) maintained, in all material respects, effective internal control over financial reporting as of September 27, 2025, based on the COSO criteria.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P121",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "The critical audit matter was uncertain tax positions, with gross unrecognized tax benefits of $23.2 billion as of September 27, 2025.",
+      "value": 23.2,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P120",
+      "quote": "As of September 27, 2025, the total amount of gross unrecognized tax benefits was $23.2 billion, of which $10.6 billion, if recognized, would impact the Company\u2019s effective tax rate.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P120",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "The critical audit matter communicated relates to accounts or disclosures material to the financial statements and involved especially challenging, subjective, or complex judgments.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P119",
+      "quote": "The critical audit matter communicated below is a matter arising from the current period audit of the financial statements that was communicated or required to be communicated to the audit committee and that: (1) relates to accounts or disclosures that are material to the financial statements and (2) involved our especially challenging, subjective, or complex judgments.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P119",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "other",
+      "statement": "Ernst & Young LLP has served as the Company's auditor since 2009.",
+      "value": 2009,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P121",
+      "quote": "We have served as the Company\u2019s auditor since 2009.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P121",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "other",
+      "statement": "Total net sales were $416,161 million for fiscal 2025.",
+      "value": 416161,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P072",
+      "quote": "Total net sales $ 416,161 6 % $ 391,035 2 % $ 383,285",
+      "check": {
+       "status": "verified",
+       "passage_id": "P072",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "capital": [
+     {
+      "topic": "cash",
+      "statement": "Total cash, cash equivalents and marketable securities was $132.4 billion as of September 27, 2025.",
+      "value": 132.4,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P076",
+      "quote": "cash, cash equivalents and marketable securities, which totaled $132.4 billion as of September 27, 2025",
+      "check": {
+       "status": "verified",
+       "passage_id": "P076",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Total cash, cash equivalents and marketable securities (fair value) was $156,650 million as of September 27, 2025.",
+      "value": 156650,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P097",
+      "quote": "Total (2)(3) $ 160,600 $ 688 $ ( 4,638 ) $ 156,650 $ 29,943 $ 35,228 $ 91,479",
+      "check": {
+       "status": "verified",
+       "passage_id": "P097",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Non-current marketable securities were $77,723 million as of September 27, 2025.",
+      "value": 77723,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P086",
+      "quote": "Marketable securities 77,723 91,479",
+      "check": {
+       "status": "verified",
+       "passage_id": "P086",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Total term debt was $90,678 million as of September 27, 2025, of which $12,350 million was current.",
+      "value": 90678,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P109",
+      "quote": "Total term debt 90,678 96,662 Less: Current portion of term debt ( 12,350 ) ( 10,912 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P109",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Commercial paper outstanding was $8.0 billion as of September 27, 2025.",
+      "value": 8.0,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P108",
+      "quote": "the Company had $ 8.0 billion and $ 10.0 billion of commercial paper outstanding, respectively",
+      "check": {
+       "status": "verified",
+       "passage_id": "P108",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "During 2025 the company repurchased 402 million shares of its common stock for $89.3 billion.",
+      "value": 89.3,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P110",
+      "quote": "During 2025, the Company repurchased 402 million shares of its common stock for $ 89.3 billion.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P110",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "Payments for dividends and dividend equivalents were $15,421 million in fiscal 2025.",
+      "value": 15421,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P088",
+      "quote": "Payments for dividends and dividend equivalents ( 15,421 ) ( 15,234 ) ( 15,025 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P088",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "capex",
+      "statement": "Payments for acquisition of property, plant and equipment were $12,715 million in fiscal 2025.",
+      "value": 12715,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P088",
+      "quote": "Payments for acquisition of property, plant and equipment ( 12,715 ) ( 9,447 ) ( 10,959 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P088",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "risks": [
+     {
+      "topic": "geopolitical",
+      "statement": "Beginning in the second quarter of 2025, new U.S. tariffs were announced on imports, including additional tariffs on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the EU.",
+      "value": 2025,
+      "unit": null,
+      "period": "second quarter of 2025",
+      "passage_id": "R001",
+      "quote": "Beginning in the second quarter of 2025, new tariffs were announced on imports to the U.S. (\u201cU.S. Tariffs\u201d), including additional tariffs on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the European Union (\u201cEU\u201d), among others.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R001",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "geopolitical",
+      "statement": "The Department of Commerce initiated a Section 232 investigation into imports of semiconductors, semiconductor manufacturing equipment and their derivative products, including downstream products that contain semiconductors.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R001",
+      "quote": "Department of Commerce has initiated an investigation under Section 232 of the Trade Expansion Act of 1962, as amended, into, among other things, imports of semiconductors, semiconductor manufacturing equipment, and their derivative products, including downstream products that contain semiconductors.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R001",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "The risk of failing to obtain third-party intellectual property licenses may be exacerbated by new and emerging technologies including machine learning and artificial intelligence, which can involve acquisition and use of copyrighted materials for training and reproduction of copyrighted materials in outputs.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R003",
+      "quote": "This risk may be exacerbated by the use of new and emerging technologies, including machine learning and artificial intelligence, which can involve, among other things, the acquisition and use of copyrighted materials for training as well as the potential reproduction of copyrighted materials in their outputs",
+      "check": {
+       "status": "verified",
+       "passage_id": "R003",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "Risks of novel claims being attempted may be exacerbated as new and emerging technologies, including machine learning and artificial intelligence, are further integrated into the Company's products and services.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R005",
+      "quote": "These risks, and the risks of novel claims being attempted, may be exacerbated as new and emerging technologies, including machine learning and artificial intelligence, are further integrated into the Company\u2019s products and services.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R005",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "The Company is subject to new and changing laws and regulations regarding online safety, including enhanced protections for minors and mandatory age verification requirements.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R008",
+      "quote": "The Company is also subject to new and changing laws and regulations regarding online safety, including enhanced protections for minors and mandatory age verification requirements.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R008",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "legal",
+      "statement": "On September 2, 2025, the U.S. District Court for the District of Columbia ordered certain remedies after Google was found on August 5, 2024 to have violated U.S. antitrust laws, and the order is subject to further proceedings and appeal.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R007",
+      "quote": "On August 5, 2024, Google was found to have violated U.S. antitrust laws. In connection with this finding, on September 2, 2025, the U.S. District Court for the District of Columbia (\u201cD.C. District Court\u201d) ordered certain remedies.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R007",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ]
+   },
+   "costs": {
+    "performance": {
+     "calls": 3,
+     "tokens": 15849,
+     "cached": 7552,
+     "usd": 0.00248,
+     "stopped": null
+    },
+    "accounting": {
+     "calls": 2,
+     "tokens": 7387,
+     "cached": 1152,
+     "usd": 0.001166,
+     "stopped": null
+    },
+    "capital": {
+     "calls": 2,
+     "tokens": 7522,
+     "cached": 1152,
+     "usd": 0.001185,
+     "stopped": null
+    },
+    "risks": {
+     "calls": 2,
+     "tokens": 5297,
+     "cached": 4096,
+     "usd": 0.000867,
+     "stopped": null
+    }
+   }
+  },
+  {
+   "ticker": "NVDA",
+   "valuation": {
+    "ticker": "NVDA",
+    "as_of": "2026-09-30",
+    "price": 228.3800048828125,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 302970000000,
+      "end": "2026-07-26",
+      "method": "FY to 2026-01-25 + 6-month YTD - prior YTD",
+      "filed": "2026-08-26",
+      "concept": "Revenues"
+     },
+     "revenue_year_ago": {
+      "value": 165218000000,
+      "end": "2025-07-27",
+      "method": "FY to 2025-01-26 + 6-month YTD - prior YTD",
+      "filed": "2025-08-27",
+      "concept": "Revenues"
+     },
+     "net_income": {
+      "value": 192880000000,
+      "end": "2026-07-26",
+      "method": "FY to 2026-01-25 + 6-month YTD - prior YTD",
+      "filed": "2026-08-26",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 134360000000,
+      "end": "2026-07-26",
+      "method": "FY to 2026-01-25 + 6-month YTD - prior YTD",
+      "filed": "2026-08-26",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 7354000000,
+      "end": "2026-07-26",
+      "method": "FY to 2026-01-25 + 6-month YTD - prior YTD",
+      "filed": "2026-08-26",
+      "concept": "PaymentsToAcquireProductiveAssets"
+     },
+     "d_and_a": {
+      "value": 3687000000,
+      "end": "2026-07-26",
+      "method": "FY to 2026-01-25 + 6-month YTD - prior YTD",
+      "filed": "2026-08-26",
+      "concept": "DepreciationDepletionAndAmortization"
+     },
+     "shares": {
+      "end": "2026-08-21",
+      "val": 24100000000,
+      "accn": "0001045810-26-000075",
+      "fy": 2027,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-26",
+      "frame": "CY2026Q3I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 33366000000,
+     "cash_and_securities": 22443000000
+    },
+    "fair_value": {
+     "bear": 185.32,
+     "base": 225.14,
+     "bull": 272.42
+    },
+    "note": null,
+    "owner_earnings": 130673000000,
+    "owner_earnings_basis": "operating cash flow - depreciation and amortization",
+    "revenue_growth": 0.8338,
+    "growth_used": 0.25,
+    "net_debt": 10923000000,
+    "shares_outstanding": 24100000000,
+    "implied_growth": 0.2537,
+    "fcf": 127006000000,
+    "cash_conversion": 0.697
+   },
+   "flags": {
+    "red": [],
+    "caution": [
+     "cash conversion 0.70 (operating cash flow / net income under 0.8)"
+    ]
+   },
+   "decision": {
+    "rating": "Underweight",
+    "why": [
+     "price 228.38 is between base and bull (bear 185.32, base 225.14, bull 272.42)",
+     "one notch off: cash conversion 0.70 (operating cash flow / net income under 0.8)"
+    ],
+    "upside_to_base": -0.0142
+   },
+   "evidence": {
+    "performance": [
+     {
+      "topic": "revenue",
+      "statement": "Total revenue for fiscal 2026 was $215,938 million.",
+      "value": 215938,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Total $ 215,938 $ 130,497 $ 85,441 65 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Total revenue grew 65% year over year in fiscal 2026.",
+      "value": 65,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Total $ 215,938 $ 130,497 $ 85,441 65 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Gross margin decreased to 71.1% in fiscal 2026 from 75.0% in fiscal 2025.",
+      "value": 71.1,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "P137",
+      "quote": "Gross margins decreased to 71.1% in fiscal year 2026 from 75.0% in fiscal year 2025",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Operating income was 60.4% of revenue in fiscal 2026.",
+      "value": 60.4,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Operating income 60.4 62.4",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income for fiscal 2026 was $120,067 million.",
+      "value": 120067,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P164",
+      "quote": "Net income \u2014 \u2014 \u2014 \u2014 120,067 120,067",
+      "check": {
+       "status": "verified",
+       "passage_id": "P164",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities was $102,718 million in fiscal 2026.",
+      "value": 102718,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P140",
+      "quote": "Net cash provided by operating activities $ 102,718 $ 64,089",
+      "check": {
+       "status": "verified",
+       "passage_id": "P140",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Compute & Networking segment revenue was $193,479 million in fiscal 2026.",
+      "value": 193479,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Compute & Networking $ 193,479 $ 116,193 $ 77,286 67 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Compute & Networking segment operating income was $130,141 million in fiscal 2026.",
+      "value": 130141,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Compute & Networking $ 130,141 $ 82,875 $ 47,266 57 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Graphics segment revenue was $22,459 million in fiscal 2026.",
+      "value": 22459,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Graphics 22,459 14,304 8,155 57 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Graphics segment operating income was $9,156 million in fiscal 2026.",
+      "value": 9156,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Graphics 9,156 5,085 4,071 80 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "accounting": [
+     {
+      "topic": "net_income",
+      "statement": "Net income for fiscal 2026 was $120,067 million.",
+      "value": 120067,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P162",
+      "quote": "Net income $ 120,067 $ 72,880 $ 29,760",
+      "check": {
+       "status": "verified",
+       "passage_id": "P162",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities for fiscal 2026 was $102,718 million.",
+      "value": 102718,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P165",
+      "quote": "Net cash provided by operating activities 102,718 64,089 28,090",
+      "check": {
+       "status": "verified",
+       "passage_id": "P165",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "audit_opinion",
+      "statement": "The auditor's opinion states the consolidated financial statements present fairly, in all material respects, the financial position and results of operations and cash flows in conformity with U.S. GAAP.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P156",
+      "quote": "of its operations and its cash flows for each of the three years in the period ended January 25, 2026 in conformity with accounting principles generally accepted in the United States of America.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P156",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "The auditor opined that the Company maintained, in all material respects, effective internal control over financial reporting as of January 25, 2026.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P156",
+      "quote": "Also in our opinion, the Company maintained, in all material respects, effective internal control over financial reporting as of January 25, 2026, based on criteria established in Internal Control - Integrated Framework (2013) issued by the COSO.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P156",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "Management concluded that internal control over financial reporting was effective as of January 25, 2026.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P149",
+      "quote": "our management concluded that our internal control over financial reporting was effective as of January 25, 2026.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P149",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "The critical audit matter was the valuation of inventories, including provisions for excess or obsolete inventories and excess product purchase commitments.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P159",
+      "quote": "Valuation of Inventories - Provisions for Excess or Obsolete Inventories and Excess Product Purchase Commitments",
+      "check": {
+       "status": "verified",
+       "passage_id": "P159",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "As of January 25, 2026, the consolidated inventories balance was $21.4 billion and outstanding inventory purchase and long-term supply and capacity obligations balance was $95.2 billion.",
+      "value": 21.4,
+      "unit": "USD billions",
+      "period": "fiscal 2026",
+      "passage_id": "P159",
+      "quote": "As of January 25, 2026, the Company\u2019s consolidated inventories balance was $21.4 billion and the Company\u2019s consolidated outstanding inventory purchase and long-term supply and capacity obligations balance was $95.2 billion",
+      "check": {
+       "status": "verified",
+       "passage_id": "P159",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "There were no changes in internal control over financial reporting during the quarter ended January 25, 2026 that materially affected, or were reasonably likely to materially affect, internal control over financial reporting.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "P149",
+      "quote": "There have been no changes in our internal control over financial reporting during the quarter ended January 25, 2026 that have materially affected, or are reasonably likely to materially affect, our internal control over financial reporting.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P149",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "capital": [
+     {
+      "topic": "cash",
+      "statement": "Cash, cash equivalents, and marketable securities totaled $62,556 million as of January 25, 2026.",
+      "value": 62556,
+      "unit": "USD millions",
+      "period": "as of Jan 25, 2026",
+      "passage_id": "P140",
+      "quote": "Cash, cash equivalents, and marketable securities $ 62,556 $ 43,210",
+      "check": {
+       "status": "verified",
+       "passage_id": "P140",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Cash and cash equivalents were $10,605 million as of January 25, 2026.",
+      "value": 10605,
+      "unit": "USD millions",
+      "period": "as of Jan 25, 2026",
+      "passage_id": "P140",
+      "quote": "Cash and cash equivalents $ 10,605 $ 8,589",
+      "check": {
+       "status": "verified",
+       "passage_id": "P140",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Marketable securities were $51,951 million as of January 25, 2026.",
+      "value": 51951,
+      "unit": "USD millions",
+      "period": "as of Jan 25, 2026",
+      "passage_id": "P140",
+      "quote": "Marketable securities 51,951 34,621",
+      "check": {
+       "status": "verified",
+       "passage_id": "P140",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Net carrying amount of debt was $8,468 million as of January 25, 2026, with $999 million short-term and $7,469 million long-term.",
+      "value": 8468,
+      "unit": "USD millions",
+      "period": "as of Jan 25, 2026",
+      "passage_id": "P143",
+      "quote": "Net carrying amount $ 8,468 Less short-term portion 999 Total long-term portion $ 7,469",
+      "check": {
+       "status": "verified",
+       "passage_id": "P143",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "In fiscal year 2026, NVIDIA repurchased 282 million shares of its common stock for $40.4 billion.",
+      "value": 40.4,
+      "unit": "USD billions",
+      "period": "fiscal 2026",
+      "passage_id": "P120",
+      "quote": "In fiscal year 2026, we repurchased 282 million shares of our common stock for $40.4 billion.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P120",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "In fiscal year 2026, NVIDIA paid cash dividends to shareholders of $974 million.",
+      "value": 974,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P120",
+      "quote": "In fiscal year 2026, we paid cash dividends to our shareholders of $974 million.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P120",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "capex",
+      "statement": "Purchases related to property and equipment and intangible assets were $6,042 million in fiscal year 2026.",
+      "value": 6042,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P165",
+      "quote": "Purchases related to property and equipment and intangible assets ( 6,042 ) ( 3,236 ) ( 1,069 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P165",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "shares",
+      "statement": "Shares outstanding decreased from 24,477 million as of January 26, 2025 to 24,304 million as of January 25, 2026.",
+      "value": 24304,
+      "unit": "USD millions",
+      "period": "as of Jan 25, 2026",
+      "passage_id": "P163",
+      "quote": "24,304 shares issued and outstanding as of January 25, 2026; 24,477 shares issued and outstanding as of January 26, 2025",
+      "check": {
+       "status": "verified",
+       "passage_id": "P163",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "risks": [
+     {
+      "topic": "geopolitical",
+      "statement": "NVIDIA incurred a $4.5 billion charge in the first quarter of fiscal year 2026 associated with H20 for excess inventory and purchase obligations.",
+      "value": 4.5,
+      "unit": "USD billions",
+      "period": "first quarter of fiscal year 2026",
+      "passage_id": "R003",
+      "quote": "we incurred a $4.5 billion charge in the first quarter of fiscal year 2026 associated with H20 for excess inventory and purchase obliga",
+      "check": {
+       "status": "verified",
+       "passage_id": "R003",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "geopolitical",
+      "statement": "NVIDIA generated approximately $60 million in H20 revenue under licenses granted in August 2025 allowing shipment of certain H20 products to certain China-based customers.",
+      "value": 60,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "R004",
+      "quote": "We generated approximately $60 million in H20 revenue under those licenses.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R004",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "geopolitical",
+      "statement": "USG officials expressed an expectation that the USG will receive 15% or more of the revenue generated from licensed sales of NVIDIA products.",
+      "value": 15,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "R004",
+      "quote": "USG officials expressed an expectation that the USG will receive 15% or more of the revenue generated from licensed sales of our products",
+      "check": {
+       "status": "verified",
+       "passage_id": "R004",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "geopolitical",
+      "statement": "Any H200 shipped under the new licensing program will be subject to a 25% tariff upon importation into the United States.",
+      "value": 25,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "R004",
+      "quote": "any H200 shipped under the new licensing program will be subject to a 25% tariff upon importation into the United States",
+      "check": {
+       "status": "verified",
+       "passage_id": "R004",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "New state AI laws took effect on January 1, 2026, which may impact NVIDIA's ability to train, deploy, or release AI models and increase compliance costs.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R003",
+      "quote": "with new state laws that took effect on January 1, 2026, which may impact our ability to train, deploy, or release AI models, and increase our compliance costs",
+      "check": {
+       "status": "verified",
+       "passage_id": "R003",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "competition",
+      "statement": "As of the end of fiscal year 2026, NVIDIA was effectively foreclosed from competing in China's data center computing/compute market, which helped competitors build larger developer and customer ecosystems.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal year 2026",
+      "passage_id": "R005",
+      "quote": "As of the end of fiscal year 2026, we were effectively foreclosed from competing in China's data center computing/compute market, and our effective foreclosure from the China market helped our competitors build larger developer and customer ecosystems to challenge us worldwide.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R005",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ]
+   },
+   "costs": {
+    "performance": {
+     "calls": 2,
+     "tokens": 7136,
+     "cached": 1408,
+     "usd": 0.001136,
+     "stopped": null
+    },
+    "accounting": {
+     "calls": 2,
+     "tokens": 7029,
+     "cached": 1152,
+     "usd": 0.001126,
+     "stopped": null
+    },
+    "capital": {
+     "calls": 2,
+     "tokens": 7207,
+     "cached": 1152,
+     "usd": 0.001139,
+     "stopped": null
+    },
+    "risks": {
+     "calls": 2,
+     "tokens": 5259,
+     "cached": 4096,
+     "usd": 0.000847,
+     "stopped": null
+    }
+   }
+  },
+  {
+   "ticker": "AMZN",
+   "valuation": {
+    "ticker": "AMZN",
+    "as_of": "2026-09-30",
+    "price": 249.14999389648438,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 775680000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-31",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 670038000000,
+      "end": "2025-06-30",
+      "method": "FY to 2024-12-31 + 6-month YTD - prior YTD",
+      "filed": "2025-08-01",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "net_income": {
+      "value": 135281000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-31",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 161403000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-31",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 173028000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-31",
+      "concept": "PaymentsToAcquireProductiveAssets"
+     },
+     "d_and_a": {
+      "value": 75200000000,
+      "end": "2026-06-30",
+      "method": "fiscal year",
+      "filed": "2026-07-31",
+      "concept": "DepreciationDepletionAndAmortization"
+     },
+     "shares": {
+      "end": "2026-07-22",
+      "val": 10786313572,
+      "accn": "0001018724-26-000026",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-31",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 132549000000,
+     "cash_and_securities": 122988000000
+    },
+    "fair_value": {
+     "bear": 188.36,
+     "base": 230.67,
+     "bull": 281.28
+    },
+    "note": null,
+    "owner_earnings": 86203000000,
+    "owner_earnings_basis": "operating cash flow - depreciation and amortization",
+    "revenue_growth": 0.1577,
+    "growth_used": 0.1577,
+    "net_debt": 9561000000,
+    "shares_outstanding": 10786313572,
+    "implied_growth": 0.177,
+    "fcf": -11625000000,
+    "cash_conversion": 1.193
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "Hold",
+    "why": [
+     "price 249.15 is between base and bull (bear 188.36, base 230.67, bull 281.28)"
+    ],
+    "upside_to_base": -0.0742
+   },
+   "evidence": {
+    "performance": [
+     {
+      "topic": "revenue",
+      "statement": "Consolidated net sales were $716,924 million in 2025.",
+      "value": 716924,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P074",
+      "quote": "Consolidated $ 637,959 $ 716,924",
+      "check": {
+       "status": "verified",
+       "passage_id": "P074",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Consolidated net sales increased 12% in 2025 compared to the prior year.",
+      "value": 12,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P074",
+      "quote": "Consolidated 11 12",
+      "check": {
+       "status": "verified",
+       "passage_id": "P074",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Consolidated operating income was $79,975 million in 2025.",
+      "value": 79975,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P081",
+      "quote": "Consolidated $ 68,593 $ 79,975",
+      "check": {
+       "status": "verified",
+       "passage_id": "P081",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Operating income was $80.0 billion for 2025.",
+      "value": 80.0,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P081",
+      "quote": "Operating income was $68.6 billion and $80.0 billion for 2024 and 2025.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P081",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities was $139,514 million in 2025.",
+      "value": 139514,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P085",
+      "quote": "Net cash provided by (used in) operating activities $ 115,877 $ 139,514",
+      "check": {
+       "status": "verified",
+       "passage_id": "P085",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "North America segment net sales were $426,305 million in 2025.",
+      "value": 426305,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P169",
+      "quote": "North America Net sales $ 352,828 $ 387,497 $ 426,305",
+      "check": {
+       "status": "verified",
+       "passage_id": "P169",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "North America segment operating income was $29,619 million in 2025.",
+      "value": 29619,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P169",
+      "quote": "Operating income $ 14,877 $ 24,967 $ 29,619",
+      "check": {
+       "status": "verified",
+       "passage_id": "P169",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "International segment net sales were $161,894 million in 2025.",
+      "value": 161894,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P169",
+      "quote": "International Net sales $ 131,200 $ 142,906 $ 161,894",
+      "check": {
+       "status": "verified",
+       "passage_id": "P169",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "AWS segment net sales were $128,725 million in 2025.",
+      "value": 128725,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P074",
+      "quote": "AWS $ 107,556 $ 128,725",
+      "check": {
+       "status": "number in passage",
+       "passage_id": "P074",
+       "quote_verbatim": false,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "AWS segment operating income was $45,606 million in 2025.",
+      "value": 45606,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P081",
+      "quote": "AWS 39,834 45,606",
+      "check": {
+       "status": "verified",
+       "passage_id": "P081",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "accounting": [
+     {
+      "topic": "net_income",
+      "statement": "Amazon reported net income of $77,670 million for the year ended December 31, 2025.",
+      "value": 77670,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P097",
+      "quote": "Net income 30,425 59,248 77,670",
+      "check": {
+       "status": "verified",
+       "passage_id": "P097",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities was $139,514 million for the year ended December 31, 2025.",
+      "value": 139514,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P097",
+      "quote": "Net cash provided by (used in) operating activities 84,946 115,877 139,514",
+      "check": {
+       "status": "verified",
+       "passage_id": "P097",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Cash provided by operating activities was $115.9 billion and $139.5 billion in 2024 and 2025.",
+      "value": 139.5,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P068",
+      "quote": "Cash provided by (used in) operating activities was $115.9 billion and $139.5 billion in 2024 and 2025.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P068",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "audit_opinion",
+      "statement": "Ernst & Young LLP expressed an unqualified opinion that the consolidated financial statements present fairly, in all material respects, the financial position and results of operations in conformity with U.S. GAAP.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P093",
+      "quote": "In our opinion, the consolidated financial statements present fairly, in all material respects, the financial position of the Company at December 31, 2025 and 2024",
+      "check": {
+       "status": "verified",
+       "passage_id": "P093",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "The auditor's report discusses evaluation of the Company's income tax disclosures in relation to identified matters.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P097",
+      "quote": "We evaluated the Company\u2019s income tax disclosures in relation to these matters.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P097",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "Management concluded that, as of December 31, 2025, internal control over financial reporting was effective.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P175",
+      "quote": "management concluded that, as of December 31, 2025, our internal control over financial reporting was effective in providing reasonable assurance regarding the reliability of financial reporting",
+      "check": {
+       "status": "verified",
+       "passage_id": "P175",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "Ernst & Young LLP opined that Amazon maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P176",
+      "quote": "In our opinion, Amazon.com, Inc. (the Company) maintained, in all material respects, effective internal control over financial reporting as",
+      "check": {
+       "status": "verified",
+       "passage_id": "P176",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "There were no changes in internal control over financial reporting during the quarter ended December 31, 2025 that materially affected, or were reasonably likely to materially affect, internal control over financial reporting.",
+      "value": null,
+      "unit": null,
+      "period": "quarter ended December 31, 2025",
+      "passage_id": "P175",
+      "quote": "There were no changes in our internal control over financial reporting during the quarter ended December 31, 2025 that materially affe",
+      "check": {
+       "status": "verified",
+       "passage_id": "P175",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "capital": [
+     {
+      "topic": "cash",
+      "statement": "Total cash, cash equivalents, and marketable securities were $123,029 million as of December 31, 2025.",
+      "value": 123029,
+      "unit": "USD millions",
+      "period": "as of December 31, 2025",
+      "passage_id": "P137",
+      "quote": "Total cash, cash equivalents, and marketable securities $ 123,029",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Cash, cash equivalents, and restricted cash at end of period were $90,106 million in 2025.",
+      "value": 90106,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P098",
+      "quote": "CASH, CASH EQUIVALENTS, AND RESTRICTED CASH, END OF PERIOD $ 73,890 $ 82,312 $ 90,106",
+      "check": {
+       "status": "verified",
+       "passage_id": "P098",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Long-term debt was $65,648 million as of December 31, 2025.",
+      "value": 65648,
+      "unit": "USD millions",
+      "period": "as of December 31, 2025",
+      "passage_id": "P145",
+      "quote": "Long-term debt $ 52,623 $ 65,648",
+      "check": {
+       "status": "verified",
+       "passage_id": "P145",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Total face value of long-term debt was $68,836 million as of December 31, 2025.",
+      "value": 68836,
+      "unit": "USD millions",
+      "period": "as of December 31, 2025",
+      "passage_id": "P145",
+      "quote": "Total face value of long-term debt 58,000 68,836",
+      "check": {
+       "status": "verified",
+       "passage_id": "P145",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Proceeds from long-term debt were $15,673 million in 2025.",
+      "value": 15673,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P098",
+      "quote": "Proceeds from long-term debt \u2014 \u2014 15,673",
+      "check": {
+       "status": "verified",
+       "passage_id": "P098",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "There were no borrowings outstanding under the two unsecured revolving credit facilities or the commercial paper programs as of December 31, 2025.",
+      "value": null,
+      "unit": null,
+      "period": "as of December 31, 2025",
+      "passage_id": "P070",
+      "quote": "We had no borrowings outstanding under the two unsecured revolving credit facilities or the commercial paper programs as of December 31, 2025.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P070",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "capex",
+      "statement": "Cash capital expenditures were $128.3 billion in 2025.",
+      "value": 128.3,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P069",
+      "quote": "Cash capital expenditures were $77.7 billion, and $128.3 billion in 2024 and 2025",
+      "check": {
+       "status": "verified",
+       "passage_id": "P069",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "acquisition",
+      "statement": "Cash payments, net of acquired cash, related to acquisition and other investment activity were $3.8 billion in 2025.",
+      "value": 3.8,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P069",
+      "quote": "We made cash payments, net of acquired cash, related to acquisition and other investment activity of $7.1 billion and $3.8 billion in",
+      "check": {
+       "status": "verified",
+       "passage_id": "P069",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "risks": [
+     {
+      "topic": "ai",
+      "statement": "Profitability or other intended benefits in newer activities, including development and adoption of automation, artificial intelligence, and machine learning technologies for customer and internal use, may not meet expectations, and the company may not recoup its often significant investments.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "profitability or other intended benefits, if any, in our newer activities (including development and adoption of automation, artificial intelligence, and machine learning technologies for customer and internal use), may not meet our expectations",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "competition",
+      "statement": "The company experiences significant competition in the technology industry, particularly for software engineers, computer scientists, and other technical staff, including for artificial intelligence and machine learning technologies.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "we experience significant competition in the technology industry, particularly for software engineers, computer scientists, and other technical staff (including for artificial intelligence and machine learning technologies)",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ]
+   },
+   "costs": {
+    "performance": {
+     "calls": 2,
+     "tokens": 6836,
+     "cached": 1408,
+     "usd": 0.001087,
+     "stopped": null
+    },
+    "accounting": {
+     "calls": 2,
+     "tokens": 6614,
+     "cached": 1152,
+     "usd": 0.001061,
+     "stopped": null
+    },
+    "capital": {
+     "calls": 2,
+     "tokens": 7100,
+     "cached": 1152,
+     "usd": 0.00112,
+     "stopped": null
+    },
+    "risks": {
+     "calls": 2,
+     "tokens": 2496,
+     "cached": 1536,
+     "usd": 0.0004,
+     "stopped": null
+    }
+   }
+  },
+  {
+   "ticker": "JPM",
+   "valuation": {
+    "ticker": "JPM",
+    "as_of": "2026-09-30",
+    "price": 330.8299865722656,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 182447000000,
+      "end": "2025-12-31",
+      "method": "fiscal year",
+      "filed": "2026-02-13",
+      "concept": "Revenues"
+     },
+     "revenue_year_ago": {
+      "value": 177556000000,
+      "end": "2024-12-31",
+      "method": "fiscal year",
+      "filed": "2025-02-14",
+      "concept": "Revenues"
+     },
+     "net_income": {
+      "value": 65019000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-06",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": -162534000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-06",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": null,
+     "d_and_a": {
+      "value": 9262000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-06",
+      "concept": "DepreciationAmortizationAndAccretionNet"
+     },
+     "shares": {
+      "end": "2026-06-30",
+      "val": 2658186195,
+      "accn": "0001628280-26-054343",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-06",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 72430000000,
+     "cash_and_securities": 309811000000
+    },
+    "fair_value": null,
+    "note": "owner earnings are negative (-171,796,000,000): a cash flow valuation does not apply"
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "No rating",
+    "why": [
+     "owner earnings are negative (-171,796,000,000): a cash flow valuation does not apply"
+    ],
+    "upside_to_base": null
+   },
+   "evidence": {
+    "performance": [
+     {
+      "topic": "revenue",
+      "statement": "Total net revenue for fiscal 2025 was $182,447 million.",
+      "value": 182447,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Total net revenue 182,447 177,556 3",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Total net revenue increased 3% in 2025 versus 2024.",
+      "value": 3,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Total net revenue 182,447 177,556 3",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "Net interest income was $95,443 million in 2025.",
+      "value": 95443,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Net interest income 95,443 92,583 3",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "Noninterest revenue was $87,004 million in 2025.",
+      "value": 87004,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Noninterest revenue $ 87,004 $ 84,973 2%",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Pre-provision profit was $86,807 million in 2025, with total noninterest expense of $95,640 million.",
+      "value": 86807,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P130",
+      "quote": "Pre-provision profit (a) 86,807 85,759 70,932",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income for 2025 was $57,048 million, down from $58,471 million in 2024.",
+      "value": 57048,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P130",
+      "quote": "Net income $ 57,048 $ 58,471 $ 49,552",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Diluted earnings per share was $20.02 in 2025.",
+      "value": 20.02,
+      "unit": "USD per share",
+      "period": "fiscal 2025",
+      "passage_id": "P130",
+      "quote": "Diluted 20.02 19.75 16.23",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash used in operating activities was $147,782 million in 2025 on a consolidated basis.",
+      "value": -147782,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P411",
+      "quote": "Net cash (used in)/provided by operating activities ( 147,782 ) ( 42,012 ) 12,974",
+      "check": {
+       "status": "verified",
+       "passage_id": "P411",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Markets revenue on a managed basis was $35,782 million in 2025, up 19%.",
+      "value": 35782,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Markets (d) 35,782 30,007 19",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Return on common equity was 17% in 2025 versus 18% in 2024.",
+      "value": 17,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Return on common equity 17 % 18 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "accounting": [
+     {
+      "topic": "net_income",
+      "statement": "Consolidated net income for 2025 was USD 57,048 million.",
+      "value": 57048,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P411",
+      "quote": "Net income $ 57,048 $ 58,471 $ 49,552",
+      "check": {
+       "status": "verified",
+       "passage_id": "P411",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash used in operating activities for 2025 was USD 147,782 million.",
+      "value": -147782,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P411",
+      "quote": "Net cash (used in)/provided by operating activities ( 147,782 ) ( 42,012 ) 12,974",
+      "check": {
+       "status": "verified",
+       "passage_id": "P411",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash used in operating activities for 2025 was USD 147,782 million per the consolidated cash flows analysis.",
+      "value": -147782,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P159",
+      "quote": "Operating activities $ (147,782) $ (42,012) $ 12,974",
+      "check": {
+       "status": "verified",
+       "passage_id": "P159",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "audit_opinion",
+      "statement": "PricewaterhouseCoopers LLP opined that the consolidated financial statements present fairly, in all material respects, the financial position and results of operations and cash flows in conformity with U.S. GAAP.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P397",
+      "quote": "In our opinion, the consolidated financial statements referred to above present fairly, in all material respects, the financial position of the Firm as of December 31, 2025 and 2024",
+      "check": {
+       "status": "verified",
+       "passage_id": "P397",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "The auditor opined that the Firm maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P397",
+      "quote": "Also in our opinion, the Firm maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025",
+      "check": {
+       "status": "verified",
+       "passage_id": "P397",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "Management concluded that internal control over financial reporting was effective as of December 31, 2025 and determined there were no material weaknesses.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P396",
+      "quote": "management concluded that as of December 31, 2025, JPMorganChase\u2019s internal control over financial reporting was effective based upon the COSO 2013 framework. Additionally, based upon management\u2019s assessment, the Firm determined that there were no material weaknesses in its internal control over financial reporting as of December 31, 2025.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P396",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "The auditor identified the fair value of certain level 3 financial instruments as a critical audit matter, citing significant management judgment and high auditor judgment, subjectivity and effort.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P404",
+      "quote": "The principal considerations for our determination that performing procedures relating to the fair value of certain level 3 financial instruments is a critical audit matter are (i) the significant judgment by management when developing the fair value estimate of certain level",
+      "check": {
+       "status": "verified",
+       "passage_id": "P404",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "The critical audit matters are matters arising from the current period audit communicated to the audit committee that relate to material accounts or disclosures and involved especially challenging, subjective or complex auditor judgment.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P400",
+      "quote": "The critical audit matters communicated below are matters arising from the current period audit of the consolidated financial statements that were communicated or required to be communicated to the audit committee",
+      "check": {
+       "status": "verified",
+       "passage_id": "P400",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "capital": [
+     {
+      "passage_id": "P412",
+      "period": "fiscal 2025",
+      "quote": "Treasury stock repurchased ( 31,591 ) ( 18,830 ) ( 9,824 )",
+      "statement": "Treasury stock repurchased in 2025 was $31,591 million.",
+      "topic": "buyback",
+      "unit": "USD millions",
+      "value": 31591,
+      "check": {
+       "status": "verified",
+       "passage_id": "P412",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P412",
+      "period": "fiscal 2025",
+      "quote": "Dividends paid ( 16,625 ) ( 14,783 ) ( 13,463 )",
+      "statement": "Dividends paid in 2025 were $16,625 million.",
+      "topic": "dividend",
+      "unit": "USD millions",
+      "value": 16625,
+      "check": {
+       "status": "verified",
+       "passage_id": "P412",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P108",
+      "period": "fiscal 2025",
+      "quote": "Full year 114,408,296 $ 276.55 $ 31,640 $ 33,423",
+      "statement": "The Firm repurchased 114,408,296 common shares for an aggregate purchase price of $31,640 million in full year 2025.",
+      "topic": "buyback",
+      "unit": "shares",
+      "value": 114408296,
+      "check": {
+       "status": "verified",
+       "passage_id": "P108",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P108",
+      "period": "2025",
+      "quote": "authorized a new $50 billion common share repurchase program, effective July 1, 2025",
+      "statement": "The Board authorized a new $50 billion common share repurchase program effective July 1, 2025.",
+      "topic": "buyback",
+      "unit": "USD",
+      "value": 50000000000,
+      "check": {
+       "status": "unverified",
+       "passage_id": "P108",
+       "quote_verbatim": true,
+       "value_in_quote": false,
+       "value_in_passage": false
+      }
+     },
+     {
+      "passage_id": "P408",
+      "period": "as of December 31, 2025",
+      "quote": "Long-term debt (included $ 134,559 and $ 100,780 at fair value) 435,206 401,418",
+      "statement": "Long-term debt was $435,206 million at December 31, 2025.",
+      "topic": "debt",
+      "unit": "USD millions",
+      "value": 435206,
+      "check": {
+       "status": "verified",
+       "passage_id": "P408",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P408",
+      "period": "as of December 31, 2025",
+      "quote": "Total liabilities (a) 4,062,462 3,658,056",
+      "statement": "Total liabilities were $4,062,462 million at December 31, 2025.",
+      "topic": "debt",
+      "unit": "USD millions",
+      "value": 4062462,
+      "check": {
+       "status": "verified",
+       "passage_id": "P408",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P408",
+      "period": "as of December 31, 2025",
+      "quote": "Treasury stock, at cost ( 1,408,661,319 and 1,307,313,494 shares) ( 164,591 ) ( 134,018 )",
+      "statement": "Treasury stock at cost was $164,591 million, representing 1,408,661,319 shares, at December 31, 2025, up from 1,307,313,494 shares a year earlier.",
+      "topic": "shares",
+      "unit": "shares",
+      "value": 1408661319,
+      "check": {
+       "status": "verified",
+       "passage_id": "P408",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "P159",
+      "period": "fiscal 2025",
+      "quote": "Net increase/(decrease) in cash and due from banks and deposits with banks $ (125,979) $ (154,834) $ 56,917",
+      "statement": "Net decrease in cash and due from banks and deposits with banks was $125,979 million in 2025.",
+      "topic": "cash",
+      "unit": "USD millions",
+      "value": 125979,
+      "check": {
+       "status": "verified",
+       "passage_id": "P159",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "risks": [
+     {
+      "topic": "ai",
+      "statement": "New risk factor states that if JPMorganChase does not keep pace with rapidly changing technological advances, including the adoption of generative AI, it risks losing clients and market share to competitors.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "R013",
+      "quote": "s, including the adoption of generative AI, it risks losing clients and market share to competitors, which could negatively impact revenues, operating costs and its competitive position.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R013",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "New risk factor describes risks from rapid development and deployment of advanced technologies, including generative and agentic AI systems, such as AI system failures, inaccurate or biased output, and insufficient testing.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "R013",
+      "quote": "The rapid development and deployment of advanced technologies, including generative and agentic AI systems, present a range of risks to JPMorganChase\u2019s businesses and operations, including: \u2022 AI system failures, inappropriate use of AI systems, lack of transparency in AI systems, or inaccurate or biased output from AI systems resulting from rapid deployment, insufficient testing, erroneous data, ineffective model design or insufficient controls",
+      "check": {
+       "status": "verified",
+       "passage_id": "R013",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cybersecurity",
+      "statement": "New risk factor states that AI systems, particularly agentic systems, increase exposure to cyber attacks, system manipulation or data loss if not designed with appropriate safeguards.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "R014",
+      "quote": "increased exposure to cyber attacks, system manipulation, or data loss if AI systems, particularly agentic systems, are not designed and implemented with appropriate safeguards to prevent systems from accessing sensitive data sources or system resources and taking actions",
+      "check": {
+       "status": "verified",
+       "passage_id": "R014",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "New risk factor states that competitors deploying AI more quickly or effectively could gain advantages in cost efficiency, client experience or product innovation, resulting in loss of market share.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "R014",
+      "quote": "competitive disadvantage if competitors are able to deploy AI more quickly or effectively, potentially gaining advantages in cost efficiency, client and customer experience, or product innovation, which could result in a loss of market share to competitors",
+      "check": {
+       "status": "verified",
+       "passage_id": "R014",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "New risk factor states that AI agents autonomously managing or intermediating financial decisions could cause replacement or disintermediation of direct customer relationships.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "R014",
+      "quote": "replacement or disintermediation of direct customer relationships if AI agents autonomously manage or intermediate financial decisions and product selection or o",
+      "check": {
+       "status": "verified",
+       "passage_id": "R014",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "competition",
+      "statement": "New risk factor states that advocacy by non-banking competitors for exemptions from regulatory requirements could significantly disadvantage traditional financial institutions.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "R013",
+      "quote": "In addition, advocacy by non-banking competitors for exemptions from regulatory requirements could significantly disadvantage traditional financial institutions.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R013",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ]
+   },
+   "costs": {
+    "performance": {
+     "calls": 2,
+     "tokens": 7563,
+     "cached": 6272,
+     "usd": 0.001195,
+     "stopped": null
+    },
+    "accounting": {
+     "calls": 2,
+     "tokens": 6789,
+     "cached": 1152,
+     "usd": 0.001096,
+     "stopped": null
+    },
+    "capital": {
+     "calls": 4,
+     "tokens": 23541,
+     "cached": 13056,
+     "usd": 0.003663,
+     "stopped": null
+    },
+    "risks": {
+     "calls": 2,
+     "tokens": 5907,
+     "cached": 1536,
+     "usd": 0.000943,
+     "stopped": null
+    }
+   }
+  },
+  {
+   "ticker": "KO",
+   "valuation": {
+    "ticker": "KO",
+    "as_of": "2026-09-30",
+    "price": 86.08000183105469,
+    "price_date": "2026-09-30",
+    "inputs": {
+     "revenue": {
+      "value": 49284000000,
+      "end": "2026-04-03",
+      "method": "FY to 2025-12-31 + 3-month YTD - prior YTD",
+      "filed": "2026-04-30",
+      "concept": "Revenues"
+     },
+     "revenue_year_ago": {
+      "value": 47062000000,
+      "end": "2025-06-27",
+      "method": "FY to 2024-12-31 + 6-month YTD - prior YTD",
+      "filed": "2025-07-24",
+      "concept": "Revenues"
+     },
+     "net_income": {
+      "value": 13701000000,
+      "end": "2026-04-03",
+      "method": "FY to 2025-12-31 + 3-month YTD - prior YTD",
+      "filed": "2026-04-30",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 14631000000,
+      "end": "2026-04-03",
+      "method": "FY to 2025-12-31 + 3-month YTD - prior YTD",
+      "filed": "2026-04-30",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 2069000000,
+      "end": "2026-04-03",
+      "method": "FY to 2025-12-31 + 3-month YTD - prior YTD",
+      "filed": "2026-04-30",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "d_and_a": {
+      "value": 1047000000,
+      "end": "2026-04-03",
+      "method": "FY to 2025-12-31 + 3-month YTD - prior YTD",
+      "filed": "2026-04-30",
+      "concept": "DepreciationDepletionAndAmortization"
+     },
+     "shares": {
+      "end": "2026-04-28",
+      "val": 4302482418,
+      "accn": "0001628280-26-028802",
+      "fy": 2026,
+      "fp": "Q1",
+      "form": "10-Q",
+      "filed": "2026-04-30",
+      "frame": "CY2026Q1I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "debt": 250000000,
+     "cash_and_securities": 10574000000
+    },
+    "fair_value": {
+     "bear": 50.14,
+     "base": 60.65,
+     "bull": 74.04
+    },
+    "note": null,
+    "owner_earnings": 13584000000,
+    "owner_earnings_basis": "operating cash flow - depreciation and amortization",
+    "revenue_growth": 0.0472,
+    "growth_used": 0.0472,
+    "net_debt": -10324000000,
+    "shares_outstanding": 4302482418,
+    "implied_growth": 0.1355,
+    "fcf": 12562000000,
+    "cash_conversion": 1.068
+   },
+   "flags": {
+    "red": [],
+    "caution": []
+   },
+   "decision": {
+    "rating": "Underweight",
+    "why": [
+     "price 86.08 is up to 25% above the bull value (bear 50.14, base 60.65, bull 74.04)"
+    ],
+    "upside_to_base": -0.2954
+   },
+   "evidence": {
+    "performance": [
+     {
+      "topic": "revenue",
+      "statement": "Total net operating revenues by operating segment and Corporate summed to 100.0% of Company net operating revenues in 2025.",
+      "value": 100.0,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P171",
+      "quote": "Total 100.0 % 100.0 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P171",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "North America was the largest operating segment by share of net operating revenues in 2025 at 40.8%.",
+      "value": 40.8,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P170",
+      "quote": "North America 40.8 40.1",
+      "check": {
+       "status": "verified",
+       "passage_id": "P170",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "EMEA contributed 22.6% of Company net operating revenues in 2025.",
+      "value": 22.6,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P170",
+      "quote": "EMEA 22.6 % 21.8 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P170",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "Latin America contributed 13.2% of Company net operating revenues in 2025.",
+      "value": 13.2,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P170",
+      "quote": "Latin America 13.2 13.8",
+      "check": {
+       "status": "verified",
+       "passage_id": "P170",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "Bottling Investments contributed 12.0% of Company net operating revenues in 2025.",
+      "value": 12.0,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P171",
+      "quote": "Bottling Investments 12.0 13.2",
+      "check": {
+       "status": "verified",
+       "passage_id": "P171",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Gross profit margin increased to 61.6% in 2025 from 61.1% in 2024.",
+      "value": 61.6,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P171",
+      "quote": "Our gross profit margin increased to 61.6% in 2025 from 61.1% in 2024.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P171",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Consolidated net income was $13,137 million in 2025.",
+      "value": 13137,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P213",
+      "quote": "Consolidated net income $ 13,137 $ 10,649 $ 10,703",
+      "check": {
+       "status": "verified",
+       "passage_id": "P213",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities was $7,408 million in 2025, up $603 million or 9% from 2024.",
+      "value": 7408,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P190",
+      "quote": "Net cash provided by operating activities for the years ended December 31, 2025 and 2024 was $7,408 million and $6,805 million, respectively, an increase of $603 million, or 9%.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P190",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "North America reported operating income of $5,070 million in 2025, the largest segment operating income.",
+      "value": 5070,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P176",
+      "quote": "Operating income for North America for the years ended December 31, 2025 and 2024 was $5,070 million and $4,556 million, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P176",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "EMEA reported operating income of $4,298 million in 2025.",
+      "value": 4298,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P176",
+      "quote": "The Company\u2019s EMEA operating segment reported operating income of $4,298 million and $4,255 million for the years ended December 31, 2025 and 2024, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P176",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "accounting": [
+     {
+      "topic": "net_income",
+      "statement": "Consolidated net income for 2025 was $13,137 million.",
+      "value": 13137,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P213",
+      "quote": "Consolidated net income $ 13,137 $ 10,649 $ 10,703",
+      "check": {
+       "status": "verified",
+       "passage_id": "P213",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities for 2025 was $7,408 million.",
+      "value": 7408,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P213",
+      "quote": "Net Cash Provided by Operating Activities 7,408 6,805 11,599",
+      "check": {
+       "status": "verified",
+       "passage_id": "P213",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "audit_opinion",
+      "statement": "Ernst & Young expressed an unqualified opinion on the consolidated financial statements.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P363",
+      "quote": "our report dated February 20, 2026 expressed an unqualified opinion thereon",
+      "check": {
+       "status": "verified",
+       "passage_id": "P363",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "The auditor concluded the Company maintained effective internal control over financial reporting as of December 31, 2025.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P362",
+      "quote": "In our opinion, The Coca-Cola Company and subsidiaries (the Company) maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025, based on the COSO criteria.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P362",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "internal_control",
+      "statement": "Management believes the Company maintained effective internal control over financial reporting as of December 31, 2025.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P355",
+      "quote": "management believes that the Company maintained effective internal control over financial reporting as of December 31, 2025",
+      "check": {
+       "status": "verified",
+       "passage_id": "P355",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "critical_audit_matter",
+      "statement": "A critical audit matter was the accounting for uncertain tax positions, with gross unrecognized tax benefits of $857 million as of December 31, 2025.",
+      "value": 857,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P359",
+      "quote": "As of December 31, 2025, the gross amount of unrecognized tax benefits was $857 million.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P359",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue_recognition",
+      "statement": "The Company recognizes revenue when performance obligations under the terms of contracts with customers are satisfied.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P220",
+      "quote": "Our Company recognizes revenue when performance obligations under the terms of the contracts with our customers are satisfied.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P220",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "policy_change",
+      "statement": "Item 9 states there were no changes in or disagreements with accountants on accounting and financial disclosure.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P365",
+      "quote": "ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE Not applicable.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P365",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "capital": [
+     {
+      "topic": "cash",
+      "statement": "Cash and cash equivalents were $10,270 million at December 31, 2025.",
+      "value": 10270,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P212",
+      "quote": "Cash and cash equivalents $ 10,270 $ 10,828",
+      "check": {
+       "status": "verified",
+       "passage_id": "P212",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Total cash, cash equivalents and short-term investments were $13,872 million at December 31, 2025.",
+      "value": 13872,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P212",
+      "quote": "Total Cash, Cash Equivalents and Short-Term Investments 13,872 12,848",
+      "check": {
+       "status": "verified",
+       "passage_id": "P212",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Cash, cash equivalents, short-term investments and marketable securities totaled $15.8 billion as of December 31, 2025.",
+      "value": 15.8,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P185",
+      "quote": "The Company\u2019s cash, cash equivalents, short-term investments and marketable securities totaled $15.8 billion as of December 31, 2025.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P185",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Long-term debt was $42,119 million at December 31, 2025.",
+      "value": 42119,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P212",
+      "quote": "Long-term debt 42,119 42,375",
+      "check": {
+       "status": "verified",
+       "passage_id": "P212",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Loans and notes payable were $1,551 million and current maturities of long-term debt were $1,822 million at December 31, 2025.",
+      "value": 1551,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P212",
+      "quote": "Loans and notes payable 1,551 1,499 Current maturities of long-term debt 1,822 648",
+      "check": {
+       "status": "verified",
+       "passage_id": "P212",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "The carrying value and fair value of long-term debt, including the current portion, were $43,941 million and $39,385 million as of December 31, 2025.",
+      "value": 43941,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P342",
+      "quote": "As of December 31, 2025, the carrying value and fair value of our long-term debt, including the current portion, were $ 43,941 million and $ 39,385 million, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P342",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "During 2025, the total cash outflow for treasury stock purchases was $746 million.",
+      "value": 746,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P196",
+      "quote": "During 2025, the total cash outflow for treasury stock purchases was $746 million.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P196",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "The Company repurchased 9.4 million shares of common stock under the 2019 Plan at an average price per share of $67.42, for a total cost of $634 million.",
+      "value": 634,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P197",
+      "quote": "These shares were repurchased at an average price per share of $67.42, for a total cost of $634 million.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P197",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "The Company paid dividends of $8,779 million during the year ended December 31, 2025.",
+      "value": 8779,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P197",
+      "quote": "The Company paid dividends of $8,779 million and $8,359 million during the years ended December 31, 2025 and 2024, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P197",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "The annualized common stock dividend was $2.04 per share in 2025.",
+      "value": 2.04,
+      "unit": "USD per share",
+      "period": "fiscal 2025",
+      "passage_id": "P198",
+      "quote": "Our annualized common stock dividend was $2.04 per share and $1.94 per share in 2025 and 2024, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P198",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "capex",
+      "statement": "Purchases of property, plant and equipment were $2,112 million in 2025.",
+      "value": 2112,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P192",
+      "quote": "Purchases of property, plant and equipment during the years ended December 31, 2025 and 2024 were $2,112 million and $2,064 million, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P192",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "acquisition",
+      "statement": "In 2025, the Company's acquisitions of businesses, equity method investments and nonmarketable securities totaled $461 million.",
+      "value": 461,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P192",
+      "quote": "In 2025 and 2024, the Company\u2019s acquisitions of businesses, equity method investments and nonmarketable securities totaled $461 million and $315 million, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P192",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "other",
+      "statement": "During 2025, the Company received proceeds of $1,338 million from the sale of a noncontrolling interest.",
+      "value": 1338,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P198",
+      "quote": "During 2025, the Company received proceeds of $1,338 million from the sale of a noncontrolling interest.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P198",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "other",
+      "statement": "The 2025 cash outflow for other financing activities included $104 million of the $6.2 billion final milestone payment for fairlife.",
+      "value": 104,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P198",
+      "quote": "Additionally, the cash outflow during 2025 included $104 million of the $6.2 billion final milestone payment for fairlife.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P198",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "risks": [
+     {
+      "topic": "regulation",
+      "statement": "Recent U.S. federal and state government activities and initiatives have focused on potential drivers behind the rise in childhood chronic diseases, which could lead to new taxes or regulations on sweetened beverages.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "Recent activities and proposals by U.S. federal and state government agencies and initiatives have focused on potential drivers behind the rise in childhood chronic diseases.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "Ongoing public concern about obesity and the effects or perceived effects of weight-loss drug usage on consumption patterns could reduce demand for sweetened beverages.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "the effects or perceived effects of the usage of weight-loss drugs on consumption patterns",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "Potential new or increased governmental regulations on particular ingredients or additives in beverages and packaging, or on manufacturing processes, could increase costs.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "potential new or increased governmental regulations on particular ingredients or additives in our beverages and packaging, or on manufacturing processes",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "Changes in funding for or restrictions on the inclusion of products in benefit programs such as SNAP in the United States could adversely affect profitability.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "changes in funding for or restrictions on the inclusion of our products in benefit programs, such as the Supplemental Nutrition Assistance Program (SNAP) in the United States",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "The increasing use of data analytics, automation and artificial intelligence across digital platforms is reshaping how consumers discover, evaluate and engage with brands.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "The increasing use of data analytics, automation and artificial intelligence across digital platforms is further reshaping how consumers discover, evaluate and",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "financial",
+      "statement": "For the year ended December 31, 2025, one bottler accounted for 10% of net operating revenues, reflected in the EMEA and Asia Pacific operating segments.",
+      "value": 10,
+      "unit": "%",
+      "period": "year ended December 31, 2025",
+      "passage_id": "R001",
+      "quote": "For the year ended December 31, 2025, one bottler accounted for 10% of our net operating revenues, which are reflected in our EMEA and Asia Pacific operating segments.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R001",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ]
+   },
+   "costs": {
+    "performance": {
+     "calls": 2,
+     "tokens": 7083,
+     "cached": 5632,
+     "usd": 0.00114,
+     "stopped": null
+    },
+    "accounting": {
+     "calls": 2,
+     "tokens": 6636,
+     "cached": 1152,
+     "usd": 0.001054,
+     "stopped": null
+    },
+    "capital": {
+     "calls": 2,
+     "tokens": 7587,
+     "cached": 1152,
+     "usd": 0.001281,
+     "stopped": null
+    },
+    "risks": {
+     "calls": 2,
+     "tokens": 3355,
+     "cached": 1408,
+     "usd": 0.00057,
+     "stopped": null
+    }
+   }
+  }
+ ]
+}
