@@ -41,6 +41,10 @@ def check(claim: dict[str, Any], passage_text: Callable[[str], str | None]) -> d
     pid = str(claim.get("passage_id", "")).strip("[] ")
     text = passage_text(pid)
     value = claim.get("value")
+    try:
+        value = None if value is None else float(value)
+    except (TypeError, ValueError):  # a date or a word in the value field: check the quote alone
+        value = None
     if text is None:
         return {"status": "no passage", "passage_id": pid}
     quote_ok = bool(claim.get("quote")) and norm(claim["quote"]) in norm(text)

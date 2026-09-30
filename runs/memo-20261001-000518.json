@@ -1,0 +1,4313 @@
+{
+ "batch": {
+  "calls": 47,
+  "input": 143320,
+  "cached": 91904,
+  "output": 23292,
+  "reasoning": 0,
+  "tokens": 166612,
+  "usd": 0.026587,
+  "max_tokens": 1000000000,
+  "max_usd": 0.5
+ },
+ "budget_usd": 0.5,
+ "repeats": 3,
+ "memos": [
+  {
+   "ticker": "V",
+   "rating": "Underweight",
+   "confidence": 0.33,
+   "sizing": {
+    "weight": 0.0,
+    "base": 0.0,
+    "vol": 0.21915393960885624,
+    "scale": null,
+    "confidence": 0.33
+   },
+   "valuation": {
+    "ticker": "V",
+    "as_of": "2026-10-01",
+    "price": 359.3299865722656,
+    "price_date": "2026-09-30",
+    "sic": "7389",
+    "inputs": {
+     "revenue": {
+      "value": 43027000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 37621000000,
+      "end": "2025-03-31",
+      "method": "FY to 2024-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "ebit": {
+      "value": 26296000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "OperatingIncomeLoss"
+     },
+     "pretax": {
+      "value": 26456000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+     },
+     "tax": {
+      "value": 4220000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "IncomeTaxExpenseBenefit"
+     },
+     "interest": {
+      "value": 621000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "InterestExpenseNonoperating"
+     },
+     "sbc": {
+      "value": 920000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "ShareBasedCompensation"
+     },
+     "net_income": {
+      "value": 22236000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 22756000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 1571000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "PaymentsToAcquireProductiveAssets"
+     },
+     "cash": {
+      "end": "2026-03-31",
+      "val": 12404000000,
+      "accn": "0001403161-26-000079",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-04-29",
+      "frame": "CY2026Q1I",
+      "concept": "CashAndCashEquivalentsAtCarryingValue"
+     },
+     "securities": null,
+     "debt": {
+      "val": 23976000000,
+      "end": "2026-03-31",
+      "concept": "LongTermDebtNoncurrent + LongTermDebtCurrent"
+     },
+     "leases": {
+      "val": 913000000,
+      "end": "2025-09-30",
+      "concept": "OperatingLeaseLiabilityNoncurrent + OperatingLeaseLiabilityCurrent"
+     },
+     "minority": {
+      "end": "2011-06-30",
+      "val": 2000000,
+      "accn": "0001193125-11-202235",
+      "fy": 2011,
+      "fp": "Q3",
+      "form": "10-Q",
+      "filed": "2011-07-29",
+      "frame": "CY2011Q2I",
+      "concept": "MinorityInterest"
+     },
+     "equity": {
+      "end": "2026-03-31",
+      "val": 35661000000,
+      "accn": "0001403161-26-000079",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-04-29",
+      "frame": "CY2026Q1I",
+      "concept": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+     },
+     "preferred": {
+      "end": "2026-03-31",
+      "val": 528000000,
+      "accn": "0001403161-26-000079",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-04-29",
+      "frame": "CY2026Q1I",
+      "concept": "PreferredStockValueOutstanding"
+     },
+     "ni_common": {
+      "value": 22236000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "NetIncomeLoss"
+     },
+     "shares": {
+      "end": "2010-01-27",
+      "val": 469280842,
+      "accn": "0001193125-10-020834",
+      "fy": 2010,
+      "fp": "Q1",
+      "form": "10-Q",
+      "filed": "2010-02-03",
+      "frame": "CY2009Q4I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "goodwill": {
+      "end": "2026-03-31",
+      "val": 20891000000,
+      "accn": "0001403161-26-000079",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-04-29",
+      "frame": "CY2026Q1I",
+      "concept": "Goodwill"
+     },
+     "intangibles": {
+      "end": "2026-03-31",
+      "val": 27750000000,
+      "accn": "0001403161-26-000079",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-04-29",
+      "frame": "CY2026Q1I",
+      "concept": "IntangibleAssetsNetExcludingGoodwill"
+     },
+     "nonoperating": {
+      "value": 160000000,
+      "end": "2026-03-31",
+      "method": "FY to 2025-09-30 + 6-month YTD - prior YTD",
+      "filed": "2026-04-29",
+      "concept": "NonoperatingIncomeExpense"
+     },
+     "equity_with_nci": {
+      "end": "2026-03-31",
+      "val": 35661000000,
+      "accn": "0001403161-26-000079",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-04-29",
+      "frame": "CY2026Q1I",
+      "concept": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+     },
+     "roic_history": [
+      {
+       "end": "2025-09-30",
+       "roic": 0.39
+      },
+      {
+       "end": "2024-09-30",
+       "roic": 0.3666
+      },
+      {
+       "end": "2023-09-30",
+       "roic": 0.363
+      },
+      {
+       "end": "2022-09-30",
+       "roic": 0.3294
+      },
+      {
+       "end": "2021-09-30",
+       "roic": 0.2815
+      }
+     ]
+    },
+    "fair_value": {
+     "bear": 222.58,
+     "base": 498.07,
+     "bull": 716.02
+    },
+    "note": null,
+    "model": "fcff",
+    "method": "FCFF DCF at company WACC: revenue growth for 5 years, fading to terminal over 5; reinvestment = change in revenue / sales-to-capital; SBC expensed; leases as debt; terminal ROIC keeps a share of today's excess return; bear/base/bull shift growth -/+4 points, margin -/+2 points, WACC +/-0.5 points, terminal excess 0/0.5/1",
+    "capital": {
+     "risk_free": 0.0475,
+     "risk_free_date": "2026-09-01 (rate in Damodaran's ERP computation)",
+     "beta": {
+      "industry": "Financial Svcs. (Non-bank & Insurance)",
+      "firms": 176,
+      "unlevered": 0.328,
+      "debt_to_equity": 0.037,
+      "used": 0.8,
+      "method": "bottom-up: industry unlevered beta (cash-corrected) relevered at market D/E",
+      "regression": 0.848,
+      "regression_raw": 0.773
+     },
+     "erp": 0.0414,
+     "cost_of_equity": 0.0806,
+     "rating": {
+      "coverage": 42.34,
+      "rating": "AAA",
+      "spread": 0.004
+     },
+     "cost_of_debt_pre_tax": 0.0515,
+     "tax_shield_rate": 0.25,
+     "weight_equity": 0.9644,
+     "debt_incl_leases": 24889000000.0,
+     "wacc": 0.0791,
+     "mature_wacc": 0.0791
+    },
+    "wacc": 0.0791,
+    "revenue_growth": 0.1437,
+    "growth_used": 0.1437,
+    "implied_growth": 0.0612,
+    "operating_margin": 0.6112,
+    "roic": 0.4591,
+    "sales_to_capital": 5.0,
+    "effective_tax": 0.1595,
+    "terminal_growth": 0.0475,
+    "terminal_roic": 0.4591,
+    "terminal_share": 0.742,
+    "ev_to_ebit": 36.0,
+    "market_ev_to_ebit": 26.1,
+    "shares_outstanding": 1877355166.2037683,
+    "shares_source": "Yahoo market cap / price (XBRL count missing or over a year old)",
+    "net_debt": 12485000000.0,
+    "data_notes": [],
+    "moat": "wide: ROIC beat WACC by 5%+ in all 5 years (min +20.2%)",
+    "terminal_excess_return": 1.0,
+    "roic_history": [
+     {
+      "end": "2025-09-30",
+      "roic": 0.39
+     },
+     {
+      "end": "2024-09-30",
+      "roic": 0.3666
+     },
+     {
+      "end": "2023-09-30",
+      "roic": 0.363
+     },
+     {
+      "end": "2022-09-30",
+      "roic": 0.3294
+     },
+     {
+      "end": "2021-09-30",
+      "roic": 0.2815
+     }
+    ],
+    "cash_conversion": 1.03,
+    "sbc_to_revenue": 0.0214,
+    "sensitivity": {
+     "grid": {
+      "wacc -1.0%": {
+       "g -0.5%": 469.73,
+       "g +0.0%": 526.79,
+       "g +0.5%": 605.1
+      },
+      "wacc +0.0%": {
+       "g -0.5%": 444.35,
+       "g +0.0%": 498.07,
+       "g +0.5%": 571.78
+      },
+      "wacc +1.0%": {
+       "g -0.5%": 420.6,
+       "g +0.0%": 471.19,
+       "g +0.5%": 540.61
+      }
+     },
+     "swings": {
+      "growth": [
+       -41.76,
+       44.36
+      ],
+      "margin": [
+       -55.27,
+       55.27
+      ],
+      "wacc": [
+       -13.66,
+       14.12
+      ],
+      "terminal_excess_return": [
+       -207.63,
+       0.0
+      ]
+     }
+    },
+    "valuation_period": "trailing twelve months to 2026-03-31 (revenue growth: twelve months to 2026-03-31 vs to 2025-03-31), from 10-K and 10-Q XBRL; the readers' evidence comes from the latest 10-K only"
+   },
+   "repeats": [
+    {
+     "flags": {
+      "red": [
+       "internal_control: Our audit of internal control over financial reporting included obtaining an understanding of internal control over fina"
+      ],
+      "caution": []
+     },
+     "base": {
+      "rating": "Underweight",
+      "why": [
+       "price / base fair value 0.72 at Medium uncertainty (volatility 22%, range 0.99x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35",
+       "red flag caps the rating at Underweight"
+      ],
+      "upside_to_base": 0.3861,
+      "uncertainty": "Medium",
+      "price_to_fair": 0.721
+     },
+     "red_team": {
+      "objections": [
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "The desk's own base fair value of 498.07 sits only 1.39x the price, yet the bear case is 222.58 \u2014 a 0.62x downside. With volatility 22% and a range/base of 0.99x, the rating hinges entirely on the base case; the bear scenario is not being weighted, so Underweight is overconfident.",
+        "cites": [
+         "fair_value",
+         "price",
+         "uncertainty"
+        ],
+        "supported": true,
+        "cites_evidence": false
+       },
+       {
+        "type": "data_conflict",
+        "direction": "rating too low",
+        "severity": "high",
+        "argument": "The desk uses growth_used of 14.37% while the 10-K reports 11% revenue growth (PERF-2). If the trailing-twelve-month figure is inflated by a one-off, the base fair value is overstated and the true price/fair-value ratio is well above 0.72 \u2014 closer to the Underweight/Sell boundary.",
+        "cites": [
+         "PERF-2",
+         "growth_used",
+         "revenue_growth"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "business",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "Operating margin of 61.12% and ROIC of 45.91% with sales-to-capital of 5.0 describe a business with exceptional economics. The desk's terminal_share of 0.742 and terminal_excess_return of 1.0 already assume the moat persists, yet the rating treats this as a value trap rather than a compounder.",
+        "cites": [
+         "operating_margin",
+         "roic",
+         "sales_to_capital",
+         "terminal_share"
+        ],
+        "supported": true,
+        "cites_evidence": false
+       },
+       {
+        "type": "method",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "The rating is capped at Underweight by a red flag, but the cited risks (RISK-1 to RISK-6) are generic AI and regulatory disclosures present in every large-cap 10-K. A cap based on boilerplate risk factors, not a quantified earnings threat, mechanically suppresses the rating.",
+        "cites": [
+         "RISK-1",
+         "RISK-3",
+         "RISK-6"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       }
+      ]
+     },
+     "final": {
+      "rating": "Underweight",
+      "why": [
+       "price / base fair value 0.72 at Medium uncertainty (volatility 22%, range 0.99x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35",
+       "red flag caps the rating at Underweight"
+      ],
+      "upside_to_base": 0.3861,
+      "uncertainty": "Medium",
+      "price_to_fair": 0.721
+     }
+    },
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.72 at Medium uncertainty (volatility 22%, range 0.99x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35"
+      ],
+      "upside_to_base": 0.3861,
+      "uncertainty": "Medium",
+      "price_to_fair": 0.721
+     },
+     "red_team": {
+      "objections": [
+       {
+        "type": "data_conflict",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "The desk's growth_used of 14.37% is the TTM figure, but the 10-K shows fiscal 2025 revenue growth of 11% (PERF-2). The 10-K also shows operating expenses up 30% (PERF-3) and net income up only 2% (PERF-4) \u2014 the TTM growth is not representative of the underlying trend the desk is extrapolating for five years.",
+        "cites": [
+         "PERF-2",
+         "PERF-3",
+         "PERF-4",
+         "growth_used"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "The terminal value assumes 74.2% of today's ROIC-WACC spread survives forever (terminal_share 0.742, terminal_excess_return 1.0), justified by a 5-year ROIC history. But the 10-K discloses a $2,698m litigation accrual (ACC-6) and a vacated Regulation II ruling (RISK-6) \u2014 structural threats to the moat that a mechanical 5-year test cannot capture.",
+        "cites": [
+         "ACC-6",
+         "RISK-6",
+         "terminal_share",
+         "terminal_excess_return"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "business",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "The desk's model treats SBC as a real expense (sbc_to_revenue 2.14%) and leases as debt, but Visa's cash conversion is 1.03 (PERF-6: $23,059m OCF vs $20,058m net income) \u2014 the business converts earnings to cash at above 100%, so the FCFF base may understate distributable owner earnings.",
+        "cites": [
+         "PERF-6",
+         "ACC-2",
+         "cash_conversion",
+         "sbc_to_revenue"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "The WACC of 7.91% uses a bottom-up beta of 0.8 (clipped at the beta_bounds floor) and a mature_wacc that keeps the same debt weight. Visa's net debt is only $12.5bn against a $359bn price \u2014 the equity-heavy capital structure and AAA rating (coverage 42.34) suggest the cost of capital is overstated, compressing fair value.",
+        "cites": [
+         "wacc",
+         "net_debt",
+         "beta_bounds",
+         "mature_wacc"
+        ],
+        "supported": true,
+        "cites_evidence": false
+       }
+      ]
+     },
+     "final": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.72 at Medium uncertainty (volatility 22%, range 0.99x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35"
+      ],
+      "upside_to_base": 0.3861,
+      "uncertainty": "Medium",
+      "price_to_fair": 0.721
+     }
+    },
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.72 at Medium uncertainty (volatility 22%, range 0.99x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35"
+      ],
+      "upside_to_base": 0.3861,
+      "uncertainty": "Medium",
+      "price_to_fair": 0.721
+     },
+     "red_team": {
+      "objections": [
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "The DCF capitalizes a 61% operating margin and 45.9% ROIC at a 7.91% WACC with terminal_share 0.742 and terminal_excess_return 1.0 \u2014 i.e. it assumes Visa's excess return persists forever. Any fade of the moat (RISK-5, RISK-6) collapses fair value toward the bear 222.58, well below price.",
+        "cites": [
+         "operating_margin",
+         "roic",
+         "terminal_share",
+         "terminal_excess_return",
+         "fair_value",
+         "RISK-5",
+         "RISK-6"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "data_conflict",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "growth_used 14.37% exceeds the 10-K's own 11% fiscal 2025 growth (PERF-2) and is the top of the growth_bounds clip; the TTM figure is inflated by a low base. At 11% growth the base fair value falls materially, pushing price/base above the 0.93 Overweight ceiling.",
+        "cites": [
+         "growth_used",
+         "PERF-2",
+         "growth_bounds",
+         "revenue_growth"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "business",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "The model charges reinvestment via sales_to_capital 5.0 and expenses SBC, but ignores that Visa's capital-light network converts 103% of NOPAT to cash (cash_conversion 1.03, PERF-6) and returns $18.2bn buybacks plus $4.6bn dividends (CAP-6, CAP-7) \u2014 real per-share value the FCFF bridge understates.",
+        "cites": [
+         "cash_conversion",
+         "sales_to_capital",
+         "PERF-6",
+         "CAP-6",
+         "CAP-7"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "WACC 7.91% uses a bottom-up beta clipped to the 0.8 floor (beta_bounds) while the regression beta is 0.848 and unlevered 0.328; a lower beta would raise fair value. Also mature_wacc holds 7.91% flat, over-discounting a AAA-rated (coverage 42.34) cash generator.",
+        "cites": [
+         "wacc",
+         "beta_bounds",
+         "mature_wacc",
+         "cost_of_equity"
+        ],
+        "supported": true,
+        "cites_evidence": false
+       }
+      ]
+     },
+     "final": {
+      "rating": "Hold",
+      "why": [
+       "price / base fair value 0.72 at Medium uncertainty (volatility 22%, range 0.99x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35",
+       "red team (rating too high, data_conflict): growth_used 14.37% exceeds the 10-K's own 11% fiscal 2025 growth (PERF-2) and is the top of the growth_bounds clip; the TTM figure is inflat"
+      ],
+      "upside_to_base": 0.3861,
+      "uncertainty": "Medium",
+      "price_to_fair": 0.721
+     }
+    }
+   ],
+   "evidence": {
+    "performance": [
+     {
+      "topic": "revenue",
+      "statement": "Visa's net revenue for fiscal 2025 was $40,000 million.",
+      "value": 40000,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P119",
+      "quote": "Net revenue $ 40,000 $ 35,926 $ 32,653 11 % 10 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P119",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Net revenue grew 11% in fiscal 2025 versus fiscal 2024.",
+      "value": 11,
+      "unit": "%",
+      "period": "fiscal 2025 vs. 2024",
+      "passage_id": "P119",
+      "quote": "Net revenue $ 40,000 $ 35,926 $ 32,653 11 % 10 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P119",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "GAAP operating expenses were $16,006 million in fiscal 2025, up 30% year over year.",
+      "value": 16006,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P119",
+      "quote": "Operating expenses $ 16,006 $ 12,331 $ 11,653 30 % 6 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P119",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Visa's net income for fiscal 2025 was $20,058 million, up 2% from fiscal 2024.",
+      "value": 20058,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P119",
+      "quote": "Net income $ 20,058 $ 19,743 $ 17,273 2 % 14 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P119",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Diluted earnings per share were $10.20 in fiscal 2025.",
+      "value": 10.2,
+      "unit": "USD per share",
+      "period": "fiscal 2025",
+      "passage_id": "P119",
+      "quote": "Diluted earnings per share $ 10.20 $ 9.73 $ 8.28 5 % 17 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P119",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities was $23,059 million in fiscal 2025.",
+      "value": 23059,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P138",
+      "quote": "Operating activities $ 23,059 $ 19,950 $ 20,755",
+      "check": {
+       "status": "verified",
+       "passage_id": "P138",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Service revenue was $17,539 million in fiscal 2025.",
+      "value": 17539,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P193",
+      "quote": "Service revenue $ 17,539 $ 16,114 $ 14,826",
+      "check": {
+       "status": "verified",
+       "passage_id": "P193",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Data processing revenue was $19,993 million in fiscal 2025.",
+      "value": 19993,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P193",
+      "quote": "Data processing revenue 19,993 17,714 16,007",
+      "check": {
+       "status": "verified",
+       "passage_id": "P193",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "International transaction revenue was $14,166 million in fiscal 2025.",
+      "value": 14166,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P193",
+      "quote": "International transaction revenue 14,166 12,665 11,638",
+      "check": {
+       "status": "verified",
+       "passage_id": "P193",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Visa reports one reportable segment, Payment Services, and the CODM uses consolidated net income to assess performance.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2025",
+      "passage_id": "P224",
+      "quote": "The Company\u2019s chief operating decision maker (CODM) is the Chief Executive Officer, who uses consolidated net income in assessing performance and allocating resources.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P224",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "capital": [
+     {
+      "topic": "cash",
+      "statement": "Cash and cash equivalents were $17,164 million as of September 30, 2025.",
+      "value": 17164,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P161",
+      "quote": "Cash and cash equivalents $ 17,164 $ 11,975",
+      "check": {
+       "status": "verified",
+       "passage_id": "P161",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "Investment securities were $1,833 million current and $999 million non-current as of September 30, 2025.",
+      "value": 1833,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P161",
+      "quote": "Investment securities 1,833 3,200",
+      "check": {
+       "status": "verified",
+       "passage_id": "P161",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash",
+      "statement": "As of September 30, 2025, cash and cash equivalents balance was $17.2 billion and available-for-sale debt securities was $2.4 billion.",
+      "value": 17.2,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P138",
+      "quote": "our cash and cash equivalents balance was $17.2 billion and our available-for-sale debt securities was $2.4 billion",
+      "check": {
+       "status": "verified",
+       "passage_id": "P138",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Total debt was $25,392 million as of September 30, 2025, with total carrying value of debt of $25,171 million.",
+      "value": 25392,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P215",
+      "quote": "Total debt 25,392 21,111",
+      "check": {
+       "status": "verified",
+       "passage_id": "P215",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Long-term debt was $19,602 million and current maturities of debt were $5,569 million as of September 30, 2025.",
+      "value": 19602,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P161",
+      "quote": "Current maturities of debt 5,569 \u2014 Accrued litigation 3,033 1,727 Total current liabilities 35,048 26,517 Long-term debt 19,602 20,836",
+      "check": {
+       "status": "verified",
+       "passage_id": "P161",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "Repurchases of class A common stock were $18,185 million in fiscal 2025.",
+      "value": 18185,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P165",
+      "quote": "Repurchases of class A common stock ( 54 ) ( 578 ) ( 17,607 ) ( 18,185 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P165",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "The Company declared and paid dividends of $4.6 billion in fiscal 2025.",
+      "value": 4.6,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P229",
+      "quote": "In fiscal 2025, 2024 and 2023, the Company declared and paid dividends of $ 4.6 billion, $ 4.2 billion and $ 3.8 billion, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P229",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "acquisition",
+      "statement": "In December 2024, the Company acquired Featurespace for a purchase consideration of $946 million.",
+      "value": 946,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P142",
+      "quote": "In December 2024, we acquired Featurespace for a purchase consideration of $946 million.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P142",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "risks": [
+     {
+      "topic": "ai",
+      "statement": "The adoption of agentic commerce, in which autonomous AI agents initiate and execute transactions on behalf of users, presents novel and complex regulatory, privacy and cybersecurity risks.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R003",
+      "quote": "In particular, the adoption of agentic commerce, in which autonomous AI agents initiate and execute transactions on behalf of users, presents novel and complex regulatory, privacy and cybersecurity risks.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R003",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "The increased risk of inadvertent disclosure of confidential information or personal data in connection with the utilization of AI technologies may result in stronger regulatory scrutiny, leading to legal and regulatory investigations and enforcement actions.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R003",
+      "quote": "The increased risk of inadvertent disclosure of confidential information or personal data in connection with the utilization of AI technologies may result in stronger regulatory scrutiny, leading to legal and regulatory investigations and 25 Table of Contents enforcement actions that may negatively affect our business, even if unfounded.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R003",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "The EU has adopted a comprehensive AI Act establishing harmonized rules across Europe, with key provisions for high-risk AI systems taking effect in August 2026.",
+      "value": null,
+      "unit": null,
+      "period": "August 2026",
+      "passage_id": "R004",
+      "quote": "the EU has adopted a comprehensive AI Act that establishes harmonized rules across Europe, with key provisions for high-risk AI systems taking effect in August 2026",
+      "check": {
+       "status": "verified",
+       "passage_id": "R004",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "Our own use and deployment of GenAI technologies could expand our cybersecurity attack surface, increasing exposure to breaches, fraud, unauthorized transactions and other vulnerabilities.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R009",
+      "quote": "Our own use and deployment of GenAI technologies could expand our cybersecurity attack surface, increasing exposure to breaches, fraud, unauthorized transactions and other vulnerabilities.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R009",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "competition",
+      "statement": "If we do not continue to invest in developing and supporting our AI-based initiatives, we may fall behind technological developments and evolving industry standards, harming our reputation and ability to compete, retain clients or grow our business.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R005",
+      "quote": "If we do not continue to invest in developing and supporting our AI-based initiatives, we may fall behind technological developments and evolving industry standards, which would likewise harm our reputation and ability to effectively compete, retain clients or grow our business.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R005",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "In August 2025, the District Court for the District of North Dakota ruled that the Federal Reserve exceeded its authority in implementing Regulation II, vacating its debit interchange fee standard.",
+      "value": null,
+      "unit": null,
+      "period": "August 2025",
+      "passage_id": "R000",
+      "quote": "in August 2025, the District Court for the District of North Dakota ruled that the Federal Reserve exceeded its authori ty in implementing Regulation II, which sets debit card interchange fees",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "accounting": [
+     [
+      {
+       "topic": "net_income",
+       "statement": "Visa reported net income of $20,058 million for fiscal 2025.",
+       "value": 20058,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P168",
+       "quote": "Net income $ 20,058 $ 19,743 $ 17,273",
+       "check": {
+        "status": "verified",
+        "passage_id": "P168",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Net cash provided by operating activities was $23,059 million in fiscal 2025.",
+       "value": 23059,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P168",
+       "quote": "Net cash provided by (used in) operating activities 23,059 19,950 20,755",
+       "check": {
+        "status": "verified",
+        "passage_id": "P168",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Cash provided by operating activities increased in fiscal 2025 over the prior year primarily due to growth in the underlying business and timing of income tax payments.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P138",
+       "quote": "Cash provided by operating activities increased in fiscal 2025 over the prior year primarily due to growth in our underlying business and the timing of payments related to income taxes, partially offset by higher incentive payments.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P138",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "audit_opinion",
+       "statement": "KPMG LLP audited the consolidated financial statements and the effectiveness of internal control over financial reporting, expressing opinions on both.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P156",
+       "quote": "Our responsibility is to express an opinion on the Company\u2019s consolidated financial statements and an opinion on the Company\u2019s internal control over financial reporting based on our audits.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P156",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "The critical audit matter was the assessment of the litigation accrual for class members opting out of the Damages Class settlement in the Interchange Multidistrict Litigation (MDL), with a recorded litigation accrual of $2,698 million as of September 30, 2025.",
+       "value": 2698,
+       "unit": "USD millions",
+       "period": "as of September 30, 2025",
+       "passage_id": "P159",
+       "quote": "the Company has recorded a litigation accrual of $2,698 million as of September 30, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P159",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "Management concluded that Visa's internal control over financial reporting was effective as of September 30, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "as of September 30, 2025",
+       "passage_id": "P273",
+       "quote": "management has concluded that our internal control over financial reporting was effective as of September 30, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P273",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "revenue_recognition",
+       "statement": "Client incentives are primarily accounted for as reductions to net revenue, unless a separate identifiable benefit at fair value can be established, in which case they are operating expenses.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P146",
+       "quote": "These incentives are primarily accounted for as reductions to net revenue; however, if a separate identifiable benefit at fair value can be established, they are accounted for as operating expenses.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P146",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "The audit of internal control over financial reporting included assessing the risk that a material weakness exists and testing the design and operating effectiveness of internal control.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P157",
+       "quote": "Our audit of internal control over financial reporting included obtaining an understanding of internal control over financial reporting, assessing the risk that a material weakness exists, and testing and evaluating the design and operating effectiveness of internal control based on the assessed risk.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P157",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      }
+     ],
+     [
+      {
+       "topic": "net_income",
+       "statement": "Visa reported net income of $20,058 million for fiscal 2025.",
+       "value": 20058,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P168",
+       "quote": "Net income $ 20,058 $ 19,743 $ 17,273",
+       "check": {
+        "status": "verified",
+        "passage_id": "P168",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Net cash provided by operating activities was $23,059 million in fiscal 2025.",
+       "value": 23059,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P168",
+       "quote": "Net cash provided by (used in) operating activities 23,059 19,950 20,755",
+       "check": {
+        "status": "verified",
+        "passage_id": "P168",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Cash provided by operating activities was $23,059 million in fiscal 2025, up from $19,950 million in fiscal 2024.",
+       "value": 23059,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P138",
+       "quote": "Operating activities $ 23,059 $ 19,950 $ 20,755",
+       "check": {
+        "status": "verified",
+        "passage_id": "P138",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "audit_opinion",
+       "statement": "KPMG LLP audited the consolidated financial statements and the effectiveness of internal control over financial reporting, expressing opinions on both.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P156",
+       "quote": "Our responsibility is to express an opinion on the Company\u2019s consolidated financial statements and an opinion on the Company\u2019s internal control over financial reporting based on our audits.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P156",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "The critical audit matter was the assessment of the litigation accrual for class members opting out of the Damages Class settlement in the Interchange Multidistrict Litigation (MDL).",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P159",
+       "quote": "Assessment of the litigation accrual for class members opting out of the Damages Class settlement in the Interchange Multidistrict Litigation (MDL)",
+       "check": {
+        "status": "verified",
+        "passage_id": "P159",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "The Company recorded a litigation accrual of $2,698 million as of September 30, 2025, the substantial majority relating to Individual Merchant Actions.",
+       "value": 2698,
+       "unit": "USD millions",
+       "period": "as of September 30, 2025",
+       "passage_id": "P159",
+       "quote": "the Company has recorded a litigation accrual of $2,698 million as of September 30, 2025, and the substantial majority of that accrual relates to Individual Merchant Actions",
+       "check": {
+        "status": "verified",
+        "passage_id": "P159",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "Management concluded that Visa's internal control over financial reporting was effective as of September 30, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "as of September 30, 2025",
+       "passage_id": "P273",
+       "quote": "management has concluded that our internal control over financial reporting was effective as of September 30, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P273",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "revenue_recognition",
+       "statement": "Client incentives are primarily accounted for as reductions to net revenue, or as operating expenses if a separate identifiable benefit at fair value can be established.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P146",
+       "quote": "These incentives are primarily accounted for as reductions to net revenue; however, if a separate identifiable benefit at fair value can be established, they are accounted for as operating expenses.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P146",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      }
+     ],
+     [
+      {
+       "topic": "net_income",
+       "statement": "Visa reported net income of $20,058 million for fiscal 2025.",
+       "value": 20058,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P168",
+       "quote": "Net income $ 20,058 $ 19,743 $ 17,273",
+       "check": {
+        "status": "verified",
+        "passage_id": "P168",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Visa reported net cash provided by operating activities of $23,059 million for fiscal 2025.",
+       "value": 23059,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P168",
+       "quote": "Net cash provided by (used in) operating activities 23,059 19,950 20,755",
+       "check": {
+        "status": "verified",
+        "passage_id": "P168",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Cash provided by operating activities was $23,059 million in fiscal 2025, up from $19,950 million in fiscal 2024.",
+       "value": 23059,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P138",
+       "quote": "Operating activities $ 23,059 $ 19,950 $ 20,755",
+       "check": {
+        "status": "verified",
+        "passage_id": "P138",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "audit_opinion",
+       "statement": "KPMG LLP opined that the consolidated financial statements present fairly, in all material respects, the financial position, results of operations and cash flows in conformity with U.S. GAAP.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P155",
+       "quote": "In our opinion, the consolidated financial statements referred to above present fairly, in all material respects, the financial position of the Company as of September 30, 2025 and 2024",
+       "check": {
+        "status": "verified",
+        "passage_id": "P155",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "KPMG LLP opined that the Company maintained, in all material respects, effective internal control over financial reporting as of September 30, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P155",
+       "quote": "Also in our opinion, the Company maintained, in all material respects, effective internal control over financial reporting as of September 30, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P155",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "Management concluded that Visa's internal control over financial reporting was effective as of September 30, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P273",
+       "quote": "management has concluded that our internal control over financial reporting was effective as of September 30, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P273",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "The critical audit matter related to the Company's litigation accrual process for the MDL \u2013 Individual Merchant Actions.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P160",
+       "quote": "internal controls related to the Company\u2019s litigation accrual process for the MDL \u2013 Individual Merchant Actions",
+       "check": {
+        "status": "verified",
+        "passage_id": "P160",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "The critical audit matter involved especially challenging, subjective, or complex judgments relating to accounts or disclosures material to the consolidated financial statements.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P158",
+       "quote": "involved our especially challenging, subjective, or complex judgments",
+       "check": {
+        "status": "verified",
+        "passage_id": "P158",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      }
+     ]
+    ]
+   },
+   "costs": {
+    "performance": {
+     "calls": 2,
+     "tokens": 7435,
+     "cached": 1408,
+     "usd": 0.001187,
+     "stopped": null
+    },
+    "capital": {
+     "calls": 2,
+     "tokens": 7245,
+     "cached": 1408,
+     "usd": 0.001144,
+     "stopped": null
+    },
+    "risks": {
+     "calls": 2,
+     "tokens": 5286,
+     "cached": 1536,
+     "usd": 0.000855,
+     "stopped": null
+    },
+    "accounting_1": {
+     "calls": 2,
+     "tokens": 6610,
+     "cached": 5248,
+     "usd": 0.001067,
+     "stopped": null
+    },
+    "accounting_2": {
+     "calls": 2,
+     "tokens": 6566,
+     "cached": 5248,
+     "usd": 0.001055,
+     "stopped": null
+    },
+    "accounting_3": {
+     "calls": 2,
+     "tokens": 6531,
+     "cached": 5248,
+     "usd": 0.001044,
+     "stopped": null
+    },
+    "red_team_1": {
+     "calls": 1,
+     "tokens": 5047,
+     "cached": 384,
+     "usd": 0.000779
+    },
+    "red_team_2": {
+     "calls": 1,
+     "tokens": 5150,
+     "cached": 512,
+     "usd": 0.000806
+    },
+    "red_team_3": {
+     "calls": 1,
+     "tokens": 5119,
+     "cached": 4096,
+     "usd": 0.000801
+    }
+   }
+  },
+  {
+   "ticker": "META",
+   "rating": "Overweight",
+   "confidence": 0.67,
+   "sizing": {
+    "weight": 0.012,
+    "base": 0.03,
+    "vol": 0.4176,
+    "scale": 0.599,
+    "confidence": 0.67
+   },
+   "valuation": {
+    "ticker": "META",
+    "as_of": "2026-10-01",
+    "price": 725.1799926757812,
+    "price_date": "2026-09-30",
+    "sic": "7370",
+    "inputs": {
+     "revenue": {
+      "value": 228247000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "revenue_year_ago": {
+      "value": 178804000000,
+      "end": "2025-06-30",
+      "method": "FY to 2024-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "RevenueFromContractWithCustomerExcludingAssessedTax"
+     },
+     "ebit": {
+      "value": 86926000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "OperatingIncomeLoss"
+     },
+     "pretax": {
+      "value": 87524000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+     },
+     "tax": {
+      "value": 19426000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "IncomeTaxExpenseBenefit"
+     },
+     "interest": {
+      "value": 1917000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "InterestExpenseDebt"
+     },
+     "sbc": {
+      "value": 25136000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "ShareBasedCompensation"
+     },
+     "net_income": {
+      "value": 68098000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 130301000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 89325000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "cash": {
+      "end": "2026-06-30",
+      "val": 15462000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "frame": "CY2026Q2I",
+      "concept": "CashAndCashEquivalentsAtCarryingValue"
+     },
+     "securities": {
+      "end": "2026-06-30",
+      "val": 74798000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "frame": "CY2026Q2I",
+      "concept": "MarketableSecuritiesCurrent"
+     },
+     "debt": {
+      "val": 83664000000,
+      "end": "2026-06-30",
+      "concept": "LongTermDebtNoncurrent"
+     },
+     "leases": {
+      "val": 28654000000,
+      "end": "2026-06-30",
+      "concept": "OperatingLeaseLiabilityNoncurrent + OperatingLeaseLiabilityCurrent"
+     },
+     "minority": null,
+     "equity": {
+      "end": "2026-06-30",
+      "val": 261221000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "frame": "CY2026Q2I",
+      "concept": "StockholdersEquity"
+     },
+     "preferred": {
+      "end": "2012-12-31",
+      "val": 0,
+      "accn": "0001326801-13-000003",
+      "fy": 2012,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2013-02-01",
+      "frame": "CY2012Q4I",
+      "concept": "PreferredStockValue"
+     },
+     "ni_common": {
+      "value": 68098000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "NetIncomeLoss"
+     },
+     "shares": {
+      "start": "2026-01-01",
+      "end": "2026-06-30",
+      "val": 2565000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "concept": "WeightedAverageNumberOfDilutedSharesOutstanding"
+     },
+     "goodwill": {
+      "end": "2026-06-30",
+      "val": 23406000000,
+      "accn": "0001628280-26-050705",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-07-30",
+      "frame": "CY2026Q2I",
+      "concept": "Goodwill"
+     },
+     "intangibles": {
+      "end": "2025-12-31",
+      "val": 3692000000,
+      "accn": "0001628280-26-003942",
+      "fy": 2025,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-01-29",
+      "frame": "CY2025Q4I",
+      "concept": "IntangibleAssetsNetExcludingGoodwill"
+     },
+     "nonoperating": {
+      "value": 598000000,
+      "end": "2026-06-30",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-07-30",
+      "concept": "NonoperatingIncomeExpense"
+     },
+     "equity_with_nci": null,
+     "roic_history": [
+      {
+       "end": "2025-12-31",
+       "roic": 0.2601
+      },
+      {
+       "end": "2024-12-31",
+       "roic": 0.3105
+      },
+      {
+       "end": "2023-12-31",
+       "roic": 0.2704
+      },
+      {
+       "end": "2022-12-31",
+       "roic": 0.1795
+      },
+      {
+       "end": "2021-12-31",
+       "roic": 0.3238
+      }
+     ]
+    },
+    "fair_value": {
+     "bear": 512.01,
+     "base": 1035.29,
+     "bull": 1471.98
+    },
+    "note": null,
+    "model": "fcff",
+    "method": "FCFF DCF at company WACC: revenue growth for 5 years, fading to terminal over 5; reinvestment = change in revenue / sales-to-capital; SBC expensed; leases as debt; terminal ROIC keeps a share of today's excess return; bear/base/bull shift growth -/+4 points, margin -/+2 points, WACC +/-0.5 points, terminal excess 0/0.5/1",
+    "capital": {
+     "risk_free": 0.0475,
+     "risk_free_date": "2026-09-01 (rate in Damodaran's ERP computation)",
+     "beta": {
+      "industry": "Software (Entertainment)",
+      "firms": 77,
+      "unlevered": 1.021,
+      "debt_to_equity": 0.06,
+      "used": 1.067,
+      "method": "bottom-up: industry unlevered beta (cash-corrected) relevered at market D/E",
+      "regression": 1.124,
+      "regression_raw": 1.185
+     },
+     "erp": 0.0414,
+     "cost_of_equity": 0.0917,
+     "rating": {
+      "coverage": 45.34,
+      "rating": "AAA",
+      "spread": 0.004
+     },
+     "cost_of_debt_pre_tax": 0.0515,
+     "tax_shield_rate": 0.25,
+     "weight_equity": 0.9431,
+     "debt_incl_leases": 112318000000.0,
+     "wacc": 0.0887,
+     "mature_wacc": 0.086
+    },
+    "wacc": 0.0887,
+    "revenue_growth": 0.2765,
+    "growth_used": 0.2765,
+    "implied_growth": 0.0953,
+    "operating_margin": 0.3808,
+    "roic": 0.2387,
+    "sales_to_capital": 0.891,
+    "effective_tax": 0.222,
+    "terminal_growth": 0.0475,
+    "terminal_roic": 0.2387,
+    "terminal_share": 0.781,
+    "ev_to_ebit": 30.8,
+    "market_ev_to_ebit": 21.7,
+    "shares_outstanding": 2565000000,
+    "shares_source": "XBRL WeightedAverageNumberOfDilutedSharesOutstanding at 2026-06-30",
+    "net_debt": 22058000000.0,
+    "data_notes": [],
+    "moat": "wide: ROIC beat WACC by 5%+ in all 5 years (min +9.1%)",
+    "terminal_excess_return": 1.0,
+    "roic_history": [
+     {
+      "end": "2025-12-31",
+      "roic": 0.2601
+     },
+     {
+      "end": "2024-12-31",
+      "roic": 0.3105
+     },
+     {
+      "end": "2023-12-31",
+      "roic": 0.2704
+     },
+     {
+      "end": "2022-12-31",
+      "roic": 0.1795
+     },
+     {
+      "end": "2021-12-31",
+      "roic": 0.3238
+     }
+    ],
+    "cash_conversion": 1.927,
+    "sbc_to_revenue": 0.1101,
+    "sensitivity": {
+     "grid": {
+      "wacc -1.0%": {
+       "g -0.5%": 1003.56,
+       "g +0.0%": 1096.69,
+       "g +0.5%": 1217.23
+      },
+      "wacc +0.0%": {
+       "g -0.5%": 947.58,
+       "g +0.0%": 1035.29,
+       "g +0.5%": 1148.81
+      },
+      "wacc +1.0%": {
+       "g -0.5%": 895.19,
+       "g +0.0%": 977.83,
+       "g +0.5%": 1084.8
+      }
+     },
+     "swings": {
+      "growth": [
+       -72.97,
+       77.18
+      ],
+      "margin": [
+       -140.73,
+       140.73
+      ],
+      "wacc": [
+       -29.2,
+       30.19
+      ],
+      "terminal_excess_return": [
+       -359.65,
+       0.0
+      ]
+     }
+    },
+    "valuation_period": "trailing twelve months to 2026-06-30 (revenue growth: twelve months to 2026-06-30 vs to 2025-06-30), from 10-K and 10-Q XBRL; the readers' evidence comes from the latest 10-K only"
+   },
+   "repeats": [
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.70 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.4276,
+      "uncertainty": "High",
+      "price_to_fair": 0.7
+     },
+     "red_team": {
+      "objections": [
+       {
+        "type": "data_conflict",
+        "direction": "rating too low",
+        "severity": "high",
+        "argument": "The desk's own growth_used (27.65%) exceeds the 10-K's 22% (PERF-2), yet the model still only reaches a 0.70 price/fair-value. If the 10-K's 22% is the truer anchor, growth is overstated, not understated \u2014 but the deeper conflict is that a 27.65% starting growth with a 0.891 sales-to-capital and 38% margin should not produce a base fair value only 1.4x price. The rating is too low relative to the growth the desk itself feeds in.",
+        "cites": [
+         "PERF-2",
+         "growth_used",
+         "sales_to_capital",
+         "operating_margin"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "business",
+        "direction": "rating too low",
+        "severity": "high",
+        "argument": "Reality Labs lost $19.2bn on $2.2bn revenue (PERF-7, PERF-9) while Family of Apps earned $102.5bn (PERF-8). The model treats the consolidated 38% margin as durable; if RL losses are a permanent drag, the base case is too high \u2014 but if RL is optionality the market is not paying for, the rating is too low. Either way the segment split is ignored.",
+        "cites": [
+         "PERF-7",
+         "PERF-8",
+         "PERF-9",
+         "operating_margin"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "terminal_share is 0.781 and terminal_excess_return is set to 1.0 (full moat), with terminal_roic held at today's 23.87% versus an 8.87% WACC. Nearly four-fifths of value rests on a perpetuity assuming Meta's excess return never fades, despite RISK-1 through RISK-6 (regulation, AI competition, copyright litigation). A 0.5 moat share would cut the base materially and push price/fair-value toward Underweight.",
+        "cites": [
+         "terminal_share",
+         "terminal_excess_return",
+         "terminal_roic",
+         "RISK-1",
+         "RISK-3",
+         "RISK-6"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "medium",
+        "argument": "sbc_to_revenue is 11.01% and is expensed, but cash_conversion of 1.927 (OCF/NOPAT) is far above 1, meaning NOPAT understates cash generation \u2014 the model's own caution threshold is 0.8. A 1.93 conversion with 11% SBC and $72bn capex (CAP-7) suggests the reinvestment charge via sales_to_capital (0.891) is too light, flattering the base fair value and the Overweight.",
+        "cites": [
+         "sbc_to_revenue",
+         "cash_conversion",
+         "CAP-7",
+         "sales_to_capital"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       }
+      ]
+     },
+     "final": {
+      "rating": "Buy",
+      "why": [
+       "price / base fair value 0.70 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55",
+       "red team (rating too low, data_conflict): The desk's own growth_used (27.65%) exceeds the 10-K's 22% (PERF-2), yet the model still only reaches a 0.70 price/fair-value. If the 10-K's"
+      ],
+      "upside_to_base": 0.4276,
+      "uncertainty": "High",
+      "price_to_fair": 0.7
+     }
+    },
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.70 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.4276,
+      "uncertainty": "High",
+      "price_to_fair": 0.7
+     },
+     "red_team": {
+      "objections": [
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "The DCF charges growth at a sales-to-capital of 0.891, but 2025 capex was $72.22bn (CAP-7) against $200.97bn revenue (PERF-1) \u2014 roughly $0.36 of capex per revenue dollar, and rising. If AI infrastructure spend keeps scaling, reinvestment is understated and base fair value falls well below 1035.29.",
+        "cites": [
+         "CAP-7",
+         "CAP-6",
+         "PERF-1",
+         "sales_to_capital"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "Terminal value assumes 78.1% of today's 15-point ROIC-WACC spread survives forever (terminal_share 0.781, terminal_excess_return 1.0), justified by a 5-year moat test. RISK-3 and RISK-1 show AI competition and EU regulation that can compress that spread; a 0.5 share would cut base fair value materially.",
+        "cites": [
+         "RISK-3",
+         "RISK-1",
+         "terminal_share",
+         "terminal_excess_return",
+         "roic",
+         "wacc"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "business",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "The model treats Meta as a single fading grower, but Family of Apps earned $102.47bn operating income while Reality Labs lost $19.19bn (PERF-8, PERF-9). The loss-making segment drags consolidated margin to 38.1%; a sum-of-parts view of the core ad engine supports a higher value than base 1035.29.",
+        "cites": [
+         "PERF-8",
+         "PERF-9",
+         "operating_margin"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "data_conflict",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "growth_used of 27.65% exceeds the 10-K's 22% revenue growth (PERF-2) and the 22% advertising growth (PERF-10). The TTM window may capture a genuine acceleration, but if it reflects a one-off, the starting growth \u2014 and the whole fade path \u2014 is too low, understating fair value.",
+        "cites": [
+         "PERF-2",
+         "PERF-10",
+         "growth_used",
+         "revenue_growth"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       }
+      ]
+     },
+     "final": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.70 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.4276,
+      "uncertainty": "High",
+      "price_to_fair": 0.7
+     }
+    },
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.70 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.4276,
+      "uncertainty": "High",
+      "price_to_fair": 0.7
+     },
+     "red_team": {
+      "objections": [
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "The DCF charges growth at a sales-to-capital of 0.891, but 2025 capex was $72.22bn (CAP-7) against $200.97bn revenue (PERF-1) \u2014 roughly 0.36 of revenue, far below the implied reinvestment. Under-charging reinvestment inflates base fair value and hence the Overweight.",
+        "cites": [
+         "CAP-7",
+         "PERF-1",
+         "sales_to_capital"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "Terminal value assumes 78.1% of today's 15-point ROIC-WACC spread survives forever (terminal_share 0.781, terminal_excess_return 1.0), yet the moat test rests on a 5-year ROIC history while RISK-1 to RISK-6 show regulatory, AI-competition and copyright threats to that spread. A lower terminal share cuts base fair value materially.",
+        "cites": [
+         "terminal_share",
+         "terminal_excess_return",
+         "RISK-1",
+         "RISK-3",
+         "RISK-6"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "Growth is clipped to 27.65% (growth_bounds cap 0.30) and then forced to decay to the 10% year-5 cap, while the 10-K shows 22% growth (PERF-2) on a $201bn base with operating margin 38% (PERF-3). The fade may understate durable compounding, making the Overweight too timid rather than too generous.",
+        "cites": [
+         "growth_used",
+         "year5_growth_cap",
+         "PERF-2",
+         "PERF-3"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "business",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "Reality Labs lost $19.19bn in 2025 (PERF-9) on $2.21bn revenue (PERF-7), dragging consolidated margin to 38.1%. Family of Apps earned $102.47bn (PERF-8). Valuing the whole at a blended margin understates the core franchise and the option value of the loss-making segment.",
+        "cites": [
+         "PERF-9",
+         "PERF-7",
+         "PERF-8",
+         "operating_margin"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       }
+      ]
+     },
+     "final": {
+      "rating": "Overweight",
+      "why": [
+       "price / base fair value 0.70 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": 0.4276,
+      "uncertainty": "High",
+      "price_to_fair": 0.7
+     }
+    }
+   ],
+   "evidence": {
+    "performance": [
+     {
+      "topic": "revenue",
+      "statement": "Total revenue for 2025 was $200.97 billion.",
+      "value": 200.97,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P194",
+      "quote": "Total revenue for 2025 was $200.97 billion, an increase of 22% compared to 2024",
+      "check": {
+       "status": "verified",
+       "passage_id": "P194",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Total revenue grew 22% in 2025 compared to 2024.",
+      "value": 22,
+      "unit": "%",
+      "period": "fiscal 2025 vs 2024",
+      "passage_id": "P217",
+      "quote": "Total revenue $ 200,966 $ 164,501 $ 134,902 22 % 22 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P217",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Income from operations for 2025 was $83.28 billion, up 20% year over year.",
+      "value": 83.28,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P194",
+      "quote": "Income from operations for 2025 was $83.28 billion, an increase of $13.90 billion, or 20%, compared to 2024",
+      "check": {
+       "status": "verified",
+       "passage_id": "P194",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income for 2025 was $60,458 million.",
+      "value": 60458,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P250",
+      "quote": "Net income $ 60,458 $ 62,360 $ 39,098",
+      "check": {
+       "status": "verified",
+       "passage_id": "P250",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities in 2025 was $115,800 million.",
+      "value": 115800,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P226",
+      "quote": "Net cash provided by operating activities $ 115,800 $ 91,328 $ 71,113",
+      "check": {
+       "status": "verified",
+       "passage_id": "P226",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Family of Apps revenue in 2025 was $198,759 million.",
+      "value": 198759,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P217",
+      "quote": "Family of Apps 198,759 162,355 133,006 22 % 22 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P217",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Reality Labs revenue in 2025 was $2,207 million.",
+      "value": 2207,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P217",
+      "quote": "Reality Labs 2,207 2,146 1,896 3 % 13 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P217",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Family of Apps income from operations in 2025 was $102,469 million, up 18%.",
+      "value": 102469,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P221",
+      "quote": "Family of Apps $ 102,469 $ 87,109 $ 62,871 18 % 39 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P221",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Reality Labs loss from operations in 2025 was $19,193 million.",
+      "value": 19193,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P221",
+      "quote": "Reality Labs (19,193) (17,729) (16,120) (8) % (10) %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P221",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "Advertising revenue in 2025 was $196,175 million, up 22% year over year.",
+      "value": 196175,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P217",
+      "quote": "Advertising $ 196,175 $ 160,633 $ 131,948 22 % 22 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P217",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "capital": [
+     {
+      "topic": "cash",
+      "statement": "Cash, cash equivalents, and marketable securities were $81.59 billion as of December 31, 2025, up $3.78 billion from December 31, 2024.",
+      "value": 81.59,
+      "unit": "USD billions",
+      "period": "as of December 31, 2025",
+      "passage_id": "P225",
+      "quote": "Cash, cash equivalents, and marketable securities were $81.59 billion as of December 31, 2025, an increase of $3.78 billion from December 31, 2024.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P225",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Aggregate principal amount of fixed-rate senior notes outstanding was $59.0 billion as of December 31, 2025, versus $29.0 billion as of December 31, 2024.",
+      "value": 59.0,
+      "unit": "USD billions",
+      "period": "as of December 31, 2025",
+      "passage_id": "P234",
+      "quote": "As of December 31, 2025 and 2024, we also had aggregate principal amounts of fixed-rate senior notes (the Notes) outstanding of $59.0 billion and $29.0 billion, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P234",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "In 2025 the company repurchased and retired 40 million shares of Class A common stock for an aggregate $26.26 billion, including excise taxes.",
+      "value": 26.26,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P317",
+      "quote": "In 2025, we repurchased and subsequently retired 40 million shares of our Class A common stock for an aggregate amount of $ 26.26 billion, including excise taxes.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P317",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "$25.03 billion remained available and authorized for repurchases as of December 31, 2025.",
+      "value": 25.03,
+      "unit": "USD billions",
+      "period": "as of December 31, 2025",
+      "passage_id": "P317",
+      "quote": "As of December 31, 2025, $ 25.03 billion remained available and authorized for repurchases.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P317",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "Total dividends and dividend equivalents paid were $5.32 billion for the year ended December 31, 2025, after the quarterly dividend was raised from $0.50 to $0.525 per share.",
+      "value": 5.32,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P231",
+      "quote": "we increased our quarterly cash dividends from $0.50 to $0.525 per share of Class A and Class B common stock. Total dividends and dividend equivalents paid were $5.32 billion for the year ended December 31, 2025.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P231",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "capex",
+      "statement": "Cash used in investing activities in 2025 included $69.69 billion of purchases of property and equipment.",
+      "value": 69.69,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P227",
+      "quote": "Cash used in investing activities during 2025 mostly consisted of $69.69 billion of purchases of property and equipment",
+      "check": {
+       "status": "verified",
+       "passage_id": "P227",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "capex",
+      "statement": "Capital expenditures of $72.22 billion in 2025 include purchases of property and equipment and principal payments on finance leases.",
+      "value": 72.22,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P226",
+      "quote": "$72.22 billion of capital expenditures, which includes purchases of property and equipment and principal payments on finance leases",
+      "check": {
+       "status": "verified",
+       "passage_id": "P226",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "shares",
+      "statement": "As of December 31, 2025, there were 2,187 million shares of Class A common stock and 343 million shares of Class B common stock issued and outstanding.",
+      "value": 2187,
+      "unit": "millions of shares",
+      "period": "as of December 31, 2025",
+      "passage_id": "P317",
+      "quote": "As of December 31, 2025, there were 2,187 million shares of Class A common stock and 343 million shares of Class B common stock issued and outstanding.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P317",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "risks": [
+     {
+      "topic": "regulation",
+      "statement": "The European Commission issued a final decision in April 2025 that Meta's \"subscription for no ads\" model does not comply with requirements, and further modifications may be imposed during the appeal.",
+      "value": null,
+      "unit": null,
+      "period": "April 2025",
+      "passage_id": "R000",
+      "quote": "In April 2025, the European Commission issued a final decision that our \"subscription for no ads\" model does not comply with such requirements.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "Meta has been subject to media and government scrutiny relating to AI and AI chatbots, including inquiries and investigations by the FTC, members of Congress and state attorneys general.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "we have been the subject of media and government scrutiny relating to AI and AI chatbots, including inquiries and investigations by the FTC, members of Congress and state attorneys general",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "competition",
+      "statement": "Meta faces significant competition from companies developing their own AI features and technologies that may be similar or superior or more cost-effective.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "we face significant competition from other companies that are developing their own AI features and technologies, including competition from AI features and technologies that may be similar or superior to our technologies or more cost-effective to develop and deploy",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "Meta's AI initiatives depend on access to data to train its models, subject to risks related to availability or costs of data and regulatory or legal developments, and on attracting specialized personnel in a limited and competitive talent market.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "Our AI initiatives also depend on our access to data to effectively train our models, which is subject to risks related to the availability or costs of data, regulatory or other legal developments, or other factors, as well as our ability to attract and retain specialized personnel in a limited and competitive talent market.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cybersecurity",
+      "statement": "Meta's efforts to develop and deploy AI models and AI tools expose it to increased and novel risks including prompt injection, errors, and compromise of intellectual property such as source code and model weights.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R004",
+      "quote": "our efforts to develop and deploy AI models, internal and third-party AI tools, and other AI applications expose us to increased and novel risks and vulnerabilities, including prompt injection, errors, and other issues related to AI agents, as well as compromise of valuable intellectual property including source code, model weights, and other assets",
+      "check": {
+       "status": "verified",
+       "passage_id": "R004",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "legal",
+      "statement": "Meta and other companies are subject to litigation in the United States, Europe, Canada, and elsewhere alleging copyright infringement in connection with the acquisition, distribution, and use of copyrighted materials for AI training and reproduction in AI outputs.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R005",
+      "quote": "we and other companies are, and expect to continue to be, the subject of litigation in the United States, Europe, Canada, and elsewhere alleging copyright infringement in connection with the acquisition, distribution, and use of copyrighted materials for AI training as well as potential reproduction of copyrighted materials in AI outputs",
+      "check": {
+       "status": "verified",
+       "passage_id": "R005",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "accounting": [
+     [
+      {
+       "topic": "net_income",
+       "statement": "Meta reported net income of $60,458 million for the year ended December 31, 2025.",
+       "value": 60458,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P248",
+       "quote": "Net income $ 60,458 $ 62,360 $ 39,098",
+       "check": {
+        "status": "verified",
+        "passage_id": "P248",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Net cash provided by operating activities was $115,800 million for the year ended December 31, 2025.",
+       "value": 115800,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P226",
+       "quote": "Net cash provided by operating activities $ 115,800 $ 91,328 $ 71,113",
+       "check": {
+        "status": "verified",
+        "passage_id": "P226",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Cash provided by operating activities in 2025 mostly consisted of $60.46 billion net income adjusted for non-cash items.",
+       "value": 60.46,
+       "unit": "USD billions",
+       "period": "fiscal 2025",
+       "passage_id": "P226",
+       "quote": "Cash provided by operating activities during 2025 mostly consisted of $60.46 billion net income adjusted for certain non-cash items",
+       "check": {
+        "status": "verified",
+        "passage_id": "P226",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "audit_opinion",
+       "statement": "Ernst & Young LLP expressed an unqualified opinion on the consolidated financial statements.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P244",
+       "quote": "our report dated January 28, 2026 expressed an unqualified opinion thereon",
+       "check": {
+        "status": "verified",
+        "passage_id": "P244",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "The auditor opined that Meta maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P244",
+       "quote": "In our opinion, Meta Platforms, Inc. (the Company) maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025, based on the COSO criteria.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P244",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "Management concluded that its internal control over financial reporting was effective as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P333",
+       "quote": "management has concluded that its internal control over financial reporting was effective as of December 31, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P333",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "A critical audit matter involved the Company's consolidation conclusion for its interest in a VIE related to the Venture.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P243",
+       "quote": "To test the Company\u2019s consolidation conclusion with respect to its interest in the VIE related to the Venture",
+       "check": {
+        "status": "verified",
+        "passage_id": "P243",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "There were no changes in internal control over financial reporting in the fourth quarter of 2025 that materially affected, or were reasonably likely to materially affect, it.",
+       "value": null,
+       "unit": null,
+       "period": "Q4 fiscal 2025",
+       "passage_id": "P333",
+       "quote": "There were no changes in our internal control over financial reporting identified in management's evaluation pursuant to Rules 13a-15(d) or 15d-15(d) of the Exchange Act during the fourth quarter of 2025 that materially affected, or are reasonably likely to materially affect, our internal control over financial reporting.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P333",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      }
+     ],
+     [
+      {
+       "topic": "net_income",
+       "statement": "Net income for fiscal 2025 was $60,458 million.",
+       "value": 60458,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P250",
+       "quote": "Net income $ 60,458 $ 62,360 $ 39,098",
+       "check": {
+        "status": "verified",
+        "passage_id": "P250",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Net cash provided by operating activities for fiscal 2025 was $115,800 million.",
+       "value": 115800,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P250",
+       "quote": "Net cash provided by operating activities 115,800 91,328 71,113",
+       "check": {
+        "status": "verified",
+        "passage_id": "P250",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Net cash provided by operating activities was $115,800 million in 2025, $91,328 million in 2024 and $71,113 million in 2023.",
+       "value": 115800,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P226",
+       "quote": "Net cash provided by operating activities $ 115,800 $ 91,328 $ 71,113",
+       "check": {
+        "status": "verified",
+        "passage_id": "P226",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "audit_opinion",
+       "statement": "The auditor expressed an unqualified opinion that the consolidated financial statements present fairly, in all material respects, the financial position and results of operations in conformity with U.S. GAAP.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P237",
+       "quote": "In our opinion, the consolidated financial statements present fairly, in all material respects, the financial position of the Company at December 31, 2025 and 2024",
+       "check": {
+        "status": "verified",
+        "passage_id": "P237",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "The auditor communicated critical audit matters arising from the current period audit of the financial statements.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P238",
+       "quote": "The critical audit matters communicated below are matters arising from the current period audit of the financial statements that were communica",
+       "check": {
+        "status": "verified",
+        "passage_id": "P238",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "A critical audit matter concerned the Company's consolidation conclusion and determination of the primary beneficiary of a VIE related to the Venture.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P243",
+       "quote": "To test the Company\u2019s consolidation conclusion with respect to its interest in the VIE related to the Venture, our procedures included, among others, reading the relevant agreements related to the VIE",
+       "check": {
+        "status": "verified",
+        "passage_id": "P243",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "Management concluded that its internal control over financial reporting was effective as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P333",
+       "quote": "management has concluded that its internal control over financial reporting was effective as of December 31, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P333",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "The auditor opined that the Company maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025, based on the COSO criteria.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P244",
+       "quote": "In our opinion, Meta Platforms, Inc. (the Company) maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025, based on the COSO criteria.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P244",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      }
+     ],
+     [
+      {
+       "topic": "net_income",
+       "statement": "Meta reported net income of $60,458 million for the year ended December 31, 2025.",
+       "value": 60458,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P248",
+       "quote": "Net income $ 60,458 $ 62,360 $ 39,098",
+       "check": {
+        "status": "verified",
+        "passage_id": "P248",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Net cash provided by operating activities was $115,800 million for the year ended December 31, 2025.",
+       "value": 115800,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P226",
+       "quote": "Net cash provided by operating activities $ 115,800 $ 91,328 $ 71,113",
+       "check": {
+        "status": "verified",
+        "passage_id": "P226",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Cash provided by operating activities in 2025 mostly consisted of $60.46 billion net income adjusted for non-cash items.",
+       "value": 60.46,
+       "unit": "USD billions",
+       "period": "fiscal 2025",
+       "passage_id": "P226",
+       "quote": "Cash provided by operating activities during 2025 mostly consisted of $60.46 billion net income adjusted for certain non-cash items",
+       "check": {
+        "status": "verified",
+        "passage_id": "P226",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "audit_opinion",
+       "statement": "Ernst & Young LLP expressed an unqualified opinion on the consolidated financial statements, dated January 28, 2026.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P244",
+       "quote": "our report dated January 28, 2026 expressed an unqualified opinion thereon",
+       "check": {
+        "status": "verified",
+        "passage_id": "P244",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "The auditor concluded Meta maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P244",
+       "quote": "In our opinion, Meta Platforms, Inc. (the Company) maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025, based on the COSO criteria.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P244",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "Management concluded that its internal control over financial reporting was effective as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P333",
+       "quote": "management has concluded that its internal control over financial reporting was effective as of December 31, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P333",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "There were no changes in internal control over financial reporting during the fourth quarter of 2025 that materially affected, or are reasonably likely to materially affect, it.",
+       "value": null,
+       "unit": null,
+       "period": "Q4 fiscal 2025",
+       "passage_id": "P333",
+       "quote": "There were no changes in our internal control over financial reporting identified in management's evaluation pursuant to Rules 13a-15(d) or 15d-15(d) of the Exchange Act during the fourth quarter of 2025 that materially affected, or are reasonably likely to materially affect, our internal control over financial reporting.",
+       "check": {
+        "status": "verified",
+        "passage_id": "P333",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "A critical audit matter involved the Company's consolidation conclusion with respect to its interest in a VIE related to the Venture.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P243",
+       "quote": "To test the Company\u2019s consolidation conclusion with respect to its interest in the VIE related to the Venture, our procedures included, among others, reading the relevant agreements related to the VIE",
+       "check": {
+        "status": "verified",
+        "passage_id": "P243",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      }
+     ]
+    ]
+   },
+   "costs": {
+    "performance": {
+     "calls": 2,
+     "tokens": 7053,
+     "cached": 5632,
+     "usd": 0.001132,
+     "stopped": null
+    },
+    "capital": {
+     "calls": 2,
+     "tokens": 6872,
+     "cached": 1536,
+     "usd": 0.001117,
+     "stopped": null
+    },
+    "risks": {
+     "calls": 2,
+     "tokens": 4379,
+     "cached": 1536,
+     "usd": 0.000736,
+     "stopped": null
+    },
+    "accounting_1": {
+     "calls": 2,
+     "tokens": 7112,
+     "cached": 5760,
+     "usd": 0.001128,
+     "stopped": null
+    },
+    "accounting_2": {
+     "calls": 2,
+     "tokens": 6569,
+     "cached": 1536,
+     "usd": 0.001054,
+     "stopped": null
+    },
+    "accounting_3": {
+     "calls": 2,
+     "tokens": 7139,
+     "cached": 5760,
+     "usd": 0.001136,
+     "stopped": null
+    },
+    "red_team_1": {
+     "calls": 1,
+     "tokens": 5303,
+     "cached": 512,
+     "usd": 0.000841
+    },
+    "red_team_2": {
+     "calls": 1,
+     "tokens": 5181,
+     "cached": 4096,
+     "usd": 0.000806
+    },
+    "red_team_3": {
+     "calls": 1,
+     "tokens": 5189,
+     "cached": 4224,
+     "usd": 0.000808
+    }
+   }
+  },
+  {
+   "ticker": "PFE",
+   "rating": "Sell",
+   "confidence": 0.67,
+   "sizing": {
+    "weight": 0.0,
+    "base": 0.0,
+    "vol": 0.22982363214148172,
+    "scale": null,
+    "confidence": 0.67
+   },
+   "valuation": {
+    "ticker": "PFE",
+    "as_of": "2026-10-01",
+    "price": 28.520000457763672,
+    "price_date": "2026-09-30",
+    "sic": "2834",
+    "inputs": {
+     "revenue": {
+      "value": 63696000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "Revenues"
+     },
+     "revenue_year_ago": {
+      "value": 63832000000,
+      "end": "2025-06-29",
+      "method": "FY to 2024-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "Revenues"
+     },
+     "ebit": {
+      "value": 13818000000.0,
+      "end": "2026-06-28",
+      "concept": "pre-tax income - NonoperatingIncomeExpense (no OperatingIncomeLoss)"
+     },
+     "pretax": {
+      "value": 4209000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+     },
+     "tax": {
+      "value": -164000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "IncomeTaxExpenseBenefit"
+     },
+     "interest": {
+      "value": 2699000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "InterestExpense"
+     },
+     "sbc": {
+      "value": 947000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "ShareBasedCompensation"
+     },
+     "net_income": {
+      "value": 4334000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "NetIncomeLoss"
+     },
+     "operating_cash_flow": {
+      "value": 13401000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "NetCashProvidedByUsedInOperatingActivities"
+     },
+     "capex": {
+      "value": 2416000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "PaymentsToAcquirePropertyPlantAndEquipment"
+     },
+     "cash": {
+      "end": "2026-06-28",
+      "val": 976000000,
+      "accn": "0000078003-26-000095",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-04",
+      "frame": "CY2026Q2I",
+      "concept": "CashAndCashEquivalentsAtCarryingValue"
+     },
+     "securities": {
+      "end": "2026-06-28",
+      "val": 7281000000,
+      "accn": "0000078003-26-000095",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-04",
+      "frame": "CY2026Q2I",
+      "concept": "AvailableForSaleSecuritiesDebtSecuritiesCurrent"
+     },
+     "debt": {
+      "val": 63100000000,
+      "end": "2026-06-28",
+      "concept": "LongTermDebtNoncurrent + LongTermDebtCurrent"
+     },
+     "leases": {
+      "val": 2621000000,
+      "end": "2025-12-31",
+      "concept": "OperatingLeaseLiabilityNoncurrent + OperatingLeaseLiabilityCurrent"
+     },
+     "minority": {
+      "end": "2026-06-28",
+      "val": 302000000,
+      "accn": "0000078003-26-000095",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-04",
+      "frame": "CY2026Q2I",
+      "concept": "MinorityInterest"
+     },
+     "equity": {
+      "end": "2026-06-28",
+      "val": 85190000000,
+      "accn": "0000078003-26-000095",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-04",
+      "frame": "CY2026Q2I",
+      "concept": "StockholdersEquity"
+     },
+     "preferred": {
+      "end": "2023-12-31",
+      "val": 0,
+      "accn": "0000078003-24-000039",
+      "fy": 2023,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2024-02-22",
+      "frame": "CY2023Q4I",
+      "concept": "PreferredStockValue"
+     },
+     "ni_common": {
+      "value": 4334000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "NetIncomeLossAvailableToCommonStockholdersBasic"
+     },
+     "shares": {
+      "end": "2026-07-29",
+      "val": 5699673589,
+      "accn": "0000078003-26-000095",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-04",
+      "frame": "CY2026Q2I",
+      "concept": "EntityCommonStockSharesOutstanding"
+     },
+     "goodwill": {
+      "end": "2026-06-28",
+      "val": 71419000000,
+      "accn": "0000078003-26-000095",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-04",
+      "frame": "CY2026Q2I",
+      "concept": "Goodwill"
+     },
+     "intangibles": {
+      "end": "2026-06-28",
+      "val": 47053000000,
+      "accn": "0000078003-26-000095",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-04",
+      "frame": "CY2026Q2I",
+      "concept": "IntangibleAssetsNetExcludingGoodwill"
+     },
+     "nonoperating": {
+      "value": -9609000000,
+      "end": "2026-06-28",
+      "method": "FY to 2025-12-31 + 6-month YTD - prior YTD",
+      "filed": "2026-08-04",
+      "concept": "OtherNonoperatingIncomeExpense"
+     },
+     "equity_with_nci": {
+      "end": "2026-06-28",
+      "val": 85492000000,
+      "accn": "0000078003-26-000095",
+      "fy": 2026,
+      "fp": "Q2",
+      "form": "10-Q",
+      "filed": "2026-08-04",
+      "frame": "CY2026Q2I",
+      "concept": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+     },
+     "roic_history": []
+    },
+    "fair_value": {
+     "bear": 10.15,
+     "base": 21.55,
+     "bull": 47.12
+    },
+    "note": null,
+    "model": "fcff",
+    "method": "FCFF DCF at company WACC: revenue growth for 5 years, fading to terminal over 5; reinvestment = change in revenue / sales-to-capital; SBC expensed; leases as debt; terminal ROIC keeps a share of today's excess return; bear/base/bull shift growth -/+4 points, margin -/+2 points, WACC +/-0.5 points, terminal excess 0/0.5/1",
+    "capital": {
+     "risk_free": 0.0475,
+     "risk_free_date": "2026-09-01 (rate in Damodaran's ERP computation)",
+     "beta": {
+      "industry": "Drugs (Pharmaceutical)",
+      "firms": 228,
+      "unlevered": 0.915,
+      "debt_to_equity": 0.404,
+      "used": 1.193,
+      "method": "bottom-up: industry unlevered beta (cash-corrected) relevered at market D/E",
+      "regression": 0.8,
+      "regression_raw": 0.318
+     },
+     "erp": 0.0414,
+     "cost_of_equity": 0.0969,
+     "rating": {
+      "coverage": 5.12,
+      "rating": "A",
+      "spread": 0.0078
+     },
+     "cost_of_debt_pre_tax": 0.0553,
+     "tax_shield_rate": 0.25,
+     "weight_equity": 0.7121,
+     "debt_incl_leases": 65721000000.0,
+     "wacc": 0.0809,
+     "mature_wacc": 0.0752
+    },
+    "wacc": 0.0809,
+    "revenue_growth": -0.0021,
+    "growth_used": -0.0021,
+    "implied_growth": 0.0376,
+    "operating_margin": 0.2169,
+    "roic": 0.0969,
+    "sales_to_capital": 2.634,
+    "effective_tax": 0.0,
+    "terminal_growth": 0.0475,
+    "terminal_roic": 0.086,
+    "terminal_share": 0.535,
+    "ev_to_ebit": 13.1,
+    "market_ev_to_ebit": 15.9,
+    "shares_outstanding": 5699673589,
+    "shares_source": "XBRL EntityCommonStockSharesOutstanding at 2026-07-29",
+    "net_debt": 57464000000.0,
+    "data_notes": [
+     "EBIT built as pre-tax income - NonoperatingIncomeExpense (no OperatingIncomeLoss)"
+    ],
+    "moat": "only 0 years of ROIC history: narrow by default",
+    "terminal_excess_return": 0.5,
+    "roic_history": [],
+    "cash_conversion": 0.97,
+    "sbc_to_revenue": 0.0149,
+    "sensitivity": {
+     "grid": {
+      "wacc -1.0%": {
+       "g -0.5%": 22.02,
+       "g +0.0%": 23.12,
+       "g +0.5%": 24.6
+      },
+      "wacc +0.0%": {
+       "g -0.5%": 20.51,
+       "g +0.0%": 21.55,
+       "g +0.5%": 22.94
+      },
+      "wacc +1.0%": {
+       "g -0.5%": 19.1,
+       "g +0.0%": 20.07,
+       "g +0.5%": 21.39
+      }
+     },
+     "swings": {
+      "growth": [
+       -5.64,
+       7.02
+      ],
+      "margin": [
+       -4.32,
+       4.42
+      ],
+      "wacc": [
+       -0.75,
+       0.77
+      ],
+      "terminal_excess_return": [
+       -3.01,
+       2.33
+      ]
+     }
+    },
+    "valuation_period": "trailing twelve months to 2026-06-28 (revenue growth: twelve months to 2026-06-28 vs to 2025-06-29), from 10-K and 10-Q XBRL; the readers' evidence comes from the latest 10-K only"
+   },
+   "repeats": [
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Underweight",
+      "why": [
+       "price / base fair value 1.32 at High uncertainty (volatility 23%, range 1.72x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": -0.2444,
+      "uncertainty": "High",
+      "price_to_fair": 1.323
+     },
+     "red_team": {
+      "objections": [
+       {
+        "type": "data_conflict",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "The desk's growth_used of -0.21% comes from a 10-K figure that is distorted by two COVID products. PERF-3 shows revenue rose 6% operationally ex-Comirnaty/Paxlovid, and PERF-7 shows Biopharma earnings of $29.3bn on $61.2bn revenue (~48% margin) versus the 21.7% operating_margin used. The base case is built on a declining, low-margin business that the evidence does not describe.",
+        "cites": [
+         "PERF-3",
+         "PERF-7",
+         "PERF-2",
+         "growth_used",
+         "operating_margin"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too low",
+        "severity": "high",
+        "argument": "The DCF charges the full Metsera acquisition ($8.0bn consideration, CAP-7; $6.9bn cash, CAP-8) as reinvestment while capital_for_reinvestment excludes acquired intangibles from the sales-to-capital denominator. Growth bought with M&A is therefore penalised twice: cash out, no revenue credit. That mechanically depresses fair_value and inflates price/base.",
+        "cites": [
+         "CAP-7",
+         "CAP-8",
+         "capital_for_reinvestment",
+         "fair_value"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "terminal_growth is set to the risk-free rate (4.75%) while implied_growth is 3.76% and growth_used is -0.21%. A terminal growth above the near-term growth path, plus terminal_share of 53.5%, means most of the value sits in a perpetuity growing faster than the explicit forecast \u2014 an internally inconsistent, value-inflating construction that argues the rating is too low, not too high.",
+        "cites": [
+         "terminal_growth",
+         "implied_growth",
+         "growth_used",
+         "terminal_share"
+        ],
+        "supported": true,
+        "cites_evidence": false
+       },
+       {
+        "type": "business",
+        "direction": "rating too high",
+        "severity": "medium",
+        "argument": "The rating ignores capital returns and balance-sheet capacity. CAP-3 shows $3.3bn of buyback authorisation unused, CAP-4 a $0.43 quarterly dividend, and CAP-1 $12.5bn short-term investments against CAP-2 $62bn long-term debt. A 1.32x price/base with a 23% volatility and a 1.72x range is not a high-conviction Underweight given this cash generation (PERF-5: $11.7bn OCF).",
+        "cites": [
+         "CAP-3",
+         "CAP-4",
+         "CAP-1",
+         "PERF-5"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       }
+      ]
+     },
+     "final": {
+      "rating": "Sell",
+      "why": [
+       "price / base fair value 1.32 at High uncertainty (volatility 23%, range 1.72x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55",
+       "red team (rating too high, data_conflict): The desk's growth_used of -0.21% comes from a 10-K figure that is distorted by two COVID products. PERF-3 shows revenue rose 6% operationall"
+      ],
+      "upside_to_base": -0.2444,
+      "uncertainty": "High",
+      "price_to_fair": 1.323
+     }
+    },
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Underweight",
+      "why": [
+       "price / base fair value 1.32 at High uncertainty (volatility 23%, range 1.72x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": -0.2444,
+      "uncertainty": "High",
+      "price_to_fair": 1.323
+     },
+     "red_team": {
+      "objections": [
+       {
+        "type": "data_conflict",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "The desk's growth_used of -0.21% comes from a 2% headline decline (PERF-2) that is distorted by Comirnaty/Paxlovid. Excluding those, revenue grew 6% operationally (PERF-3). Using the ex-COVID trend would raise the starting growth and lift base fair value well above 21.55, undercutting Underweight.",
+        "cites": [
+         "PERF-2",
+         "PERF-3",
+         "growth_used",
+         "fair_value"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "Terminal growth is capped at the risk-free rate (4.75%) while the terminal ROIC of 8.6% still exceeds WACC, so the model grants a perpetual excess return. With terminal_share at 0.535, small changes in the fade or the 0.5 excess-return share swing base value materially; the rating is sensitive to an unverified assumption.",
+        "cites": [
+         "terminal_growth",
+         "terminal_roic",
+         "terminal_share",
+         "terminal_excess_return"
+        ],
+        "supported": true,
+        "cites_evidence": false
+       },
+       {
+        "type": "business",
+        "direction": "rating too high",
+        "severity": "medium",
+        "argument": "The model treats the 2025 revenue decline as the trend, but the 10-K shows Biopharma segment earnings of $29.3bn on $61.2bn revenue (PERF-6, PERF-7) and 41% of sales outside the U.S. (PERF-10). A 21.7% operating margin on a business with that earnings base may understate normalized profitability, arguing the rating is too low.",
+        "cites": [
+         "PERF-6",
+         "PERF-7",
+         "PERF-10",
+         "operating_margin"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "data_conflict",
+        "direction": "rating too high",
+        "severity": "medium",
+        "argument": "The desk's effective_tax of 0.0 is inconsistent with the 10-K: pre-tax earnings of $7,520m (PERF-8) against net income of $7,812m (PERF-4) implies a negative effective rate, and the model's 25% marginal tax assumption is not reflected. A zero tax rate inflates NOPAT and fair value, so the Underweight may be too harsh.",
+        "cites": [
+         "PERF-8",
+         "PERF-4",
+         "effective_tax",
+         "fair_value"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       }
+      ]
+     },
+     "final": {
+      "rating": "Sell",
+      "why": [
+       "price / base fair value 1.32 at High uncertainty (volatility 23%, range 1.72x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55",
+       "red team (rating too high, data_conflict): The desk's growth_used of -0.21% comes from a 2% headline decline (PERF-2) that is distorted by Comirnaty/Paxlovid. Excluding those, revenue"
+      ],
+      "upside_to_base": -0.2444,
+      "uncertainty": "High",
+      "price_to_fair": 1.323
+     }
+    },
+    {
+     "flags": {
+      "red": [],
+      "caution": []
+     },
+     "base": {
+      "rating": "Underweight",
+      "why": [
+       "price / base fair value 1.32 at High uncertainty (volatility 23%, range 1.72x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": -0.2444,
+      "uncertainty": "High",
+      "price_to_fair": 1.323
+     },
+     "red_team": {
+      "objections": [
+       {
+        "type": "data_conflict",
+        "direction": "rating too high",
+        "severity": "high",
+        "argument": "The desk's growth_used of -0.21% is contradicted by the 10-K's own ex-Comirnaty/Paxlovid growth of +6% (PERF-3). The base case therefore understates the ongoing franchise: the -2% headline (PERF-2) is a COVID-comparison artifact, not the run-rate. A 6% start materially lifts base fair value and pushes price/base below the Underweight line.",
+        "cites": [
+         "PERF-3",
+         "PERF-2",
+         "growth_used",
+         "revenue_growth"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too high",
+        "severity": "medium",
+        "argument": "growth_bounds clips the starting growth to the last twelve months' single noisy observation, and the -0.05 floor plus 5-year hold means a one-off COVID revenue collapse is projected forward for five years. Using a normalized multi-year growth rate (or the 6% ex-COVID figure) would raise base fair value and lower price/base.",
+        "cites": [
+         "growth_bounds",
+         "high_growth_years",
+         "PERF-3"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "business",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "The rating ignores capital returns and balance-sheet strength: $3.3bn buyback authorization (CAP-3), a $0.43 quarterly dividend (CAP-4), $12.5bn short-term investments (CAP-1) and 97% cash conversion (cash_conversion). These support value not captured by a growth-only DCF narrative, arguing the Underweight is too harsh.",
+        "cites": [
+         "CAP-3",
+         "CAP-4",
+         "CAP-1",
+         "cash_conversion"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       },
+       {
+        "type": "method",
+        "direction": "rating too low",
+        "severity": "medium",
+        "argument": "terminal_excess_return of 0.5 and terminal_roic 8.6% vs wacc 8.09% assume the excess return nearly vanishes, yet the 10-K shows Biopharma segment earnings of $29.3bn on $61.2bn revenue (PERF-6, PERF-7) \u2014 a durable high-margin franchise. A higher terminal excess (bull case 1.0) would lift base fair value and make the Underweight too low.",
+        "cites": [
+         "terminal_excess_return",
+         "terminal_roic",
+         "PERF-6",
+         "PERF-7"
+        ],
+        "supported": true,
+        "cites_evidence": true
+       }
+      ]
+     },
+     "final": {
+      "rating": "Underweight",
+      "why": [
+       "price / base fair value 1.32 at High uncertainty (volatility 23%, range 1.72x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55"
+      ],
+      "upside_to_base": -0.2444,
+      "uncertainty": "High",
+      "price_to_fair": 1.323
+     }
+    }
+   ],
+   "evidence": {
+    "performance": [
+     {
+      "topic": "revenue",
+      "statement": "Total revenues were $62.6 billion in 2025.",
+      "value": 62.6,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P163",
+      "quote": "Total revenues decreased $1.0 billion, or 2%, to $62.6 billion in 2025 from $63.6 billion in 2024",
+      "check": {
+       "status": "verified",
+       "passage_id": "P163",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Total revenues decreased $1.0 billion, or 2%, in 2025 versus 2024.",
+      "value": -2,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P163",
+      "quote": "Total revenues decreased $1.0 billion, or 2%, to $62.6 billion in 2025 from $63.6 billion in 2024",
+      "check": {
+       "status": "verified",
+       "passage_id": "P163",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Excluding Comirnaty and Paxlovid, total revenues increased 6% operationally.",
+      "value": 6,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P163",
+      "quote": "Excluding contributions from Comirnaty and Paxlovid, Total revenues increased 6% operationally.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P163",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income before allocation to noncontrolling interests was $7,812 million in 2025.",
+      "value": 7812,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P239",
+      "quote": "Net income before allocation to noncontrolling interests $ 7,812 $ 8,062 $ 2,158",
+      "check": {
+       "status": "verified",
+       "passage_id": "P239",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities was $11,704 million in 2025.",
+      "value": 11704,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P240",
+      "quote": "Net cash provided by/(used in) operating activities 11,704 12,744 8,700",
+      "check": {
+       "status": "verified",
+       "passage_id": "P240",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Biopharma reportable segment total revenues were $61,199 million in 2025.",
+      "value": 61199,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P390",
+      "quote": "Biopharma (c) $ 61,199 $ 62,400 $ 58,237",
+      "check": {
+       "status": "verified",
+       "passage_id": "P390",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Biopharma segment earnings were $29,342 million in 2025.",
+      "value": 29342,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P390",
+      "quote": "Biopharma (c) $ 61,199 $ 62,400 $ 58,237 $ 29,342 $ 27,969 $ 15,767",
+      "check": {
+       "status": "verified",
+       "passage_id": "P390",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Total earnings (income from continuing operations before taxes) were $7,520 million in 2025.",
+      "value": 7520,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P390",
+      "quote": "$ 62,579 $ 63,627 $ 59,553 $ 7,520 $ 8,023 $ 1,058",
+      "check": {
+       "status": "verified",
+       "passage_id": "P390",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Other business activities revenues were $1,380 million in 2025.",
+      "value": 1380,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P390",
+      "quote": "Other business activities (d) 1,380 1,228 1,316",
+      "check": {
+       "status": "verified",
+       "passage_id": "P390",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "Revenues from operations outside the U.S. were $25.5 billion, or 41% of total revenues, in 2025.",
+      "value": 25.5,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P041",
+      "quote": "Revenues from operations outside the U.S. of $25.5 billion, $24.9 billion and $31.4 billion accounted for 41%, 39% and 53% of Total revenues in 2025, 2024 and 2023",
+      "check": {
+       "status": "verified",
+       "passage_id": "P041",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "capital": [
+     {
+      "topic": "cash",
+      "statement": "Total short-term investments were $12,454 million as of December 31, 2025.",
+      "value": 12454,
+      "unit": "USD millions",
+      "period": "as of December 31, 2025",
+      "passage_id": "P315",
+      "quote": "Total Short-term investments $ 12,454 $ 19,434",
+      "check": {
+       "status": "verified",
+       "passage_id": "P315",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "debt",
+      "statement": "Carrying value of long-term debt, excluding the current portion, was $62 billion as of December 31, 2025.",
+      "value": 62,
+      "unit": "USD billions",
+      "period": "as of December 31, 2025",
+      "passage_id": "P315",
+      "quote": "The carrying value of Long-term debt, excluding the current portion, was $ 62 billion as of December 31, 2025",
+      "check": {
+       "status": "verified",
+       "passage_id": "P315",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "buyback",
+      "statement": "Remaining share-purchase authorization was $3.3 billion as of December 31, 2025, with no repurchases in 2025.",
+      "value": 3.3,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P222",
+      "quote": "As of December 31, 2025, our remaining share-purchase authorization was $3.3 billion with no repurchases in 2025.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P222",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "Pfizer's board declared a first-quarter dividend of $0.43 per share on December 12, 2025, payable March 6, 2026.",
+      "value": 0.43,
+      "unit": "USD per share",
+      "period": "first-quarter 2026",
+      "passage_id": "P222",
+      "quote": "On December 12, 2025, our BOD declared a first-quarter dividend of $0.43 per share, payable on March 6, 2026",
+      "check": {
+       "status": "verified",
+       "passage_id": "P222",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "dividend",
+      "statement": "Cash dividends declared on common stock were $9,577 million in 2024 at $1.69 per share.",
+      "value": 9577,
+      "unit": "USD millions",
+      "period": "fiscal 2024",
+      "passage_id": "P238",
+      "quote": "Cash dividends declared, per share: $ 1.69 Common stock ( 9,577 ) ( 9,577 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P238",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "capex",
+      "statement": "Purchases of property, plant and equipment were $2,629 million in the most recent year.",
+      "value": 2629,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P240",
+      "quote": "Purchases of property, plant and equipment ( 2,629 ) ( 2,909 ) ( 3,907 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P240",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "acquisition",
+      "statement": "Pfizer acquired Metsera on November 13, 2025 for $65.60 per share in cash plus a CVR of up to $20.65 per share; total fair value of consideration transferred was $8.0 billion ($7.8 billion net of cash acquired).",
+      "value": 8.0,
+      "unit": "USD billions",
+      "period": "fiscal 2025",
+      "passage_id": "P269",
+      "quote": "The total fair value of the consideration transferred was $ 8.0 billion ($ 7.8 billion net of cash acquired)",
+      "check": {
+       "status": "verified",
+       "passage_id": "P269",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "acquisition",
+      "statement": "Cash used for acquisitions of businesses, net of cash acquired, was $6,927 million in the most recent year.",
+      "value": 6927,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P240",
+      "quote": "Acquisitions of businesses, net of cash acquired ( 6,927 ) \u2014 ( 43,430 )",
+      "check": {
+       "status": "verified",
+       "passage_id": "P240",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "risks": [
+     {
+      "passage_id": "R000",
+      "period": null,
+      "quote": "Our future results could be adversely affected by changes in laws, regulations or policies, or their interpretation, including, among others, new or changes in accounting standards, tariffs, tax laws and regulations internationally and in the U.S.",
+      "statement": "Pfizer's future results could be adversely affected by changes in laws, regulations or policies or their interpretation, including new or changes in accounting standards, tariffs, tax laws and regulations internationally and in the U.S.",
+      "topic": "regulation",
+      "unit": null,
+      "value": null,
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "R000",
+      "period": null,
+      "quote": "including, without limitation, the IRA, and the OBBBA, which is still subject to further guidance",
+      "statement": "The OBBBA is cited as a law whose changes could affect Pfizer and is still subject to further guidance.",
+      "topic": "regulation",
+      "unit": null,
+      "value": null,
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "R000",
+      "period": "since January 1, 2024",
+      "quote": "the adoption of global minimum taxation requirements outside the U.S. generally effective in most jurisdictions since January 1, 2024",
+      "statement": "Global minimum taxation requirements outside the U.S. have generally been effective in most jurisdictions since January 1, 2024.",
+      "topic": "regulation",
+      "unit": null,
+      "value": null,
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "R000",
+      "period": null,
+      "quote": "government cost-cutting measures and related impacts on, among other matters, government staffing, resources and ability to timely review and process regulatory or other submissions",
+      "statement": "Government cost-cutting measures and related impacts on government staffing, resources and ability to timely review and process regulatory or other submissions could affect Pfizer.",
+      "topic": "regulation",
+      "unit": null,
+      "value": null,
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "R000",
+      "period": null,
+      "quote": "restrictions related to certain data transfers, including data security, data localization and cross border data transfer regulations, and transactions involving certain countries",
+      "statement": "Restrictions related to certain data transfers, including data security, data localization and cross border data transfer regulations, and transactions involving certain countries, are cited as risks.",
+      "topic": "regulation",
+      "unit": null,
+      "value": null,
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "passage_id": "R001",
+      "period": null,
+      "quote": "Data Act, and the EU Health Data Space Regulation, among others.",
+      "statement": "The EU Data Act and the EU Health Data Space Regulation are among the legislative initiatives cited as potentially affecting Pfizer's business.",
+      "topic": "regulation",
+      "unit": null,
+      "value": null,
+      "check": {
+       "status": "verified",
+       "passage_id": "R001",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "accounting": [
+     [
+      {
+       "topic": "net_income",
+       "statement": "Net income before allocation to noncontrolling interests was USD 7,812 million in 2025.",
+       "value": 7812,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P239",
+       "quote": "Net income before allocation to noncontrolling interests $ 7,812 $ 8,062 $ 2,158",
+       "check": {
+        "status": "verified",
+        "passage_id": "P239",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Net cash provided by operating activities was USD 11,704 million in 2025.",
+       "value": 11704,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P240",
+       "quote": "Net cash provided by/(used in) operating activities 11,704 12,744 8,700",
+       "check": {
+        "status": "verified",
+        "passage_id": "P240",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "audit_opinion",
+       "statement": "KPMG expressed an unqualified opinion on the consolidated financial statements, dated February 26, 2026.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P405",
+       "quote": "our report dated February 26, 2026 expressed an unqualified opinion on those consolidated financial statements",
+       "check": {
+        "status": "verified",
+        "passage_id": "P405",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "A critical audit matter involved the liability for unrecognized tax positions, including interpretation of tax law and estimation of gross unrecognized tax benefits.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P232",
+       "quote": "We evaluated the design and tested the operating effectiveness of an internal control over the Company\u2019s liability for unrecognized tax position process",
+       "check": {
+        "status": "verified",
+        "passage_id": "P232",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "A critical audit matter involved evaluation of product liability and other product-related litigation.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P232",
+       "quote": "Evaluation of product liability and other product-related litigation",
+       "check": {
+        "status": "verified",
+        "passage_id": "P232",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "The auditor concluded the Company maintained effective internal control over financial reporting as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P404",
+       "quote": "In our opinion, the Company maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P404",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "Management believes the Company maintained effective internal control over financial reporting as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P409",
+       "quote": "management believes that the Company maintained effective internal control over financial reporting as of December 31, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P409",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "There was no change in the Company's internal control over financial reporting in the most recent fiscal quarter that materially affected or is reasonably likely to materially affect it.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P404",
+       "quote": "there has not been any change in the Company\u2019s internal control over financial reporting",
+       "check": {
+        "status": "verified",
+        "passage_id": "P404",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      }
+     ],
+     [
+      {
+       "topic": "net_income",
+       "statement": "Net income before allocation to noncontrolling interests was USD 7,812 million for 2025.",
+       "value": 7812,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P239",
+       "quote": "Net income before allocation to noncontrolling interests $ 7,812 $ 8,062 $ 2,158",
+       "check": {
+        "status": "verified",
+        "passage_id": "P239",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Net cash provided by operating activities was USD 11,704 million for 2025.",
+       "value": 11704,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P240",
+       "quote": "Net cash provided by/(used in) operating activities 11,704 12,744 8,700",
+       "check": {
+        "status": "verified",
+        "passage_id": "P240",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "audit_opinion",
+       "statement": "KPMG expressed an unqualified opinion on the consolidated financial statements, dated February 26, 2026.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P405",
+       "quote": "our report dated February 26, 2026 expressed an unqualified opinion on those consolidated financial statements",
+       "check": {
+        "status": "verified",
+        "passage_id": "P405",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "A critical audit matter involved the liability for unrecognized tax positions, including interpretation of tax law and estimation of gross unrecognized tax benefits.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P232",
+       "quote": "We evaluated the design and tested the operating effectiveness of an internal control over the Company\u2019s liability for unrecognized tax position process related to (1) interpretation of tax law",
+       "check": {
+        "status": "verified",
+        "passage_id": "P232",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "A critical audit matter was the evaluation of product liability and other product-related litigation.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P232",
+       "quote": "Evaluation of product liability and other product-related litigation As discussed in Notes 1S and 16 to the consolidated financial statements, the Company is involved in product liability and other product-related litigation",
+       "check": {
+        "status": "verified",
+        "passage_id": "P232",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "KPMG opined that the Company maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "as of December 31, 2025",
+       "passage_id": "P404",
+       "quote": "In our opinion, the Company maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P404",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "Management believes the Company maintained effective internal control over financial reporting as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "as of December 31, 2025",
+       "passage_id": "P409",
+       "quote": "management believes that the Company maintained effective internal control over financial reporting as of December 31, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P409",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "There was no change in the Company's internal control over financial reporting during the most recent fiscal quarter that materially affected, or is reasonably likely to materially affect, it.",
+       "value": null,
+       "unit": null,
+       "period": "quarter ended December 31, 2025",
+       "passage_id": "P404",
+       "quote": "there has not been any change in the Company\u2019s internal control over financial reporting (as such term is defined in Rules 13a-15(f) and 15d-15(f) under the Exchange Act) that has materially affected, or is reasonably likely to materially affect, the Company\u2019s internal control over financial reporting",
+       "check": {
+        "status": "verified",
+        "passage_id": "P404",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      }
+     ],
+     [
+      {
+       "topic": "net_income",
+       "statement": "Net income before allocation to noncontrolling interests was USD 7,812 million in 2025.",
+       "value": 7812,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P239",
+       "quote": "Net income before allocation to noncontrolling interests $ 7,812 $ 8,062 $ 2,158",
+       "check": {
+        "status": "verified",
+        "passage_id": "P239",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "cash_flow",
+       "statement": "Net cash provided by operating activities was USD 11,704 million in 2025.",
+       "value": 11704,
+       "unit": "USD millions",
+       "period": "fiscal 2025",
+       "passage_id": "P240",
+       "quote": "Net cash provided by/(used in) operating activities 11,704 12,744 8,700",
+       "check": {
+        "status": "verified",
+        "passage_id": "P240",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "audit_opinion",
+       "statement": "KPMG expressed an unqualified opinion on the consolidated financial statements, dated February 26, 2026.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P405",
+       "quote": "our report dated February 26, 2026 expressed an unqualified opinion on those consolidated financial statements",
+       "check": {
+        "status": "verified",
+        "passage_id": "P405",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "The auditor concluded the Company maintained effective internal control over financial reporting as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "as of December 31, 2025",
+       "passage_id": "P404",
+       "quote": "In our opinion, the Company maintained, in all material respects, effective internal control over financial reporting as of December 31, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P404",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "Management believes the Company maintained effective internal control over financial reporting as of December 31, 2025.",
+       "value": null,
+       "unit": null,
+       "period": "as of December 31, 2025",
+       "passage_id": "P409",
+       "quote": "management believes that the Company maintained effective internal control over financial reporting as of December 31, 2025",
+       "check": {
+        "status": "verified",
+        "passage_id": "P409",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "A critical audit matter involved the liability for unrecognized tax positions, including interpretation of tax law and estimation of gross unrecognized tax benefits.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P232",
+       "quote": "We evaluated the design and tested the operating effectiveness of an internal control over the Company\u2019s liability for unrecognized tax position process",
+       "check": {
+        "status": "verified",
+        "passage_id": "P232",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "critical_audit_matter",
+       "statement": "A critical audit matter was the evaluation of product liability and other product-related litigation.",
+       "value": null,
+       "unit": null,
+       "period": "fiscal 2025",
+       "passage_id": "P232",
+       "quote": "Evaluation of product liability and other product-related litigation",
+       "check": {
+        "status": "verified",
+        "passage_id": "P232",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      },
+      {
+       "topic": "internal_control",
+       "statement": "No change in internal control over financial reporting occurred in the most recent fiscal quarter that materially affected or is reasonably likely to materially affect it.",
+       "value": null,
+       "unit": null,
+       "period": "quarter ended December 31, 2025",
+       "passage_id": "P404",
+       "quote": "there has not been any change in the Company\u2019s internal control over financial reporting",
+       "check": {
+        "status": "verified",
+        "passage_id": "P404",
+        "quote_verbatim": true,
+        "value_in_quote": true,
+        "value_in_passage": true
+       }
+      }
+     ]
+    ]
+   },
+   "costs": {
+    "performance": {
+     "calls": 2,
+     "tokens": 7302,
+     "cached": 5888,
+     "usd": 0.001176,
+     "stopped": null
+    },
+    "capital": {
+     "calls": 2,
+     "tokens": 7218,
+     "cached": 5888,
+     "usd": 0.00115,
+     "stopped": null
+    },
+    "risks": {
+     "calls": 3,
+     "tokens": 5778,
+     "cached": 2816,
+     "usd": 0.001003,
+     "stopped": null
+    },
+    "accounting_1": {
+     "calls": 2,
+     "tokens": 6917,
+     "cached": 5632,
+     "usd": 0.001092,
+     "stopped": null
+    },
+    "accounting_2": {
+     "calls": 2,
+     "tokens": 7026,
+     "cached": 1536,
+     "usd": 0.001123,
+     "stopped": null
+    },
+    "accounting_3": {
+     "calls": 2,
+     "tokens": 6926,
+     "cached": 5632,
+     "usd": 0.001095,
+     "stopped": null
+    },
+    "red_team_1": {
+     "calls": 1,
+     "tokens": 5147,
+     "cached": 512,
+     "usd": 0.00081
+    },
+    "red_team_2": {
+     "calls": 1,
+     "tokens": 5110,
+     "cached": 4096,
+     "usd": 0.000799
+    },
+    "red_team_3": {
+     "calls": 1,
+     "tokens": 5094,
+     "cached": 4096,
+     "usd": 0.000796
+    }
+   }
+  }
+ ]
+}

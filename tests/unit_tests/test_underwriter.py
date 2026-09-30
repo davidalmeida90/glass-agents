@@ -260,3 +260,28 @@ def test_high_growth_decays_by_year_five():
     assert abs(growth[0] - 0.30) < 1e-9 and abs(growth[4] - 0.10) < 1e-9 and abs(growth[-1] - 0.03) < 1e-9
     slow = value_per_share(_inputs(growth=0.06, terminal_growth=0.03, year5_growth_cap=0.10))
     assert all(abs(r["growth"] - 0.06) < 1e-9 for r in slow["forecast"][:5])  # plateau below the cap
+
+
+def test_period_mismatch_is_not_a_data_conflict():
+    from underwriter.redteam import counts
+
+    base = {"type": "data_conflict", "severity": "high", "supported": True, "cites_evidence": True}
+    assert not counts(dict(base, cites=["growth_used", "PERF-2"]))            # TTM growth vs a 10-K figure
+    assert counts(dict(base, cites=["net_debt", "CAP-1"]))                    # a real figure against evidence
+
+
+def test_verifier_survives_a_date_in_the_value_field():
+    out = verify([{"value": "2024-01-01", "passage_id": "P001", "quote": "Revenue was $281.7 billion"}], PASSAGES.get)
+    assert out["claims"][0]["check"]["status"] == "verified"
+
+
+
+def test_red_team_corrections_take_the_median_of_counting_objections():
+    from underwriter.redteam import corrections
+
+    ok = {"type": "business", "severity": "high", "supported": True, "cites_evidence": True, "cites": ["PERF-3"]}
+    result = {"objections": [dict(ok, correction={"field": "growth", "value": 0.06}),
+                             dict(ok, correction={"field": "growth", "value": 0.08}),
+                             dict(ok, correction={"field": "growth", "value": 0.10}),
+                             dict(ok, severity="medium", correction={"field": "operating_margin", "value": 0.5})]}
+    assert corrections(result) == {"growth": 0.08}

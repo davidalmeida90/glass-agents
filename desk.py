@@ -79,9 +79,12 @@ async def main() -> int:
     from underwriter.budget import BudgetExceeded, TokenLedger
     from underwriter.decision import RATINGS, adjust, decide, flags
     from underwriter.edgar import RISK_STATS, load_index
-    from underwriter.redteam import adjustment, counts, method_review, red_team
+    from dataclasses import replace
+    from underwriter import dcf
+    from underwriter.redteam import corrections, counts, method_review, red_team
     from underwriter.schemas import READERS
     from underwriter.sizing import annual_volatility, size
+    from underwriter.parameters import value as param
     from underwriter.valuation import value
     from underwriter.verifier import verify
 
@@ -148,17 +151,27 @@ async def main() -> int:
                        "metadata": {"purpose": "red_team"}}
                 try:
                     rt = await red_team(ticker, val, base, lines, ids, cfg)
-                    final = adjust(base, *adjustment(rt))
+                    fixes = corrections(rt)
+                    x = val.get("dcf_inputs")
+                    if fixes and x is not None:
+                        g_lo, g_hi = param("growth_bounds")  # corrections pass through the same bounds as every input
+                        margin = min(max(fixes.get("operating_margin", x.margin), 0.0), 0.8)
+                        y = replace(x, growth=min(max(fixes.get("growth", x.growth), g_lo), g_hi), ebit=x.revenue * margin)
+                        fv = {n: round(dcf.value_per_share(dcf.scenario(y, n))["per_share"], 2) for n in ("bear", "base", "bull")}
+                        revalued = decide(dict(val, fair_value=fv), fl, vol)
+                        step = max(min(RATINGS.index(revalued["rating"]) - RATINGS.index(base["rating"]), 1), -1)
+                        final = adjust(base, step, f"red team correction {fixes}: base value {fv['base']:,.2f}, "
+                                                   f"P/FV {val['price'] / fv['base']:.2f}" if step else None)
+                        rt["revalued"] = {"fixes": fixes, "fair_value": fv, "step": step}
                 except BudgetExceeded as e:
                     print(f"  red team stopped: {e}")
                 costs[f"red_team_{i + 1}"] = {k: ledger.summary()[k] for k in ("calls", "tokens", "cached", "usd")}
             repeats.append({"flags": fl, "base": base, "red_team": rt, "final": final})
 
         ratings = [r["final"]["rating"] for r in repeats]
-        top = max(Counter(ratings).values())
-        modal = min((r for r in set(ratings) if ratings.count(r) == top),
-                    key=lambda r: RATINGS.index(r) if r in RATINGS else -1)  # ties: the more cautious rating
-        confidence = round(top / len(ratings), 2)
+        ranked = sorted(ratings, key=lambda r: RATINGS.index(r) if r in RATINGS else -1)
+        modal = ranked[(len(ranked) - 1) // 2]  # the median rating (lower middle for an even count)
+        confidence = round(ratings.count(modal) / len(ratings), 2)
         sized = size(modal, confidence, vol)
         memos.append({"ticker": ticker, "rating": modal, "confidence": confidence, "sizing": sized, "valuation": val,
                       "repeats": repeats, "evidence": dict(once, accounting=accounting_runs), "costs": costs})

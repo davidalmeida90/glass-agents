@@ -481,6 +481,7 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
         high_growth_years=param("high_growth_years"),
         fade_years=param("fade_years"), mid_year=param("mid_year"), debt=debt, cash=cash,
         minority=_v(f, "minority"), shares=count)
+    out["dcf_inputs"] = x
     runs = {name: dcf.value_per_share(dcf.scenario(x, name)) for name in ("bear", "base", "bull")}
     fair = {name: round(r["per_share"], 2) for name, r in runs.items()}
     base = runs["base"]

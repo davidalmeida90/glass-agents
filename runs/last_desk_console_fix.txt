@@ -1,0 +1,119 @@
+  call  1 preflight        in    276 (cached   128)  out    32  $0.00005   0.9s  Ping                  | run    308 tok $0.0000 of $0.50
+  preflight: forced tool call accepted
+
+=== V
+  reader performance
+  call  1 call_agent_model in    904 (cached   768)  out   124  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,028 tok $0.0002 of $0.50
+  call  2 call_agent_model in  5,489 (cached   640)  out   918  $0.00103   3.1s  Info                  | run  7,435 tok $0.0012 of $0.50
+  reader capital
+  call  1 call_agent_model in    904 (cached   768)  out   111  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,015 tok $0.0002 of $0.50
+  call  2 call_agent_model in  5,414 (cached   640)  out   816  $0.00099   3.1s  Info                  | run  7,245 tok $0.0011 of $0.50
+  reader risks
+  call  1 call_agent_model in    939 (cached   768)  out   106  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,045 tok $0.0002 of $0.50
+  call  2 call_agent_model in  3,527 (cached   768)  out   714  $0.00069   2.7s  Info                  | run  5,286 tok $0.0009 of $0.50
+  reader accounting
+  call  1 call_agent_model in    950 (cached   768)  out   120  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,070 tok $0.0002 of $0.50
+  call  2 call_agent_model in  4,648 (cached 4,480)  out   892  $0.00090   3.2s  Info                  | run  6,610 tok $0.0011 of $0.50
+  reader accounting
+  call  1 call_agent_model in    950 (cached   768)  out   117  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,067 tok $0.0002 of $0.50
+  call  2 call_agent_model in  4,645 (cached 4,480)  out   854  $0.00089   2.9s  Info                  | run  6,566 tok $0.0011 of $0.50
+  reader accounting
+  call  1 call_agent_model in    950 (cached   768)  out   121  $0.00017   0.9s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,658 (cached 4,480)  out   802  $0.00088   3.1s  Info                  | run  6,531 tok $0.0010 of $0.49
+  call  1 red_team         in  4,530 (cached   384)  out   517  $0.00078   2.9s  Objections            | run  5,047 tok $0.0008 of $0.49
+  call  1 red_team         in  4,544 (cached   512)  out   606  $0.00081   3.3s  Objections            | run  5,150 tok $0.0008 of $0.49
+  call  1 red_team         in  4,520 (cached 4,096)  out   599  $0.00080   3.3s  Objections            | run  5,119 tok $0.0008 of $0.49
+
+  V: UNDERWEIGHT (agreement 33%: Underweight, Overweight, Hold)  target weight 0.0%  price 359.33  fair value 222.58 / 498.07 / 716.02
+    WACC 7.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.8 [Financial Svcs. (Non-bank & Insurance); regression 0.848], ERP 4.1%, Ke 8.1%, rating AAA at coverage 42.34, Kd 5.1%, E/V 96.4%)
+    growth +14.4% (used 14.4%), price implies +6.1%; margin 61.1%, ROIC 45.9%, sales/capital 5.0, SBC 2.1% of revenue; terminal 74.2% of EV; EV/EBIT at base 36.0x vs market 26.1x; volatility 22%
+    - price / base fair value 0.72 at Medium uncertainty (volatility 22%, range 0.99x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    - red flag caps the rating at Underweight
+    red team: 4 objections (method 2, data_conflict 1, business 1), 0 can move the rating (none)
+    model spend 54,989 tokens, $0.0087 | batch $0.0088 of $0.50
+
+=== META
+  reader performance
+  call  1 call_agent_model in    906 (cached   768)  out   109  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,015 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,115 (cached 4,864)  out   923  $0.00097   3.2s  Info                  | run  7,053 tok $0.0011 of $0.49
+  reader capital
+  call  1 call_agent_model in    906 (cached   768)  out   114  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,020 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,857 (cached   768)  out   995  $0.00096   3.3s  Info                  | run  6,872 tok $0.0011 of $0.49
+  reader risks
+  call  1 call_agent_model in    941 (cached   768)  out   103  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,044 tok $0.0002 of $0.49
+  call  2 call_agent_model in  2,561 (cached   768)  out   774  $0.00058   2.8s  Info                  | run  4,379 tok $0.0007 of $0.49
+  reader accounting
+  call  1 call_agent_model in    952 (cached   768)  out   107  $0.00016   0.9s  search_filing,search_filing,search_filing| run  1,059 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,212 (cached 4,992)  out   841  $0.00097   3.2s  Info                  | run  7,112 tok $0.0011 of $0.49
+  reader accounting
+  call  1 call_agent_model in    952 (cached   768)  out   118  $0.00017   0.9s  search_filing,search_filing,search_filing| run  1,070 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,661 (cached   768)  out   838  $0.00089   3.1s  Info                  | run  6,569 tok $0.0011 of $0.49
+  reader accounting
+  call  1 call_agent_model in    952 (cached   768)  out   107  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,059 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,212 (cached 4,992)  out   868  $0.00097   2.9s  Info                  | run  7,139 tok $0.0011 of $0.49
+  call  1 red_team         in  4,597 (cached   512)  out   706  $0.00084   4.1s  Objections            | run  5,303 tok $0.0008 of $0.48
+  call  1 red_team         in  4,603 (cached 4,096)  out   578  $0.00081   3.3s  Objections            | run  5,181 tok $0.0008 of $0.48
+  call  1 red_team         in  4,607 (cached 4,224)  out   582  $0.00081   3.3s  Objections            | run  5,189 tok $0.0008 of $0.48
+
+  META: OVERWEIGHT (agreement 67%: Buy, Overweight, Overweight)  target weight 1.2%  price 725.18  fair value 512.01 / 1,035.29 / 1,471.98
+    WACC 8.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.067 [Software (Entertainment); regression 1.124], ERP 4.1%, Ke 9.2%, rating AAA at coverage 45.34, Kd 5.1%, E/V 94.3%)
+    growth +27.7% (used 27.7%), price implies +9.5%; margin 38.1%, ROIC 23.9%, sales/capital 0.891, SBC 11.0% of revenue; terminal 78.1% of EV; EV/EBIT at base 30.8x vs market 21.7x; volatility 42%
+    - price / base fair value 0.70 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    - red team (rating too low, data_conflict): The desk's own growth_used (27.65%) exceeds the 10-K's 22% (PERF-2), yet the model still only reaches a 0.70 price/fair-value. If the 10-K's
+    red team: 4 objections (data_conflict 1, business 1, method 2), 2 can move the rating (rating too low, rating too low)
+    model spend 54,797 tokens, $0.0088 | batch $0.0175 of $0.50
+
+=== PFE
+  reader performance
+  call  1 call_agent_model in    905 (cached   768)  out   102  $0.00016   0.9s  search_filing,search_filing,search_filing| run  1,007 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,297 (cached 5,120)  out   998  $0.00102   3.2s  Info                  | run  7,302 tok $0.0012 of $0.48
+  reader capital
+  call  1 call_agent_model in    905 (cached   768)  out   111  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,016 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,320 (cached 5,120)  out   882  $0.00099   3.2s  Info                  | run  7,218 tok $0.0011 of $0.48
+  reader risks
+  call  1 call_agent_model in    940 (cached   768)  out   106  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,046 tok $0.0002 of $0.48
+  call  2 call_agent_model in  1,352 (cached   768)  out   680  $0.00038   2.6s  Info                  | run  3,078 tok $0.0005 of $0.48
+  call  3 call_agent_model in  2,098 (cached 1,280)  out   602  $0.00046   2.3s  Info                  | run  5,778 tok $0.0010 of $0.48
+  reader accounting
+  call  1 call_agent_model in    951 (cached   768)  out   126  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,077 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,081 (cached 4,864)  out   759  $0.00092   2.7s  Info                  | run  6,917 tok $0.0011 of $0.48
+  reader accounting
+  call  1 call_agent_model in    951 (cached   768)  out   125  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,076 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,080 (cached   768)  out   870  $0.00095   3.0s  Info                  | run  7,026 tok $0.0011 of $0.48
+  reader accounting
+  call  1 call_agent_model in    951 (cached   768)  out   126  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,077 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,081 (cached 4,864)  out   768  $0.00093   3.1s  Info                  | run  6,926 tok $0.0011 of $0.48
+  call  1 red_team         in  4,506 (cached   512)  out   641  $0.00081   3.9s  Objections            | run  5,147 tok $0.0008 of $0.48
+  call  1 red_team         in  4,516 (cached 4,096)  out   594  $0.00080   3.2s  Objections            | run  5,110 tok $0.0008 of $0.48
+  call  1 red_team         in  4,504 (cached 4,096)  out   590  $0.00080   3.3s  Objections            | run  5,094 tok $0.0008 of $0.47
+
+  PFE: SELL (agreement 67%: Sell, Sell, Underweight)  target weight 0.0%  price 28.52  fair value 10.15 / 21.55 / 47.12
+    WACC 8.1% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.193 [Drugs (Pharmaceutical); regression 0.8], ERP 4.1%, Ke 9.7%, rating A at coverage 5.12, Kd 5.5%, E/V 71.2%)
+    growth -0.2% (used -0.2%), price implies +3.8%; margin 21.7%, ROIC 9.7%, sales/capital 2.634, SBC 1.5% of revenue; terminal 53.5% of EV; EV/EBIT at base 13.1x vs market 15.9x; volatility 23%
+    - price / base fair value 1.32 at High uncertainty (volatility 23%, range 1.72x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    - red team (rating too high, data_conflict): The desk's growth_used of -0.21% comes from a 10-K figure that is distorted by two COVID products. PERF-3 shows revenue rose 6% operationall
+    red team: 4 objections (data_conflict 1, method 2, business 1), 1 can move the rating (rating too high)
+    model spend 56,518 tokens, $0.0090 | batch $0.0266 of $0.50
+
+method review (18 points raised by the red team; they never move a rating):
+  V: The desk's own base fair value of 498.07 sits only 1.39x the price, yet the bear case is 222.58 — a 0.62x downside. With volatility 22% and a range/ba
+  V: The rating is capped at Underweight by a red flag, but the cited risks (RISK-1 to RISK-6) are generic AI and regulatory disclosures present in every l
+  V: The terminal value assumes 74.2% of today's ROIC-WACC spread survives forever (terminal_share 0.742, terminal_excess_return 1.0), justified by a 5-yea
+  V: The WACC of 7.91% uses a bottom-up beta of 0.8 (clipped at the beta_bounds floor) and a mature_wacc that keeps the same debt weight. Visa's net debt i
+  V: The DCF capitalizes a 61% operating margin and 45.9% ROIC at a 7.91% WACC with terminal_share 0.742 and terminal_excess_return 1.0 — i.e. it assumes V
+  V: WACC 7.91% uses a bottom-up beta clipped to the 0.8 floor (beta_bounds) while the regression beta is 0.848 and unlevered 0.328; a lower beta would rai
+  META: terminal_share is 0.781 and terminal_excess_return is set to 1.0 (full moat), with terminal_roic held at today's 23.87% versus an 8.87% WACC. Nearly f
+  META: sbc_to_revenue is 11.01% and is expensed, but cash_conversion of 1.927 (OCF/NOPAT) is far above 1, meaning NOPAT understates cash generation — the mod
+  META: The DCF charges growth at a sales-to-capital of 0.891, but 2025 capex was $72.22bn (CAP-7) against $200.97bn revenue (PERF-1) — roughly $0.36 of capex
+  META: Terminal value assumes 78.1% of today's 15-point ROIC-WACC spread survives forever (terminal_share 0.781, terminal_excess_return 1.0), justified by a 
+  META: The DCF charges growth at a sales-to-capital of 0.891, but 2025 capex was $72.22bn (CAP-7) against $200.97bn revenue (PERF-1) — roughly 0.36 of revenu
+  META: Terminal value assumes 78.1% of today's 15-point ROIC-WACC spread survives forever (terminal_share 0.781, terminal_excess_return 1.0), yet the moat te
+
+batch: 3 companies in 118s, 47 model calls, 166,612 tokens (91,904 cached), $0.0266 of $0.50
+
+ticker rating      agree weight     price      bear      base      bull  upside  key figure
+V      Underweight   33%   0.0%    359.33    222.58    498.07    716.02    +39%  WACC 7.9%, growth 14.4% vs implied +6.1%
+META   Overweight    67%   1.2%    725.18    512.01  1,035.29  1,471.98    +43%  WACC 8.9%, growth 27.7% vs implied +9.5%
+PFE    Sell          67%   0.0%     28.52     10.15     21.55     47.12    -24%  WACC 8.1%, growth -0.2% vs implied +3.8%
+
+saved runs\memo-20261001-000518.json

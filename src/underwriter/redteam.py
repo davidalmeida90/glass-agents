@@ -1,7 +1,11 @@
 """Red team: one model call that argues against the desk's rating, using only the evidence the desk verified.
 
 Every objection has a type, a direction and citations: evidence IDs (e.g. CAP-2) or valuation figures by
-name. Code checks the citations. Criticism of the method itself (discount rate, growth cap, fade, how owner
+name, and may carry a numeric correction to one valuation input (starting growth or operating margin). Code
+checks the citations. A correction from a supported, high-severity business or data objection that cites a
+filing fact is applied by revaluing in code, and the new price / fair value sets the rating (one notch at
+most): the direction comes from the arithmetic, not from the model's label, which proved unreliable (Pfizer,
+2026-10-01: an argument that growth was understated labelled "rating too high"). Criticism of the method itself (discount rate, growth cap, fade, how owner
 earnings are defined) applies to every company alike, so it goes to a method review list and never moves a
 single rating. A data conflict or business objection moves the rating only when it is high severity, all
 its citations exist and at least one is a verified filing fact; the net direction of those decides, one
@@ -48,6 +52,12 @@ OBJECTIONS_TOOL = {
                         "argument": {"type": "string", "description": "At most 60 words."},
                         "cites": {"type": "array", "items": {"type": "string"},
                                   "description": "Evidence IDs such as PERF-1, or valuation figure names such as implied_growth."},
+                        "correction": {"type": ["object", "null"],
+                                       "description": "Optional: the value one input should take instead, as a decimal "
+                                                      "(0.06 for 6%), when the cited evidence supports a specific number.",
+                                       "properties": {"field": {"type": "string", "enum": ["growth", "operating_margin"]},
+                                                      "value": {"type": "number"}},
+                                       "required": ["field", "value"]},
                     },
                     "required": ["type", "direction", "severity", "argument", "cites"],
                 },
@@ -62,8 +72,10 @@ PROMPT = """You are the red team on an equity research desk. Argue against the d
 Rules:
 - Use only the evidence lines and valuation figures given here. Cite evidence by its ID (for example CAP-2) and valuation figures by their name (for example implied_growth).
 - Give each objection its own direction. Look for reasons the rating is too low as hard as for reasons it is too high.
+- The valuation uses trailing twelve months from the latest 10-K and 10-Q filings (see valuation_period); the evidence comes from the latest 10-K's fiscal year. A difference between the two periods (for example growth_used vs a 10-K growth figure) is expected and is not a data_conflict.
 - Criticism of the valuation method or its fixed assumptions (discount rate, growth cap, the fade, how owner earnings are defined) is type "method": it applies to every company alike and goes to the desk's method review.
 - Severity "high" only when the objection alone should change the rating and the cited evidence supports it. Otherwise "medium" or "low".
+- When the evidence supports a specific different number for starting revenue growth or operating margin, put it in "correction" as a decimal. The desk revalues with it; the direction label is informational.
 - No outside knowledge, no news, no prices other than the one given.
 - Submit with the Objections tool.
 
@@ -103,10 +115,30 @@ async def red_team(ticker: str, valuation: dict[str, Any], decision: dict[str, A
     return {"objections": objections}
 
 
+PERIOD_FIELDS = {"growth_used", "revenue_growth", "implied_growth"}
+
+
 def counts(o: dict[str, Any]) -> bool:
-    """Can this objection move the rating?"""
+    """Can this objection move the rating?
+
+    A data conflict that only sets a trailing-twelve-month growth figure against 10-K evidence compares two
+    periods, not two versions of one fact, so it does not count (first seen on Visa and Meta, 2026-10-01).
+    """
+    cites = set(o.get("cites") or [])
+    period_only = o.get("type") == "data_conflict" and cites & PERIOD_FIELDS and not cites - PERIOD_FIELDS - {
+        c for c in cites if c.startswith("PERF-")}
     return bool(o.get("type") in ("data_conflict", "business") and o.get("severity") == "high"
-                and o.get("supported") and o.get("cites_evidence"))
+                and o.get("supported") and o.get("cites_evidence") and not period_only)
+
+
+def corrections(result: dict[str, Any]) -> dict[str, float]:
+    """Numeric corrections from objections that count, the median per field."""
+    by_field: dict[str, list[float]] = {}
+    for o in result["objections"]:
+        c = o.get("correction") or {}
+        if counts(o) and c.get("field") in ("growth", "operating_margin") and isinstance(c.get("value"), (int, float)):
+            by_field.setdefault(c["field"], []).append(float(c["value"]))
+    return {k: sorted(v)[len(v) // 2] for k, v in by_field.items()}
 
 
 def adjustment(result: dict[str, Any]) -> tuple[int, str | None]:
