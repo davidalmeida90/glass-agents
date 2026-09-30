@@ -1,0 +1,2219 @@
+{
+ "tickers": [
+  "MSFT",
+  "AAPL",
+  "NVDA",
+  "AMZN",
+  "JPM",
+  "KO"
+ ],
+ "readers": [
+  "performance",
+  "risks"
+ ],
+ "model": "deepseek/deepseek-flash",
+ "budget_usd": 0.5,
+ "max_tokens_per_run": 40000,
+ "preflight": {
+  "tool_choice_any": true,
+  "error": null
+ },
+ "batch": {
+  "calls": 25,
+  "input": 62458,
+  "cached": 12160,
+  "output": 10477,
+  "reasoning": 0,
+  "tokens": 72935,
+  "usd": 0.011678,
+  "max_tokens": 1000000000,
+  "max_usd": 0.5
+ },
+ "stopped": null,
+ "runs": [
+  {
+   "ticker": "MSFT",
+   "reader": "performance",
+   "calls": 2,
+   "tokens": 7178,
+   "cached": 384,
+   "output": 961,
+   "usd": 0.001139,
+   "seconds": 4.5,
+   "turns": 2,
+   "claims": 10,
+   "checked_ok": 10,
+   "counts": {
+    "verified": 10
+   },
+   "stopped": null,
+   "passages_shown": 12,
+   "verification": {
+    "claims": [
+     {
+      "topic": "revenue",
+      "statement": "Total revenue for fiscal 2026 was $331,839 million.",
+      "value": 331839,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P130",
+      "quote": "tal revenue 331,839 281,724 245,122",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Total revenue grew 18% in fiscal 2026 compared with fiscal 2025.",
+      "value": 18,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "P104",
+      "quote": "Total Revenue $ 331,839 $ 281,724 18%",
+      "check": {
+       "status": "verified",
+       "passage_id": "P104",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Gross margin for fiscal 2026 was $225,465 million.",
+      "value": 225465,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P130",
+      "quote": "Gross margin 225,465 193,893 171,008",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Operating income for fiscal 2026 was $155,237 million, up 21%.",
+      "value": 155237,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P104",
+      "quote": "Operating income $ 155,237 $ 128,528 21%",
+      "check": {
+       "status": "verified",
+       "passage_id": "P104",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income for fiscal 2026 was $133,749 million.",
+      "value": 133749,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P130",
+      "quote": "Net income $ 133,749 $ 101,832 $ 88,136",
+      "check": {
+       "status": "verified",
+       "passage_id": "P130",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash from operations for fiscal 2026 was $182,935 million.",
+      "value": 182935,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P132",
+      "quote": "Net cash from operations 182,935 136,162 118,548",
+      "check": {
+       "status": "verified",
+       "passage_id": "P132",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Productivity and Business Processes segment revenue was $139,996 million in fiscal 2026, up 16%.",
+      "value": 139996,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P104",
+      "quote": "Productivity and Business Processes Revenue $ 139,996 $ 120,810 16%",
+      "check": {
+       "status": "verified",
+       "passage_id": "P104",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Intelligent Cloud segment revenue was $137,791 million in fiscal 2026, up 30%.",
+      "value": 137791,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P104",
+      "quote": "Intelligent Cloud Revenue $ 137,791 $ 106,265 30%",
+      "check": {
+       "status": "verified",
+       "passage_id": "P104",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Intelligent Cloud segment operating income was $56,972 million in fiscal 2026, up 28%.",
+      "value": 56972,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P104",
+      "quote": "Operating income $ 56,972 $ 44,589 28%",
+      "check": {
+       "status": "verified",
+       "passage_id": "P104",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "More Personal Computing segment revenue was $54,052 million in fiscal 2026, down 1%.",
+      "value": 54052,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P104",
+      "quote": "More Personal Computing Revenue $ 54,052 $ 54,649 (1)%",
+      "check": {
+       "status": "verified",
+       "passage_id": "P104",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 10
+    },
+    "total": 10
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 907,
+     "cached": 0,
+     "output": 102,
+     "reasoning": 0,
+     "usd": 0.00015554000000000002,
+     "seconds": 1.2,
+     "estimate_in": 335,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 5310,
+     "cached": 384,
+     "output": 859,
+     "reasoning": 0,
+     "usd": 0.00098392,
+     "seconds": 3.1,
+     "estimate_in": 4881,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "MSFT",
+   "reader": "risks",
+   "calls": 2,
+   "tokens": 5806,
+   "cached": 128,
+   "output": 747,
+   "usd": 0.000917,
+   "seconds": 3.8,
+   "turns": 2,
+   "claims": 6,
+   "checked_ok": 6,
+   "counts": {
+    "verified": 6
+   },
+   "stopped": null,
+   "passages_shown": 12,
+   "verification": {
+    "claims": [
+     {
+      "topic": "ai",
+      "statement": "Increasing use of AI, including models, algorithms, copilots, and autonomous or semi-autonomous agents, in internal or third-party systems may create new attack surfaces or methods for adversaries.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R006",
+      "quote": "Increasing use of AI, including models, algorithms, copilots, and autonomous or semi-autonomous agents, in our internal or third-party systems may create new attack surfaces or methods for adversaries.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R006",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cybersecurity",
+      "statement": "Attackers, potentially with the assistance of artificial intelligence, may reconstruct and exploit product vulnerabilities before patching.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R006",
+      "quote": "if attackers, potentially with the assistance of artificial intelligence, reconstruct and exploit the vulnerabilities before patching",
+      "check": {
+       "status": "verified",
+       "passage_id": "R006",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "Code generated by AI could include errors, deficiencies, or vulnerabilities that increase exposure to cyberattacks.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R007",
+      "quote": "code generated by AI could include errors, deficiencies, or vulnerabilities that increase our exposure to cyberattacks",
+      "check": {
+       "status": "verified",
+       "passage_id": "R007",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "Certain AI technologies, including conversational or emotionally engaging AI systems, may present distinct risks for children and adolescents.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R007",
+      "quote": "certain AI technologies, including conversational or emotionally engaging AI systems, may present distinct risks for children and adolescents",
+      "check": {
+       "status": "verified",
+       "passage_id": "R007",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "geopolitical",
+      "statement": "Governments may impose restrictions on the development, deployment, availability, or cross-border access to advanced AI models based on safety, cybersecurity, or national security.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R012",
+      "quote": "governments may impose restrictions on the development, deployment, availability, or cross-border access to advanced AI models based on safety, cybersecurity, or national security",
+      "check": {
+       "status": "verified",
+       "passage_id": "R012",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "supply_chain",
+      "statement": "U.S. tariffs, shifting AI export controls policies, and disagreements among governments on sanctions policies toward third countries have increased operational costs and created uncertainty in the continuity of products.",
+      "value": null,
+      "unit": null,
+      "period": "fiscal 2026",
+      "passage_id": "R012",
+      "quote": "U.S. tariffs, shifting AI export controls policies, and disagreements among governments on sanctions policies toward third countries, has and may continue to increase operational costs, create uncertainty in the continuity of our products",
+      "check": {
+       "status": "verified",
+       "passage_id": "R012",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 6
+    },
+    "total": 6
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 942,
+     "cached": 128,
+     "output": 112,
+     "reasoning": 0,
+     "usd": 0.00016324000000000002,
+     "seconds": 1.2,
+     "estimate_in": 352,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 4117,
+     "cached": 0,
+     "output": 635,
+     "reasoning": 0,
+     "usd": 0.0007541800000000001,
+     "seconds": 2.6,
+     "estimate_in": 4898,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "AAPL",
+   "reader": "performance",
+   "calls": 2,
+   "tokens": 8169,
+   "cached": 1152,
+   "output": 1009,
+   "usd": 0.001285,
+   "seconds": 4.3,
+   "turns": 2,
+   "claims": 10,
+   "checked_ok": 10,
+   "counts": {
+    "verified": 10
+   },
+   "stopped": null,
+   "passages_shown": 12,
+   "verification": {
+    "claims": [
+     {
+      "topic": "revenue",
+      "statement": "Total net sales were $416,161 million in fiscal 2025.",
+      "value": 416161,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P084",
+      "quote": "Total net sales 416,161 391,035 383,285",
+      "check": {
+       "status": "verified",
+       "passage_id": "P084",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Total net sales increased 6% in 2025 compared to 2024.",
+      "value": 6,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P072",
+      "quote": "Total net sales $ 416,161 6 % $ 391,035 2 % $ 383,285",
+      "check": {
+       "status": "verified",
+       "passage_id": "P072",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Total gross margin was $195,201 million in fiscal 2025.",
+      "value": 195201,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P084",
+      "quote": "Gross margin 195,201 180,683 169,148",
+      "check": {
+       "status": "verified",
+       "passage_id": "P084",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Total gross margin percentage was 46.9% in fiscal 2025.",
+      "value": 46.9,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P073",
+      "quote": "Total gross margin percentage 46.9 % 46.2 % 44.1 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P073",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income was $112,010 million in fiscal 2025.",
+      "value": 112010,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P084",
+      "quote": "Net income $ 112,010 $ 93,736 $ 96,995",
+      "check": {
+       "status": "verified",
+       "passage_id": "P084",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Cash generated by operating activities was $111,482 million in fiscal 2025.",
+      "value": 111482,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P088",
+      "quote": "Cash generated by operating activities 111,482 118,254 110,543",
+      "check": {
+       "status": "verified",
+       "passage_id": "P088",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Americas segment net sales were $178,353 million in fiscal 2025.",
+      "value": 178353,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P116",
+      "quote": "Net sales $ 178,353 $ 111,032 $ 64,377 $ 28,703 $ 33,696 $ \u2014 $ 416,161",
+      "check": {
+       "status": "verified",
+       "passage_id": "P116",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Americas segment operating income was $72,480 million in fiscal 2025.",
+      "value": 72480,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P116",
+      "quote": "Operating income/(loss) $ 72,480 $ 47,739 $ 26,917 $ 13,955 $ 14,586 $ ( 42,627 ) $ 133,050",
+      "check": {
+       "status": "verified",
+       "passage_id": "P116",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Europe segment net sales were $111,032 million in fiscal 2025.",
+      "value": 111032,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P072",
+      "quote": "Europe 111,032 10 % 101,328 7 % 94,294",
+      "check": {
+       "status": "verified",
+       "passage_id": "P072",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "iPhone net sales were $209,586 million in fiscal 2025.",
+      "value": 209586,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P094",
+      "quote": "iPhone $ 209,586 $ 201,183 $ 200,583",
+      "check": {
+       "status": "verified",
+       "passage_id": "P094",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 10
+    },
+    "total": 10
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 904,
+     "cached": 640,
+     "output": 120,
+     "reasoning": 0,
+     "usd": 0.00016016,
+     "seconds": 1.0,
+     "estimate_in": 334,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 6256,
+     "cached": 512,
+     "output": 889,
+     "reasoning": 0,
+     "usd": 0.00112476,
+     "seconds": 3.1,
+     "estimate_in": 4880,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "AAPL",
+   "reader": "risks",
+   "calls": 2,
+   "tokens": 5296,
+   "cached": 1152,
+   "output": 892,
+   "usd": 0.000866,
+   "seconds": 4.5,
+   "turns": 2,
+   "claims": 6,
+   "checked_ok": 6,
+   "counts": {
+    "verified": 6
+   },
+   "stopped": null,
+   "passages_shown": 10,
+   "verification": {
+    "claims": [
+     {
+      "topic": "geopolitical",
+      "statement": "New U.S. tariffs were announced beginning in the second quarter of 2025 on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the EU, among others.",
+      "value": 2025,
+      "unit": null,
+      "period": "second quarter of 2025",
+      "passage_id": "R001",
+      "quote": "Beginning in the second quarter of 2025, new tariffs were announced on imports to the U.S. (\u201cU.S. Tariffs\u201d), including additional tariffs on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the European Union (\u201cEU\u201d), among others.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R001",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "The Department of Commerce initiated a Section 232 investigation into imports of semiconductors, semiconductor manufacturing equipment and their derivative products, including downstream products containing semiconductors.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R001",
+      "quote": "Department of Commerce has initiated an investigation under Section 232 of the Trade Expansion Act of 1962, as amended, into, among other things, imports of semiconductors, semiconductor manufacturing equipment, and their derivative products, including downstream products that contain semiconductors.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R001",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "The risk of failing to obtain third-party intellectual property licenses is exacerbated by new and emerging technologies including machine learning and artificial intelligence, which can involve acquiring and using copyrighted materials for training and reproducing copyrighted materials in outputs.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R003",
+      "quote": "This risk may be exacerbated by the use of new and emerging technologies, including machine learning and artificial intelligence, which can involve, among other things, the acquisition and use of copyrighted materials for training as well as the potential reproduction of copyrighted materials in their outputs",
+      "check": {
+       "status": "verified",
+       "passage_id": "R003",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "Risks of novel claims being attempted may be exacerbated as new and emerging technologies, including machine learning and artificial intelligence, are further integrated into the Company's products and services.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R005",
+      "quote": "These risks, and the risks of novel claims being attempted, may be exacerbated as new and emerging technologies, including machine learning and artificial intelligence, are further integrated into the Company\u2019s products and services.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R005",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "The Company is subject to new and changing laws and regulations regarding online safety, including enhanced protections for minors and mandatory age verification requirements.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R008",
+      "quote": "The Company is also subject to new and changing laws and regulations regarding online safety, including enhanced protections for minors and mandatory age verification requirements.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R008",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "legal",
+      "statement": "On September 2, 2025, the U.S. District Court for the District of Columbia ordered certain remedies after Google was found on August 5, 2024 to have violated U.S. antitrust laws, and the order is subject to further proceedings and appeal.",
+      "value": 2025,
+      "unit": null,
+      "period": "September 2, 2025",
+      "passage_id": "R007",
+      "quote": "On August 5, 2024, Google was found to have violated U.S. antitrust laws. In connection with this finding, on September 2, 2025, the U.S. District Court for the District of Columbia (\u201cD.C. District Court\u201d) ordered certain remedies.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R007",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 6
+    },
+    "total": 6
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 939,
+     "cached": 640,
+     "output": 102,
+     "reasoning": 0,
+     "usd": 0.00016002000000000003,
+     "seconds": 1.1,
+     "estimate_in": 351,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 3465,
+     "cached": 512,
+     "output": 790,
+     "reasoning": 0,
+     "usd": 0.0007063,
+     "seconds": 3.3,
+     "estimate_in": 3797,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "NVDA",
+   "reader": "performance",
+   "calls": 2,
+   "tokens": 7141,
+   "cached": 1152,
+   "output": 967,
+   "usd": 0.001135,
+   "seconds": 4.6,
+   "turns": 2,
+   "claims": 10,
+   "checked_ok": 10,
+   "counts": {
+    "verified": 10
+   },
+   "stopped": null,
+   "passages_shown": 12,
+   "verification": {
+    "claims": [
+     {
+      "topic": "revenue",
+      "statement": "Total revenue for fiscal 2026 was $215,938 million.",
+      "value": 215938,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Total $ 215,938 $ 130,497 $ 85,441 65 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Total revenue grew 65% year over year in fiscal 2026.",
+      "value": 65,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Total $ 215,938 $ 130,497 $ 85,441 65 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Gross margin decreased to 71.1% in fiscal 2026 from 75.0% in fiscal 2025.",
+      "value": 71.1,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "P137",
+      "quote": "Gross margins decreased to 71.1% in fiscal year 2026 from 75.0% in fiscal year 2025",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Operating income was 60.4% of revenue in fiscal 2026.",
+      "value": 60.4,
+      "unit": "%",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Operating income 60.4 62.4",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income for fiscal 2026 was $120,067 million.",
+      "value": 120067,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P164",
+      "quote": "Net income \u2014 \u2014 \u2014 \u2014 120,067 120,067",
+      "check": {
+       "status": "verified",
+       "passage_id": "P164",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities was $102,718 million in fiscal 2026.",
+      "value": 102718,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P140",
+      "quote": "Net cash provided by operating activities $ 102,718 $ 64,089",
+      "check": {
+       "status": "verified",
+       "passage_id": "P140",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Compute & Networking segment revenue was $193,479 million in fiscal 2026.",
+      "value": 193479,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Compute & Networking $ 193,479 $ 116,193 $ 77,286 67 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Compute & Networking segment operating income was $130,141 million in fiscal 2026.",
+      "value": 130141,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Compute & Networking $ 130,141 $ 82,875 $ 47,266 57 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Graphics segment revenue was $22,459 million in fiscal 2026.",
+      "value": 22459,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Graphics 22,459 14,304 8,155 57 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Graphics segment operating income was $9,156 million in fiscal 2026.",
+      "value": 9156,
+      "unit": "USD millions",
+      "period": "fiscal 2026",
+      "passage_id": "P134",
+      "quote": "Graphics 9,156 5,085 4,071 80 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P134",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 10
+    },
+    "total": 10
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 904,
+     "cached": 640,
+     "output": 107,
+     "reasoning": 0,
+     "usd": 0.00015652,
+     "seconds": 1.3,
+     "estimate_in": 334,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 5270,
+     "cached": 512,
+     "output": 860,
+     "reasoning": 0,
+     "usd": 0.0009786,
+     "seconds": 3.1,
+     "estimate_in": 4880,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "NVDA",
+   "reader": "risks",
+   "calls": 2,
+   "tokens": 5212,
+   "cached": 1152,
+   "output": 747,
+   "usd": 0.000834,
+   "seconds": 4.0,
+   "turns": 2,
+   "claims": 6,
+   "checked_ok": 6,
+   "counts": {
+    "verified": 6
+   },
+   "stopped": null,
+   "passages_shown": 10,
+   "verification": {
+    "claims": [
+     {
+      "topic": "regulation",
+      "statement": "In October 2025 the Senate passed the \"GAIN AI Act\" in the NDAA, which would restrict the administration's ability to adapt export control rules.",
+      "value": null,
+      "unit": null,
+      "period": "October 2025",
+      "passage_id": "R006",
+      "quote": "in October 2025, the Senate passed the \u201cGAIN AI Act\u201d in the NDAA",
+      "check": {
+       "status": "verified",
+       "passage_id": "R006",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "geopolitical",
+      "statement": "China's government publicly questioned whether H20 products have built-in vulnerabilities, discouraging customers from purchasing them.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R006",
+      "quote": "China\u2019s government publicly questioned whether our H20 products have",
+      "check": {
+       "status": "verified",
+       "passage_id": "R006",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "Regulatory control limiting NVIDIA's ability to support third-party applications and models, including those built on Chinese foundation models such as DeepSeek, Qwen, or KIMMI, could materially impact the business.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R007",
+      "quote": "including applications built on foundation models originating in China such as DeepSeek, Qwen, or KIMMI, could have a material impact on our business",
+      "check": {
+       "status": "verified",
+       "passage_id": "R007",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "Several states are considering or have enacted AI technology regulations, with new state laws taking effect January 1, 2026.",
+      "value": null,
+      "unit": null,
+      "period": "January 1, 2026",
+      "passage_id": "R003",
+      "quote": "Several states are considering enacting or have already enacted regulations concerning AI technologies, with new state laws that took effect on January 1, 2026",
+      "check": {
+       "status": "verified",
+       "passage_id": "R003",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "legal",
+      "statement": "On September 15, 2025, China's antitrust regulators published a preliminary finding that NVIDIA's compliance with U.S. export controls violated the terms of China's approval of the Mellanox acquisition.",
+      "value": null,
+      "unit": null,
+      "period": "September 15, 2025",
+      "passage_id": "R003",
+      "quote": "On September 15, 2025, China\u2019s antitrust regulators published their preliminary finding that our compliance with applicable U.S. export controls",
+      "check": {
+       "status": "verified",
+       "passage_id": "R003",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "financial",
+      "statement": "NVIDIA incurred a $4.5 billion charge in the first quarter of fiscal year 2026 associated with H20 for excess inventory and purchase obligations.",
+      "value": 4.5,
+      "unit": "USD billions",
+      "period": "first quarter of fiscal year 2026",
+      "passage_id": "R003",
+      "quote": "we incurred a $4.5 billion charge in the first quarter of fiscal year 2026 associated with H20 for excess inventory and purchase obliga",
+      "check": {
+       "status": "verified",
+       "passage_id": "R003",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 6
+    },
+    "total": 6
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 939,
+     "cached": 640,
+     "output": 104,
+     "reasoning": 0,
+     "usd": 0.00016058,
+     "seconds": 1.2,
+     "estimate_in": 351,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 3526,
+     "cached": 512,
+     "output": 643,
+     "reasoning": 0,
+     "usd": 0.0006736800000000001,
+     "seconds": 2.8,
+     "estimate_in": 3786,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "AMZN",
+   "reader": "performance",
+   "calls": 2,
+   "tokens": 7139,
+   "cached": 1152,
+   "output": 903,
+   "usd": 0.001126,
+   "seconds": 4.6,
+   "turns": 2,
+   "claims": 10,
+   "checked_ok": 10,
+   "counts": {
+    "verified": 10
+   },
+   "stopped": null,
+   "passages_shown": 12,
+   "verification": {
+    "claims": [
+     {
+      "topic": "revenue",
+      "statement": "Consolidated net sales were $716,924 million in 2025.",
+      "value": 716924,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P074",
+      "quote": "Consolidated $ 637,959 $ 716,924",
+      "check": {
+       "status": "verified",
+       "passage_id": "P074",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Consolidated net sales increased 12% in 2025 compared to the prior year.",
+      "value": 12,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P074",
+      "quote": "Consolidated 11 12",
+      "check": {
+       "status": "verified",
+       "passage_id": "P074",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Operating income was $79,975 million in 2025.",
+      "value": 79975,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P099",
+      "quote": "Operating income 36,852 68,593 79,975",
+      "check": {
+       "status": "verified",
+       "passage_id": "P099",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income was $77,670 million in 2025.",
+      "value": 77670,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P099",
+      "quote": "Net income $ 30,425 $ 59,248 $ 77,670",
+      "check": {
+       "status": "verified",
+       "passage_id": "P099",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities was $139,514 million in 2025.",
+      "value": 139514,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P068",
+      "quote": "Operating activities $ 115,877 $ 139,514",
+      "check": {
+       "status": "verified",
+       "passage_id": "P068",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "North America segment net sales were $426,305 million in 2025.",
+      "value": 426305,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P074",
+      "quote": "North America $ 387,497 $ 426,305",
+      "check": {
+       "status": "verified",
+       "passage_id": "P074",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "International segment net sales were $161,894 million in 2025.",
+      "value": 161894,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P074",
+      "quote": "International 142,906 161,894",
+      "check": {
+       "status": "verified",
+       "passage_id": "P074",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "AWS segment net sales were $128,725 million in 2025.",
+      "value": 128725,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P074",
+      "quote": "AWS 107,556 128,725",
+      "check": {
+       "status": "verified",
+       "passage_id": "P074",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "AWS sales increased 20% in 2025 compared to the prior year.",
+      "value": 20,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P075",
+      "quote": "AWS sales increased 20% in 2025, compared to the prior year.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P075",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "other",
+      "statement": "Diluted earnings per share was $7.17 in 2025.",
+      "value": 7.17,
+      "unit": "USD per share",
+      "period": "fiscal 2025",
+      "passage_id": "P099",
+      "quote": "Diluted earnings per share $ 2.90 $ 5.53 $ 7.17",
+      "check": {
+       "status": "verified",
+       "passage_id": "P099",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 10
+    },
+    "total": 10
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 906,
+     "cached": 640,
+     "output": 103,
+     "reasoning": 0,
+     "usd": 0.00015568000000000003,
+     "seconds": 1.5,
+     "estimate_in": 335,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 5330,
+     "cached": 512,
+     "output": 800,
+     "reasoning": 0,
+     "usd": 0.0009702000000000001,
+     "seconds": 2.9,
+     "estimate_in": 4881,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "AMZN",
+   "reader": "risks",
+   "calls": 2,
+   "tokens": 2583,
+   "cached": 1152,
+   "output": 444,
+   "usd": 0.000424,
+   "seconds": 2.6,
+   "turns": 2,
+   "claims": 3,
+   "checked_ok": 3,
+   "counts": {
+    "verified": 3
+   },
+   "stopped": null,
+   "passages_shown": 1,
+   "verification": {
+    "claims": [
+     {
+      "topic": "ai",
+      "statement": "The filing warns that profitability or other intended benefits in newer activities, including development and adoption of automation, artificial intelligence, and machine learning technologies for customer and internal use, may not meet expectations.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "profitability or other intended benefits, if any, in our newer activities (including development and adoption of automation, artificial intelligence, and machine learning technologies for customer and internal use), may not meet our expectations",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "The filing states the company may not be successful enough in these newer activities to recoup its investments in them, which are often significant.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "we may not be successful enough in these newer activities to recoup our investments in them, which investments are often significant",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "competition",
+      "statement": "The filing states the company experiences significant competition in the technology industry, particularly for software engineers, computer scientists, and other technical staff, including for artificial intelligence and machine learning technologies.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "we experience significant competition in the technology industry, particularly for software engineers, computer scientists, and other technical staff (including for artificial intelligence and machine learning technologies)",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 3
+    },
+    "total": 3
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 941,
+     "cached": 640,
+     "output": 101,
+     "reasoning": 0,
+     "usd": 0.00016002,
+     "seconds": 1.0,
+     "estimate_in": 352,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 1198,
+     "cached": 512,
+     "output": 343,
+     "reasoning": 0,
+     "usd": 0.00026376000000000004,
+     "seconds": 1.6,
+     "estimate_in": 632,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "JPM",
+   "reader": "performance",
+   "calls": 2,
+   "tokens": 7573,
+   "cached": 1152,
+   "output": 981,
+   "usd": 0.001198,
+   "seconds": 5.1,
+   "turns": 2,
+   "claims": 10,
+   "checked_ok": 10,
+   "counts": {
+    "verified": 10
+   },
+   "stopped": null,
+   "passages_shown": 12,
+   "verification": {
+    "claims": [
+     {
+      "topic": "revenue",
+      "statement": "Total net revenue for 2025 was $182,447 million.",
+      "value": 182447,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Total net revenue 182,447 177,556 3",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "growth",
+      "statement": "Total net revenue increased 3% in 2025 versus 2024.",
+      "value": 3,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Total net revenue 182,447 177,556 3",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Pre-provision profit was $86,807 million in 2025, up 1% from 2024.",
+      "value": 86807,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Pre-provision profit 86,807 85,759 1",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Net income for 2025 was $57,048 million, down 2% from 2024.",
+      "value": 57048,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Net income 57,048 58,471 (2)",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash used in operating activities was $147,782 million in 2025.",
+      "value": -147782,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P411",
+      "quote": "Net cash (used in)/provided by operating activities ( 147,782 ) ( 42,012 ) 12,974",
+      "check": {
+       "status": "verified",
+       "passage_id": "P411",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Markets revenue was $35,782 million in 2025, up 19% from 2024.",
+      "value": 35782,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Markets (d) 35,782 30,007 19",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "Noninterest revenue was $87,004 million in 2025, up 2% from 2024.",
+      "value": 87004,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Noninterest revenue $ 87,004 $ 84,973 2%",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "Net interest income was $95,443 million in 2025, up 3% from 2024.",
+      "value": 95443,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Net interest income 95,443 92,583 3",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Return on common equity was 17% for 2025, down from 18% in 2024.",
+      "value": 17,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Return on common equity 17 % 18 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Diluted earnings per share was $20.02 in 2025, up 1% from 2024.",
+      "value": 20.02,
+      "unit": "USD per share",
+      "period": "fiscal 2025",
+      "passage_id": "P137",
+      "quote": "Diluted earnings per share 20.02 19.75 1",
+      "check": {
+       "status": "verified",
+       "passage_id": "P137",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 10
+    },
+    "total": 10
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 909,
+     "cached": 640,
+     "output": 105,
+     "reasoning": 0,
+     "usd": 0.00015666,
+     "seconds": 1.3,
+     "estimate_in": 336,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 5683,
+     "cached": 512,
+     "output": 876,
+     "reasoning": 0,
+     "usd": 0.0010409000000000002,
+     "seconds": 3.2,
+     "estimate_in": 4882,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "JPM",
+   "reader": "risks",
+   "calls": 2,
+   "tokens": 5860,
+   "cached": 1152,
+   "output": 785,
+   "usd": 0.00093,
+   "seconds": 4.1,
+   "turns": 2,
+   "claims": 6,
+   "checked_ok": 6,
+   "counts": {
+    "verified": 6
+   },
+   "stopped": null,
+   "passages_shown": 12,
+   "verification": {
+    "claims": [
+     {
+      "topic": "ai",
+      "statement": "JPMorganChase warns that failing to keep pace with rapidly changing technological advances, including the adoption of generative AI, risks losing clients and market share to competitors.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R013",
+      "quote": "s, including the adoption of generative AI, it risks losing clients and market share to competitors, which could negatively impact revenues, operating costs and its competitive position.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R013",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "The rapid development and deployment of advanced technologies, including generative and agentic AI systems, presents a range of risks including AI system failures, inappropriate use, lack of transparency, and inaccurate or biased output.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R013",
+      "quote": "The rapid development and deployment of advanced technologies, including generative and agentic AI systems, present a range of risks to JPMorganChase\u2019s businesses and operations, including:",
+      "check": {
+       "status": "verified",
+       "passage_id": "R013",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cybersecurity",
+      "statement": "JPMorganChase faces intensified AI-enabled cyber threats that may allow malicious actors to exploit vulnerabilities, reverse-engineer security patches and conduct sophisticated social engineering attacks.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R014",
+      "quote": "intensified AI-enabled cyber threats, which may allow malicious actors to exploit vulnerabilities, reverse-engineer security patches, and conduct sophisticated social engineering attacks",
+      "check": {
+       "status": "verified",
+       "passage_id": "R014",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "JPMorganChase could face competitive disadvantage if competitors deploy AI more quickly or effectively, potentially resulting in a loss of market share.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R014",
+      "quote": "competitive disadvantage if competitors are able to deploy AI more quickly or effectively, potentially gaining advantages in cost efficiency, client and customer experience, or product innovation, which could result in a loss of market share to competitors",
+      "check": {
+       "status": "verified",
+       "passage_id": "R014",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "JPMorganChase faces replacement or disintermediation of direct customer relationships if AI agents autonomously manage or intermediate financial decisions and product selection.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R014",
+      "quote": "replacement or disintermediation of direct customer relationships if AI agents autonomously manage or intermediate financial decisions and product selection",
+      "check": {
+       "status": "verified",
+       "passage_id": "R014",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "JPMorganChase faces regulatory and compliance challenges from rapidly evolving applicable law on AI, including differences, inconsistencies and conflicts in international standards, which could increase costs, lead to fines and sanctions, and restrict its use of AI technologies.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R014",
+      "quote": "regulatory and compliance challenges arising from rapidly evolving applicable law, including differences, inconsistencies and conflicts in international standards, which could increase costs, lead to fines and sanctions, and restrict JPMorganChase\u2019s use of AI technologies",
+      "check": {
+       "status": "verified",
+       "passage_id": "R014",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 6
+    },
+    "total": 6
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 944,
+     "cached": 640,
+     "output": 103,
+     "reasoning": 0,
+     "usd": 0.00016100000000000004,
+     "seconds": 1.2,
+     "estimate_in": 353,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 4131,
+     "cached": 512,
+     "output": 682,
+     "reasoning": 0,
+     "usd": 0.0007693,
+     "seconds": 2.9,
+     "estimate_in": 4742,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "KO",
+   "reader": "performance",
+   "calls": 2,
+   "tokens": 7296,
+   "cached": 1152,
+   "output": 1272,
+   "usd": 0.0012,
+   "seconds": 5.2,
+   "turns": 2,
+   "claims": 10,
+   "checked_ok": 10,
+   "counts": {
+    "verified": 10
+   },
+   "stopped": null,
+   "passages_shown": 12,
+   "verification": {
+    "claims": [
+     {
+      "topic": "revenue",
+      "statement": "Net operating revenues by operating segment as a percentage of Company net operating revenues for 2025: North America 40.8%, EMEA 22.6%, Latin America 13.2%, Bottling Investments 12.0%, Asia Pacific 11.1%, Corporate 0.3%.",
+      "value": 40.8,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P170",
+      "quote": "North America 40.8 40.1 Asia Pac",
+      "check": {
+       "status": "verified",
+       "passage_id": "P170",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "revenue",
+      "statement": "Asia Pacific contributed 11.1% and Bottling Investments 12.0% of Company net operating revenues in 2025, with Corporate at 0.3% and total 100.0%.",
+      "value": 11.1,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P171",
+      "quote": "ific 11.1 10.9 Bottling Investments 12.0 13.2 Corporate 0.3 0.2 Total 100.0 % 100.0 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P171",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "margin",
+      "statement": "Gross profit margin increased to 61.6% in 2025 from 61.1% in 2024.",
+      "value": 61.6,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P171",
+      "quote": "Our gross profit margin increased to 61.6% in 2025 from 61.1% in 2024.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P171",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "EMEA operating segment reported operating income of $4,298 million for the year ended December 31, 2025.",
+      "value": 4298,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P176",
+      "quote": "The Company\u2019s EMEA operating segment reported operating income of $4,298 million and $4,255 million for the years ended December 31, 2025 and 2024, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P176",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Latin America reported operating income of $3,742 million for the year ended December 31, 2025.",
+      "value": 3742,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P176",
+      "quote": "Latin America reported operating income of $3,742 million and $3,792 million for the years ended December 31, 2025 and 2024, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P176",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "North America operating income was $5,070 million for the year ended December 31, 2025.",
+      "value": 5070,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P176",
+      "quote": "Operating income for North America for the years ended December 31, 2025 and 2024 was $5,070 million and $4,556 million, respectively.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P176",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "segment",
+      "statement": "Operating income contribution by segment in 2025: North America 36.8%, EMEA 31.2%, Latin America 27.2%, Asia Pacific 14.9%, Bottling Investments 3.1%, Corporate (13.2)%.",
+      "value": 36.8,
+      "unit": "%",
+      "period": "fiscal 2025",
+      "passage_id": "P174",
+      "quote": "North America 36.8 45.6 Asia Pacific 14.9 21.5 Bottling Investments 3.1 5.0 Corporate (13.2) (52.7) Total 100.0 % 100.0 %",
+      "check": {
+       "status": "verified",
+       "passage_id": "P174",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "net_income",
+      "statement": "Consolidated net income was $13,137 million for the year ended December 31, 2025.",
+      "value": 13137,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P213",
+      "quote": "Consolidated net income $ 13,137 $ 10,649 $ 10,703",
+      "check": {
+       "status": "verified",
+       "passage_id": "P213",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities was $7,408 million for the year ended December 31, 2025.",
+      "value": 7408,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P213",
+      "quote": "Net Cash Provided by Operating Activities 7,408 6,805 11,599",
+      "check": {
+       "status": "verified",
+       "passage_id": "P213",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "cash_flow",
+      "statement": "Net cash provided by operating activities increased $603 million, or 9%, in 2025 versus 2024.",
+      "value": 603,
+      "unit": "USD millions",
+      "period": "fiscal 2025",
+      "passage_id": "P190",
+      "quote": "Net cash provided by operating activities for the years ended December 31, 2025 and 2024 was $7,408 million and $6,805 million, respectively, an increase of $603 million, or 9%.",
+      "check": {
+       "status": "verified",
+       "passage_id": "P190",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 10
+    },
+    "total": 10
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 905,
+     "cached": 640,
+     "output": 105,
+     "reasoning": 0,
+     "usd": 0.00015610000000000003,
+     "seconds": 1.1,
+     "estimate_in": 334,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 5119,
+     "cached": 512,
+     "output": 1167,
+     "reasoning": 0,
+     "usd": 0.0010434200000000002,
+     "seconds": 4.0,
+     "estimate_in": 4880,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  },
+  {
+   "ticker": "KO",
+   "reader": "risks",
+   "calls": 2,
+   "tokens": 3374,
+   "cached": 1152,
+   "output": 737,
+   "usd": 0.000576,
+   "seconds": 4.3,
+   "turns": 2,
+   "claims": 6,
+   "checked_ok": 6,
+   "counts": {
+    "verified": 6
+   },
+   "stopped": null,
+   "passages_shown": 3,
+   "verification": {
+    "claims": [
+     {
+      "topic": "regulation",
+      "statement": "Recent U.S. federal and state government activities and initiatives have focused on potential drivers behind the rise in childhood chronic diseases, and continued governmental focus on such initiatives may reduce demand for or increase the cost of sweetened beverages.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "Recent activities and proposals by U.S. federal and state government agencies and initiatives have focused on potential drivers behind the rise in childhood chronic diseases.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "Ongoing public concern about obesity and other health-related concerns surrounding consumption of sweetened beverages could reduce demand for or increase the cost of the company's sweetened beverages.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "ongoing public concern about obesity; other health-related public concerns surrounding consumption of sweetened beverages",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "The effects or perceived effects of the usage of weight-loss drugs on consumption patterns are a risk that may reduce demand for or increase the cost of the company's sweetened beverages.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "the effects or perceived effects of the usage of weight-loss drugs on consumption patterns",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "regulation",
+      "statement": "Potential new or increased governmental regulations on particular ingredients or additives in the company's beverages and packaging, or on manufacturing processes, may reduce demand for or increase the cost of its sweetened beverages.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "potential new or increased governmental regulations on particular ingredients or additives in our beverages and packaging, or on manufacturing processes",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "ai",
+      "statement": "The increasing use of data analytics, automation and artificial intelligence across digital platforms is reshaping how consumers discover, evaluate and engage with brands.",
+      "value": null,
+      "unit": null,
+      "period": null,
+      "passage_id": "R000",
+      "quote": "The increasing use of data analytics, automation and artificial intelligence across digital platforms is further reshaping how consumers discover, evaluate and",
+      "check": {
+       "status": "verified",
+       "passage_id": "R000",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     },
+     {
+      "topic": "financial",
+      "statement": "For the year ended December 31, 2025, one bottler accounted for 10% of the company's net operating revenues, reflected in its EMEA and Asia Pacific operating segments.",
+      "value": 10,
+      "unit": "%",
+      "period": "year ended December 31, 2025",
+      "passage_id": "R001",
+      "quote": "For the year ended December 31, 2025, one bottler accounted for 10% of our net operating revenues, which are reflected in our EMEA and Asia Pacific operating segments.",
+      "check": {
+       "status": "verified",
+       "passage_id": "R001",
+       "quote_verbatim": true,
+       "value_in_quote": true,
+       "value_in_passage": true
+      }
+     }
+    ],
+    "counts": {
+     "verified": 6
+    },
+    "total": 6
+   },
+   "ledger": [
+    {
+     "n": 1,
+     "node": "call_agent_model",
+     "input": 940,
+     "cached": 640,
+     "output": 102,
+     "reasoning": 0,
+     "usd": 0.00016016000000000004,
+     "seconds": 1.6,
+     "estimate_in": 351,
+     "tool_calls": [
+      "search_filing",
+      "search_filing",
+      "search_filing"
+     ]
+    },
+    {
+     "n": 2,
+     "node": "call_agent_model",
+     "input": 1697,
+     "cached": 512,
+     "output": 635,
+     "reasoning": 0,
+     "usd": 0.00041538,
+     "seconds": 2.7,
+     "estimate_in": 1308,
+     "tool_calls": [
+      "Info"
+     ]
+    }
+   ]
+  }
+ ]
+}

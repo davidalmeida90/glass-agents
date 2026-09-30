@@ -17,7 +17,10 @@ class InputState:
     """Input state defines the interface between the graph and the user (external API)."""
 
     ticker: str
-    "The company whose latest 10-K the reader searches."
+    "The company whose filing the reader searches."
+
+    corpus: str = "10-K"
+    "What the reader searches: the latest 10-K, or only this year's new risk factor sentences."
 
     topic: str
     "The reader's task, e.g. which financial performance evidence to collect."

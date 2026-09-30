@@ -61,11 +61,11 @@ async def run_reader(ticker, reader, configurable, callbacks):
     from underwriter.edgar import load_index
     from underwriter.graph import graph
 
-    load_index(ticker).served.clear()  # each reader run starts with every passage available
+    load_index(ticker, reader.corpus).served.clear()  # each reader run starts with every passage available
     stopped, last = None, {}
     try:
         async for last in graph.astream(
-            {"ticker": ticker, "topic": reader.task, "extraction_schema": reader.schema},
+            {"ticker": ticker, "corpus": reader.corpus, "topic": reader.task, "extraction_schema": reader.schema},
             config={"configurable": dict(configurable, min_verified=reader.min_verified),
                     "callbacks": callbacks, "recursion_limit": 20},
             stream_mode="values",
@@ -126,17 +126,29 @@ async def main() -> int:
         print(f"{m['company']} {m['form']} period {m['period']}, filed {m['filed']}: {len(index.passages)} passages")
         for reader in readers:
             ledger = TokenLedger(model, args.max_tokens, args.budget_usd - batch.usd)
-            print(f" reader {reader.name}")
+            try:
+                corpus = load_index(ticker, reader.corpus)
+            except Exception as e:  # noqa: BLE001 - e.g. no earlier 10-K to compare risk factors with
+                print(f" reader {reader.name}: skipped, {e}")
+                results.append({"ticker": ticker, "reader": reader.name, "error": str(e)})
+                continue
+            extra = ""
+            if reader.corpus == "risk_changes":
+                from underwriter.edgar import RISK_STATS
+                rs = RISK_STATS.get(ticker, {})
+                extra = (f": {rs.get('new_count')} new of {rs.get('sentences_now')} risk sentences vs {rs.get('prior_period')}"
+                         f" ({rs.get('removed_count')} removed), {len(corpus.passages)} passages")
+            print(f" reader {reader.name}{extra}")
             t0 = time.time()
             last, stopped = await run_reader(ticker, reader, configurable, [ledger, batch])
             claims = ((last.get("info") or {}).get("claims")) or []
-            check = verify(claims, index.text_of)
+            check = verify(claims, corpus.text_of)
             s = ledger.summary()
             ok = check["counts"].get("verified", 0) + check["counts"].get("number in passage", 0)
             row = {"ticker": ticker, "reader": reader.name, "calls": s["calls"], "tokens": s["tokens"],
                    "cached": s["cached"], "output": s["output"], "usd": s["usd"], "seconds": round(time.time() - t0, 1),
                    "turns": last.get("loop_step", 0), "claims": check["total"], "checked_ok": ok,
-                   "counts": check["counts"], "stopped": stopped, "passages_shown": len(index.served),
+                   "counts": check["counts"], "stopped": stopped, "passages_shown": len(corpus.served),
                    "verification": check, "ledger": ledger.calls}
             results.append(row)
             print(f"   {'STOPPED: ' + stopped if stopped else 'done'}: {s['calls']} calls, {s['tokens']:,} tokens,"
@@ -149,7 +161,7 @@ async def main() -> int:
         if batch_stop:
             break
 
-    runs = [r for r in results if "reader" in r]
+    runs = [r for r in results if "reader" in r and "error" not in r]
     print(f"{'BATCH STOPPED: ' + batch_stop if batch_stop else 'batch finished'} in {time.time() - t_batch:.0f}s")
     print(f"\n{'ticker':<6} {'reader':<11} {'calls':>5} {'tokens':>7} {'cached':>7} {'$':>8} {'sec':>5} {'claims':>6} {'ok':>3}  stopped")
     for r in runs:

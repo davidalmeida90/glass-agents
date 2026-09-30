@@ -102,3 +102,19 @@ def test_code_checker_accepts_good_evidence_and_returns_specific_failures():
     ko = asyncio.run(reflect(State(ticker="ZZZ", topic="t", extraction_schema={}, messages=[call],
                                    info={"claims": bad}), config={"configurable": {"min_verified": 4}}))
     assert ko["messages"][0].status == "error" and "P001" in ko["messages"][0].content and "info" not in ko
+
+
+def test_risk_changes_keeps_only_new_sentences():
+    from underwriter.edgar import risk_changes
+
+    old = ("Table of contents Item 1A. Risk Factors 12 Item 1B. Unresolved staff comments 20 "
+           "Item 1A. Risk Factors Our business depends on consumer demand for our products worldwide. "
+           "We rely on third party suppliers for components in 2025 and beyond. "
+           "Item 1B. Unresolved Staff Comments None.")
+    new = ("Item 1A. Risk Factors Our business depends on consumer demand for our products worldwide. "
+           "We rely on third party suppliers for components in 2026 and beyond. "
+           "New export controls on advanced chips could restrict our sales to certain countries. "
+           "Item 1B. Unresolved Staff Comments None.")
+    out = risk_changes(new, old)
+    assert out["new"] == ["New export controls on advanced chips could restrict our sales to certain countries."]
+    assert out["removed"] == [] and out["sentences_now"] == 3

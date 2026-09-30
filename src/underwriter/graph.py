@@ -5,7 +5,6 @@ web tools replaced by a search over the filing and hard limits on searches and t
 ends with the evidence it has instead of looping.
 """
 
-import json
 from typing import Any, Dict, List, Literal, Optional, cast
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
@@ -23,10 +22,10 @@ from underwriter.verifier import verify
 
 
 def _main_prompt(state: State, configuration: Configuration) -> str:
-    meta = load_index(state.ticker).meta
+    meta = load_index(state.ticker, state.corpus).meta
     return configuration.prompt.format(
-        info=json.dumps(state.extraction_schema, indent=2), topic=state.topic, company=meta["company"],
-        ticker=meta["ticker"], period=meta["period"], filed=meta["filed"], max_searches=configuration.max_searches,
+        topic=state.topic, company=meta["company"], ticker=meta["ticker"], source=meta["source"],
+        max_searches=configuration.max_searches,
     )
 
 
@@ -95,7 +94,7 @@ async def reflect(
     if not isinstance(last_message, AIMessage) or not last_message.tool_calls:
         raise ValueError(f"{reflect.__name__} expects an AI message with the Info call. Got: {type(last_message)}")
     claims = (state.info or {}).get("claims") or []
-    check = verify(claims, load_index(state.ticker).text_of)
+    check = verify(claims, load_index(state.ticker, state.corpus).text_of)
     verified = sum(1 for c in check["claims"] if c["check"]["status"] in ("verified", "number in passage"))
     failed = [c for c in check["claims"] if c["check"]["status"] in ("unverified", "no passage")]
     tool_call_id = last_message.tool_calls[0]["id"]

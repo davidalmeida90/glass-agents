@@ -20,12 +20,12 @@ async def search_filing(
     state: Annotated[State, InjectedState],
     config: Annotated[RunnableConfig, InjectedToolArg],
 ) -> str:
-    """Search the company's latest 10-K and return the best matching passages with their IDs.
+    """Search the filing and return the best matching passages with their IDs.
 
-    Use specific wording from financial statements or MD&A. Passages already shown in this run are not repeated.
+    Use specific wording from the filing. Passages already shown in this run are not repeated.
     """
     configuration = Configuration.from_runnable_config(config)
-    index = load_index(state.ticker)
+    index = load_index(state.ticker, state.corpus)
     hits = index.search(query, configuration.passages_per_search)
     if not hits:
         return "No new passages match this search."

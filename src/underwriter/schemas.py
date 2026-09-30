@@ -43,6 +43,7 @@ class Reader:
     task: str
     schema: dict[str, Any]
     min_verified: int
+    corpus: str = "10-K"
 
 
 READERS: dict[str, Reader] = {
@@ -72,6 +73,16 @@ READERS: dict[str, Reader] = {
               "in shares outstanding, and any large acquisition."),
         schema=evidence_schema(["cash", "debt", "buyback", "dividend", "capex", "shares", "acquisition", "other"], 8),
         min_verified=4,
+    ),
+    "risks": Reader(
+        name="risks",
+        task=("The passages hold only the sentences that are new in this year's risk factors compared with last "
+              "year's. Collect the most material new or expanded risks, one per claim, each with the exact words "
+              "that state it. Skip boilerplate and sentences that only restate an old risk."),
+        schema=evidence_schema(["ai", "regulation", "competition", "supply_chain", "macro", "cybersecurity",
+                                "legal", "geopolitical", "financial", "other"], 6),
+        min_verified=2,
+        corpus="risk_changes",
     ),
 }
 
