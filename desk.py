@@ -109,7 +109,11 @@ async def main() -> int:
             for i in range(args.repeats):
                 if not room():
                     break
-                claims, cost = await read(ticker, "accounting")
+                try:
+                    claims, cost = await read(ticker, "accounting")
+                except Exception as e:  # noqa: BLE001 - e.g. no 10-K under this company's CIK
+                    print(f"  accounting: skipped, {e}")
+                    break
                 accounting_runs.append(claims)
                 costs[f"accounting_{i + 1}"] = cost
         try:

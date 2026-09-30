@@ -1,0 +1,87 @@
+  call  1 preflight        in    276 (cached   128)  out    32  $0.00005   1.0s  Ping                  | run    308 tok $0.0000 of $0.50
+  preflight: forced tool call accepted
+
+=== GOOGL
+  reader performance
+  call  1 call_agent_model in    905 (cached   640)  out   108  $0.00016   0.9s  search_filing,search_filing,search_filing| run  1,013 tok $0.0002 of $0.50
+  call  2 call_agent_model in  5,478 (cached   512)  out   821  $0.00100   3.2s  Info                  | run  7,312 tok $0.0012 of $0.50
+  reader capital
+  call  1 call_agent_model in    905 (cached   640)  out   119  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,024 tok $0.0002 of $0.50
+  call  2 call_agent_model in  4,887 (cached   512)  out   881  $0.00093   3.4s  Info                  | run  6,792 tok $0.0011 of $0.50
+  reader risks
+  call  1 call_agent_model in    940 (cached   640)  out   105  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,045 tok $0.0002 of $0.50
+  call  2 call_agent_model in  2,882 (cached   512)  out   778  $0.00062   3.1s  Info                  | run  4,705 tok $0.0008 of $0.50
+  reader accounting
+  call  1 call_agent_model in    951 (cached   640)  out   119  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,070 tok $0.0002 of $0.50
+  call  2 call_agent_model in  5,069 (cached   512)  out   798  $0.00093   3.3s  Info                  | run  6,937 tok $0.0011 of $0.50
+  reader accounting
+  call  1 call_agent_model in    951 (cached   768)  out   123  $0.00017   1.3s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.50
+  call  2 call_agent_model in  4,912 (cached   768)  out   839  $0.00092   3.2s  Info                  | run  6,825 tok $0.0011 of $0.50
+  reader accounting
+  call  1 call_agent_model in    951 (cached   768)  out   123  $0.00017   1.5s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,912 (cached 4,736)  out   816  $0.00092   3.0s  Info                  | run  6,802 tok $0.0011 of $0.49
+  call  1 red_team         in  2,277 (cached   512)  out   532  $0.00047   4.2s  Objections            | run  2,809 tok $0.0005 of $0.49
+  call  1 red_team         in  2,291 (cached 1,920)  out   544  $0.00047   2.7s  Objections            | run  2,835 tok $0.0005 of $0.49
+  call  1 red_team         in  2,292 (cached 2,048)  out   581  $0.00048   3.2s  Objections            | run  2,873 tok $0.0005 of $0.49
+
+  GOOGL: SELL (agreement 100%: Sell, Sell, Sell)  target weight 0.0%  price 344.08  fair value 209.99 / 209.99 / 256.52
+    owner earnings 160.4B, FCF 53.3B, revenue growth +0.0% (used 0.0%), price implies +12.4%, net debt -142.3B, cash conversion 0.76; volatility 31%
+    - price 344.08 is more than 25% above the bull value (bear 209.99, base 209.99, bull 256.52)
+    - one notch off: cash conversion 0.76 (operating cash flow / net income under 0.8)
+    - red team (rating too high, data_conflict): The desk's own figures contradict the evidence: revenue_growth and growth_used are 0.0 while PERF-2 shows 15% growth and PERF-1 shows $402,8
+    red team: 4 objections (data_conflict 1, method 1, business 2), 1 can move the rating (rating too high)
+    model spend 47,890 tokens, $0.0077 | batch $0.0078 of $0.50
+
+=== META
+  reader performance
+  call  1 call_agent_model in    906 (cached   640)  out   109  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,015 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,115 (cached   512)  out   910  $0.00097   3.2s  Info                  | run  7,040 tok $0.0011 of $0.49
+  reader capital
+  call  1 call_agent_model in    906 (cached   640)  out   115  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,021 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,857 (cached   512)  out 1,050  $0.00097   3.6s  Info                  | run  6,928 tok $0.0011 of $0.49
+  reader risks
+  call  1 call_agent_model in    941 (cached   640)  out   104  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,045 tok $0.0002 of $0.49
+  call  2 call_agent_model in  2,562 (cached   512)  out   746  $0.00057   3.1s  Info                  | run  4,353 tok $0.0007 of $0.49
+  reader accounting
+  call  1 call_agent_model in    952 (cached   640)  out   121  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,073 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,661 (cached   512)  out   823  $0.00088   3.4s  Info                  | run  6,557 tok $0.0011 of $0.49
+  reader accounting
+  call  1 call_agent_model in    952 (cached   768)  out   122  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,741 (cached   768)  out   785  $0.00088   3.0s  Info                  | run  6,600 tok $0.0011 of $0.49
+  reader accounting
+  call  1 call_agent_model in    952 (cached   768)  out   122  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,741 (cached 4,607)  out   825  $0.00089   3.3s  Info                  | run  6,640 tok $0.0011 of $0.49
+
+  META: NO RATING (agreement 100%: No rating, No rating, No rating)  target weight 0.0%  price 725.18
+    - operating cash flow or depreciation not available from XBRL (typical for banks)
+    model spend 38,118 tokens, $0.0062 | batch $0.0139 of $0.50
+
+=== XOM
+  performance: skipped, fewer than 1 10-K filings for XOM on EDGAR
+  capital: skipped, fewer than 1 10-K filings for XOM on EDGAR
+  risks: skipped, fewer than 1 10-K filings for XOM on EDGAR
+Traceback (most recent call last):
+  File "C:\Users\david\Financial_models\underwriting_desk\desk.py", line 199, in <module>
+    raise SystemExit(asyncio.run(main()))
+                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\david\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\david\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\david\AppData\Local\Python\pythoncore-3.11-64\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\david\Financial_models\underwriting_desk\desk.py", line 112, in main
+    claims, cost = await read(ticker, "accounting")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\david\Financial_models\underwriting_desk\desk.py", line 89, in read
+    corpus = load_index(ticker, reader.corpus)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\david\Financial_models\underwriting_desk\src\underwriter\edgar.py", line 191, in load_index
+    meta = latest_filing(ticker, "10-K")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\david\Financial_models\underwriting_desk\src\underwriter\edgar.py", line 55, in latest_filing
+    raise ValueError(f"fewer than {skip + 1} {form} filings for {ticker} on EDGAR")
+ValueError: fewer than 1 10-K filings for XOM on EDGAR

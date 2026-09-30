@@ -103,13 +103,23 @@ def _instant(data: dict, concepts: list[str], as_of: str, taxonomy: str = "us-ga
     return {**max(rows, key=lambda r: (r["end"], r["filed"])), "concept": concept}
 
 
-def _ttm(data: dict, concepts: list[str], as_of: str) -> dict | None:
-    """Trailing twelve months known on as_of: the fiscal year, or last FY + year-to-date - prior year-to-date."""
+def _ttm(data: dict, concepts: list[str], as_of: str, near_end: str | None = None) -> dict | None:
+    """Trailing twelve months known on as_of: the fiscal year, or last FY + year-to-date - prior year-to-date.
+
+    With *near_end*, the twelve months ending within 10 days of that date instead of the latest ones.
+    """
     concept, rows = _facts(data, concepts, as_of)
     flows = [r for r in rows if r.get("start")]
-    if not flows:
+    if near_end:
+        target = date.fromisoformat(near_end)
+        flows_near = [r for r in flows if abs((date.fromisoformat(r["end"]) - target).days) <= 10]
+        if not flows_near:
+            return None
+        end = max(r["end"] for r in flows_near)
+    elif not flows:
         return None
-    end = max(r["end"] for r in flows)
+    else:
+        end = max(r["end"] for r in flows)
     at_end = [r for r in flows if r["end"] == end]
     annual = [r for r in at_end if 350 <= _days(r) <= 380]
     if annual:
@@ -134,8 +144,46 @@ def _ttm(data: dict, concepts: list[str], as_of: str) -> dict | None:
 
 
 def _shares(data: dict, as_of: str) -> dict | None:
-    return (_instant(data, ["EntityCommonStockSharesOutstanding"], as_of, taxonomy="dei", unit="shares")
-            or _instant(data, ["CommonStockSharesOutstanding"], as_of, unit="shares"))
+    """Cover-page count, else balance sheet count, else diluted weighted average of the latest period.
+
+    Companies with several share classes (Meta: A and B) report the cover count per class only, which
+    the XBRL API leaves out, so the diluted weighted average is the last resort.
+    """
+    found = (_instant(data, ["EntityCommonStockSharesOutstanding"], as_of, taxonomy="dei", unit="shares")
+             or _instant(data, ["CommonStockSharesOutstanding"], as_of, unit="shares"))
+    if found:
+        return found
+    concept, rows = _facts(data, ["WeightedAverageNumberOfDilutedSharesOutstanding"], as_of, unit="shares")
+    if not rows:
+        return None
+    return {**max(rows, key=lambda r: (r["end"], r["filed"])), "concept": concept}
+
+
+def yahoo_shares(ticker: str) -> float | None:
+    """Share count implied by Yahoo's market cap and price (all classes, as Yahoo counts them)."""
+    import yfinance as yf
+
+    info = yf.Ticker(ticker).info
+    price = info.get("currentPrice") or info.get("regularMarketPrice")
+    return info["marketCap"] / price if info.get("marketCap") and price else None
+
+
+def checked_shares(ticker: str, xbrl: dict | None, as_of: str) -> tuple[float | None, str]:
+    """XBRL share count unless it is over a year old or more than 10% away from Yahoo's implied count.
+
+    Visa's only undivided cover-page count is from 2010 (later ones are per class), 4x too few shares.
+    """
+    stale = xbrl is None or xbrl["end"] < (date.fromisoformat(as_of) - timedelta(days=400)).isoformat()
+    try:
+        yahoo = yahoo_shares(ticker)
+    except Exception:  # noqa: BLE001 - Yahoo is only the cross-check
+        yahoo = None
+    if not stale and (yahoo is None or abs(xbrl["val"] / yahoo - 1) <= 0.10):
+        return xbrl["val"], f"XBRL {xbrl['concept']} at {xbrl['end']}"
+    if yahoo:
+        why = "XBRL count missing or over a year old" if stale else f"XBRL count {xbrl['val'] / 1e9:.3f}B differs by over 10%"
+        return yahoo, f"Yahoo market cap / price ({why})"
+    return (None, "no share count") if stale else (xbrl["val"], f"XBRL {xbrl['concept']} at {xbrl['end']} (no Yahoo check)")
 
 
 def last_price(ticker: str, as_of: str) -> tuple[float, str]:
@@ -153,7 +201,6 @@ def last_price(ticker: str, as_of: str) -> tuple[float, str]:
 def fundamentals(ticker: str, as_of: str) -> dict[str, Any]:
     """The figures the DCF and the flags need, each with the filing it came from."""
     data = company_facts(ticker)
-    year_ago = (date.fromisoformat(as_of) - timedelta(days=365)).isoformat()
     cash = _instant(data, CASH, as_of)
     securities = _instant(data, SECURITIES, as_of)
     parts = [p for p in (_instant(data, c, as_of) for c in DEBT_PARTS) if p and cash and p["end"] == cash["end"]]
@@ -161,8 +208,13 @@ def fundamentals(ticker: str, as_of: str) -> dict[str, Any]:
     debt = sum(p["val"] for p in parts) if parts else (total_debt["val"] if total_debt else None)
     liquid = (cash["val"] if cash else 0) + (
         securities["val"] if securities and cash and securities["end"] == cash["end"] else 0)
+    revenue = _ttm(data, REVENUE, as_of)
+    revenue_year_ago = None
+    if revenue:
+        prior_end = (date.fromisoformat(revenue["end"]) - timedelta(days=364)).isoformat()
+        revenue_year_ago = _ttm(data, [revenue["concept"]], as_of, near_end=prior_end)
     return {
-        "revenue": _ttm(data, REVENUE, as_of), "revenue_year_ago": _ttm(data, REVENUE, year_ago),
+        "revenue": revenue, "revenue_year_ago": revenue_year_ago,
         "net_income": _ttm(data, NET_INCOME, as_of), "operating_cash_flow": _ttm(data, OCF, as_of),
         "capex": _ttm(data, CAPEX, as_of), "d_and_a": _ttm(data, DA, as_of), "shares": _shares(data, as_of),
         "debt": debt,
@@ -200,7 +252,9 @@ def bank_value(ticker: str, as_of: str, price: float, price_date: str, sic: str)
     """Justified price-to-book for banks: P/B = (ROE - g) / (r - g) on common equity."""
     data = company_facts(ticker)
     equity, preferred = _instant(data, EQUITY, as_of), _instant(data, PREFERRED, as_of)
-    ni, shares = _ttm(data, NI_COMMON, as_of), _shares(data, as_of)
+    ni = _ttm(data, NI_COMMON, as_of)
+    count, count_source = checked_shares(ticker, _shares(data, as_of), as_of)
+    shares = {"val": count, "source": count_source} if count else None
     out: dict[str, Any] = {"ticker": ticker.upper(), "as_of": as_of, "price": price, "price_date": price_date,
                            "sic": sic, "fair_value": None, "note": None,
                            "method": "justified price-to-book: P/B = (ROE - 3%) / (cost of equity - 3%), ROE +/-2 points "
@@ -237,10 +291,14 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
                            "method": "owner earnings (operating cash flow - D&A), 10 years fading to 3%, 9% discount; "
                                      "bear/base/bull = own revenue growth capped at 25% -5/0/+5 points; "
                                      "implied_growth = starting growth the price implies"}
-    ocf, capex, da, shares = f["operating_cash_flow"], f["capex"], f["d_and_a"], f["shares"]
+    ocf, capex, da = f["operating_cash_flow"], f["capex"], f["d_and_a"]
+    count, count_source = checked_shares(ticker, f["shares"], as_of)
+    shares = {"val": count, "source": count_source} if count else None
     rev, rev_ago = f["revenue"], f["revenue_year_ago"]
-    if not (ocf and shares and (da or capex)):
-        out["note"] = "operating cash flow or depreciation not available from XBRL (typical for banks)"
+    missing = [n for n, v in (("operating cash flow", ocf), ("share count", shares),
+                               ("depreciation or capex", da or capex)) if not v]
+    if missing:
+        out["note"] = f"not available from XBRL: {', '.join(missing)}"
         return out
     if da and da["end"] == ocf["end"]:
         owner, basis = ocf["value"] - da["value"], "operating cash flow - depreciation and amortization"
@@ -262,6 +320,7 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
                                f"10-Q XBRL; the readers' evidence comes from the latest 10-K only")
     out.update(fair_value=fair, owner_earnings=owner, owner_earnings_basis=basis, revenue_growth=round(growth, 4),
                growth_used=round(base_growth, 4), net_debt=net_debt, shares_outstanding=shares["val"],
+               shares_source=shares["source"],
                implied_growth=round(implied_growth(owner, price * shares["val"] + net_debt), 4),
                fcf=(ocf["value"] - capex["value"]) if capex and capex["end"] == ocf["end"] else None,
                cash_conversion=round(ocf["value"] / f["net_income"]["value"], 3)
