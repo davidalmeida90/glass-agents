@@ -160,3 +160,34 @@ def test_clean_control_wording_raises_no_red_flag():
                           "quote": "Management did not identify any material weaknesses in internal control"},
                          {"topic": "internal_control", "check": ok, "quote": "there were no identified material weaknesses"}]}
     assert flags({"cash_conversion": 1.1}, ev, None)["red"] == []
+
+
+def test_red_team_moves_a_rating_only_with_supported_high_objections():
+    from underwriter.decision import adjust
+    from underwriter.redteam import adjustment
+
+    base = {"rating": "Buy", "why": ["x"], "upside_to_base": 0.3}
+    weak = {"verdict": "rating too high", "objections": [
+        {"severity": "high", "supported": False, "argument": "cites nothing real"},
+        {"severity": "medium", "supported": True, "argument": "minor"}]}
+    assert adjustment(weak) == (0, None)
+    strong = {"verdict": "rating too high", "objections": [{"severity": "high", "supported": True, "argument": "capex"}]}
+    step, reason = adjustment(strong)
+    assert step == -1 and adjust(base, step, reason)["rating"] == "Overweight"
+    assert adjust(dict(base, rating="Sell"), -1, "r")["rating"] == "Sell"  # never below the scale
+    assert adjust(dict(base, rating="No rating"), -1, "r")["rating"] == "No rating"
+
+
+def test_sizing_scales_by_volatility_and_confidence():
+    from underwriter.sizing import size
+
+    assert size("Hold", 1.0, 0.2)["weight"] == 0.0
+    assert size("Buy", 1.0, 0.25)["weight"] == 0.05
+    assert size("Buy", 1.0, 0.50)["weight"] == 0.025          # twice as volatile, half the weight
+    assert size("Buy", 2 / 3, 0.25)["weight"] == round(0.05 * 2 / 3, 4)
+    assert size("Buy", 1.0, 0.05)["weight"] == 0.075           # scaling capped at 1.5x
+
+
+def test_justified_price_to_book():
+    # ROE 15%, g 3%, r 10%: P/B = 0.12 / 0.07
+    assert abs((0.15 - 0.03) / (0.10 - 0.03) - 1.7142857) < 1e-6

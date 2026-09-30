@@ -56,3 +56,11 @@ def decide(value: dict[str, Any], flag_set: dict[str, list[str]]) -> dict[str, A
         step = max(step - 1, 0)
         why.append(f"one notch off: {c}")
     return {"rating": RATINGS[step], "why": why, "upside_to_base": round(fv["base"] / price - 1, 4)}
+
+
+def adjust(decision: dict[str, Any], step: int, reason: str | None) -> dict[str, Any]:
+    """Move a rating by *step* notches (the red team's at most one), keeping the reason."""
+    if not step or decision["rating"] not in RATINGS:
+        return decision
+    i = min(max(RATINGS.index(decision["rating"]) + step, 0), len(RATINGS) - 1)
+    return dict(decision, rating=RATINGS[i], why=decision["why"] + [reason or f"{step:+d} notch"])

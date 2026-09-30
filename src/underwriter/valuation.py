@@ -32,6 +32,12 @@ SECURITIES = ["MarketableSecuritiesCurrent", "AvailableForSaleSecuritiesDebtSecu
 DEBT_PARTS = [["LongTermDebtNoncurrent"], ["LongTermDebtCurrent"], ["CommercialPaper"], ["ShortTermBorrowings"]]
 DEBT_TOTAL = ["LongTermDebt", "DebtInstrumentCarryingAmount"]
 
+EQUITY = ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"]
+PREFERRED = ["PreferredStockValue", "PreferredStockValueOutstanding"]
+NI_COMMON = ["NetIncomeLossAvailableToCommonStockholdersBasic", "NetIncomeLoss"]
+BANK_SIC = {"6021", "6022", "6029", "6035", "6036", "6211"}  # commercial and savings banks, broker-dealers
+BANK_SCENARIOS = {"bear": (-0.02, 0.11), "base": (0.0, 0.10), "bull": (0.02, 0.09)}  # ROE points, cost of equity
+
 SCENARIOS = {"bear": -0.05, "base": 0.0, "bull": 0.05}  # points added to the company's own growth
 GROWTH_CAP = 0.25
 DISCOUNT = 0.09
@@ -40,12 +46,24 @@ YEARS = 10
 
 
 # ------------------------------------------------------------------ SEC XBRL (adapted from Glassbench)
-def company_facts(ticker: str) -> dict[str, Any]:
+def _cik(ticker: str) -> int:
     tickers = json.loads(sec_get("https://www.sec.gov/files/company_tickers.json", "company_tickers.json"))
     co = next((v for v in tickers.values() if v["ticker"].upper() == ticker.upper()), None)
     if co is None:
         raise ValueError(f"unknown ticker {ticker}")
-    cik = co["cik_str"]
+    return co["cik_str"]
+
+
+def industry(ticker: str) -> tuple[str, str]:
+    """SEC industry code and description from the submissions API."""
+    cik = _cik(ticker)
+    sub = json.loads(sec_get(f"https://data.sec.gov/submissions/CIK{cik:010d}.json",
+                             f"submissions-{cik}-{date.today().isoformat()}.json"))
+    return str(sub.get("sic", "")), sub.get("sicDescription", "")
+
+
+def company_facts(ticker: str) -> dict[str, Any]:
+    cik = _cik(ticker)
     name = f"companyfacts-{cik}-{date.today().isoformat()}.json"  # refreshed once a day
     return json.loads(sec_get(f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json", name))
 
@@ -178,13 +196,45 @@ def implied_growth(cash_flow: float, enterprise_value: float, discount: float = 
     return (lo + hi) / 2
 
 
+def bank_value(ticker: str, as_of: str, price: float, price_date: str, sic: str) -> dict[str, Any]:
+    """Justified price-to-book for banks: P/B = (ROE - g) / (r - g) on common equity."""
+    data = company_facts(ticker)
+    equity, preferred = _instant(data, EQUITY, as_of), _instant(data, PREFERRED, as_of)
+    ni, shares = _ttm(data, NI_COMMON, as_of), _shares(data, as_of)
+    out: dict[str, Any] = {"ticker": ticker.upper(), "as_of": as_of, "price": price, "price_date": price_date,
+                           "sic": sic, "fair_value": None, "note": None,
+                           "method": "justified price-to-book: P/B = (ROE - 3%) / (cost of equity - 3%), ROE +/-2 points "
+                                     "and cost of equity 11/10/9% for bear/base/bull"}
+    if not (equity and ni and shares):
+        out["note"] = "equity, net income or share count not available from XBRL"
+        return out
+    common = equity["val"] - (preferred["val"] if preferred and preferred["end"] == equity["end"] else 0)
+    roe = ni["value"] / common
+    bvps = common / shares["val"]
+    fair = {}
+    for name, (d_roe, r) in BANK_SCENARIOS.items():
+        pb = max((roe + d_roe - TERMINAL_GROWTH) / (r - TERMINAL_GROWTH), 0.0)
+        fair[name] = round(bvps * pb, 2)
+    out.update(fair_value=fair, roe=round(roe, 4), book_value_per_share=round(bvps, 2),
+               implied_roe=round(price / bvps * (0.10 - TERMINAL_GROWTH) + TERMINAL_GROWTH, 4),
+               shares_outstanding=shares["val"], cash_conversion=None,
+               inputs={"common_equity": common, "net_income_to_common": ni, "equity": equity, "preferred": preferred})
+    return out
+
+
 def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     """Fair value range per share, the inputs behind it, and why it is missing when it is."""
     as_of = as_of or date.today().isoformat()
-    f = fundamentals(ticker, as_of)
     price, price_date = last_price(ticker, as_of)
+    sic, _ = industry(ticker)
+    if sic in BANK_SIC:
+        return bank_value(ticker, as_of, price, price_date, sic)
+    f = fundamentals(ticker, as_of)
     out: dict[str, Any] = {"ticker": ticker.upper(), "as_of": as_of, "price": price, "price_date": price_date,
-                           "inputs": f, "fair_value": None, "note": None}
+                           "sic": sic, "inputs": f, "fair_value": None, "note": None,
+                           "method": "owner earnings (operating cash flow - D&A), 10 years fading to 3%, 9% discount; "
+                                     "bear/base/bull = own revenue growth capped at 25% -5/0/+5 points; "
+                                     "implied_growth = starting growth the price implies"}
     ocf, capex, da, shares = f["operating_cash_flow"], f["capex"], f["d_and_a"], f["shares"]
     rev, rev_ago = f["revenue"], f["revenue_year_ago"]
     if not (ocf and shares and (da or capex)):
