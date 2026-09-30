@@ -1,440 +1,441 @@
-  call  1 preflight        in    276 (cached   128)  out    32  $0.00005   1.1s  Ping                  | run    308 tok $0.0000 of $0.50
+  call  1 preflight        in    276 (cached   128)  out    32  $0.00005   0.9s  Ping                  | run    308 tok $0.0000 of $0.50
   preflight: forced tool call accepted
 
 === MSFT
   reader performance
-  call  1 call_agent_model in    907 (cached   768)  out   103  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,010 tok $0.0002 of $0.50
-  call  2 call_agent_model in  5,313 (cached 5,120)  out   854  $0.00098   2.9s  Info                  | run  7,177 tok $0.0011 of $0.50
+  call  1 call_agent_model in    936 (cached   640)  out   108  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,044 tok $0.0002 of $0.50
+  call  2 call_agent_model in  5,715 (cached   640)  out   899  $0.00105   3.4s  Info                  | run  7,658 tok $0.0012 of $0.50
   reader capital
   call  1 call_agent_model in    907 (cached   768)  out   112  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,019 tok $0.0002 of $0.50
-  call  2 call_agent_model in  5,848 (cached 5,632)  out   833  $0.00105   3.2s  Info                  | run  7,700 tok $0.0012 of $0.50
+  call  2 call_agent_model in  5,848 (cached 5,632)  out   858  $0.00106   2.9s  Info                  | run  7,725 tok $0.0012 of $0.50
   reader risks
-  call  1 call_agent_model in    942 (cached   768)  out    73  $0.00015   1.1s  search_filing,search_filing| run  1,015 tok $0.0002 of $0.50
-  call  2 call_agent_model in  2,980 (cached   896)  out    42  $0.00043   1.1s  search_filing         | run  4,037 tok $0.0006 of $0.50
-  call  3 call_agent_model in  3,999 (cached   768)  out   700  $0.00076   3.0s  Info                  | run  8,736 tok $0.0013 of $0.50
-  reader accounting
-  call  1 call_agent_model in    953 (cached   768)  out   119  $0.00017   0.9s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.50
-  call  2 call_agent_model in  4,816 (cached 4,608)  out   878  $0.00092   3.0s  Info                  | run  6,766 tok $0.0011 of $0.50
+  call  1 call_agent_model in    942 (cached   768)  out    73  $0.00015   1.0s  search_filing,search_filing| run  1,015 tok $0.0002 of $0.50
+  call  2 call_agent_model in  2,980 (cached 2,816)  out    77  $0.00044   1.4s  search_filing,search_filing| run  4,072 tok $0.0006 of $0.50
+  call  3 call_agent_model in  4,008 (cached 2,688)  out   651  $0.00074   2.7s  Info                  | run  8,731 tok $0.0013 of $0.50
   reader accounting
   call  1 call_agent_model in    953 (cached   768)  out   121  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.50
   call  2 call_agent_model in  4,818 (cached 4,608)  out   877  $0.00092   3.2s  Info                  | run  6,769 tok $0.0011 of $0.50
   reader accounting
-  call  1 call_agent_model in    953 (cached   768)  out   121  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.49
-  call  2 call_agent_model in  4,818 (cached 4,608)  out   877  $0.00092   3.7s  Info                  | run  6,769 tok $0.0011 of $0.49
-  call  1 red_team         in  4,881 (cached   768)  out   579  $0.00085   3.0s  Objections            | run  5,460 tok $0.0008 of $0.49
-  call  1 red_team         in  4,881 (cached 4,480)  out   565  $0.00084   3.2s  Objections            | run  5,446 tok $0.0008 of $0.49
-  call  1 red_team         in  4,881 (cached 4,736)  out   521  $0.00083   2.8s  Objections            | run  5,402 tok $0.0008 of $0.49
+  call  1 call_agent_model in    953 (cached   768)  out   121  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.50
+  call  2 call_agent_model in  4,818 (cached 4,608)  out   877  $0.00092   3.1s  Info                  | run  6,769 tok $0.0011 of $0.50
+  reader accounting
+  call  1 call_agent_model in    953 (cached   768)  out   121  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.49
+  call  2 call_agent_model in  4,818 (cached 4,608)  out   877  $0.00092   3.3s  Info                  | run  6,769 tok $0.0011 of $0.49
+  call  1 red_team         in  5,060 (cached   640)  out   614  $0.00088   3.4s  Objections            | run  5,674 tok $0.0009 of $0.49
+  call  1 red_team         in  5,060 (cached 4,736)  out   585  $0.00087   3.5s  Objections            | run  5,645 tok $0.0009 of $0.49
+  call  1 red_team         in  5,060 (cached 4,864)  out   673  $0.00090   4.1s  Objections            | run  5,733 tok $0.0009 of $0.49
 
   MSFT: HOLD (agreement 100%: Hold, Hold, Hold)  target weight 0.0%  price 512.90  fair value 268.41 / 514.44 / 724.51
     WACC 9.8% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.28 [Software (System & Application); regression 1.068], ERP 4.1%, Ke 10.1%, rating AAA at coverage 50.88, Kd 5.1%, E/V 96.7%)
     growth +17.8% (used 17.8%), price implies +17.6%; margin 48.5%, ROIC 23.1%, sales/capital 0.784, SBC 3.7% of revenue; terminal 73.4% of EV; EV/EBIT at base 24.0x vs market 24.0x; volatility 32%
     - price / base fair value 1.00 at High uncertainty (volatility 32%, range 0.89x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
-    red team: 4 objections (method 2, business 2), 0 can move the rating (none)
-    model spend 60,225 tokens, $0.0095 | batch $0.0095 of $0.50
+    red team: 4 objections (method 2, business 1, data_conflict 1), 0 can move the rating (none)
+    model spend 61,473 tokens, $0.0097 | batch $0.0097 of $0.50
 
 === AAPL
   reader performance
-  call  1 call_agent_model in    904 (cached   768)  out   121  $0.00016   1.4s  search_filing,search_filing,search_filing| run  1,025 tok $0.0002 of $0.49
-  call  2 call_agent_model in  6,067 (cached 5,888)  out   881  $0.00110   3.3s  Info                  | run  7,973 tok $0.0013 of $0.49
-  call  3 call_agent_model in  7,019 (cached 6,784)  out   867  $0.00123   3.0s  Info                  | run 15,859 tok $0.0025 of $0.49
+  call  1 call_agent_model in    965 (cached   640)  out   115  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,080 tok $0.0002 of $0.49
+  call  2 call_agent_model in  6,200 (cached   640)  out   991  $0.00115   3.6s  Info                  | run  8,271 tok $0.0013 of $0.49
+  call  3 call_agent_model in  7,263 (cached 6,144)  out   983  $0.00129   3.4s  Info                  | run 16,517 tok $0.0026 of $0.49
   reader capital
-  call  1 call_agent_model in    904 (cached   768)  out   123  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,027 tok $0.0002 of $0.49
-  call  2 call_agent_model in  5,675 (cached 5,504)  out   812  $0.00102   3.2s  Info                  | run  7,514 tok $0.0012 of $0.49
+  call  1 call_agent_model in    904 (cached   768)  out   123  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,027 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,675 (cached 5,504)  out   812  $0.00102   3.4s  Info                  | run  7,514 tok $0.0012 of $0.49
   reader risks
-  call  1 call_agent_model in    939 (cached   768)  out   102  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,041 tok $0.0002 of $0.49
-  call  2 call_agent_model in  3,465 (cached 3,328)  out   803  $0.00071   3.3s  Info                  | run  5,309 tok $0.0009 of $0.49
+  call  1 call_agent_model in    939 (cached   768)  out   102  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,041 tok $0.0002 of $0.49
+  call  2 call_agent_model in  3,465 (cached 3,328)  out   775  $0.00070   3.2s  Info                  | run  5,281 tok $0.0009 of $0.49
   reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   122  $0.00017   1.6s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.49
-  call  2 call_agent_model in  5,312 (cached 5,120)  out   884  $0.00099   3.4s  Info                  | run  7,268 tok $0.0012 of $0.49
+  call  1 call_agent_model in    950 (cached   768)  out   121  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.49
+  call  2 call_agent_model in  5,232 (cached 4,992)  out   855  $0.00097   3.5s  Info                  | run  7,158 tok $0.0011 of $0.49
   reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   121  $0.00017   1.3s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.48
-  call  2 call_agent_model in  5,232 (cached   768)  out   844  $0.00097   3.3s  Info                  | run  7,147 tok $0.0011 of $0.48
+  call  1 call_agent_model in    950 (cached   768)  out   122  $0.00017   1.5s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,312 (cached 5,120)  out   890  $0.00099   3.5s  Info                  | run  7,274 tok $0.0012 of $0.48
   reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   122  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.48
-  call  2 call_agent_model in  5,299 (cached 5,120)  out   890  $0.00099   3.4s  Info                  | run  7,261 tok $0.0012 of $0.48
-  call  1 red_team         in  4,967 (cached   768)  out   607  $0.00087   3.3s  Objections            | run  5,574 tok $0.0009 of $0.48
-  call  1 red_team         in  4,954 (cached 4,480)  out   612  $0.00086   3.6s  Objections            | run  5,566 tok $0.0009 of $0.48
-  call  1 red_team         in  4,964 (cached 4,608)  out   569  $0.00085   3.2s  Objections            | run  5,533 tok $0.0009 of $0.48
+  call  1 call_agent_model in    950 (cached   768)  out   122  $0.00017   0.9s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,312 (cached 5,120)  out   884  $0.00099   3.4s  Info                  | run  7,268 tok $0.0012 of $0.48
+  call  1 red_team         in  5,145 (cached   768)  out   658  $0.00090   3.6s  Objections            | run  5,803 tok $0.0009 of $0.48
+  call  1 red_team         in  5,159 (cached 4,736)  out   605  $0.00089   3.4s  Objections            | run  5,764 tok $0.0009 of $0.48
+  call  1 red_team         in  5,162 (cached 4,736)  out   625  $0.00090   3.4s  Objections            | run  5,787 tok $0.0009 of $0.48
 
-  AAPL: SELL (agreement 67%: Sell, Underweight, Sell)  target weight 0.0%  price 333.02  fair value 149.55 / 300.91 / 415.31
+  AAPL: UNDERWEIGHT (agreement 100%: Underweight, Underweight, Underweight)  target weight 0.0%  price 333.02  fair value 149.55 / 300.91 / 415.31
     WACC 10.2% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.344 [Computers/Peripherals; regression 1.047], ERP 4.1%, Ke 10.3%, rating AAA at coverage 39.37, Kd 5.1%, E/V 98.0%)
     growth +14.2% (used 14.2%), price implies +19.2%; margin 36.9%, ROIC 58.6%, sales/capital 2.207, SBC 2.9% of revenue; terminal 70.8% of EV; EV/EBIT at base 25.7x vs market 28.4x; volatility 25%
     - price / base fair value 1.11 at Medium uncertainty (volatility 25%, range 0.88x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
-    - red team correction {'growth': 0.06}: base value 220.82, P/FV 1.51
-    red team: 4 objections (data_conflict 1, business 1, method 2), 2 can move the rating (rating too high, rating too low)
-    model spend 67,031 tokens, $0.0106 | batch $0.0201 of $0.50
+    red team: 4 objections (data_conflict 1, business 2, method 1), 1 can move the rating (rating too low)
+    model spend 68,366 tokens, $0.0108 | batch $0.0205 of $0.50
 
 === NVDA
   reader performance
-  call  1 call_agent_model in    904 (cached   768)  out   122  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,026 tok $0.0002 of $0.48
-  call  2 call_agent_model in  5,265 (cached 5,120)  out   868  $0.00098   3.3s  Info                  | run  7,159 tok $0.0011 of $0.48
+  call  1 call_agent_model in    965 (cached   640)  out   110  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,075 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,324 (cached   640)  out   857  $0.00099   3.3s  Info                  | run  7,256 tok $0.0012 of $0.48
   reader capital
-  call  1 call_agent_model in    904 (cached   768)  out   108  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,012 tok $0.0002 of $0.48
-  call  2 call_agent_model in  5,021 (cached   768)  out   827  $0.00093   3.2s  Info                  | run  6,860 tok $0.0011 of $0.48
+  call  1 call_agent_model in    904 (cached   768)  out   108  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,012 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,021 (cached 4,864)  out   846  $0.00094   3.2s  Info                  | run  6,879 tok $0.0011 of $0.48
   reader risks
-  call  1 call_agent_model in    939 (cached   768)  out   103  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,042 tok $0.0002 of $0.48
-  call  2 call_agent_model in  3,525 (cached 3,328)  out   752  $0.00070   3.1s  Info                  | run  5,319 tok $0.0009 of $0.48
+  call  1 call_agent_model in    939 (cached   768)  out   103  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,042 tok $0.0002 of $0.48
+  call  2 call_agent_model in  3,525 (cached 3,328)  out   757  $0.00071   3.2s  Info                  | run  5,324 tok $0.0009 of $0.48
+  reader accounting
+  call  1 call_agent_model in    950 (cached   768)  out   121  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.48
+  call  2 call_agent_model in  5,064 (cached 4,864)  out   897  $0.00096   3.2s  Info                  | run  7,032 tok $0.0011 of $0.48
   reader accounting
   call  1 call_agent_model in    950 (cached   768)  out   121  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.48
-  call  2 call_agent_model in  5,064 (cached 4,864)  out   897  $0.00096   3.4s  Info                  | run  7,032 tok $0.0011 of $0.48
+  call  2 call_agent_model in  5,064 (cached 4,864)  out   896  $0.00096   3.2s  Info                  | run  7,031 tok $0.0011 of $0.48
   reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   122  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.48
-  call  2 call_agent_model in  5,033 (cached   768)  out   822  $0.00093   3.1s  Info                  | run  6,927 tok $0.0011 of $0.48
-  reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   121  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.47
-  call  2 call_agent_model in  5,064 (cached 4,864)  out   897  $0.00096   3.5s  Info                  | run  7,032 tok $0.0011 of $0.47
-  call  1 red_team         in  5,076 (cached   640)  out   551  $0.00086   2.9s  Objections            | run  5,627 tok $0.0009 of $0.47
-  call  1 red_team         in  5,044 (cached 4,608)  out   622  $0.00088   3.4s  Objections            | run  5,666 tok $0.0009 of $0.47
-  call  1 red_team         in  5,076 (cached 4,864)  out   633  $0.00089   3.2s  Objections            | run  5,709 tok $0.0009 of $0.47
+  call  1 call_agent_model in    950 (cached   768)  out   121  $0.00017   1.3s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.47
+  call  2 call_agent_model in  5,064 (cached 4,864)  out   893  $0.00096   3.3s  Info                  | run  7,028 tok $0.0011 of $0.47
+  call  1 red_team         in  5,183 (cached   768)  out   581  $0.00089   3.1s  Objections            | run  5,764 tok $0.0009 of $0.47
+  call  1 red_team         in  5,180 (cached 4,864)  out   581  $0.00089   3.2s  Objections            | run  5,761 tok $0.0009 of $0.47
+  call  1 red_team         in  5,183 (cached 4,992)  out   686  $0.00092   3.6s  Objections            | run  5,869 tok $0.0009 of $0.47
 
-  NVDA: UNDERWEIGHT (agreement 100%: Underweight, Underweight, Underweight)  target weight 0.0%  price 228.38  fair value 146.85 / 281.89 / 404.23
+  NVDA: HOLD (agreement 100%: Hold, Hold, Hold)  target weight 0.0%  price 228.38  fair value 146.85 / 281.89 / 404.23
     WACC 11.0% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.513 [Semiconductor; regression 1.815], ERP 4.1%, Ke 11.0%, rating AAA at coverage 425.82, Kd 5.1%, E/V 99.3%)
     growth +83.4% (used 30.0%), price implies +19.1%; margin 70.5%, ROIC 62.1%, sales/capital 1.146, SBC 2.4% of revenue; terminal 70.5% of EV; EV/EBIT at base 31.9x vs market 25.9x; volatility 38%
     - price / base fair value 0.81 at High uncertainty (volatility 38%, range 0.91x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
-    - one notch off: cash conversion 0.75 (operating cash flow / net income under 0.8)
-    - red team correction {'operating_margin': 0.604}: base value 235.14, P/FV 0.97
-    red team: 4 objections (data_conflict 2, business 2), 1 can move the rating (rating too high)
-    model spend 57,331 tokens, $0.0091 | batch $0.0292 of $0.50
+    - one notch off: cash conversion 0.75 (operating cash flow / NOPAT under 0.8)
+    red team: 4 objections (data_conflict 1, business 1, method 2), 2 can move the rating (rating too high, rating too low)
+    model spend 57,944 tokens, $0.0092 | batch $0.0297 of $0.50
 
 === AMZN
   reader performance
-  call  1 call_agent_model in    906 (cached   768)  out   103  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,009 tok $0.0002 of $0.47
-  call  2 call_agent_model in  5,330 (cached 5,120)  out   787  $0.00097   3.2s  Info                  | run  7,126 tok $0.0011 of $0.47
+  call  1 call_agent_model in    967 (cached   640)  out   107  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.47
+  call  2 call_agent_model in  5,112 (cached   640)  out   883  $0.00096   3.5s  Info                  | run  7,069 tok $0.0011 of $0.47
   reader capital
-  call  1 call_agent_model in    906 (cached   768)  out   118  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,024 tok $0.0002 of $0.47
-  call  2 call_agent_model in  5,565 (cached   640)  out   829  $0.00101   3.8s  Info                  | run  7,418 tok $0.0012 of $0.47
+  call  1 call_agent_model in    906 (cached   768)  out   111  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,017 tok $0.0002 of $0.47
+  call  2 call_agent_model in  5,298 (cached 5,120)  out   857  $0.00098   3.2s  Info                  | run  7,172 tok $0.0011 of $0.47
   reader risks
-  call  1 call_agent_model in    941 (cached   768)  out   109  $0.00016   1.5s  search_filing,search_filing,search_filing| run  1,050 tok $0.0002 of $0.47
-  call  2 call_agent_model in  1,206 (cached 1,024)  out   260  $0.00024   1.9s  Info                  | run  2,516 tok $0.0004 of $0.47
+  call  1 call_agent_model in    941 (cached   768)  out    75  $0.00015   1.2s  search_filing,search_filing| run  1,016 tok $0.0002 of $0.47
+  call  2 call_agent_model in  1,212 (cached 1,024)  out    76  $0.00019   1.0s  search_filing,search_filing| run  2,304 tok $0.0003 of $0.47
+  call  3 call_agent_model in  1,222 (cached 1,024)  out   262  $0.00024   1.8s  Info                  | run  3,788 tok $0.0006 of $0.47
+  reader accounting
+  call  1 call_agent_model in    952 (cached   768)  out   119  $0.00017   1.4s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.47
+  call  2 call_agent_model in  4,692 (cached 4,480)  out   841  $0.00089   3.4s  Info                  | run  6,604 tok $0.0011 of $0.47
   reader accounting
   call  1 call_agent_model in    952 (cached   768)  out   119  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.47
-  call  2 call_agent_model in  4,692 (cached 4,480)  out   841  $0.00089   3.3s  Info                  | run  6,604 tok $0.0011 of $0.47
+  call  2 call_agent_model in  4,692 (cached 4,480)  out   837  $0.00089   3.0s  Info                  | run  6,600 tok $0.0011 of $0.47
   reader accounting
-  call  1 call_agent_model in    952 (cached   768)  out   119  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.47
-  call  2 call_agent_model in  4,692 (cached 4,480)  out   862  $0.00090   3.5s  Info                  | run  6,625 tok $0.0011 of $0.47
-  reader accounting
-  call  1 call_agent_model in    952 (cached   768)  out   119  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.47
-  call  2 call_agent_model in  4,692 (cached 4,480)  out   851  $0.00090   3.2s  Info                  | run  6,614 tok $0.0011 of $0.47
-  call  1 red_team         in  4,778 (cached   768)  out   632  $0.00085   3.5s  Objections            | run  5,410 tok $0.0008 of $0.46
-  call  1 red_team         in  4,780 (cached 4,352)  out   657  $0.00085   3.5s  Objections            | run  5,437 tok $0.0009 of $0.46
-  call  1 red_team         in  4,788 (cached 4,224)  out   585  $0.00083   3.4s  Objections            | run  5,373 tok $0.0008 of $0.46
+  call  1 call_agent_model in    952 (cached   768)  out   121  $0.00017   0.9s  search_filing,search_filing,search_filing| run  1,073 tok $0.0002 of $0.47
+  call  2 call_agent_model in  4,782 (cached 4,608)  out   836  $0.00090   3.0s  Info                  | run  6,691 tok $0.0011 of $0.47
+  call  1 red_team         in  4,979 (cached   768)  out   566  $0.00086   3.5s  Objections            | run  5,545 tok $0.0009 of $0.46
+  call  1 red_team         in  4,977 (cached 4,608)  out   581  $0.00086   3.2s  Objections            | run  5,558 tok $0.0009 of $0.46
+  call  1 red_team         in  4,972 (cached 4,480)  out   594  $0.00086   3.1s  Objections            | run  5,566 tok $0.0009 of $0.46
 
   AMZN: SELL (agreement 100%: Sell, Sell, Sell)  target weight 0.0%  price 249.15  fair value 84.57 / 145.33 / 264.70
     WACC 7.8% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.831 [Retail (General); regression 1.305], ERP 4.1%, Ke 8.2%, rating AAA at coverage 28.13, Kd 5.1%, E/V 92.2%)
     growth +15.8% (used 15.8%), price implies +53.2%; margin 12.1%, ROIC 11.0%, sales/capital 1.241, SBC 2.5% of revenue; terminal 87.7% of EV; EV/EBIT at base 17.9x vs market 29.8x; volatility 34%
     - price / base fair value 1.71 at High uncertainty (volatility 34%, range 1.24x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
-    red team: 4 objections (data_conflict 2, business 1, method 1), 1 can move the rating (rating too low)
-    model spend 53,123 tokens, $0.0084 | batch $0.0376 of $0.50
+    red team: 4 objections (method 2, data_conflict 1, business 1), 0 can move the rating (none)
+    model spend 54,593 tokens, $0.0086 | batch $0.0383 of $0.50
 
 === GOOGL
   reader performance
-  call  1 call_agent_model in    905 (cached   768)  out   106  $0.00016   0.9s  search_filing,search_filing,search_filing| run  1,011 tok $0.0002 of $0.46
-  call  2 call_agent_model in  5,362 (cached   640)  out   847  $0.00099   3.2s  Info                  | run  7,220 tok $0.0011 of $0.46
+  call  1 call_agent_model in    966 (cached   640)  out   108  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.46
+  call  2 call_agent_model in  5,151 (cached   640)  out   968  $0.00099   3.4s  Info                  | run  7,193 tok $0.0012 of $0.46
   reader capital
-  call  1 call_agent_model in    905 (cached   768)  out   118  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,023 tok $0.0002 of $0.46
-  call  2 call_agent_model in  4,824 (cached   640)  out   826  $0.00091   3.3s  Info                  | run  6,673 tok $0.0011 of $0.46
+  call  1 call_agent_model in    905 (cached   768)  out   119  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,024 tok $0.0002 of $0.46
+  call  2 call_agent_model in  4,887 (cached 4,736)  out   862  $0.00093   3.1s  Info                  | run  6,773 tok $0.0011 of $0.46
   reader risks
-  call  1 call_agent_model in    940 (cached   768)  out    74  $0.00015   1.1s  search_filing,search_filing| run  1,014 tok $0.0002 of $0.46
-  call  2 call_agent_model in  2,891 (cached   896)  out    42  $0.00042   1.4s  search_filing         | run  3,947 tok $0.0006 of $0.46
-  call  3 call_agent_model in  2,902 (cached   640)  out   718  $0.00061   2.8s  Info                  | run  7,567 tok $0.0012 of $0.46
+  call  1 call_agent_model in    940 (cached   768)  out   104  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,044 tok $0.0002 of $0.46
+  call  2 call_agent_model in  2,881 (cached 2,688)  out   704  $0.00060   2.9s  Info                  | run  4,629 tok $0.0008 of $0.46
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   123  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.46
-  call  2 call_agent_model in  4,912 (cached 4,736)  out   816  $0.00092   3.4s  Info                  | run  6,802 tok $0.0011 of $0.46
-  reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   123  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.46
-  call  2 call_agent_model in  4,912 (cached 4,736)  out   874  $0.00093   3.3s  Info                  | run  6,860 tok $0.0011 of $0.46
+  call  1 call_agent_model in    951 (cached   768)  out   120  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.46
+  call  2 call_agent_model in  4,943 (cached   768)  out   834  $0.00093   3.2s  Info                  | run  6,848 tok $0.0011 of $0.46
+  call  3 call_agent_model in  5,846 (cached 4,864)  out   838  $0.00105   3.1s  Info                  | run 13,532 tok $0.0021 of $0.46
   reader accounting
   call  1 call_agent_model in    951 (cached   768)  out   123  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.46
-  call  2 call_agent_model in  4,912 (cached 4,736)  out   816  $0.00092   3.1s  Info                  | run  6,802 tok $0.0011 of $0.46
-  call  1 red_team         in  4,941 (cached   768)  out   645  $0.00087   3.8s  Objections            | run  5,586 tok $0.0009 of $0.46
-  call  1 red_team         in  4,963 (cached 4,480)  out   710  $0.00089   4.0s  Objections            | run  5,673 tok $0.0009 of $0.45
-  call  1 red_team         in  4,941 (cached 4,736)  out   543  $0.00084   3.6s  Objections            | run  5,484 tok $0.0008 of $0.45
+  call  2 call_agent_model in  4,912 (cached 4,736)  out   835  $0.00092   3.0s  Info                  | run  6,821 tok $0.0011 of $0.46
+  reader accounting
+  call  1 call_agent_model in    951 (cached   768)  out   123  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.46
+  call  2 call_agent_model in  4,912 (cached 4,736)  out   874  $0.00093   3.1s  Info                  | run  6,860 tok $0.0011 of $0.46
+  call  1 red_team         in  5,224 (cached   768)  out   543  $0.00088   2.8s  Objections            | run  5,767 tok $0.0009 of $0.45
+  call  1 red_team         in  5,210 (cached 4,736)  out   617  $0.00090   3.7s  Objections            | run  5,827 tok $0.0009 of $0.45
+  call  1 red_team         in  5,232 (cached 4,736)  out   579  $0.00089   3.1s  Objections            | run  5,811 tok $0.0009 of $0.45
 
   GOOGL: HOLD (agreement 100%: Hold, Hold, Hold)  target weight 0.0%  price 344.08  fair value 195.17 / 365.48 / 511.87
     WACC 8.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.042 [Software (Entertainment); regression 1.141], ERP 4.1%, Ke 9.1%, rating AAA at coverage 65.55, Kd 5.1%, E/V 97.3%)
     growth +20.1% (used 20.1%), price implies +16.6%; margin 38.5%, ROIC 22.1%, sales/capital 0.787, SBC 6.3% of revenue; terminal 76.1% of EV; EV/EBIT at base 25.3x vs market 23.8x; volatility 31%
     - price / base fair value 0.94 at High uncertainty (volatility 31%, range 0.87x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
-    red team: 4 objections (method 2, business 1, data_conflict 1), 0 can move the rating (none)
-    model spend 58,667 tokens, $0.0093 | batch $0.0468 of $0.50
+    red team: 4 objections (business 2, method 1, data_conflict 1), 1 can move the rating (rating too low)
+    model spend 63,213 tokens, $0.0100 | batch $0.0484 of $0.50
 
 === META
   reader performance
-  call  1 call_agent_model in    906 (cached   768)  out   109  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,015 tok $0.0002 of $0.45
-  call  2 call_agent_model in  5,115 (cached 4,864)  out   897  $0.00097   3.1s  Info                  | run  7,027 tok $0.0011 of $0.45
+  call  1 call_agent_model in    967 (cached   640)  out   103  $0.00016   0.9s  search_filing,search_filing,search_filing| run  1,070 tok $0.0002 of $0.45
+  call  2 call_agent_model in  5,400 (cached   640)  out   969  $0.00103   3.3s  Info                  | run  7,439 tok $0.0012 of $0.45
+  call  3 call_agent_model in  6,441 (cached 5,120)  out   973  $0.00117   3.2s  Info                  | run 14,853 tok $0.0024 of $0.45
   reader capital
-  call  1 call_agent_model in    906 (cached   768)  out   112  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,018 tok $0.0002 of $0.45
-  call  2 call_agent_model in  5,223 (cached   768)  out 1,010  $0.00101   3.6s  Info                  | run  7,251 tok $0.0012 of $0.45
+  call  1 call_agent_model in    906 (cached   768)  out   114  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,020 tok $0.0002 of $0.45
+  call  2 call_agent_model in  4,945 (cached   768)  out   997  $0.00097   3.4s  Info                  | run  6,962 tok $0.0011 of $0.45
   reader risks
-  call  1 call_agent_model in    941 (cached   768)  out   102  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,043 tok $0.0002 of $0.45
-  call  2 call_agent_model in  2,560 (cached 2,304)  out   739  $0.00057   3.3s  Info                  | run  4,342 tok $0.0007 of $0.45
+  call  1 call_agent_model in    941 (cached   768)  out   102  $0.00016   1.6s  search_filing,search_filing,search_filing| run  1,043 tok $0.0002 of $0.45
+  call  2 call_agent_model in  2,560 (cached 2,304)  out   812  $0.00059   3.2s  Info                  | run  4,415 tok $0.0007 of $0.45
   reader accounting
-  call  1 call_agent_model in    952 (cached   768)  out   122  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.45
-  call  2 call_agent_model in  4,741 (cached 4,607)  out   859  $0.00090   3.4s  Info                  | run  6,674 tok $0.0011 of $0.45
+  call  1 call_agent_model in    952 (cached   768)  out   122  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.45
+  call  2 call_agent_model in  4,741 (cached 4,607)  out   804  $0.00089   2.9s  Info                  | run  6,619 tok $0.0011 of $0.45
   reader accounting
-  call  1 call_agent_model in    952 (cached   768)  out   118  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,070 tok $0.0002 of $0.45
-  call  2 call_agent_model in  4,661 (cached 4,480)  out   829  $0.00088   2.8s  Info                  | run  6,560 tok $0.0011 of $0.45
+  call  1 call_agent_model in    952 (cached   768)  out   118  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,070 tok $0.0002 of $0.45
+  call  2 call_agent_model in  4,661 (cached 4,480)  out   835  $0.00089   3.4s  Info                  | run  6,566 tok $0.0011 of $0.45
   reader accounting
-  call  1 call_agent_model in    952 (cached   768)  out   121  $0.00017   1.3s  search_filing,search_filing,search_filing| run  1,073 tok $0.0002 of $0.45
-  call  2 call_agent_model in  4,661 (cached 4,480)  out   830  $0.00088   3.0s  Info                  | run  6,564 tok $0.0011 of $0.45
-  call  1 red_team         in  4,988 (cached   640)  out   599  $0.00087   3.5s  Objections            | run  5,587 tok $0.0009 of $0.45
-  call  1 red_team         in  5,000 (cached 4,608)  out   610  $0.00087   3.4s  Objections            | run  5,610 tok $0.0009 of $0.45
-  call  1 red_team         in  4,996 (cached 4,480)  out   587  $0.00086   3.6s  Objections            | run  5,583 tok $0.0009 of $0.45
+  call  1 call_agent_model in    952 (cached   768)  out   118  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,070 tok $0.0002 of $0.45
+  call  2 call_agent_model in  4,661 (cached 4,480)  out   838  $0.00089   3.4s  Info                  | run  6,569 tok $0.0011 of $0.45
+  call  1 red_team         in  5,219 (cached   768)  out   604  $0.00090   3.3s  Objections            | run  5,823 tok $0.0009 of $0.44
+  call  1 red_team         in  5,239 (cached 4,864)  out   668  $0.00092   3.6s  Objections            | run  5,907 tok $0.0009 of $0.44
+  call  1 red_team         in  5,217 (cached 4,736)  out   594  $0.00090   3.3s  Objections            | run  5,811 tok $0.0009 of $0.44
 
   META: BUY (agreement 100%: Buy, Buy, Buy)  target weight 3.0%  price 725.18  fair value 696.19 / 1,407.17 / 2,003.21
     WACC 8.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.067 [Software (Entertainment); regression 1.124], ERP 4.1%, Ke 9.2%, rating AAA at coverage 45.34, Kd 5.1%, E/V 94.3%)
     growth +27.7% (used 27.7%), price implies +3.3%; margin 52.3%, ROIC 23.4%, sales/capital 0.617, SBC 11.0% of revenue; terminal 78.6% of EV; EV/EBIT at base 30.4x vs market 15.8x; volatility 42%
     - price / base fair value 0.52 at High uncertainty (volatility 42%, range 0.93x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
-    red team: 4 objections (data_conflict 1, business 2, method 1), 1 can move the rating (rating too high)
-    model spend 55,198 tokens, $0.0088 | batch $0.0556 of $0.50
+    red team: 4 objections (method 3, business 1), 0 can move the rating (none)
+    model spend 63,525 tokens, $0.0101 | batch $0.0585 of $0.50
 
 === V
   reader performance
-  call  1 call_agent_model in    904 (cached   768)  out   102  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,006 tok $0.0002 of $0.44
-  call  2 call_agent_model in  5,226 (cached   640)  out   923  $0.00099   3.6s  Info                  | run  7,155 tok $0.0011 of $0.44
-  call  3 call_agent_model in  6,217 (cached 5,120)  out   911  $0.00113   3.0s  Info                  | run 14,283 tok $0.0023 of $0.44
-  call  4 call_agent_model in  7,190 (cached 6,144)  out   911  $0.00126   3.0s  Info                  | run 22,384 tok $0.0035 of $0.44
+  call  1 call_agent_model in    965 (cached   640)  out   106  $0.00016   0.9s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.44
+  call  2 call_agent_model in  5,225 (cached   640)  out   941  $0.00099   3.4s  Info                  | run  7,237 tok $0.0012 of $0.44
+  call  3 call_agent_model in  6,234 (cached 5,120)  out   927  $0.00113   3.0s  Info                  | run 14,398 tok $0.0023 of $0.44
+  call  4 call_agent_model in  7,222 (cached 6,144)  out   957  $0.00128   3.3s  Info                  | run 22,577 tok $0.0036 of $0.44
   reader capital
-  call  1 call_agent_model in    904 (cached   768)  out   114  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,018 tok $0.0002 of $0.44
-  call  2 call_agent_model in  5,503 (cached   768)  out   855  $0.00101   3.0s  Info                  | run  7,376 tok $0.0012 of $0.44
+  call  1 call_agent_model in    904 (cached   768)  out   109  $0.00016   1.5s  search_filing,search_filing,search_filing| run  1,013 tok $0.0002 of $0.44
+  call  2 call_agent_model in  5,453 (cached   640)  out   813  $0.00099   3.0s  Info                  | run  7,279 tok $0.0011 of $0.44
   reader risks
-  call  1 call_agent_model in    939 (cached   768)  out   105  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,044 tok $0.0002 of $0.44
-  call  2 call_agent_model in  3,526 (cached   768)  out   654  $0.00068   2.9s  Info                  | run  5,224 tok $0.0008 of $0.44
+  call  1 call_agent_model in    939 (cached   768)  out   103  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,042 tok $0.0002 of $0.44
+  call  2 call_agent_model in  3,524 (cached   768)  out   933  $0.00075   3.7s  Info                  | run  5,499 tok $0.0009 of $0.44
   reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   122  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.44
-  call  2 call_agent_model in  4,650 (cached 4,480)  out   858  $0.00089   3.1s  Info                  | run  6,580 tok $0.0011 of $0.44
+  call  1 call_agent_model in    950 (cached   768)  out   117  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,067 tok $0.0002 of $0.44
+  call  2 call_agent_model in  4,645 (cached 4,480)  out   871  $0.00089   3.5s  Info                  | run  6,583 tok $0.0011 of $0.44
   reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   117  $0.00017   1.4s  search_filing,search_filing,search_filing| run  1,067 tok $0.0002 of $0.44
-  call  2 call_agent_model in  4,645 (cached 4,480)  out   871  $0.00089   3.3s  Info                  | run  6,583 tok $0.0011 of $0.44
+  call  1 call_agent_model in    950 (cached   768)  out   118  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,068 tok $0.0002 of $0.43
+  call  2 call_agent_model in  4,655 (cached   768)  out   957  $0.00092   3.4s  Info                  | run  6,680 tok $0.0011 of $0.43
   reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   122  $0.00017   1.4s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.44
-  call  2 call_agent_model in  4,712 (cached   768)  out   874  $0.00090   3.5s  Info                  | run  6,658 tok $0.0011 of $0.44
-  call  1 red_team         in  4,971 (cached   768)  out   644  $0.00088   3.8s  Objections            | run  5,615 tok $0.0009 of $0.44
-  call  1 red_team         in  4,970 (cached 4,736)  out   555  $0.00085   3.1s  Objections            | run  5,525 tok $0.0009 of $0.43
-  call  1 red_team         in  4,969 (cached   768)  out   569  $0.00085   3.1s  Objections            | run  5,538 tok $0.0009 of $0.43
+  call  1 call_agent_model in    950 (cached   768)  out   121  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.43
+  call  2 call_agent_model in  4,658 (cached 4,480)  out   803  $0.00088   3.2s  Info                  | run  6,532 tok $0.0010 of $0.43
+  call  1 red_team         in  5,209 (cached   768)  out   641  $0.00091   3.5s  Objections            | run  5,850 tok $0.0009 of $0.43
+  call  1 red_team         in  5,192 (cached 4,864)  out   584  $0.00089   3.3s  Objections            | run  5,776 tok $0.0009 of $0.43
+  call  1 red_team         in  5,201 (cached 4,736)  out   569  $0.00089   3.3s  Objections            | run  5,770 tok $0.0009 of $0.43
 
-  V: OVERWEIGHT (agreement 67%: Overweight, Overweight, Underweight)  target weight 2.3%  price 359.33  fair value 222.58 / 498.07 / 716.02
+  V: OVERWEIGHT (agreement 100%: Overweight, Overweight, Overweight)  target weight 3.4%  price 359.33  fair value 222.58 / 498.07 / 716.02
     WACC 7.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.8 [Financial Svcs. (Non-bank & Insurance); regression 0.848], ERP 4.1%, Ke 8.1%, rating AAA at coverage 42.34, Kd 5.1%, E/V 96.4%)
     growth +14.4% (used 14.4%), price implies +6.1%; margin 61.1%, ROIC 45.9%, sales/capital 5.0, SBC 2.1% of revenue; terminal 74.2% of EV; EV/EBIT at base 36.0x vs market 26.1x; volatility 22%
     - price / base fair value 0.72 at Medium uncertainty (volatility 22%, range 0.99x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
-    red team: 4 objections (data_conflict 1, method 1, business 2), 1 can move the rating (rating too high)
-    model spend 71,483 tokens, $0.0113 | batch $0.0670 of $0.50
+    red team: 4 objections (method 2, business 2), 0 can move the rating (none)
+    model spend 72,546 tokens, $0.0115 | batch $0.0700 of $0.50
 
 === WMT
   reader performance
-  call  1 call_agent_model in    904 (cached   768)  out   113  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,017 tok $0.0002 of $0.43
-  call  2 call_agent_model in  5,317 (cached   640)  out   903  $0.00100   3.1s  Info                  | run  7,237 tok $0.0012 of $0.43
+  call  1 call_agent_model in    965 (cached   640)  out   111  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,076 tok $0.0002 of $0.43
+  call  2 call_agent_model in  5,304 (cached   640)  out   951  $0.00101   3.4s  Info                  | run  7,331 tok $0.0012 of $0.43
   reader capital
-  call  1 call_agent_model in    904 (cached   768)  out   113  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,017 tok $0.0002 of $0.43
-  call  2 call_agent_model in  5,389 (cached 5,248)  out   889  $0.00100   3.1s  Info                  | run  7,295 tok $0.0012 of $0.43
+  call  1 call_agent_model in    904 (cached   768)  out   109  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,013 tok $0.0002 of $0.43
+  call  2 call_agent_model in  5,175 (cached 4,992)  out   835  $0.00096   3.4s  Info                  | run  7,023 tok $0.0011 of $0.43
   reader risks
-  call  1 call_agent_model in    939 (cached   768)  out   104  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,043 tok $0.0002 of $0.43
-  call  2 call_agent_model in  2,673 (cached   768)  out   632  $0.00055   2.8s  Info                  | run  4,348 tok $0.0007 of $0.43
-  reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   114  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,064 tok $0.0002 of $0.43
-  call  2 call_agent_model in  5,059 (cached 4,864)  out   895  $0.00096   3.5s  Info                  | run  7,018 tok $0.0011 of $0.43
-  reader accounting
-  call  1 call_agent_model in    950 (cached   768)  out   114  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,064 tok $0.0002 of $0.43
-  call  2 call_agent_model in  5,059 (cached 4,864)  out   864  $0.00095   3.7s  Info                  | run  6,987 tok $0.0011 of $0.43
+  call  1 call_agent_model in    939 (cached   768)  out   104  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,043 tok $0.0002 of $0.43
+  call  2 call_agent_model in  2,673 (cached 2,432)  out   611  $0.00055   2.5s  Info                  | run  4,327 tok $0.0007 of $0.43
   reader accounting
   call  1 call_agent_model in    950 (cached   768)  out   114  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,064 tok $0.0002 of $0.43
-  call  2 call_agent_model in  5,059 (cached 4,864)  out   843  $0.00094   3.3s  Info                  | run  6,966 tok $0.0011 of $0.43
-  call  1 red_team         in  4,933 (cached   768)  out   542  $0.00084   2.8s  Objections            | run  5,475 tok $0.0008 of $0.43
-  call  1 red_team         in  4,939 (cached   768)  out   640  $0.00087   3.6s  Objections            | run  5,579 tok $0.0009 of $0.43
-  call  1 red_team         in  4,933 (cached 4,480)  out   619  $0.00086   3.6s  Objections            | run  5,552 tok $0.0009 of $0.42
+  call  2 call_agent_model in  5,059 (cached 4,864)  out   865  $0.00095   3.0s  Info                  | run  6,988 tok $0.0011 of $0.43
+  reader accounting
+  call  1 call_agent_model in    950 (cached   768)  out   114  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,064 tok $0.0002 of $0.43
+  call  2 call_agent_model in  5,059 (cached 4,864)  out   900  $0.00096   3.4s  Info                  | run  7,023 tok $0.0011 of $0.43
+  reader accounting
+  call  1 call_agent_model in    950 (cached   768)  out   118  $0.00017   0.9s  search_filing,search_filing,search_filing| run  1,068 tok $0.0002 of $0.42
+  call  2 call_agent_model in  4,711 (cached   768)  out   935  $0.00092   3.2s  Info                  | run  6,714 tok $0.0011 of $0.42
+  call  3 call_agent_model in  5,712 (cached 4,608)  out   889  $0.00105   2.9s  Info                  | run 13,315 tok $0.0021 of $0.42
+  call  1 red_team         in  5,077 (cached   768)  out   556  $0.00087   3.4s  Objections            | run  5,633 tok $0.0009 of $0.42
+  call  1 red_team         in  5,090 (cached   896)  out   604  $0.00088   3.5s  Objections            | run  5,694 tok $0.0009 of $0.42
+  call  1 red_team         in  5,073 (cached 4,608)  out   626  $0.00089   3.4s  Objections            | run  5,699 tok $0.0009 of $0.42
 
   WMT: SELL (agreement 100%: Sell, Sell, Sell)  target weight 0.0%  price 103.92  fair value 31.27 / 73.67 / 128.30
     WACC 7.8% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.828 [Retail (General); regression 0.8], ERP 4.1%, Ke 8.2%, rating AAA at coverage 17.36, Kd 5.1%, E/V 92.5%)
     growth +6.1% (used 6.1%), price implies +17.2%; margin 4.4%, ROIC 16.1%, sales/capital 5.0, SBC 0.5% of revenue; terminal 75.8% of EV; EV/EBIT at base 20.0x vs market 27.5x; volatility 26%
     - price / base fair value 1.41 at Medium uncertainty (volatility 26%, range 1.32x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
-    red team: 4 objections (data_conflict 2, business 1, method 1), 0 can move the rating (none)
-    model spend 56,457 tokens, $0.0090 | batch $0.0759 of $0.50
+    red team: 4 objections (data_conflict 1, method 2, business 1), 0 can move the rating (none)
+    model spend 63,033 tokens, $0.0100 | batch $0.0800 of $0.50
 
 === KO
   reader performance
-  call  1 call_agent_model in    905 (cached   768)  out   105  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,010 tok $0.0002 of $0.42
-  call  2 call_agent_model in  5,119 (cached 4,864)  out 1,187  $0.00105   4.0s  Info                  | run  7,316 tok $0.0012 of $0.42
+  call  1 call_agent_model in    966 (cached   640)  out   108  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.42
+  call  2 call_agent_model in  5,535 (cached   640)  out 1,107  $0.00108   3.5s  Info                  | run  7,716 tok $0.0013 of $0.42
   reader capital
-  call  1 call_agent_model in    905 (cached   768)  out   112  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,017 tok $0.0002 of $0.42
-  call  2 call_agent_model in  5,435 (cached 5,248)  out   910  $0.00102   3.4s  Info                  | run  7,362 tok $0.0012 of $0.42
+  call  1 call_agent_model in    905 (cached   768)  out   112  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,017 tok $0.0002 of $0.42
+  call  2 call_agent_model in  5,435 (cached 5,248)  out   801  $0.00099   2.8s  Info                  | run  7,253 tok $0.0011 of $0.42
   reader risks
-  call  1 call_agent_model in    940 (cached   768)  out   104  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,044 tok $0.0002 of $0.42
-  call  2 call_agent_model in  1,699 (cached 1,536)  out   604  $0.00041   2.5s  Info                  | run  3,347 tok $0.0006 of $0.42
+  call  1 call_agent_model in    940 (cached   768)  out   105  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,045 tok $0.0002 of $0.42
+  call  2 call_agent_model in  1,700 (cached   768)  out   755  $0.00045   2.8s  Info                  | run  3,500 tok $0.0006 of $0.42
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   127  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,078 tok $0.0002 of $0.42
-  call  2 call_agent_model in  4,774 (cached 4,608)  out   815  $0.00090   3.1s  Info                  | run  6,667 tok $0.0011 of $0.42
+  call  1 call_agent_model in    951 (cached   768)  out   125  $0.00017   1.5s  search_filing,search_filing,search_filing| run  1,076 tok $0.0002 of $0.42
+  call  2 call_agent_model in  4,923 (cached   768)  out   835  $0.00092   3.0s  Info                  | run  6,834 tok $0.0011 of $0.42
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   127  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,078 tok $0.0002 of $0.42
-  call  2 call_agent_model in  4,777 (cached 4,608)  out   773  $0.00089   2.9s  Info                  | run  6,628 tok $0.0011 of $0.42
+  call  1 call_agent_model in    951 (cached   768)  out   127  $0.00017   1.3s  search_filing,search_filing,search_filing| run  1,078 tok $0.0002 of $0.42
+  call  2 call_agent_model in  4,777 (cached 4,608)  out   781  $0.00089   2.9s  Info                  | run  6,636 tok $0.0011 of $0.42
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   127  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,078 tok $0.0002 of $0.42
-  call  2 call_agent_model in  4,777 (cached 4,608)  out   814  $0.00090   3.0s  Info                  | run  6,669 tok $0.0011 of $0.42
-  call  1 red_team         in  5,071 (cached   768)  out   549  $0.00086   3.3s  Objections            | run  5,620 tok $0.0009 of $0.42
-  call  1 red_team         in  5,065 (cached 4,608)  out   549  $0.00086   3.7s  Objections            | run  5,614 tok $0.0009 of $0.42
-  call  1 red_team         in  5,092 (cached 4,736)  out   539  $0.00086   3.5s  Objections            | run  5,631 tok $0.0009 of $0.42
+  call  1 call_agent_model in    951 (cached   768)  out   126  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,077 tok $0.0002 of $0.41
+  call  2 call_agent_model in  4,774 (cached 4,608)  out   786  $0.00089   2.9s  Info                  | run  6,637 tok $0.0011 of $0.41
+  call  1 red_team         in  5,190 (cached   768)  out   571  $0.00089   3.1s  Objections            | run  5,761 tok $0.0009 of $0.41
+  call  1 red_team         in  5,184 (cached 4,736)  out   556  $0.00088   3.0s  Objections            | run  5,740 tok $0.0009 of $0.41
+  call  1 red_team         in  5,183 (cached 4,736)  out   652  $0.00091   3.5s  Objections            | run  5,835 tok $0.0009 of $0.41
 
-  KO: SELL (agreement 100%: Sell, Sell, Sell)  target weight 0.0%  price 86.08  fair value 24.86 / 65.09 / 116.73
+  KO: SELL (agreement 67%: Underweight, Sell, Sell)  target weight 0.0%  price 86.08  fair value 24.86 / 65.09 / 116.73
     WACC 7.6% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.8 [Beverage (Soft); regression 0.8], ERP 4.1%, Ke 8.1%, rating AAA at coverage 8.81, Kd 5.1%, E/V 89.0%)
     growth +5.1% (used 5.1%), price implies +10.0%; margin 29.3%, ROIC 17.5%, sales/capital 0.933, SBC 0.5% of revenue; terminal 74.5% of EV; EV/EBIT at base 21.9x vs market 28.2x; volatility 19%
     - price / base fair value 1.32 at Low uncertainty (volatility 19%, range 1.41x base): Buy at or below 0.80, Overweight to 0.95, Underweight from 1.05, Sell from 1.25
-    red team: 4 objections (method 2, business 1, data_conflict 1), 0 can move the rating (none)
-    model spend 54,854 tokens, $0.0087 | batch $0.0846 of $0.50
+    - red team correction {'growth': 0.09}: base value 81.35, P/FV 1.06
+    red team: 4 objections (data_conflict 1, method 2, business 1), 1 can move the rating (rating too high)
+    model spend 55,912 tokens, $0.0089 | batch $0.0889 of $0.50
 
 === PFE
   reader performance
-  call  1 call_agent_model in    905 (cached   768)  out   102  $0.00016   1.4s  search_filing,search_filing,search_filing| run  1,007 tok $0.0002 of $0.42
-  call  2 call_agent_model in  5,297 (cached 5,120)  out 1,009  $0.00102   3.4s  Info                  | run  7,313 tok $0.0012 of $0.42
+  call  1 call_agent_model in    966 (cached   640)  out   102  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,068 tok $0.0002 of $0.41
+  call  2 call_agent_model in  5,645 (cached   640)  out 1,023  $0.00108   3.3s  Info                  | run  7,736 tok $0.0012 of $0.41
   reader capital
-  call  1 call_agent_model in    905 (cached   768)  out   114  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,019 tok $0.0002 of $0.41
-  call  2 call_agent_model in  5,457 (cached   640)  out   803  $0.00099   2.8s  Info                  | run  7,279 tok $0.0011 of $0.41
+  call  1 call_agent_model in    905 (cached   768)  out   111  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,016 tok $0.0002 of $0.41
+  call  2 call_agent_model in  5,291 (cached   768)  out   861  $0.00098   3.0s  Info                  | run  7,168 tok $0.0011 of $0.41
   reader risks
-  call  1 call_agent_model in    940 (cached   768)  out   104  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,044 tok $0.0002 of $0.41
-  call  2 call_agent_model in  1,350 (cached 1,152)  out   684  $0.00038   2.5s  Info                  | run  3,078 tok $0.0005 of $0.41
+  call  1 call_agent_model in    940 (cached   768)  out   104  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,044 tok $0.0002 of $0.41
+  call  2 call_agent_model in  1,350 (cached 1,152)  out   703  $0.00039   2.7s  Info                  | run  3,097 tok $0.0005 of $0.41
+  call  3 call_agent_model in  2,117 (cached 1,280)  out   628  $0.00047   2.3s  Info                  | run  5,842 tok $0.0010 of $0.41
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   121  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.41
-  call  2 call_agent_model in  4,972 (cached 4,736)  out   752  $0.00091   3.0s  Info                  | run  6,796 tok $0.0011 of $0.41
+  call  1 call_agent_model in    951 (cached   768)  out   126  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,077 tok $0.0002 of $0.41
+  call  2 call_agent_model in  5,081 (cached 4,864)  out   759  $0.00092   3.1s  Info                  | run  6,917 tok $0.0011 of $0.41
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   128  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,079 tok $0.0002 of $0.41
-  call  2 call_agent_model in  5,083 (cached   768)  out   758  $0.00092   3.2s  Info                  | run  6,920 tok $0.0011 of $0.41
+  call  1 call_agent_model in    951 (cached   768)  out   125  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,076 tok $0.0002 of $0.41
+  call  2 call_agent_model in  5,080 (cached 4,864)  out   777  $0.00093   2.9s  Info                  | run  6,933 tok $0.0011 of $0.41
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   126  $0.00017   1.6s  search_filing,search_filing,search_filing| run  1,077 tok $0.0002 of $0.41
-  call  2 call_agent_model in  5,081 (cached 4,864)  out   759  $0.00092   2.8s  Info                  | run  6,917 tok $0.0011 of $0.41
-  call  1 red_team         in  4,927 (cached   768)  out   556  $0.00085   4.4s  Objections            | run  5,483 tok $0.0008 of $0.41
-  call  1 red_team         in  4,925 (cached 4,480)  out   581  $0.00085   3.3s  Objections            | run  5,506 tok $0.0009 of $0.41
-  call  1 red_team         in  4,923 (cached 4,608)  out   558  $0.00085   3.1s  Objections            | run  5,481 tok $0.0008 of $0.41
+  call  1 call_agent_model in    951 (cached   768)  out   126  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,077 tok $0.0002 of $0.41
+  call  2 call_agent_model in  5,081 (cached 4,864)  out   755  $0.00092   2.8s  Info                  | run  6,913 tok $0.0011 of $0.41
+  call  1 red_team         in  5,079 (cached   768)  out   578  $0.00087   3.1s  Objections            | run  5,657 tok $0.0009 of $0.40
+  call  1 red_team         in  5,088 (cached 4,608)  out   546  $0.00087   3.0s  Objections            | run  5,634 tok $0.0009 of $0.40
+  call  1 red_team         in  5,077 (cached 4,736)  out   586  $0.00087   3.1s  Objections            | run  5,663 tok $0.0009 of $0.40
 
-  PFE: UNDERWEIGHT (agreement 67%: Underweight, Underweight, Sell)  target weight 0.0%  price 28.52  fair value 14.25 / 22.58 / 44.05
+  PFE: UNDERWEIGHT (agreement 67%: Underweight, Underweight, Hold)  target weight 0.0%  price 28.52  fair value 14.25 / 22.58 / 44.05
     WACC 8.1% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.193 [Drugs (Pharmaceutical); regression 0.8], ERP 4.1%, Ke 9.7%, rating A at coverage 5.12, Kd 5.5%, E/V 71.2%)
     growth -0.2% (used -0.2%), price implies +4.7%; margin 24.7%, ROIC 7.9%, sales/capital 0.795, SBC 1.5% of revenue; terminal 50.6% of EV; EV/EBIT at base 11.9x vs market 14.0x; volatility 23%
     - price / base fair value 1.26 at Medium uncertainty (volatility 23%, range 1.32x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
-    red team: 4 objections (data_conflict 1, business 1, method 2), 0 can move the rating (none)
-    model spend 54,773 tokens, $0.0087 | batch $0.0933 of $0.50
+    red team: 4 objections (data_conflict 1, business 1, method 2), 1 can move the rating (rating too low)
+    model spend 58,463 tokens, $0.0093 | batch $0.0982 of $0.50
 
 === CAT
   reader performance
-  call  1 call_agent_model in    905 (cached   768)  out   102  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,007 tok $0.0002 of $0.41
-  call  2 call_agent_model in  4,921 (cached 4,736)  out 1,011  $0.00097   3.5s  Info                  | run  6,939 tok $0.0011 of $0.41
-  call  3 call_agent_model in  6,058 (cached 5,504)  out 1,018  $0.00113   3.3s  Info                  | run 14,015 tok $0.0023 of $0.41
+  call  1 call_agent_model in    966 (cached   640)  out   102  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,068 tok $0.0002 of $0.40
+  call  2 call_agent_model in  5,402 (cached   640)  out 1,059  $0.00105   3.5s  Info                  | run  7,529 tok $0.0012 of $0.40
   reader capital
-  call  1 call_agent_model in    905 (cached   768)  out   114  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,019 tok $0.0002 of $0.40
-  call  2 call_agent_model in  5,554 (cached 5,376)  out   727  $0.00098   2.8s  Info                  | run  7,300 tok $0.0011 of $0.40
+  call  1 call_agent_model in    905 (cached   768)  out   114  $0.00016   1.5s  search_filing,search_filing,search_filing| run  1,019 tok $0.0002 of $0.40
+  call  2 call_agent_model in  5,554 (cached 5,376)  out   739  $0.00098   2.8s  Info                  | run  7,312 tok $0.0011 of $0.40
   reader risks
   call  1 call_agent_model in    940 (cached   768)  out   106  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,046 tok $0.0002 of $0.40
-  call  2 call_agent_model in  1,045 (cached   768)  out    31  $0.00015   1.0s  Info                  | run  2,122 tok $0.0003 of $0.40
-  call  3 call_agent_model in  1,128 (cached   768)  out   106  $0.00019   1.1s  Info                  | run  3,356 tok $0.0005 of $0.40
-  call  4 call_agent_model in  1,286 (cached 1,024)  out   189  $0.00023   1.4s  Info                  | run  4,831 tok $0.0007 of $0.40
+  call  2 call_agent_model in  1,045 (cached   896)  out    31  $0.00015   0.8s  Info                  | run  2,122 tok $0.0003 of $0.40
+  call  3 call_agent_model in  1,128 (cached   896)  out   106  $0.00019   1.1s  Info                  | run  3,356 tok $0.0005 of $0.40
+  call  4 call_agent_model in  1,286 (cached 1,152)  out   180  $0.00023   1.4s  Info                  | run  4,822 tok $0.0007 of $0.40
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   120  $0.00017   1.3s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.40
-  call  2 call_agent_model in  4,847 (cached 4,608)  out   931  $0.00094   3.2s  Info                  | run  6,849 tok $0.0011 of $0.40
+  call  1 call_agent_model in    951 (cached   768)  out   120  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.40
+  call  2 call_agent_model in  4,847 (cached 4,608)  out   947  $0.00094   3.6s  Info                  | run  6,865 tok $0.0011 of $0.40
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   120  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.40
-  call  2 call_agent_model in  4,847 (cached 4,608)  out   938  $0.00094   3.7s  Info                  | run  6,856 tok $0.0011 of $0.40
+  call  1 call_agent_model in    951 (cached   768)  out   120  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.40
+  call  2 call_agent_model in  4,847 (cached 4,608)  out   935  $0.00094   3.4s  Info                  | run  6,853 tok $0.0011 of $0.40
   reader accounting
-  call  1 call_agent_model in    951 (cached   768)  out   120  $0.00017   1.3s  search_filing,search_filing,search_filing| run  1,071 tok $0.0002 of $0.40
-  call  2 call_agent_model in  4,847 (cached 4,608)  out   984  $0.00095   3.8s  Info                  | run  6,902 tok $0.0011 of $0.40
-  call  1 red_team         in  4,795 (cached   768)  out   622  $0.00085   3.4s  Objections            | run  5,417 tok $0.0008 of $0.40
-  call  1 red_team         in  4,801 (cached 4,480)  out   604  $0.00084   2.9s  Objections            | run  5,405 tok $0.0008 of $0.40
-  call  1 red_team         in  4,817 (cached 4,224)  out   619  $0.00085   3.1s  Objections            | run  5,436 tok $0.0008 of $0.40
+  call  1 call_agent_model in    951 (cached   768)  out   119  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,070 tok $0.0002 of $0.40
+  call  2 call_agent_model in  4,999 (cached 4,864)  out   935  $0.00096   3.5s  Info                  | run  7,004 tok $0.0011 of $0.40
+  call  1 red_team         in  4,957 (cached   768)  out   595  $0.00086   3.0s  Objections            | run  5,552 tok $0.0009 of $0.40
+  call  1 red_team         in  4,954 (cached 4,480)  out   633  $0.00087   3.1s  Objections            | run  5,587 tok $0.0009 of $0.39
+  call  1 red_team         in  4,968 (cached 4,480)  out   625  $0.00087   3.4s  Objections            | run  5,593 tok $0.0009 of $0.39
 
-  CAT: UNDERWEIGHT (agreement 33%: Sell, Underweight, Hold)  target weight 0.0%  price 810.79  fair value 369.63 / 690.52 / 1,074.03
+  CAT: UNDERWEIGHT (agreement 67%: Hold, Underweight, Underweight)  target weight 0.0%  price 810.79  fair value 369.63 / 690.52 / 1,074.03
     WACC 9.0% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.089 [Construction Supplies; regression 1.395], ERP 4.1%, Ke 9.3%, rating AA at coverage 7.11, Kd 5.3%, E/V 94.9%)
     growth +18.4% (used 18.4%), price implies +26.7%; margin 18.1%, ROIC 26.6%, sales/capital 2.291, SBC 0.3% of revenue; terminal 72.6% of EV; EV/EBIT at base 24.4x vs market 28.5x; volatility 39%
     - price / base fair value 1.17 at High uncertainty (volatility 39%, range 1.02x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
-    - red team correction {'growth': 0.04}: base value 423.35, P/FV 1.92
-    red team: 4 objections (data_conflict 1, business 1, method 2), 1 can move the rating (rating too high)
-    model spend 63,011 tokens, $0.0100 | batch $0.1033 of $0.50
+    - red team correction {'growth': 0.24, 'operating_margin': 0.194}: base value 881.09, P/FV 0.92
+    red team: 4 objections (data_conflict 1, business 2, method 1), 2 can move the rating (rating too high, rating too low)
+    model spend 57,117 tokens, $0.0090 | batch $0.1072 of $0.50
 
 === JPM
   reader performance
-  call  1 call_agent_model in    909 (cached   768)  out   103  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,012 tok $0.0002 of $0.40
-  call  2 call_agent_model in  5,681 (cached 5,504)  out   869  $0.00104   3.2s  Info                  | run  7,562 tok $0.0012 of $0.40
+  call  1 call_agent_model in    970 (cached   640)  out   103  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,073 tok $0.0002 of $0.39
+  call  2 call_agent_model in  5,696 (cached   640)  out 1,047  $0.00109   3.7s  Info                  | run  7,816 tok $0.0013 of $0.39
   reader capital
-  call  1 call_agent_model in    909 (cached   768)  out   112  $0.00016   1.3s  search_filing,search_filing,search_filing| run  1,021 tok $0.0002 of $0.40
-  call  2 call_agent_model in  5,712 (cached   768)  out   885  $0.00105   3.4s  Info                  | run  7,618 tok $0.0012 of $0.40
-  call  3 call_agent_model in  6,669 (cached 5,632)  out   874  $0.00118   3.1s  Info                  | run 15,161 tok $0.0024 of $0.40
+  call  1 call_agent_model in    909 (cached   768)  out   112  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,021 tok $0.0002 of $0.39
+  call  2 call_agent_model in  5,775 (cached 5,632)  out   904  $0.00106   3.2s  Info                  | run  7,700 tok $0.0012 of $0.39
+  call  3 call_agent_model in  6,751 (cached 5,632)  out   847  $0.00118   2.9s  Info                  | run 15,298 tok $0.0024 of $0.39
   reader risks
-  call  1 call_agent_model in    944 (cached   768)  out   104  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,048 tok $0.0002 of $0.39
-  call  2 call_agent_model in  4,225 (cached 4,091)  out   677  $0.00078   2.8s  Info                  | run  5,950 tok $0.0009 of $0.39
+  call  1 call_agent_model in    944 (cached   768)  out   103  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,047 tok $0.0002 of $0.39
+  call  2 call_agent_model in  4,224 (cached 3,968)  out   743  $0.00080   2.8s  Info                  | run  6,014 tok $0.0010 of $0.39
   reader accounting
-  call  1 call_agent_model in    955 (cached   768)  out   117  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.39
-  call  2 call_agent_model in  4,844 (cached 4,608)  out   944  $0.00094   3.7s  Info                  | run  6,860 tok $0.0011 of $0.39
+  call  1 call_agent_model in    955 (cached   768)  out   119  $0.00017   1.0s  search_filing,search_filing,search_filing| run  1,074 tok $0.0002 of $0.39
+  call  2 call_agent_model in  4,790 (cached 4,608)  out   882  $0.00092   3.4s  Info                  | run  6,746 tok $0.0011 of $0.39
   reader accounting
-  call  1 call_agent_model in    955 (cached   768)  out   117  $0.00017   1.2s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.39
-  call  2 call_agent_model in  4,844 (cached 4,608)  out   944  $0.00094   3.5s  Info                  | run  6,860 tok $0.0011 of $0.39
+  call  1 call_agent_model in    955 (cached   768)  out   108  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,063 tok $0.0002 of $0.39
+  call  2 call_agent_model in  5,182 (cached   768)  out   795  $0.00095   3.2s  Info                  | run  7,040 tok $0.0011 of $0.39
   reader accounting
-  call  1 call_agent_model in    955 (cached   768)  out   117  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.39
-  call  2 call_agent_model in  4,844 (cached 4,608)  out   944  $0.00094   3.7s  Info                  | run  6,860 tok $0.0011 of $0.39
-  call  1 red_team         in  4,606 (cached 2,304)  out   630  $0.00082   3.7s  Objections            | run  5,236 tok $0.0008 of $0.39
-  call  1 red_team         in  4,606 (cached 4,352)  out   584  $0.00081   3.3s  Objections            | run  5,190 tok $0.0008 of $0.39
-  call  1 red_team         in  4,606 (cached 4,352)  out   602  $0.00081   3.4s  Objections            | run  5,208 tok $0.0008 of $0.39
+  call  1 call_agent_model in    955 (cached   768)  out   117  $0.00017   1.4s  search_filing,search_filing,search_filing| run  1,072 tok $0.0002 of $0.39
+  call  2 call_agent_model in  4,844 (cached 4,608)  out   917  $0.00093   3.4s  Info                  | run  6,833 tok $0.0011 of $0.39
+  call  1 red_team         in  4,761 (cached   768)  out   597  $0.00083   3.3s  Objections            | run  5,358 tok $0.0008 of $0.38
+  call  1 red_team         in  4,733 (cached 4,224)  out   553  $0.00082   3.6s  Objections            | run  5,286 tok $0.0008 of $0.38
+  call  1 red_team         in  4,763 (cached 4,352)  out   544  $0.00082   3.1s  Objections            | run  5,307 tok $0.0008 of $0.38
 
   JPM: OVERWEIGHT (agreement 100%: Overweight, Overweight, Overweight)  target weight 3.3%  price 330.83  fair value 176.19 / 368.87 / 756.96
     bank: ROE 17.0%, price implies ROE 12.2%, book value per share 140.92; cost of equity 7.9% = rf 4.8% + beta 0.761 x ERP 4.1%; volatility 23%
     - price / base fair value 0.90 at High uncertainty (volatility 23%, range 1.57x base): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
-    red team: 4 objections (method 2, data_conflict 1, business 1), 0 can move the rating (none)
-    model spend 64,887 tokens, $0.0103 | batch $0.1136 of $0.50
+    red team: 4 objections (method 2, business 2), 0 can move the rating (none)
+    model spend 65,698 tokens, $0.0104 | batch $0.1176 of $0.50
 
 === BAC
   reader performance
-  call  1 call_agent_model in    910 (cached   768)  out   109  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,019 tok $0.0002 of $0.39
-  call  2 call_agent_model in  5,391 (cached 5,248)  out   938  $0.00102   3.5s  Info                  | run  7,348 tok $0.0012 of $0.39
+  call  1 call_agent_model in    971 (cached   640)  out   107  $0.00017   1.1s  search_filing,search_filing,search_filing| run  1,078 tok $0.0002 of $0.38
+  call  2 call_agent_model in  5,495 (cached   640)  out 1,144  $0.00109   3.8s  Info                  | run  7,717 tok $0.0013 of $0.38
   reader capital
-  call  1 call_agent_model in    910 (cached   768)  out    69  $0.00015   1.5s  search_filing,search_filing| run    979 tok $0.0001 of $0.39
-  call  2 call_agent_model in  4,136 (cached 3,968)  out    81  $0.00060   1.3s  search_filing,search_filing| run  5,196 tok $0.0007 of $0.39
-  call  3 call_agent_model in  5,678 (cached 3,840)  out   861  $0.00104   3.5s  Info                  | run 11,735 tok $0.0018 of $0.39
+  call  1 call_agent_model in    910 (cached   768)  out   106  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,016 tok $0.0002 of $0.38
+  call  2 call_agent_model in  5,851 (cached   640)  out   766  $0.00103   2.7s  Info                  | run  7,633 tok $0.0012 of $0.38
   reader risks
   call  1 call_agent_model in    945 (cached   768)  out   104  $0.00016   1.2s  search_filing,search_filing,search_filing| run  1,049 tok $0.0002 of $0.38
-  call  2 call_agent_model in  2,851 (cached   768)  out   705  $0.00060   2.7s  Info                  | run  4,605 tok $0.0008 of $0.38
+  call  2 call_agent_model in  2,851 (cached 2,688)  out   825  $0.00063   3.2s  Info                  | run  4,725 tok $0.0008 of $0.38
   reader accounting
-  call  1 call_agent_model in    956 (cached   768)  out   105  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,061 tok $0.0002 of $0.38
-  call  2 call_agent_model in  5,357 (cached 5,120)  out   840  $0.00099   3.4s  Info                  | run  7,258 tok $0.0011 of $0.38
+  call  1 call_agent_model in    956 (cached   768)  out   105  $0.00016   0.9s  search_filing,search_filing,search_filing| run  1,061 tok $0.0002 of $0.38
+  call  2 call_agent_model in  5,357 (cached 5,120)  out   823  $0.00098   2.9s  Info                  | run  7,241 tok $0.0011 of $0.38
   reader accounting
-  call  1 call_agent_model in    956 (cached   768)  out   105  $0.00016   0.8s  search_filing,search_filing,search_filing| run  1,061 tok $0.0002 of $0.38
-  call  2 call_agent_model in  5,357 (cached 5,120)  out   805  $0.00098   3.2s  Info                  | run  7,223 tok $0.0011 of $0.38
+  call  1 call_agent_model in    956 (cached   768)  out   105  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,061 tok $0.0002 of $0.38
+  call  2 call_agent_model in  5,357 (cached 5,120)  out   815  $0.00098   3.0s  Info                  | run  7,233 tok $0.0011 of $0.38
   reader accounting
-  call  1 call_agent_model in    956 (cached   768)  out   105  $0.00016   1.1s  search_filing,search_filing,search_filing| run  1,061 tok $0.0002 of $0.38
-  call  2 call_agent_model in  5,357 (cached 5,120)  out   840  $0.00099   3.4s  Info                  | run  7,258 tok $0.0011 of $0.38
-  call  1 red_team         in  4,650 (cached 2,304)  out   565  $0.00081   3.3s  Objections            | run  5,215 tok $0.0008 of $0.38
-  call  1 red_team         in  4,626 (cached 4,224)  out   614  $0.00082   3.7s  Objections            | run  5,240 tok $0.0008 of $0.38
-  call  1 red_team         in  4,650 (cached 4,480)  out   727  $0.00085   4.0s  Objections            | run  5,377 tok $0.0009 of $0.38
+  call  1 call_agent_model in    956 (cached   768)  out   105  $0.00016   1.0s  search_filing,search_filing,search_filing| run  1,061 tok $0.0002 of $0.38
+  call  2 call_agent_model in  5,357 (cached 5,120)  out   793  $0.00097   2.9s  Info                  | run  7,211 tok $0.0011 of $0.38
+  call  1 red_team         in  4,877 (cached   768)  out   619  $0.00086   3.5s  Objections            | run  5,496 tok $0.0009 of $0.38
+  call  1 red_team         in  4,851 (cached 4,480)  out   611  $0.00085   3.4s  Objections            | run  5,462 tok $0.0009 of $0.37
+  call  1 red_team         in  4,850 (cached 4,480)  out   640  $0.00086   3.4s  Objections            | run  5,490 tok $0.0009 of $0.37
 
   BAC: OVERWEIGHT (agreement 100%: Overweight, Overweight, Overweight)  target weight 3.4%  price 54.43  fair value 43.50 / 64.28 / 128.65
     bank: ROE 10.7%, price implies ROE 8.7%, book value per share 43.06; cost of equity 7.9% = rf 4.8% + beta 0.761 x ERP 4.1%; volatility 22%
     - price / base fair value 0.85 at Medium uncertainty (volatility 22%, range 1.32x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
-    red team: 4 objections (method 2, business 2), 0 can move the rating (none)
-    model spend 61,259 tokens, $0.0096 | batch $0.1232 of $0.50
+    red team: 4 objections (data_conflict 1, business 2, method 1), 1 can move the rating (rating too low)
+    model spend 58,208 tokens, $0.0092 | batch $0.1268 of $0.50
 
-method review (61 points raised by the red team; they never move a rating):
-  MSFT: The desk holds 17.8% growth for five years, but the 10-K shows the mix is already decelerating: More Personal Computing revenue fell 1% (PERF-10) and 
-  MSFT: Terminal value assumes 73.4% of today's excess return survives forever (terminal_share, terminal_roic 23.1% vs wacc 9.85%), yet the 10-K flags AI comp
-  MSFT: The desk holds 17.8% growth for five years, but its own year5_growth_cap rule says growth above 10% must decay linearly to 10% by year 5. Applying the
-  MSFT: Terminal value assumes only 73.4% of today's excess return survives (terminal_share), yet ROIC of 23.1% versus WACC of 9.85% has been sustained and th
-  MSFT: The desk holds growth at 17.79% for five years, but its own year5_growth_cap rule says growth above 10% must decay linearly to 10% by year 5. Applying
-  MSFT: The bear case shifts growth -4 points and margin -10% relative, but the moat share can also go to 0, which alone removes the entire terminal excess re
-  AAPL: The terminal value keeps 70.8% of today's excess return (terminal_share 0.708) with terminal ROIC of 58.63% forever, far above the 10.19% WACC. That i
-  AAPL: The method expenses SBC (2.94% of revenue) and capitalizes R&D, but the 10-K shows $111,482m operating cash flow against $112,010m net income (PERF-6,
-  AAPL: Terminal value keeps 70.8% of today's excess return (terminal_share, terminal_roic 0.5863) and terminal growth is capped at the 4.75% risk-free rate, 
-  AAPL: The WACC of 10.19% uses a bottom-up beta of 1.344 while the regression beta is 1.047 (capital build-up), and the mature WACC of 8.79% is applied over 
-  AAPL: The terminal value keeps 70.8% of today's excess return (terminal_share 0.708) with terminal_roic 58.63% versus wacc 10.19%, and terminal growth 4.75%
-  AAPL: The WACC of 10.19% uses a bottom-up beta of 1.344 while the regression beta is 1.047 (raw 1.07), and mature_wacc fades to 8.79%. Using the regression 
+method review (71 points raised by the red team; they never move a rating):
+  MSFT: The 5-year growth cap forces 17.8% growth to decay to 10% by year 5, but the 10-K shows Intelligent Cloud up 30% (PERF-8) and total revenue up 18% (PE
+  MSFT: SBC of 3.74% of revenue is expensed but buybacks of $16.7bn (CAP-4) and dividends of $27.0bn (CAP-6) return cash; the DCF's reinvestment via sales-to-
+  MSFT: The model holds 17.8% growth for five years, but the year5_growth_cap rule (10%) is only applied above 10% — here it decays to 10% by year 5. Yet the 
+  MSFT: Terminal ROIC is set equal to today's 23.1% with terminal_share 0.734, but the moat test only requires a 5% spread in each of five years — a low bar f
+  MSFT: The model holds 17.8% growth for five years, but the 10-K shows the growth is concentrated: Intelligent Cloud +30% (PERF-8) while More Personal Comput
+  MSFT: The moat is understated. ROIC 23.1% vs WACC 9.85% is a 13-point spread, and terminal_share is only 0.734 with terminal_excess_return 1.0 — the model a
+  AAPL: The method's fixed assumptions flatter the value: terminal_share 0.708 puts most of the value beyond year 10, terminal_excess_return 1.0 assumes the e
+  AAPL: The 5-year ROIC history gives terminal_share 0.708 and terminal_roic 0.5863, i.e. a 48-point excess return persisting forever. With moat_margin 0.05 a
+  AAPL: The WACC build uses a bottom-up beta of 1.344 (industry unlevered 1.325 relevered) while the regression beta is 1.047 and the mature path moves only t
+  AAPL: The moat test is self-referential: terminal_share 0.708 and terminal_roic 0.5863 are set from a 5-year ROIC history that includes the current peak, an
+  NVDA: The moat test uses terminal_excess_return = 0.5 (narrow) from 5-year ROIC history, but roic is 62.1% against wacc 10.96% — a spread far above moat_mar
+  NVDA: cash_conversion is 0.749, below the 0.8 caution threshold, and the desk already flags a one-notch downgrade for it. Yet the rating stays Hold; if cash
 
 audit: 13 of 13 memos add up
 market consistency: median price / fair value 1.00 over 13 companies (consistent with the market on average)
-memos: runs\memos\20261001-002117
-batch: 13 companies in 541s, 206 model calls, 778,607 tokens (498,170 cached), $0.1232 of $0.50
+memos: runs\memos\20261001-003140
+batch: 13 companies in 545s, 208 model calls, 800,399 tokens (482,047 cached), $0.1268 of $0.50
 
 ticker rating      agree weight     price      bear      base      bull  upside  key figure
 MSFT   Hold         100%   0.0%    512.90    268.41    514.44    724.51     +0%  WACC 9.8%, growth 17.8% vs implied +17.6%
-AAPL   Sell          67%   0.0%    333.02    149.55    300.91    415.31    -10%  WACC 10.2%, growth 14.2% vs implied +19.2%
-NVDA   Underweight  100%   0.0%    228.38    146.85    281.89    404.23    +23%  WACC 11.0%, growth 30.0% vs implied +19.1%
+AAPL   Underweight  100%   0.0%    333.02    149.55    300.91    415.31    -10%  WACC 10.2%, growth 14.2% vs implied +19.2%
+NVDA   Hold         100%   0.0%    228.38    146.85    281.89    404.23    +23%  WACC 11.0%, growth 30.0% vs implied +19.1%
 AMZN   Sell         100%   0.0%    249.15     84.57    145.33    264.70    -42%  WACC 7.8%, growth 15.8% vs implied +53.2%
 GOOGL  Hold         100%   0.0%    344.08    195.17    365.48    511.87     +6%  WACC 8.9%, growth 20.1% vs implied +16.6%
 META   Buy          100%   3.0%    725.18    696.19  1,407.17  2,003.21    +94%  WACC 8.9%, growth 27.7% vs implied +3.3%
-V      Overweight    67%   2.3%    359.33    222.58    498.07    716.02    +39%  WACC 7.9%, growth 14.4% vs implied +6.1%
+V      Overweight   100%   3.4%    359.33    222.58    498.07    716.02    +39%  WACC 7.9%, growth 14.4% vs implied +6.1%
 WMT    Sell         100%   0.0%    103.92     31.27     73.67    128.30    -29%  WACC 7.8%, growth 6.1% vs implied +17.2%
-KO     Sell         100%   0.0%     86.08     24.86     65.09    116.73    -24%  WACC 7.6%, growth 5.1% vs implied +10.0%
+KO     Sell          67%   0.0%     86.08     24.86     65.09    116.73    -24%  WACC 7.6%, growth 5.1% vs implied +10.0%
 PFE    Underweight   67%   0.0%     28.52     14.25     22.58     44.05    -21%  WACC 8.1%, growth -0.2% vs implied +4.7%
-CAT    Underweight   33%   0.0%    810.79    369.63    690.52  1,074.03    -15%  WACC 9.0%, growth 18.4% vs implied +26.7%
+CAT    Underweight   67%   0.0%    810.79    369.63    690.52  1,074.03    -15%  WACC 9.0%, growth 18.4% vs implied +26.7%
 JPM    Overweight   100%   3.3%    330.83    176.19    368.87    756.96    +11%  ROE 17.0% vs implied 12.2%
 BAC    Overweight   100%   3.4%     54.43     43.50     64.28    128.65    +18%  ROE 10.7% vs implied 8.7%
 
-saved runs\memo-20261001-003018.json
+saved runs\memo-20261001-004045.json
