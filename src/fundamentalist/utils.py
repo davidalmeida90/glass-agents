@@ -9,7 +9,7 @@ from langchain_core.messages import AnyMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_openai import ChatOpenAI
 
-from underwriter.configuration import Configuration
+from fundamentalist.configuration import Configuration
 
 DEEPSEEK_URL = "https://api.deepseek.com"
 

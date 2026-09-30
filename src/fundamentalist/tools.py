@@ -9,9 +9,9 @@ from langchain_core.tools import InjectedToolArg
 from langgraph.prebuilt import InjectedState
 from typing_extensions import Annotated
 
-from underwriter.configuration import Configuration
-from underwriter.edgar import load_index
-from underwriter.state import State
+from fundamentalist.configuration import Configuration
+from fundamentalist.edgar import load_index
+from fundamentalist.state import State
 
 
 async def search_filing(

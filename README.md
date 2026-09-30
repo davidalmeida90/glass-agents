@@ -1,4 +1,4 @@
-# Underwriting desk
+# Fundamentalist Agents
 
 A first-pass equity underwriting memo for any US-listed company, in about 40 seconds and one cent: evidence read from its own SEC filings and checked against them in code, a sourced valuation, a rating a person can recompute, and the points where it could be wrong.
 
@@ -52,7 +52,7 @@ Keys come from `Agents_model/.env` through `FIDCS/backend/chaves.py` (DeepSeek, 
 
 ## Every choice can be questioned
 
-`src/underwriter/parameters.py` holds each parameter with its value, method, source, alternatives and whether it was verified on a primary source: risk-free rate and ERP pairing (Damodaran, 2026-09-01), beta method, rating spreads (January 2026), tax, growth bounds and base-rate decay, terminal growth, moat rule, R&D lives, captive finance, sanity bounds, rating bands. The memo prints them; the red team cites them by name in its method review. The docstrings record the versions that were rejected and why (a plain DCF that rated every large cap a Sell; a 3.5% terminal cap that made the model bearish by construction).
+`src/fundamentalist/parameters.py` holds each parameter with its value, method, source, alternatives and whether it was verified on a primary source: risk-free rate and ERP pairing (Damodaran, 2026-09-01), beta method, rating spreads (January 2026), tax, growth bounds and base-rate decay, terminal growth, moat rule, R&D lives, captive finance, sanity bounds, rating bands. The memo prints them; the red team cites them by name in its method review. The docstrings record the versions that were rejected and why (a plain DCF that rated every large cap a Sell; a 3.5% terminal cap that made the model bearish by construction).
 
 ## Known limits
 

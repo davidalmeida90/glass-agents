@@ -7,7 +7,7 @@ from typing import Annotated, Optional
 
 from langchain_core.runnables import RunnableConfig, ensure_config
 
-from underwriter import prompts
+from fundamentalist import prompts
 
 
 @dataclass(kw_only=True)

@@ -12,13 +12,13 @@ from langchain_core.runnables import RunnableConfig
 from langgraph.graph import StateGraph
 from langgraph.prebuilt import ToolNode
 
-from underwriter import prompts
-from underwriter.configuration import Configuration
-from underwriter.edgar import load_index
-from underwriter.state import InputState, OutputState, State
-from underwriter.tools import search_filing
-from underwriter.utils import init_model
-from underwriter.verifier import verify
+from fundamentalist import prompts
+from fundamentalist.configuration import Configuration
+from fundamentalist.edgar import load_index
+from fundamentalist.state import InputState, OutputState, State
+from fundamentalist.tools import search_filing
+from fundamentalist.utils import init_model
+from fundamentalist.verifier import verify
 
 
 def _main_prompt(state: State, configuration: Configuration) -> str:

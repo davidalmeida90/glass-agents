@@ -1,4 +1,4 @@
-from underwriter.configuration import Configuration
+from fundamentalist.configuration import Configuration
 
 
 def test_configuration_from_none() -> None:

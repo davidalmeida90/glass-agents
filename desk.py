@@ -76,18 +76,18 @@ async def main() -> int:
     tickers = [t.strip().upper() for t in args.tickers.split(",") if t.strip()]
 
     load_keys()
-    from underwriter.budget import BudgetExceeded, TokenLedger
-    from underwriter.decision import RATINGS, adjust, decide, flags
-    from underwriter.edgar import RISK_STATS, load_index
+    from fundamentalist.budget import BudgetExceeded, TokenLedger
+    from fundamentalist.decision import RATINGS, adjust, decide, flags
+    from fundamentalist.edgar import RISK_STATS, load_index
     from dataclasses import replace
-    from underwriter import dcf
-    from underwriter.redteam import corrections, counts, method_review, red_team
-    from underwriter.schemas import READERS
-    from underwriter.sizing import annual_volatility, size
-    from underwriter.parameters import value as param
-    from underwriter.report import audit, write_memo
-    from underwriter.valuation import value
-    from underwriter.verifier import verify
+    from fundamentalist import dcf
+    from fundamentalist.redteam import corrections, counts, method_review, red_team
+    from fundamentalist.schemas import READERS
+    from fundamentalist.sizing import annual_volatility, size
+    from fundamentalist.parameters import value as param
+    from fundamentalist.report import audit, write_memo
+    from fundamentalist.valuation import value
+    from fundamentalist.verifier import verify
 
     model = args.model.split("/")[-1]
     batch = TokenLedger(model, max_tokens=10**9, max_usd=args.budget_usd, echo=False)

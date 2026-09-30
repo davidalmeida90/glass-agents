@@ -17,7 +17,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
-from underwriter.parameters import value as param
+from fundamentalist.parameters import value as param
 
 RATINGS = ["Sell", "Underweight", "Hold", "Overweight", "Buy"]
 RED = re.compile(r"material weakness|not effective|ineffective|adverse opinion|going concern|restat", re.I)

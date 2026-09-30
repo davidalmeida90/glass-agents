@@ -19,10 +19,10 @@ from dataclasses import replace
 from datetime import date, timedelta
 from typing import Any
 
-from underwriter import dcf
-from underwriter.edgar import sec_get
-from underwriter.market import beta, bottom_up_beta, risk_free, synthetic_rating
-from underwriter.parameters import value as param
+from fundamentalist import dcf
+from fundamentalist.edgar import sec_get
+from fundamentalist.market import beta, bottom_up_beta, risk_free, synthetic_rating
+from fundamentalist.parameters import value as param
 
 REVENUE = ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet",
            "RevenueFromContractWithCustomerIncludingAssessedTax"]
@@ -497,7 +497,7 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
     rd_note, rd_margin_adjustment, reported_margin = None, 0.0, ebit / revenue
     rd_ttm = _v(f, "rd_ttm")
     if rd_ttm > param("capitalize_rd")["min_share_of_revenue"] * revenue and f.get("rd_annual"):
-        from underwriter.market import _ticker_industries
+        from fundamentalist.market import _ticker_industries
         life = rd_life(_ticker_industries().get(ticker.upper()))
         asset, amortization = research_asset(rd_ttm, f["rd_annual"], life)
         ebit += rd_ttm - amortization

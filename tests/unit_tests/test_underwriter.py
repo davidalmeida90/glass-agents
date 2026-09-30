@@ -6,11 +6,11 @@ import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.outputs import ChatGeneration, LLMResult
 
-from underwriter.budget import BudgetExceeded, TokenLedger
-from underwriter.edgar import FilingIndex
-from underwriter.graph import route_after_agent
-from underwriter.state import State
-from underwriter.verifier import numbers, verify
+from fundamentalist.budget import BudgetExceeded, TokenLedger
+from fundamentalist.edgar import FilingIndex
+from fundamentalist.graph import route_after_agent
+from fundamentalist.state import State
+from fundamentalist.verifier import numbers, verify
 
 PASSAGES = {
     "P001": "Revenue was $281.7 billion, an increase of 15% compared with fiscal year 2025.",
@@ -85,8 +85,8 @@ def test_routing_ends_at_the_turn_limit():
 def test_code_checker_accepts_good_evidence_and_returns_specific_failures():
     import asyncio
 
-    from underwriter import edgar
-    from underwriter.graph import reflect
+    from fundamentalist import edgar
+    from fundamentalist.graph import reflect
 
     idx = edgar.FilingIndex(meta={"ticker": "ZZZ"}, passages=list(PASSAGES.items()))
     edgar._INDEXES["ZZZ:10-K"] = idx
@@ -105,7 +105,7 @@ def test_code_checker_accepts_good_evidence_and_returns_specific_failures():
 
 
 def test_risk_changes_keeps_only_new_sentences():
-    from underwriter.edgar import risk_changes
+    from fundamentalist.edgar import risk_changes
 
     old = ("Table of contents Item 1A. Risk Factors 12 Item 1B. Unresolved staff comments 20 "
            "Item 1A. Risk Factors Our business depends on consumer demand for our products worldwide. "
@@ -122,7 +122,7 @@ def test_risk_changes_keeps_only_new_sentences():
 
 
 def _inputs(**kw):
-    from underwriter.dcf import Inputs
+    from fundamentalist.dcf import Inputs
 
     base = dict(revenue=100.0, ebit=20.0, effective_tax=0.0, marginal_tax=0.0, invested_capital=100.0,
                 operating_capital=100.0, growth=0.0,
@@ -132,7 +132,7 @@ def _inputs(**kw):
 
 
 def test_fcff_dcf_matches_a_perpetuity():
-    from underwriter.dcf import value_per_share
+    from fundamentalist.dcf import value_per_share
 
     # no growth, no reinvestment, no tax: 20 a year forever at 10% is 200
     assert abs(value_per_share(_inputs())["per_share"] - 200.0) < 1e-6
@@ -141,7 +141,7 @@ def test_fcff_dcf_matches_a_perpetuity():
 
 
 def test_growth_without_excess_return_adds_no_terminal_value():
-    from underwriter.dcf import value_per_share
+    from fundamentalist.dcf import value_per_share
 
     # terminal ROIC = WACC: the terminal value is next year's NOPAT / WACC, whatever the terminal growth
     for g in (0.0, 0.03):
@@ -155,14 +155,14 @@ def test_growth_without_excess_return_adds_no_terminal_value():
 
 
 def test_reverse_dcf_inverts_the_value():
-    from underwriter.dcf import implied_growth, value_per_share
+    from fundamentalist.dcf import implied_growth, value_per_share
 
     x = _inputs(growth=0.12, terminal_growth=0.02)
     price = value_per_share(x)["per_share"]
     assert abs(implied_growth(_inputs(terminal_growth=0.02), price) - 0.12) < 1e-6
 
 def test_decision_bands_and_flags():
-    from underwriter.decision import decide, flags
+    from fundamentalist.decision import decide, flags
 
     fv = {"bear": 90.0, "base": 100.0, "bull": 110.0}           # narrow range: no overlay
     none = {"red": [], "caution": []}
@@ -187,7 +187,7 @@ def test_decision_bands_and_flags():
 
 
 def test_clean_control_wording_raises_no_red_flag():
-    from underwriter.decision import flags
+    from fundamentalist.decision import flags
 
     ok = {"status": "verified"}
     ev = {"accounting": [{"topic": "internal_control", "check": ok,
@@ -197,8 +197,8 @@ def test_clean_control_wording_raises_no_red_flag():
 
 
 def test_red_team_moves_a_rating_only_with_supported_high_objections():
-    from underwriter.decision import adjust
-    from underwriter.redteam import adjustment
+    from fundamentalist.decision import adjust
+    from fundamentalist.redteam import adjustment
 
     base = {"rating": "Buy", "why": ["x"], "upside_to_base": 0.3}
     def o(**kw):
@@ -216,7 +216,7 @@ def test_red_team_moves_a_rating_only_with_supported_high_objections():
 
 
 def test_sizing_scales_by_volatility_and_confidence():
-    from underwriter.sizing import size
+    from fundamentalist.sizing import size
 
     assert size("Hold", 1.0, 0.2)["weight"] == 0.0
     assert size("Buy", 1.0, 0.25)["weight"] == 0.05
@@ -232,7 +232,7 @@ def test_justified_price_to_book():
 
 
 def test_moat_from_roic_history():
-    from underwriter.valuation import moat
+    from fundamentalist.valuation import moat
 
     wide = [{"roic": r} for r in (0.30, 0.28, 0.25, 0.27, 0.31)]
     assert moat(wide, 0.09)[0] == 1.0
@@ -244,7 +244,7 @@ def test_moat_from_roic_history():
 
 
 def test_excess_return_model():
-    from underwriter.valuation import excess_return_value
+    from fundamentalist.valuation import excess_return_value
 
     # ROE equal to Ke: worth exactly book value
     assert abs(excess_return_value(100.0, 0.10, 0.10, 0.03, 1.0) - 100.0) < 1e-9
@@ -253,7 +253,7 @@ def test_excess_return_model():
 
 
 def test_high_growth_decays_by_year_five():
-    from underwriter.dcf import value_per_share
+    from fundamentalist.dcf import value_per_share
 
     out = value_per_share(_inputs(growth=0.30, terminal_growth=0.03, year5_growth_cap=0.10))
     growth = [row["growth"] for row in out["forecast"]]
@@ -263,7 +263,7 @@ def test_high_growth_decays_by_year_five():
 
 
 def test_period_mismatch_is_not_a_data_conflict():
-    from underwriter.redteam import counts
+    from fundamentalist.redteam import counts
 
     base = {"type": "data_conflict", "severity": "high", "supported": True, "cites_evidence": True}
     assert not counts(dict(base, cites=["growth_used", "PERF-2"]))            # TTM growth vs a 10-K figure
@@ -277,7 +277,7 @@ def test_verifier_survives_a_date_in_the_value_field():
 
 
 def test_red_team_corrections_take_the_median_of_counting_objections():
-    from underwriter.redteam import corrections
+    from fundamentalist.redteam import corrections
 
     ok = {"type": "business", "severity": "high", "supported": True, "cites_evidence": True, "cites": ["PERF-3"]}
     result = {"objections": [dict(ok, correction={"field": "growth", "value": 0.06}),
@@ -289,7 +289,7 @@ def test_red_team_corrections_take_the_median_of_counting_objections():
 
 
 def test_research_asset_straight_line():
-    from underwriter.valuation import research_asset
+    from fundamentalist.valuation import research_asset
 
     # flat R&D of 10 a year over a 5-year life: asset = 10 x (5+4+3+2+1)/5 = 30, amortization = 10
     annual = {f"20{y}-12-31": 10.0 for y in range(10, 26)}

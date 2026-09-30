@@ -3,7 +3,7 @@ from typing import Any, Dict
 import pytest
 from langsmith import unit
 
-from underwriter import graph
+from fundamentalist import graph
 
 pytestmark = [pytest.mark.anyio, pytest.mark.skip(reason="template web research test; the reader now searches SEC filings")]
 

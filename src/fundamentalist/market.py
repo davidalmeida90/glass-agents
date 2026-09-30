@@ -11,7 +11,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from underwriter.parameters import value as param
+from fundamentalist.parameters import value as param
 
 # Interest coverage (EBIT / interest expense) floor -> (rating, default spread), large non-financial firms
 # (market cap of $5bn or more). Damodaran, ratings.xls, January 2026 (read 2026-09-30).

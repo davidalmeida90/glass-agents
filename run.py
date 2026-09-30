@@ -40,7 +40,7 @@ async def preflight(callbacks, model_name: str) -> dict:
     """One tiny call: thinking disabled, and a forced tool call accepted."""
     from langchain_core.messages import HumanMessage
 
-    from underwriter.utils import init_model
+    from fundamentalist.utils import init_model
 
     ping = {"name": "Ping", "description": "Reply by calling this tool.",
             "parameters": {"type": "object", "properties": {"ok": {"type": "boolean"}}, "required": ["ok"]}}
@@ -58,9 +58,9 @@ async def preflight(callbacks, model_name: str) -> dict:
 
 async def run_reader(ticker, reader, configurable, callbacks):
     """One reader on one company. Returns the last state and the reason it stopped, if it did."""
-    from underwriter.budget import BudgetExceeded
-    from underwriter.edgar import load_index
-    from underwriter.graph import graph
+    from fundamentalist.budget import BudgetExceeded
+    from fundamentalist.edgar import load_index
+    from fundamentalist.graph import graph
 
     load_index(ticker, reader.corpus).served.clear()  # each reader run starts with every passage available
     stopped, last = None, {}
@@ -94,10 +94,10 @@ async def main() -> int:
         ap.error("give a ticker or --tickers")
 
     load_keys()
-    from underwriter.budget import BudgetExceeded, TokenLedger
-    from underwriter.edgar import load_index
-    from underwriter.schemas import READERS
-    from underwriter.verifier import verify
+    from fundamentalist.budget import BudgetExceeded, TokenLedger
+    from fundamentalist.edgar import load_index
+    from fundamentalist.schemas import READERS
+    from fundamentalist.verifier import verify
 
     readers = [READERS[r.strip()] for r in args.readers.split(",")]
     model = args.model.split("/")[-1]
@@ -135,7 +135,7 @@ async def main() -> int:
                 continue
             extra = ""
             if reader.corpus == "risk_changes":
-                from underwriter.edgar import RISK_STATS
+                from fundamentalist.edgar import RISK_STATS
                 rs = RISK_STATS.get(ticker, {})
                 extra = (f": {rs.get('new_count')} new of {rs.get('sentences_now')} risk sentences vs {rs.get('prior_period')}"
                          f" ({rs.get('removed_count')} removed), {len(corpus.passages)} passages")

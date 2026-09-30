@@ -10,9 +10,9 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from underwriter import dcf
-from underwriter.decision import RATINGS
-from underwriter.parameters import PARAMS
+from fundamentalist import dcf
+from fundamentalist.decision import RATINGS
+from fundamentalist.parameters import PARAMS
 
 OK = ("verified", "number in passage")
 

@@ -1,5 +1,5 @@
 [project]
-name = "underwriting-desk"
+name = "fundamentalist-agents"
 version = "0.0.1"
 description = "Evidence readers over SEC filings, started from LangChain's data-enrichment template"
 authors = [
@@ -23,9 +23,9 @@ requires = ["setuptools>=83.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["underwriter"]
+packages = ["fundamentalist"]
 [tool.setuptools.package-dir]
-"underwriter" = "src/underwriter"
+"fundamentalist" = "src/fundamentalist"
 
 
 [tool.setuptools.package-data]
