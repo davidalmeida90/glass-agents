@@ -17,19 +17,21 @@ An analyst screening a watchlist needs the opposite: numbers traced to the filin
 
 For each company:
 
-1. **Readers** (a language model with bounded tasks) search the latest 10-K, and the latest 10-Q for recent performance, and return structured claims with the exact quote and passage ID: financial performance, accounting quality, capital allocation, and the risk factors that are new this year.
-2. **Code checks every claim** against the filing: the quote must be in the cited passage and the number in the quote.
-3. **Code values the company**, with the model picked by its SEC industry code:
+1. **Six readers** (DeepSeek Flash with bounded tasks) search the latest 10-K, 10-Q and earnings release and return structured claims with the exact quote and passage ID: financial performance, accounting quality, capital allocation, the risk factors that are new this year, management's guidance (as ranges) and segment revenue and operating income (this year and last).
+2. **Code checks every claim** against the filing: the quote must be in the cited passage and every number in the quote (a range's two ends, last year's figure).
+3. **Verified claims move the valuation** (`forward.py`): a full-year revenue outlook, set against last year's revenue from XBRL, moves starting growth halfway toward the guided midpoint (at most 5 points); the segment mix in five years (each segment at its own growth and margin) sets a target margin the DCF converges to by year 5.
+4. **Code values the company**, with the model picked by its SEC industry code:
    - operating companies: FCFF DCF at its own WACC (bottom-up beta, implied ERP paired with its risk-free rate, synthetic-rating cost of debt), stock-based compensation expensed, R&D capitalized where material, leases as debt, growth paid for by reinvestment, a moat share taken from 5-year ROIC history, and a reverse DCF;
-   - banks and insurers: excess return model on a normalized 5-year ROE, with at most half of today's excess return kept in the terminal value;
-   - REITs and utilities: two-stage dividend discount model on their own dividend per share growth.
+   - banks and insurers: excess return model on a normalized 5-year ROE, with at most half of today's excess return kept in the terminal value, at a cost of equity no lower than the rate at which the same model prices the industry's book at its own P/B (CAPM on insurers' low betas gave 7.4% against 9.4 to 9.9% implied);
+   - utilities: earnings grow with the rate base (median of net plant and EPS growth, 0 to 7%), dividends = earnings x a payout moving to 1 - g / ROE;
+   - REITs: two-stage dividend discount model on their own dividend per share growth.
 
-   Starting growth blends the last twelve months with the 3-year CAGR. A second method checks the first: industry EV/EBIT (price to book adjusted for ROE for financials) from Damodaran's January 2026 tables; when the two disagree by more than half, uncertainty goes up a level.
-4. **Code rates it:** price over base fair value against Morningstar-style bands that widen with uncertainty, minus notches for flags raised by verified evidence (material weakness, weak cash conversion, a large share of new risk factors).
-5. **A red team** (one model call) argues against the rating using only the verified evidence. It can propose a corrected input, which code revalues; its criticism of the method goes to a review list and never moves a rating.
-6. **A noise meter** repeats the model-driven steps three times and reports the median rating and the agreement.
-7. **An audit** recomputes each memo (value, equity bridge, WACC, scenario order, share of claims verified) and the batch's median price to fair value.
-8. **A memo** in Markdown per company: rating and why, valuation build-up, sensitivity grid, evidence with quotes, red team, noise, data notes, parameters, cost.
+   Starting growth blends the last twelve months with the 3-year CAGR. The memo states what must be true: the constant operating margin the price needs, against the company's own 10-year range. A second method checks the first: industry EV/EBIT (price to book adjusted for ROE for financials) from Damodaran's January 2026 tables; when the two disagree by more than half, uncertainty goes up a level.
+5. **Code rates it:** price over base fair value against Morningstar-style bands that widen with uncertainty, minus notches for flags raised by verified evidence (material weakness, weak cash conversion, a large share of new risk factors).
+6. **A red team** on a different model family (Gemini 3.1 Flash-Lite) argues against the rating using only the verified evidence, starting where code points it: the input that moves fair value most and the margin the price needs. A correction must be a formula over claim IDs (operating income / revenue, revenue / prior revenue - 1); code computes it, checks that it computes what it claims and that a margin stays within 30% of the reported one, then revalues, one notch at most. Criticism of the method goes to a review list and never moves a rating.
+7. **A noise meter** runs the red team three times and reports the median rating and the agreement.
+8. **An audit** recomputes each memo (value, equity bridge, WACC, scenario order, share of claims verified) and the batch's median price to fair value.
+9. **A memo** in Markdown per company: rating and why, valuation build-up, sensitivity grid, evidence with quotes, red team, noise, data notes, parameters, cost.
 
 ## Evidence, 21 companies, 2026-10-01
 
@@ -54,11 +56,30 @@ Thirteen large caps plus two REITs, two utilities and four insurers, so every va
 
 They are the model's reading under the stated parameters, not investment advice, and no backtest has been run. The run found three faults, fixed since: false red flags from 10-K boilerplate (the auditor's PCAOB paragraph, the cover page check boxes), a red team margin correction that was really operating expenses over revenue (Visa, now bounded against the reported margin), and trimmed tool calls sent back to the API (a 400 on Pfizer's risk reader).
 
+## Backtest of the code core, 2015 to 2025
+
+`backtest.py` replays the valuation and the rating (no model calls, so nothing remembered from the future) on the last trading day of every month for each current S&P 500 member from the day it joined: XBRL facts filed before that day, that day's close, betas and volatility from prices up to it, Damodaran's implied ERP and T-bond rate from the previous year end, and his January industry EV/EBIT, P/B and P/E tables of that year.
+
+| Signal (481 companies, 129 months) | 1-month rank IC | t | 12-month rank IC | t |
+|---|---|---|---|---|
+| fair value / price (desk) | +0.004 | 0.4 | +0.025 | 1.1 |
+| rating (desk) | +0.000 | 0.0 | +0.018 | 0.8 |
+| industry multiples value / price | +0.005 | 0.5 | +0.024 | 2.3 |
+| book-to-market | -0.005 | -0.3 | -0.016 | -0.3 |
+| EBIT / EV | +0.001 | 0.1 | -0.001 | -0.0 |
+
+The ratings do not sort later returns: 12-month excess return over the universe average was Buy -1.5%, Overweight +0.4%, Hold 0.0%, Underweight -1.3%, Sell -2.2%. The desk's fair value / price moves with EBIT / EV (rank correlation 0.80): it is largely a value measure, and value lost in 2016 to 2020 (IC -0.021) and won in 2021 to 2025 (+0.083). Within an industry it has a weak short-horizon signal (1-month IC +0.031, t 3.8). Banks show a strong one (+0.175), which survivorship most likely inflates: banks that failed in 2023 are not in today's member list.
+
+A lesson from building it: with the January 2026 industry tables applied to every year, the industry multiples signal looked strong (12-month IC +0.082, t 4.5). With each year's own tables it fell to +0.024. Industries that re-rated by 2026 looked cheap in the past because their future multiple was used.
+
+Leaks left: industry betas and rating spreads are the 2026 vintage; SIC codes and industry mapping are today's; companies that left the index are missing. The readers and the red team cannot be backtested, since they read today's filings; their effect is measured by the forward track record only.
+
 ## Run it
 
 ```
 python desk.py --tickers MSFT,AAPL --budget-usd 0.50       # full desk, memos in runs/memos/
 python desk.py --tickers MSFT --valuation-only             # free: SEC, FRED and Yahoo only
+python backtest.py fetch && python backtest.py run          # free: point-in-time replay of the code core
 python run.py --tickers MSFT --readers performance         # one reader, for testing
 python track.py show                                       # ratings recorded by full runs
 python track.py score --min-days 90                         # excess return vs SPY by rating, once they age
@@ -78,7 +99,8 @@ Keys come from `Agents_model/.env` through `FIDCS/backend/chaves.py` (DeepSeek, 
 ## Known limits
 
 - Operating margin is held at today's level; margin expansion enters only through a red team correction backed by evidence (Amazon's technology spending sits under a company tag the XBRL API does not carry, so it is not capitalized).
-- Starting growth comes from reported revenue only; no analyst consensus and no forward guidance.
+- The rating is a valuation opinion, not a return forecast: in the 2015 to 2025 backtest it did not sort later returns.
+- Guidance moves only starting growth, and only when stated for a full year or as a growth rate; no analyst consensus.
 - Pharma pipelines are not valued; banks and insurers use an excess return model without a separate look at reserves or credit losses.
 - The readers read the latest filings, so the desk runs live only.
 - Ratings are not backtested; the forward track record needs months before it says anything.

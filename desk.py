@@ -189,7 +189,15 @@ class Desk:
                 cfg = {"configurable": dict(self.configurable, model=critic, max_output_tokens=800),
                        "callbacks": [ledger, self.batch, *self.callbacks], "metadata": {"purpose": "red_team"}}
                 try:
-                    rt = await red_team(ticker, val, base, lines, ids, cfg)
+                    try:
+                        rt = await red_team(ticker, val, base, lines, ids, cfg)
+                    except BudgetExceeded:
+                        raise
+                    except Exception as e:  # noqa: BLE001 - the critic's provider down (Gemini free tier 503): readers' model
+                        self.log(f"  red team on {critic} failed ({type(e).__name__}); retrying on {self.model_arg}")
+                        cfg = dict(cfg, configurable=dict(cfg["configurable"], model=self.model_arg))
+                        rt = await red_team(ticker, val, base, lines, ids, cfg)
+                        rt["fallback"] = f"{critic} unavailable ({str(e)[:100]}); ran on {self.model_arg}"
                     fixes = corrections(rt, val.get("operating_margin_reported"), ids)
                     x = val.get("dcf_inputs")
                     if fixes and x is not None:
