@@ -209,7 +209,9 @@ def last_price(ticker: str, as_of: str) -> tuple[float, str]:
 
     start = (date.fromisoformat(as_of) - timedelta(days=10)).isoformat()
     end = (date.fromisoformat(as_of) + timedelta(days=1)).isoformat()
-    hist = yf.Ticker(ticker).history(start=start, end=end, auto_adjust=False)
+    # Yahoo can list the latest session with its volume but no close yet (seen 2026-10-01 for the 30 Sep
+    # session on 19 of 21 tickers): such rows are skipped, so the price is the last session with a close.
+    hist = yf.Ticker(ticker).history(start=start, end=end, auto_adjust=False).dropna(subset=["Close"])
     if hist.empty:
         raise ValueError(f"no Yahoo price for {ticker} near {as_of}")
     return float(hist["Close"].iloc[-1]), hist.index[-1].date().isoformat()

@@ -55,7 +55,7 @@ def record(run: str, memos: list[dict]) -> int:
 def _close(ticker: str, day: str | None = None) -> tuple[float, str]:
     import yfinance as yf
 
-    hist = yf.Ticker(ticker).history(period="10d" if day is None else "max", auto_adjust=True)
+    hist = yf.Ticker(ticker).history(period="10d" if day is None else "max", auto_adjust=True).dropna(subset=["Close"])
     if day is not None:
         hist = hist[hist.index.strftime("%Y-%m-%d") <= day]
     return float(hist["Close"].iloc[-1]), hist.index[-1].strftime("%Y-%m-%d")

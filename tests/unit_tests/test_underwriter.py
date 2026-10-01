@@ -313,3 +313,13 @@ def test_ddm_matches_gordon_when_growth_is_flat():
 
     # constant 3% growth at 8%: Gordon value D0 x 1.03 / (0.08 - 0.03)
     assert abs(ddm_value(2.0, 0.03, 0.03, 0.08) - 2.0 * 1.03 / 0.05) < 1e-9
+
+
+
+def test_audit_flags_a_missing_price():
+    from fundamentalist.report import audit
+
+    memo = {"rating": "No rating", "valuation": {"price": float("nan"), "fair_value": None,
+                                                 "note": "not rated, review: base value is nanx the price"},
+            "repeats": [{"final": {"rating": "No rating", "why": []}}], "evidence": {}}
+    assert any("no usable price" in i for i in audit(memo))

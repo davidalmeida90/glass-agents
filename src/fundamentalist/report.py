@@ -41,6 +41,9 @@ def audit(memo: dict[str, Any]) -> list[str]:
             issues.append(f"WACC does not recompute: {wacc:.4f} vs {cap['wacc']:.4f}")
     if str(val.get("note") or "").startswith("valuation failed"):
         issues.append(f"valuation did not run: {val['note']}")
+    price = val.get("price")
+    if price is not None and not (isinstance(price, (int, float)) and price == price and price > 0):
+        issues.append(f"no usable price ({price}): the valuation could not be compared with the market")
     if rating not in RATINGS and rating != "No rating":
         issues.append(f"unknown rating {rating}")
     if fv and rating == "No rating":
