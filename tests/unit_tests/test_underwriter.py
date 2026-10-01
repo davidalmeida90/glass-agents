@@ -452,3 +452,20 @@ def test_guided_growth_uses_xbrl_base_and_skips_past_years():
     assert guided_growth([old], fy_revenue=62.6e9, year=2026) is None
     quarter = dict(pfe, period="Q3 2026")
     assert guided_growth([quarter], fy_revenue=62.6e9, year=2026) is None  # a quarter's revenue range has no base here
+
+
+
+def test_correction_formulas_cannot_carry_the_models_own_numbers():
+    from fundamentalist.redteam import evaluate, identity
+
+    claims = {"PERF-1": {"topic": "revenue", "statement": "Revenue was $187,142 million", "value": 187142.0,
+                         "value_prior": 130497.0, "unit": "USD millions"},
+              "PERF-5": {"topic": "growth", "statement": "Revenue grew 21%", "value": 21.0, "unit": "%"},
+              "PERF-8": {"topic": "revenue", "statement": "Data Center revenue was $115,186 million", "value": 115186.0,
+                         "unit": "USD millions"}}
+    for formula in ("0.04", "(PERF-5 + 0.17) / 2", "PERF-8 / PERF-1"):  # all three seen on 2026-10-01
+        _, used = evaluate(formula, claims) if "PERF" in formula else (None, [])
+        assert identity("growth", formula, used), formula
+    for formula in ("PERF-5", "PERF-1 / PERF-1.prior - 1"):
+        _, used = evaluate(formula, claims)
+        assert identity("growth", formula, used) is None, formula

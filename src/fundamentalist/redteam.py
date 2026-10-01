@@ -214,6 +214,11 @@ def identity(field: str, formula: str, used: list[dict[str, Any]]) -> str | None
     """Why a correction formula does not compute the field it claims to, or None when it does."""
     text = [f"{c.get('topic', '')} {c.get('statement', '')}" for c in used]
     shape = re.sub(r"\s+", "", REF.sub("X", formula))
+    if not used:
+        return "a formula must use at least one evidence ID"
+    if any(float(n) not in (1.0, 100.0) for n in re.findall(r"\d+(?:\.\d+)?", shape)):
+        # 2026-10-01: '0.04' and '(PERF-5 + 0.17) / 2' slipped the model's own numbers into corrections
+        return "a formula may use only evidence IDs and the constants 1 and 100"
     if field == "operating_margin":
         if shape == "X/X" and OPERATING_INCOME.search(text[0]) and not OPEX.search(text[0]) and REVENUE.search(text[1]):
             return None
@@ -222,9 +227,11 @@ def identity(field: str, formula: str, used: list[dict[str, Any]]) -> str | None
         return "an operating margin must be operating income / revenue or 1 - operating expenses / revenue"
     if any(c.get("segment") or c.get("topic") == "segment" for c in used):
         return "a growth correction must use company totals, not a segment"
-    if all(GROWTH.search(t) for t in text):
-        return None
-    return "a growth correction may use only revenue or growth figures"
+    if shape == "X" and GROWTH.search(text[0]) and "%" in str(used[0].get("unit") or "%"):
+        return None  # a stated growth rate
+    if shape == "X/X-1" and all(REVENUE.search(t) for t in text):
+        return None  # revenue / prior revenue - 1 (NVDA, 2026-10-01: a revenue share 'PERF-8 / PERF-1' was sent as growth)
+    return "a growth correction must be a stated growth rate or revenue / prior revenue - 1"
 
 
 def corrections(result: dict[str, Any], reported_margin: float | None = None,

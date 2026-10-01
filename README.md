@@ -35,26 +35,28 @@ For each company:
 
 ## Evidence, 21 companies, 2026-10-01
 
-Thirteen large caps plus two REITs, two utilities and four insurers, so every valuation route ran.
+Thirteen large caps plus two REITs, two utilities and four insurers, so every valuation route ran (final version of the day).
 
 | Measure | Result |
 |---|---|
-| Claims checked against the filings | 992 of 994 (the code verifier rejected the other 2) |
+| Claims checked against the filings | 828 of 839 (the code verifier rejected 11) |
 | Audit | 21 of 21 memos add up |
-| Median price / fair value | 1.01 (consistent with the market on average) |
-| Agreement across 3 repeats | 100% on 19 companies, 67% on 2 (Visa, Pfizer) |
-| Cost per company | $0.0101, 64,070 tokens, 16 model calls, 63% of input cached |
-| Time per company | about 44 seconds |
+| Median price / fair value | 1.18 (the financials' industry-implied cost of equity made banks and insurers dearer) |
+| Forward drivers used | guidance moved starting growth on 5 companies, segment mix set a margin path on 7 |
+| Red team | 63 runs; 3 moved a rating, and all 3 fail the formula rule tightened afterwards (an invented constant, a revenue share sent as growth) |
+| Agreement across 3 repeats | 100% on 19 companies, 67% on 2 (100% on 20 under the tightened rule) |
+| Cost per company | about $0.008 of DeepSeek for the readers; the red team runs on Gemini's free tier (the ledger prices it at the paid rate, $0.015 a company in all) |
+| Time per company | about 58 seconds |
 
 | Rating | Companies |
 |---|---|
 | Buy | Meta, Realty Income |
-| Overweight | Visa, Prologis, NextEra, Chubb |
-| Hold | Microsoft, Nvidia, Alphabet, JPMorgan, Pfizer, Progressive, Travelers |
-| Underweight | Apple, Walmart, Caterpillar, Bank of America, MetLife |
-| Sell | Amazon, Coca-Cola, Duke Energy |
+| Overweight | Visa, Prologis, NextEra |
+| Hold | Microsoft, Alphabet, Duke Energy (Nvidia, Hold in the run, is Underweight under the tightened rule) |
+| Underweight | Apple, JPMorgan, Walmart, Pfizer, Caterpillar, Bank of America, Chubb |
+| Sell | Amazon, Coca-Cola, Progressive, Travelers, MetLife |
 
-They are the model's reading under the stated parameters, not investment advice, and no backtest has been run. The run found three faults, fixed since: false red flags from 10-K boilerplate (the auditor's PCAOB paragraph, the cover page check boxes), a red team margin correction that was really operating expenses over revenue (Visa, now bounded against the reported margin), and trimmed tool calls sent back to the API (a 400 on Pfizer's risk reader).
+They are valuation opinions under the stated parameters, not return forecasts (see the backtest below) and not investment advice.
 
 ## Backtest of the code core, 2015 to 2025
 
