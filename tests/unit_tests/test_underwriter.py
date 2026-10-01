@@ -356,3 +356,18 @@ def test_boilerplate_is_not_a_red_flag():
     real = {"accounting": [{"topic": "internal_control", "check": ok, "statement": "",
                             "quote": "management identified a material weakness in our internal control over financial reporting"}]}
     assert len(flags({}, real, None)["red"]) == 1
+
+
+
+def test_margin_correction_far_from_reported_is_dropped():
+    from fundamentalist.redteam import corrections
+
+    def obj(v):
+        return {"type": "data_conflict", "direction": "rating too high", "severity": "high", "argument": "x",
+                "cites": ["PERF-1", "PERF-10"], "supported": True, "cites_evidence": True,
+                "correction": {"field": "operating_margin", "value": v}}
+
+    rt = {"objections": [obj(0.3224)]}  # Visa 2026-10-01: operating expenses / revenue sent as the margin
+    assert corrections(rt, 0.6112) == {}
+    assert rt["rejected"]
+    assert corrections({"objections": [obj(0.677)]}, 0.6112) == {"operating_margin": 0.677}

@@ -181,7 +181,7 @@ class Desk:
                        "callbacks": [ledger, self.batch, *self.callbacks], "metadata": {"purpose": "red_team"}}
                 try:
                     rt = await red_team(ticker, val, base, lines, ids, cfg)
-                    fixes = corrections(rt)
+                    fixes = corrections(rt, val.get("operating_margin_reported"))
                     x = val.get("dcf_inputs")
                     if fixes and x is not None:
                         g_lo, g_hi = param("growth_bounds")  # corrections pass through the same bounds as every input

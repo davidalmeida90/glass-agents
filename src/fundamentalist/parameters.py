@@ -76,6 +76,12 @@ PARAMS: dict[str, Parameter] = {p.name: p for p in [
               "analyst consensus (not free)"),
     Parameter("growth_bounds", (-0.05, 0.30), "starting revenue growth (the blend below), clipped",
               "own choice", "analyst consensus (not free)"),
+    Parameter("margin_correction_band", 0.30, "a red team operating margin correction counts only within 30% "
+              "(relative) of the reported trailing margin from XBRL; further away it contradicts an audited figure "
+              "instead of correcting it", "own rule after Visa, 2026-10-01: operating expenses / revenue (32%) was "
+              "submitted as the operating margin (reported 61%) and cost a notch in one repeat",
+              "no band (corrections bounded 0 to 80% only); require the value in a cited claim (rejects every "
+              "computed margin, right or wrong)"),
     Parameter("growth_blend", {"ttm": 0.5, "cagr_3y": 0.5}, "starting growth = weighted average of the last twelve "
               "months' revenue growth and the 3-year fiscal revenue CAGR (same XBRL tag); TTM alone when the history is "
               "missing", "base rates: one year of growth is noisy and mean-reverts (Mauboussin and Callahan, 2016)",

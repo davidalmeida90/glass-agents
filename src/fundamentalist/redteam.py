@@ -134,13 +134,24 @@ def counts(o: dict[str, Any]) -> bool:
                 and o.get("supported") and o.get("cites_evidence") and not period_only)
 
 
-def corrections(result: dict[str, Any]) -> dict[str, float]:
-    """Numeric corrections from objections that count, the median per field."""
+def corrections(result: dict[str, Any], reported_margin: float | None = None) -> dict[str, float]:
+    """Numeric corrections from objections that count, the median per field.
+
+    A margin correction far from the reported margin is dropped and listed in result["rejected"].
+    """
+    from fundamentalist.parameters import value as param
+
+    band = param("margin_correction_band")
     by_field: dict[str, list[float]] = {}
     for o in result["objections"]:
         c = o.get("correction") or {}
         if counts(o) and c.get("field") in ("growth", "operating_margin") and isinstance(c.get("value"), (int, float)):
-            by_field.setdefault(c["field"], []).append(float(c["value"]))
+            v = float(c["value"])
+            if c["field"] == "operating_margin" and reported_margin and abs(v / reported_margin - 1) > band:
+                result.setdefault("rejected", []).append(
+                    f"operating margin {v:.1%} is {v / reported_margin - 1:+.0%} from the reported {reported_margin:.1%}")
+                continue
+            by_field.setdefault(c["field"], []).append(v)
     return {k: sorted(v)[len(v) // 2] for k, v in by_field.items()}
 
 
