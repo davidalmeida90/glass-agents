@@ -34,6 +34,23 @@ def _searches_done(state: State) -> int:
                for tc in m.tool_calls if tc["name"] == "search_filing")
 
 
+def _keep(response: AIMessage, calls: list) -> None:
+    """Keep only *calls* on the message, everywhere the provider client reads them.
+
+    langchain-openai sends tool_calls and invalid_tool_calls back on the next request, and falls back to the raw
+    additional_kwargs["tool_calls"] when both are empty; a call left in any of them with no tool reply makes the
+    API refuse the request (Pfizer's risk reader, 2026-10-01: a search asked for after the cap, trimmed to none).
+    """
+    ids = {tc["id"] for tc in calls}
+    response.tool_calls = calls
+    response.invalid_tool_calls = []
+    raw = [t for t in response.additional_kwargs.get("tool_calls") or [] if t.get("id") in ids]
+    if raw:
+        response.additional_kwargs["tool_calls"] = raw
+    else:
+        response.additional_kwargs.pop("tool_calls", None)
+
+
 async def call_agent_model(
     state: State, *, config: Optional[RunnableConfig] = None
 ) -> Dict[str, Any]:
@@ -64,11 +81,10 @@ async def call_agent_model(
                 break
     if info is not None:
         # Submitting: drop any searches asked for in the same turn
-        response.tool_calls = [next(tc for tc in response.tool_calls if tc["name"] == "Info")]
-    elif response.tool_calls:
+        _keep(response, [next(tc for tc in response.tool_calls if tc["name"] == "Info")])
+    else:
         # Never run more searches than the run has left
-        searches = [tc for tc in response.tool_calls if tc["name"] == "search_filing"][:max(searches_left, 0)]
-        response.tool_calls = searches
+        _keep(response, [tc for tc in response.tool_calls if tc["name"] == "search_filing"][:max(searches_left, 0)])
     response_messages: List[BaseMessage] = [response]
     if not response.tool_calls:  # If LLM didn't respect the tool_choice
         response_messages.append(

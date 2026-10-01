@@ -323,3 +323,17 @@ def test_audit_flags_a_missing_price():
                                                  "note": "not rated, review: base value is nanx the price"},
             "repeats": [{"final": {"rating": "No rating", "why": []}}], "evidence": {}}
     assert any("no usable price" in i for i in audit(memo))
+
+
+
+def test_trimmed_tool_calls_are_not_sent_back():
+    from langchain_core.messages import AIMessage
+    from langchain_openai.chat_models.base import _convert_message_to_dict
+
+    from fundamentalist.graph import _keep
+
+    raw = [{"id": "a", "type": "function", "function": {"name": "search_filing", "arguments": "{\"query\": \"x\"}"}}]
+    msg = AIMessage(content="", tool_calls=[{"id": "a", "name": "search_filing", "args": {"query": "x"}}],
+                    additional_kwargs={"tool_calls": raw})
+    _keep(msg, [])  # no searches left: every call dropped
+    assert "tool_calls" not in _convert_message_to_dict(msg)
