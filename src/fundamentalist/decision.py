@@ -21,7 +21,12 @@ from fundamentalist.parameters import value as param
 
 RATINGS = ["Sell", "Underweight", "Hold", "Overweight", "Buy"]
 RED = re.compile(r"material weakness|not effective|ineffective|adverse opinion|going concern|restat", re.I)
-CLEAN = re.compile(r"(no|not identify any|did not identify|without any?|free of)\s+(\w+\s+){0,2}material weakness", re.I)
+CLEAN = re.compile(r"(no|not identify any|did not identify|without any?|free of)\s+(\w+\s+){0,2}(material weakness|restatement)",
+                   re.I)
+# Standard 10-K text that names a red-flag term without reporting one: the auditor's PCAOB paragraph and the
+# cover page check boxes. Each raised a false red flag in one repeat on 2026-10-01 (Visa, Chubb, Walmart).
+BOILERPLATE = re.compile(r"risk that a material weakness exists|indicate by check mark|correction of an error to "
+                         r"previously issued|error corrections are restatements|a material weakness is a deficiency", re.I)
 OK_STATUSES = ("verified", "number in passage")
 
 
@@ -29,7 +34,7 @@ def flags(value: dict[str, Any], evidence: dict[str, list[dict]], risk_stats: di
     red, caution = [], []
     for c in evidence.get("accounting", []):
         text = f"{c.get('quote', '')} {c.get('statement', '')}"
-        if c["check"]["status"] in OK_STATUSES and RED.search(text) and not CLEAN.search(text):
+        if c["check"]["status"] in OK_STATUSES and RED.search(text) and not CLEAN.search(text)                 and not BOILERPLATE.search(c.get("quote", "")):
             red.append(f"{c.get('topic')}: {c.get('quote', '')[:120]}")
     conv = value.get("cash_conversion")
     if conv is not None and conv < 0.8:

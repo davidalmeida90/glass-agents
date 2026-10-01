@@ -337,3 +337,22 @@ def test_trimmed_tool_calls_are_not_sent_back():
                     additional_kwargs={"tool_calls": raw})
     _keep(msg, [])  # no searches left: every call dropped
     assert "tool_calls" not in _convert_message_to_dict(msg)
+
+
+
+def test_boilerplate_is_not_a_red_flag():
+    from fundamentalist.decision import flags
+
+    ok = {"status": "verified"}
+    quotes = [  # Visa and Chubb (auditor's paragraph), Walmart (cover page), 10-Ks read on 2026-10-01
+        ("Our audit of internal control over financial reporting included obtaining an understanding of internal "
+         "control over financial reporting, assessing the risk that a material weakness exists", "PCAOB audit scope"),
+        ("Indicate by check mark whether the financial statements of the registrant included in the filing reflect the "
+         "correction of an error to previously issued financial statements.",
+         "The filing indicates no correction of an error and no restatement."),
+    ]
+    evidence = {"accounting": [{"topic": "internal_control", "quote": q, "statement": st, "check": ok} for q, st in quotes]}
+    assert flags({}, evidence, None)["red"] == []
+    real = {"accounting": [{"topic": "internal_control", "check": ok, "statement": "",
+                            "quote": "management identified a material weakness in our internal control over financial reporting"}]}
+    assert len(flags({}, real, None)["red"]) == 1
