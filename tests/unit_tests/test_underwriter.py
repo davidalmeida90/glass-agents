@@ -371,3 +371,13 @@ def test_margin_correction_far_from_reported_is_dropped():
     assert corrections(rt, 0.6112) == {}
     assert rt["rejected"]
     assert corrections({"objections": [obj(0.677)]}, 0.6112) == {"operating_margin": 0.677}
+
+
+
+def test_implied_financial_ke_reprices_the_industry_book():
+    from fundamentalist.valuation import excess_return_value, implied_financial_ke
+
+    ke = implied_financial_ke(2.0, 0.19, 0.0475, 0.5)  # P&C: industry P/B 2.0 at ROE 19%
+    assert 0.06 < ke < 0.12
+    assert abs(excess_return_value(1.0, 0.19, ke, min(0.0475, ke - 0.03), 0.5) - 2.0) < 1e-6
+    assert implied_financial_ke(2.0, 0.19, 0.0475, 1.0) > ke  # full persistence needs a higher Ke for the same P/B

@@ -134,6 +134,12 @@ PARAMS: dict[str, Parameter] = {p.name: p for p in [
               "SEC industry code picks the model: FCFF needs operating debt and free cash flow that banks, insurers, "
               "REITs and utilities do not have in a meaningful form", "Damodaran on financial firms and on REITs and "
               "regulated utilities (dividend and excess return models)", "FCFF for everyone"),
+    Parameter("financial_ke_floor", "industry_implied", "banks and insurers: cost of equity = the higher of CAPM and "
+              "the cost of equity at which this desk's own excess return model (same fade and moat cap) prices the "
+              "industry's book at the industry's price-to-book and ROE (Damodaran, January 2026). CAPM on insurers' low "
+              "betas (0.64) gave 7.4%, which made every insurer 1.4 to 1.6x its own industry multiple",
+              "found on the 2026-10-01 run by the multiples cross-check; insurers' low market betas understate risk "
+              "the market prices (catastrophe and reserve risk)", "CAPM only; a fixed beta floor of 1.0"),
     Parameter("financial_moat_cap", 0.5, "banks and insurers keep at most half of today's ROE - cost of equity spread "
               "in the terminal value, whatever their ROE history: their returns are cyclical (Progressive's 34% ROE after a "
               "hard insurance market is priced at an implied 11.8%)", "Damodaran fades financial firms' excess returns "

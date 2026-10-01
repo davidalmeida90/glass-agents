@@ -414,7 +414,12 @@ def bank_value(ticker: str, as_of: str, price: float, price_date: str, sic: str)
     if b is not regression and abs(b["used"] - regression["used"]) > param("beta_disagreement"):
         b = dict(b, used=round((b["used"] + regression["used"]) / 2, 3), method="average of industry and regression betas")
     b = dict(b, regression=regression["used"], regression_raw=regression["raw"])
-    ke = rf + b["used"] * param("equity_risk_premium")
+    ke = ke_capm = rf + b["used"] * param("equity_risk_premium")
+    floor_industry, peer_row = industry_pbv(ticker)
+    ke_floor = implied_financial_ke(peer_row["pbv"], peer_row["roe"], min(rf, param("terminal_growth_cap")),
+                                    param("financial_moat_cap")) if peer_row else None
+    if param("financial_ke_floor") == "industry_implied" and ke_floor and ke_floor > ke:
+        ke = ke_floor
     g = min(rf, param("terminal_growth_cap"), ke - param("min_terminal_spread"))
     common = equity["val"] - (preferred["val"] if preferred and preferred["end"] == equity["end"] else 0)
     roe_latest, bvps = ni["value"] / common, common / count
@@ -437,9 +442,11 @@ def bank_value(ticker: str, as_of: str, price: float, price_date: str, sic: str)
                moat=moat_why, roe_history=history,
                shares_source=count_source, cash_conversion=None,
                capital={"risk_free": round(rf, 4), "risk_free_date": rf_date, "beta": b,
-                        "erp": param("equity_risk_premium"), "cost_of_equity": round(ke, 4)},
+                        "erp": param("equity_risk_premium"), "cost_of_equity": round(ke, 4),
+                        "cost_of_equity_capm": round(ke_capm, 4),
+                        "cost_of_equity_floor": round(ke_floor, 4) if ke_floor else None, "floor_industry": floor_industry},
                valuation_period=f"net income to common, twelve months to {ni['end']}; equity at {equity['end']}; "
-                                f"the readers' evidence comes from the latest 10-K only")
+                                f"the readers' evidence comes from the latest 10-K and 10-Q")
     peer_industry, peer = industry_pbv(ticker)
     if peer and peer["roe"] > 0 and roe > 0:
         per_share = bvps * peer["pbv"] * (roe / peer["roe"])
@@ -473,6 +480,27 @@ def revenue_cagr(data: dict, concept: str, as_of: str, years: int = 3) -> float 
     if not start or annual[start[0]] <= 0:
         return None
     return (annual[last] / annual[start[0]]) ** (1 / years) - 1
+
+
+def implied_financial_ke(pbv: float, roe: float, g_cap: float, moat_share: float) -> float | None:
+    """Cost of equity at which this desk's excess return model prices one unit of the industry's book at the
+    industry's own price-to-book, with the industry's ROE and the financial moat cap (bisection; None if out of range).
+
+    Solving the plain justified P/B (full persistence) instead gave 11.5% for P&C insurers and, combined with the
+    model's fade, rated every bank and insurer a Sell on 2026-10-01: two different persistence assumptions.
+    """
+    spread = param("min_terminal_spread")
+
+    def gap(ke: float) -> float:
+        return excess_return_value(1.0, roe, ke, min(g_cap, ke - spread), moat_share) - pbv
+
+    lo, hi = 0.03, 0.40
+    if pbv <= 0 or gap(lo) < 0 or gap(hi) > 0:
+        return None
+    for _ in range(60):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if gap(mid) > 0 else (lo, mid)
+    return (lo + hi) / 2
 
 
 def excess_return_value(bvps: float, roe: float, ke: float, g: float, moat_share: float, years: int = 10) -> float:
