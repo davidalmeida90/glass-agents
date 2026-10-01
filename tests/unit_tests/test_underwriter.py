@@ -381,3 +381,13 @@ def test_implied_financial_ke_reprices_the_industry_book():
     assert 0.06 < ke < 0.12
     assert abs(excess_return_value(1.0, 0.19, ke, min(0.0475, ke - 0.03), 0.5) - 2.0) < 1e-6
     assert implied_financial_ke(2.0, 0.19, 0.0475, 1.0) > ke  # full persistence needs a higher Ke for the same P/B
+
+
+
+def test_utility_ddm_matches_gordon_in_steady_state():
+    from fundamentalist.valuation import utility_ddm
+
+    # flat growth and payout already at 1 - g/ROE: value = EPS x (1 + g) x payout / (ke - g)
+    eps, g, roe, ke = 5.0, 0.04, 0.10, 0.075
+    payout = 1 - g / roe
+    assert abs(utility_ddm(eps, payout, payout, g, g, ke) - eps * (1 + g) * payout / (ke - g)) < 1e-9

@@ -97,8 +97,9 @@ def _industry_multiples() -> dict[str, dict[str, float]]:
         rows = {}
         for r in csv.DictReader(fh):
             try:
+                pe = float(r["Current PE"]) if r.get("Current PE") not in (None, "") else float("nan")
                 rows[r["Industry Name"].strip()] = {"ev_ebit": float(r["EV/EBIT"]), "ev_ebitda": float(r["EV/EBITDA"]),
-                                                    "firms": int(float(r["Number of firms"]))}
+                                                    "pe": pe, "firms": int(float(r["Number of firms"]))}
             except (TypeError, ValueError):
                 continue
         return rows
@@ -123,6 +124,12 @@ def industry_pbv(ticker: str) -> tuple[str | None, dict[str, float] | None]:
 
 def industry_of(ticker: str) -> str | None:
     return _ticker_industries().get(ticker.upper())
+
+
+def industry_pe(ticker: str) -> tuple[str | None, float | None]:
+    industry = industry_of(ticker)
+    row = _industry_multiples().get(industry or "")
+    return industry, (row["pe"] if row and row["pe"] == row["pe"] and row["pe"] > 0 else None)
 
 
 def industry_ev_ebit(ticker: str) -> tuple[str | None, float | None]:

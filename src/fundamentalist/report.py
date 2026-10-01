@@ -83,6 +83,10 @@ def write_memo(memo: dict[str, Any], out_dir: Path, as_of: str) -> Path:
         lines += ["## Valuation", "", f"Method: {val.get('method')}", "",
                   "| Bear | Base | Bull | Price / base |", "|---:|---:|---:|---:|",
                   f"| {fv['bear']:,.2f} | {fv['base']:,.2f} | {fv['bull']:,.2f} | {val['price'] / fv['base']:.2f} |", ""]
+        if val.get("model") == "ddm" and val.get("multiples_check"):
+            mc = val["multiples_check"]
+            lines += [f"- Industry multiples check: {mc['industry']} P/E {mc['pe']}x gives {mc['value_per_share']:,.2f} per "
+                      f"share; DDM / multiples {mc['dcf_to_multiples']}", ""]
         if val.get("model") == "ddm":
             lines += [f"- Dividend per share {val['dividend_per_share']:.2f} (yield {_pct(val['dividend_yield'])}), growth "
                       f"{_pct(val['growth_used'])} fading to {_pct(val['terminal_growth'])}, cost of equity "

@@ -148,6 +148,16 @@ PARAMS: dict[str, Parameter] = {p.name: p for p in [
               "years), not the latest year: insurance and credit cycles make a single year misleading (Progressive 34%, "
               "Travelers 25% after a hard insurance market)", "Damodaran: normalize earnings for cyclical firms",
               "latest twelve months' ROE"),
+    Parameter("utility_model", {"growth_bounds": (0.0, 0.07), "signal_range": (-0.05, 0.15), "max_age_days": 456},
+              "regulated utilities (SIC 4911/4931/4932/4941): earnings per share grow at the median of the 3-year growth "
+              "of net plant (rate base proxy; utility or general PP&E tag, latest value under 15 months old) and of "
+              "earnings per share, each used only between -5% and 15% (AEP's plant tag changed scope: -78%), the result "
+              "bounded 0 to 7% (the top of typical utility EPS guidance: rate base growth above it is partly funded by "
+              "new shares); dividends = earnings x a payout moving to 1 - g / ROE",
+              "practice: utilities are valued on rate base growth and allowed ROE (NARUC ratemaking; Damodaran's DDM "
+              "with payout tied to growth and ROE); Duke guides 5 to 7% EPS growth against a 2% dividend trend",
+              "dividend trend (rejected: Duke 82 vs 114); full rate base x allowed ROE model (allowed ROE tags are "
+              "dimensional, not in the company facts API)"),
     Parameter("ddm", {"stage1_years": 5, "growth_bounds": (-0.05, 0.08), "bear_bull": (0.02, 0.005)},
               "two-stage dividend discount: dividends per share grow at their own 3-year growth (revenue growth blend when "
               "there is no per-share history; REITs grow revenue partly by issuing shares), bounded -5% to 8%, for "

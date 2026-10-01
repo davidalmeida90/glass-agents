@@ -21,7 +21,8 @@ from typing import Any
 
 from fundamentalist import dcf
 from fundamentalist.edgar import sec_get
-from fundamentalist.market import beta, bottom_up_beta, industry_ev_ebit, industry_pbv, risk_free, synthetic_rating
+from fundamentalist.market import (beta, bottom_up_beta, industry_ev_ebit, industry_pbv, industry_pe, risk_free,
+                                   synthetic_rating)
 from fundamentalist.parameters import value as param
 
 REVENUE = ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet",
@@ -64,6 +65,9 @@ INSURANCE_SIC = {"6311", "6321", "6331", "6351", "6361", "6399"}
 DDM_SIC = {"6798", "4911", "4931", "4932", "4941"}  # REITs, electric and gas utilities, water
 DIVIDENDS = ["PaymentsOfDividendsCommonStock", "PaymentsOfDividends", "DividendsCommonStockCash", "DividendsCommonStock"]
 DPS = ["CommonStockDividendsPerShareDeclared", "CommonStockDividendsPerShareCashPaid"]
+EPS = ["EarningsPerShareDiluted", "EarningsPerShareBasicAndDiluted", "EarningsPerShareBasic"]
+UTILITY_PLANT = [["PublicUtilitiesPropertyPlantAndEquipmentNet"], ["PropertyPlantAndEquipmentNet"]]
+UTILITY_SIC = {"4911", "4931", "4932", "4941"}
 
 
 # ------------------------------------------------------------------ SEC XBRL (adapted from Glassbench)
@@ -538,6 +542,8 @@ def dividend_value(ticker: str, as_of: str, price: float, price_date: str, sic: 
         b = dict(b, used=round((b["used"] + regression["used"]) / 2, 3), method="average of bottom-up and regression betas")
     b = dict(b, regression=regression["used"])
     ke = rf + b["used"] * param("equity_risk_premium")
+    if sic in UTILITY_SIC:
+        return _utility_value(out, data, f, as_of, price, count, dividends, ke, rf, cfg)
     dps_growth = dps_cagr(data, as_of)
     if dps_growth is not None:
         g1, growth_source = dps_growth, "3-year dividend per share CAGR"
@@ -567,6 +573,97 @@ def dividend_value(ticker: str, as_of: str, price: float, price_date: str, sic: 
         out.update(fair_value=None, fair_value_raw=fair, review=[f"base value is {ratio:.2f}x the price"],
                    note=f"not rated, review: base value is {ratio:.2f}x the price, outside {lo_s}x to {hi_s}x")
     return out
+
+
+def _utility_value(out: dict, data: dict, f: dict, as_of: str, price: float, count: float, dividends: dict,
+                   ke: float, rf: float, cfg: dict) -> dict[str, Any]:
+    """Regulated utility: earnings grow with the rate base, dividends = earnings x a payout that moves to 1 - g/ROE.
+
+    The dividend trend alone undervalued Duke Energy (82 vs 114 on 2026-10-01): its payout is falling to fund a
+    capital plan, so dividends grow slower than the earnings the rate base produces.
+    """
+    ni = _ttm(data, NI_COMMON, as_of)
+    history = roe_history(data, as_of)
+    if not (ni and ni["value"] > 0 and history):
+        out["note"] = "net income or ROE history not available from XBRL"
+        return out
+    eps0, d0 = ni["value"] / count, dividends["value"] / count
+    roe = sum(h["roe"] for h in history) / len(history)
+    cfg_u = param("utility_model")
+    lo_ok, hi_ok = cfg_u["signal_range"]
+    signals = {}
+    for tags in UTILITY_PLANT:  # a tag's latest value must be recent, or the company stopped filing it
+        plant = _at_ends(data, tags, as_of)
+        if plant and (date.fromisoformat(as_of) - date.fromisoformat(max(plant))).days <= cfg_u["max_age_days"]:
+            g = _cagr(plant, 3)
+            if g is not None and lo_ok <= g <= hi_ok:
+                signals["net utility plant (rate base proxy)"] = g
+            break
+    g_eps = per_share_cagr(data, EPS, as_of)
+    if g_eps is not None and lo_ok <= g_eps <= hi_ok:
+        signals["earnings per share"] = g_eps
+    if signals:
+        vals = sorted(signals.values())
+        g1 = vals[len(vals) // 2] if len(vals) % 2 else (vals[0] + vals[1]) / 2
+        source = "3-year growth, median of " + ", ".join(f"{k} {v:.1%}" for k, v in signals.items())
+    else:
+        g1, source = dps_cagr(data, as_of) or 0.0, "3-year dividend per share CAGR (no usable earnings or plant growth)"
+    lo, hi = cfg_u["growth_bounds"]
+    g1 = min(max(g1, lo), hi)
+    g_t = min(rf, param("terminal_growth_cap"), ke - param("min_terminal_spread"))
+    payout0 = min(max(d0 / eps0, 0.0), 1.2)
+    payout_t = min(max(1 - g_t / roe, 0.0), 1.0) if roe > g_t else payout0
+    dg, dk = cfg["bear_bull"]
+    fair = {name: round(utility_ddm(eps0, payout0, payout_t, g1 + sg * dg, g_t, ke + sk * dk, cfg["stage1_years"]), 2)
+            for name, (sg, sk) in {"bear": (-1, 1), "base": (0, 0), "bull": (1, -1)}.items()}
+    out.update(fair_value=fair, model="ddm", dividend_per_share=round(d0, 4), earnings_per_share=round(eps0, 4),
+               payout=round(payout0, 4), terminal_payout=round(payout_t, 4), roe=round(roe, 4),
+               growth_used=round(g1, 4), growth_source=source, terminal_growth=g_t, cost_of_equity=round(ke, 4),
+               dividend_yield=round(d0 / price, 4),
+               method="regulated utility, earnings-driven dividend discount: earnings per share grow with the rate base "
+                      "(median of 3-year net plant and EPS growth, bounded 0 to 7%) for 5 years, fading to terminal growth = "
+                      "risk-free rate; payout moves linearly from today's to the sustainable 1 - g / ROE (5-year ROE) "
+                      "over 10 years; CAPM cost of equity; bear/bull growth -/+2 points, cost of equity +/-0.5 points",
+               valuation_period=f"net income to common and dividends paid, twelve months to {ni['end']}")
+    peer_industry, pe = industry_pe(out["ticker"])
+    if pe:
+        per_share = pe * eps0
+        out["multiples_check"] = {"industry": peer_industry, "pe": round(pe, 1), "value_per_share": round(per_share, 2),
+                                  "dcf_to_multiples": round(fair["base"] / per_share, 3)}
+    lo_s, hi_s = param("sanity")["fair_to_price"]
+    ratio = fair["base"] / price
+    if not lo_s <= ratio <= hi_s:
+        out.update(fair_value=None, fair_value_raw=fair, review=[f"base value is {ratio:.2f}x the price"],
+                   note=f"not rated, review: base value is {ratio:.2f}x the price, outside {lo_s}x to {hi_s}x")
+    return out
+
+
+def utility_ddm(eps0: float, payout0: float, payout_t: float, g1: float, g_t: float, ke: float, years: int = 5) -> float:
+    """Earnings grow at g1 for *years* then fade to g_t over *years*; payout moves linearly to payout_t over both."""
+    value, eps, discount, n = 0.0, eps0, 1.0, 2 * years
+    for t in range(1, n + 1):
+        eps *= 1 + (g1 if t <= years else g1 + (g_t - g1) * (t - years) / years)
+        discount /= 1 + ke
+        value += eps * (payout0 + (payout_t - payout0) * t / n) * discount
+    return value + eps * (1 + g_t) * payout_t / (ke - g_t) * discount
+
+
+def _cagr(by_end: dict[str, float], years: int) -> float | None:
+    """CAGR between the latest fiscal year end and the one *years* earlier, from {end: value}."""
+    if not by_end:
+        return None
+    last = max(by_end)
+    target = date.fromisoformat(last) - timedelta(days=365 * years)
+    start = [e for e in by_end if abs((date.fromisoformat(e) - target).days) <= 20]
+    if not start or by_end[start[0]] <= 0 or by_end[last] <= 0:
+        return None
+    return (by_end[last] / by_end[start[0]]) ** (1 / years) - 1
+
+
+def per_share_cagr(data: dict, concepts: list[str], as_of: str, years: int = 3) -> float | None:
+    """Fiscal-year per share CAGR (earnings or dividends) over *years*, or None without the history."""
+    _, rows = _facts(data, concepts, as_of, unit="USD/shares")
+    return _cagr({r["end"]: r["val"] for r in rows if r.get("start") and 350 <= _days(r) <= 380}, years)
 
 
 def dps_cagr(data: dict, as_of: str, years: int = 3) -> float | None:
