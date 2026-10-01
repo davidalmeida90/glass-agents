@@ -76,12 +76,25 @@ PARAMS: dict[str, Parameter] = {p.name: p for p in [
               "analyst consensus (not free)"),
     Parameter("growth_bounds", (-0.05, 0.30), "starting revenue growth (the blend below), clipped",
               "own choice", "analyst consensus (not free)"),
+    Parameter("red_team_model", "google/gemini-2.5-flash-lite", "the red team runs on a different model family from "
+              "the readers (DeepSeek); falls back to the readers' model when no Gemini key is set",
+              "deliberation helps only across different models (Schneider and Schramm 2025); voting explains most "
+              "debate gains among copies of one model (Choi, Zhu, Li, NeurIPS 2025)", "the readers' model; a larger model"),
     Parameter("margin_correction_band", 0.30, "a red team operating margin correction counts only within 30% "
               "(relative) of the reported trailing margin from XBRL; further away it contradicts an audited figure "
               "instead of correcting it", "own rule after Visa, 2026-10-01: operating expenses / revenue (32%) was "
               "submitted as the operating margin (reported 61%) and cost a notch in one repeat",
               "no band (corrections bounded 0 to 80% only); require the value in a cited claim (rejects every "
               "computed margin, right or wrong)"),
+    Parameter("forward_drivers", {"guidance_weight": 0.5, "guidance_cap": 0.05, "mix_horizon": 5,
+                                   "segment_growth_bounds": (-0.10, 0.40), "mix_ratio_bounds": (0.67, 1.5),
+                                   "segment_coverage": (0.7, 1.3), "margin_years": 5},
+              "verified reader claims move the DCF: management's revenue outlook moves starting growth halfway to the "
+              "guided midpoint (at most 5 points); segment mix (each segment at its own growth and margin for 5 years) "
+              "sets a target margin the consolidated margin reaches by year 5, used when the segments cover 70% to 130% "
+              "of revenue", "anchor and adjust on verified guidance (CAME, Wu et al., EMNLP 2026); Damodaran's Ginzu "
+              "target operating margin by a convergence year", "hold today's margin (the earlier rule; Amazon); take "
+              "guidance at face value; an industry target margin"),
     Parameter("growth_blend", {"ttm": 0.5, "cagr_3y": 0.5}, "starting growth = weighted average of the last twelve "
               "months' revenue growth and the 3-year fiscal revenue CAGR (same XBRL tag); TTM alone when the history is "
               "missing", "base rates: one year of growth is noisy and mean-reverts (Mauboussin and Callahan, 2016)",
@@ -190,8 +203,12 @@ PARAMS: dict[str, Parameter] = {p.name: p for p in [
 ]}
 
 
+# Values set for one computation, e.g. the backtest's ERP and risk-free rate for each year. Empty in normal runs.
+OVERRIDES: dict[str, Any] = {}
+
+
 def value(name: str) -> Any:
-    return PARAMS[name].value
+    return OVERRIDES[name] if name in OVERRIDES else PARAMS[name].value
 
 
 def table() -> list[dict[str, Any]]:

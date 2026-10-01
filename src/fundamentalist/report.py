@@ -68,6 +68,24 @@ def _money(v: Any) -> str:
     return f"{v / 1e9:,.1f}B" if abs(v) >= 1e9 else f"{v / 1e6:,.0f}M"
 
 
+def _forward_lines(val: dict[str, Any]) -> list[str]:
+    """Forward drivers taken from verified claims, and the margin the price needs."""
+    fw, lines = val.get("forward") or {}, []
+    if fw.get("growth"):
+        g = fw["growth"]
+        lines.append(f"- Guidance: starting growth {_pct(g['model'])} moved to {_pct(g['used'])} toward the guided "
+                     f"{_pct(g['guided'])} ({g['source']})")
+    if fw.get("margin"):
+        m = fw["margin"]
+        lines.append(f"- Segment mix: margin {_pct(m['today'])} converges to {_pct(m['target'])} by year {m['by_year']} "
+                     f"({m['source']})")
+    elif fw.get("margin_skipped"):
+        lines.append(f"- Segment mix not used: {fw['margin_skipped']}")
+    if val.get("what_must_be_true"):
+        lines.append(f"- What must be true: {val['what_must_be_true']}")
+    return lines
+
+
 def write_memo(memo: dict[str, Any], out_dir: Path, as_of: str) -> Path:
     t, val, first = memo["ticker"], memo["valuation"], memo["repeats"][0]
     fv, cap = val.get("fair_value") or {}, val.get("capital") or {}
@@ -116,6 +134,7 @@ def write_memo(memo: dict[str, Any], out_dir: Path, as_of: str) -> Path:
                       f" + R&D adjustment {_pct(val.get('rd_margin_adjustment'))}), ROIC {_pct(val['roic'])}, sales-to-capital "
                       f"{val['sales_to_capital']}, SBC {_pct(val['sbc_to_revenue'])} of revenue",
                       f"- Moat: {val.get('moat')}",
+                      *_forward_lines(val),
                       (f"- Industry multiples check: {val['multiples_check']['industry']} EV/EBIT {val['multiples_check']['ev_to_ebit']}x "
                        f"gives {val['multiples_check']['value_per_share']:,.2f} per share; DCF / multiples "
                        f"{val['multiples_check']['dcf_to_multiples']}" if val.get("multiples_check") else "- Industry multiples check: n/a"),

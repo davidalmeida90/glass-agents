@@ -12,6 +12,7 @@ from langchain_openai import ChatOpenAI
 from fundamentalist.configuration import Configuration
 
 DEEPSEEK_URL = "https://api.deepseek.com"
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"  # Google's OpenAI-compatible endpoint
 
 
 def get_message_text(msg: AnyMessage) -> str:
@@ -47,4 +48,7 @@ def init_model(config: Optional[RunnableConfig] = None) -> BaseChatModel:
             timeout=120,
             extra_body={"thinking": {"type": "disabled"}},
         )
+    if provider == "google":
+        return ChatOpenAI(model=model, base_url=GEMINI_URL, api_key=os.environ["GEMINI_API_KEY"],
+                          max_tokens=configuration.max_output_tokens, temperature=0, max_retries=2, timeout=120)
     return init_chat_model(model, model_provider=provider or None, max_tokens=configuration.max_output_tokens)

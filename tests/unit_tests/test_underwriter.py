@@ -280,11 +280,13 @@ def test_red_team_corrections_take_the_median_of_counting_objections():
     from fundamentalist.redteam import corrections
 
     ok = {"type": "business", "severity": "high", "supported": True, "cites_evidence": True, "cites": ["PERF-3"]}
-    result = {"objections": [dict(ok, correction={"field": "growth", "value": 0.06}),
-                             dict(ok, correction={"field": "growth", "value": 0.08}),
-                             dict(ok, correction={"field": "growth", "value": 0.10}),
-                             dict(ok, severity="medium", correction={"field": "operating_margin", "value": 0.5})]}
-    assert corrections(result) == {"growth": 0.08}
+    claims = {f"PERF-{i}": {"topic": "growth", "statement": "revenue growth", "value": v, "unit": "%"}
+              for i, v in ((3, 6.0), (4, 8.0), (5, 10.0))}
+    result = {"objections": [dict(ok, correction={"field": "growth", "formula": "PERF-3"}),
+                             dict(ok, correction={"field": "growth", "formula": "PERF-4"}),
+                             dict(ok, correction={"field": "growth", "formula": "PERF-5"}),
+                             dict(ok, severity="medium", correction={"field": "operating_margin", "formula": "PERF-3"})]}
+    assert corrections(result, None, claims) == {"growth": 0.08}
 
 
 
@@ -362,15 +364,19 @@ def test_boilerplate_is_not_a_red_flag():
 def test_margin_correction_far_from_reported_is_dropped():
     from fundamentalist.redteam import corrections
 
-    def obj(v):
-        return {"type": "data_conflict", "direction": "rating too high", "severity": "high", "argument": "x",
-                "cites": ["PERF-1", "PERF-10"], "supported": True, "cites_evidence": True,
-                "correction": {"field": "operating_margin", "value": v}}
+    claims = {"PERF-1": {"topic": "revenue", "statement": "Net revenue was $40,000 million", "value": 40000.0,
+                         "unit": "USD millions"},
+              "PERF-9": {"topic": "margin", "statement": "Operating income was $13,400 million", "value": 13400.0,
+                         "unit": "USD millions"}}
 
-    rt = {"objections": [obj(0.3224)]}  # Visa 2026-10-01: operating expenses / revenue sent as the margin
-    assert corrections(rt, 0.6112) == {}
+    def obj(formula):
+        return {"type": "data_conflict", "direction": "rating too high", "severity": "high", "argument": "x",
+                "cites": ["PERF-1", "PERF-9"], "supported": True, "cites_evidence": True,
+                "correction": {"field": "operating_margin", "formula": formula}}
+
+    rt = {"objections": [obj("PERF-9 / PERF-1")]}  # 33.5%: computes, but 45% below the reported 61.1%
+    assert corrections(rt, 0.6112, claims) == {}
     assert rt["rejected"]
-    assert corrections({"objections": [obj(0.677)]}, 0.6112) == {"operating_margin": 0.677}
 
 
 
@@ -391,3 +397,43 @@ def test_utility_ddm_matches_gordon_in_steady_state():
     eps, g, roe, ke = 5.0, 0.04, 0.10, 0.075
     payout = 1 - g / roe
     assert abs(utility_ddm(eps, payout, payout, g, g, ke) - eps * (1 + g) * payout / (ke - g)) < 1e-9
+
+
+
+def test_ttm_bridges_a_revenue_tag_change():
+    from fundamentalist.valuation import _ttm
+
+    def fact(start, end, val, filed):
+        return {"start": start, "end": end, "val": val, "filed": filed, "form": "10-Q"}
+
+    data = {"facts": {"us-gaap": {
+        "Revenues": {"units": {"USD": [fact("2017-01-01", "2017-12-31", 1000.0, "2018-02-10"),
+                                       fact("2017-01-01", "2017-03-31", 240.0, "2017-05-01")]}},
+        "RevenueFromContractWithCustomerExcludingAssessedTax": {"units": {"USD": [
+            fact("2018-01-01", "2018-03-31", 260.0, "2018-05-01")]}},
+    }}}
+    out = _ttm(data, ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues"], "2018-06-01")
+    assert out and abs(out["value"] - (1000 + 260 - 240)) < 1e-9  # FY 2017 (old tag) + Q1 2018 (new) - Q1 2017 (old)
+
+
+
+def test_correction_formulas_are_computed_and_checked():
+    from fundamentalist.redteam import corrections, evaluate, identity
+
+    claims = {"PERF-1": {"topic": "revenue", "statement": "Net revenue was $40,000 million", "value": 40000.0,
+                         "value_prior": 35926.0, "unit": "USD millions"},
+              "PERF-10": {"topic": "other", "statement": "Operating expenses were $12,906 million", "value": 12906.0,
+                          "unit": "USD millions"},
+              "GUID-1": {"topic": "revenue_growth", "statement": "Net revenue growth outlook", "low": 10.0, "high": 12.0,
+                         "unit": "%"}}
+    v, used = evaluate("PERF-10 / PERF-1", claims)  # Visa, 2026-10-01: opex / revenue taken as the margin
+    assert abs(v - 0.32265) < 1e-4 and identity("operating_margin", "PERF-10 / PERF-1", used)
+    v, used = evaluate("1 - PERF-10 / PERF-1", claims)
+    assert abs(v - 0.67735) < 1e-4 and identity("operating_margin", "1 - PERF-10 / PERF-1", used) is None
+    assert abs(evaluate("PERF-1 / PERF-1.prior - 1", claims)[0] - (40000 / 35926 - 1)) < 1e-12
+    assert abs(evaluate("GUID-1.mid", claims)[0] - 0.11) < 1e-12
+    obj = {"type": "business", "direction": "rating too low", "severity": "high", "argument": "x", "cites": ["GUID-1"],
+           "supported": True, "cites_evidence": True, "correction": {"field": "growth", "formula": "GUID-1.mid"}}
+    assert corrections({"objections": [obj]}, 0.61, claims) == {"growth": 0.11}
+    no_formula = dict(obj, correction={"field": "growth", "value": 0.2})
+    assert corrections({"objections": [no_formula]}, 0.61, claims) == {}

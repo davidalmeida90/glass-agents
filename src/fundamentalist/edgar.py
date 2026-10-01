@@ -60,6 +60,28 @@ def latest_filing(ticker: str, form: str = "10-K", skip: int = 0) -> dict[str, s
                 url=f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace('-', '')}/{rec['primaryDocument'][i]}")
 
 
+def latest_earnings_release(ticker: str) -> dict:
+    """Latest 8-K reporting results (Item 2.02) and the URLs of its EX-99 exhibits (the release itself)."""
+    tickers = json.loads(sec_get("https://www.sec.gov/files/company_tickers.json", "company_tickers.json"))
+    co = next((v for v in tickers.values() if v["ticker"].upper() == ticker.upper()), None)
+    if co is None:
+        raise ValueError(f"unknown ticker {ticker}")
+    cik = co["cik_str"]
+    rec = json.loads(sec_get(f"https://data.sec.gov/submissions/CIK{cik:010d}.json"))["filings"]["recent"]
+    for i, form in enumerate(rec["form"]):
+        if form != "8-K" or "2.02" not in (rec.get("items", [""] * len(rec["form"]))[i] or ""):
+            continue
+        acc = rec["accessionNumber"][i]
+        folder = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace('-', '')}"
+        listing = json.loads(sec_get(folder + "/index.json", f"{acc}-index.json"))
+        docs = sorted(d["name"] for d in listing["directory"]["item"]
+                      if re.search(r"ex-?99", d["name"], re.I) and d["name"].lower().endswith((".htm", ".html", ".txt")))
+        if docs:
+            return dict(company=co["title"], ticker=ticker.upper(), form="8-K", key=acc, period=rec["reportDate"][i],
+                        filed=rec["filingDate"][i], urls=[f"{folder}/{d}" for d in docs])
+    raise ValueError(f"no results 8-K (Item 2.02) with an EX-99 exhibit among {ticker}'s recent filings")
+
+
 def filing_text(fil: dict[str, str]) -> str:
     """Plain text of the filing's primary document."""
     raw = sec_get(fil["url"], f"{fil['key']}.html").decode("utf-8", "ignore")
@@ -211,6 +233,27 @@ def load_index(ticker: str, corpus: str = "10-K") -> FilingIndex:
         meta = dict(now_meta, source=(f"sentences new in the Item 1A risk factors of the 10-K for the period ended "
                                       f"{now_meta['period']}, compared with the 10-K for {prior_meta['period']}"))
         _INDEXES[key] = FilingIndex.from_text(meta, " ".join(diff["new"]) or "No new risk factor sentences.", prefix="R")
+    elif corpus == "guidance":
+        # the outlook lives in the earnings release (8-K Item 2.02, EX-99) and in the 10-Q's MD&A
+        passages, sources, meta = [], [], None
+        try:
+            er = latest_earnings_release(ticker)
+            text = " ".join(filing_text({"url": u, "key": f"{er['key']}-{u.rsplit('/', 1)[1]}"}) for u in er["urls"])
+            passages += FilingIndex.from_text(er, text, prefix="E").passages
+            sources.append(f"the earnings release filed {er['filed']} (8-K Item 2.02, passages E000 onward)")
+            meta = er
+        except ValueError:
+            pass
+        try:
+            q = latest_filing(ticker, "10-Q")
+            passages += FilingIndex.from_text(q, filing_text(q), prefix="Q").passages
+            sources.append(f"the 10-Q for the quarter ended {q['period']}, filed {q['filed']} (passages Q000 onward)")
+            meta = meta or q
+        except ValueError:
+            pass
+        if not passages:
+            raise ValueError(f"no earnings release or 10-Q for {ticker}")
+        _INDEXES[key] = FilingIndex(meta=dict(meta, source="; ".join(sources)), passages=passages)
     else:
         raise ValueError(f"unknown corpus {corpus}")
     return _INDEXES[key]

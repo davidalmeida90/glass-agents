@@ -37,6 +37,72 @@ def evidence_schema(topics: list[str], max_items: int) -> dict[str, Any]:
     }
 
 
+def guidance_schema(max_items: int) -> dict[str, Any]:
+    """Management's outlook: a range per metric and period, with the prior-period figure when one is given."""
+    return {
+        "type": "object",
+        "properties": {
+            "claims": {
+                "type": "array",
+                "maxItems": max_items,
+                "description": "Forward-looking guidance only, one metric and period per claim; empty when there is none.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "topic": {"type": "string", "enum": ["revenue", "revenue_growth", "operating_income",
+                                                             "operating_margin", "gross_margin", "eps", "capex", "other"]},
+                        "statement": {"type": "string", "description": "One short sentence stating the outlook."},
+                        "low": {"type": ["number", "null"], "description": "Low end of the range as printed, no unit."},
+                        "high": {"type": ["number", "null"], "description": "High end as printed; equal to low for a point."},
+                        "unit": {"type": ["string", "null"], "description": "For example 'USD billions' or '%'."},
+                        "period": {"type": "string", "description": "For example 'Q4 2026' or 'full year 2026'."},
+                        "basis": {"type": "string", "enum": ["GAAP", "non-GAAP", "unspecified"]},
+                        "compared_with": {"type": ["number", "null"],
+                                          "description": "The prior-period figure the outlook is compared with, as printed "
+                                                         "in the same sentence; null when none is printed."},
+                        "passage_id": {"type": "string", "description": "ID of the passage, e.g. E004."},
+                        "quote": {"type": "string", "description": "Exact words containing every number you give, at most "
+                                                                   "250 characters."},
+                    },
+                    "required": ["topic", "statement", "low", "high", "period", "passage_id", "quote"],
+                },
+            }
+        },
+        "required": ["claims"],
+    }
+
+
+def segments_schema(max_items: int) -> dict[str, Any]:
+    """Segment revenue and operating income, this year and last, as printed in one row of the segment note."""
+    return {
+        "type": "object",
+        "properties": {
+            "claims": {
+                "type": "array",
+                "maxItems": max_items,
+                "description": "One claim per segment and measure; empty when the company reports a single segment.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "topic": {"type": "string", "enum": ["revenue", "operating_income"]},
+                        "segment": {"type": "string", "description": "Segment name as the filing writes it."},
+                        "statement": {"type": "string", "description": "One short sentence."},
+                        "value": {"type": "number", "description": "Latest fiscal year, as printed, no unit."},
+                        "value_prior": {"type": ["number", "null"], "description": "The year before, as printed."},
+                        "unit": {"type": "string", "description": "For example 'USD millions'."},
+                        "period": {"type": "string", "description": "For example 'fiscal 2026'."},
+                        "passage_id": {"type": "string", "description": "ID of the passage, e.g. P230."},
+                        "quote": {"type": "string", "description": "Exact words or table row containing both numbers, at "
+                                                                   "most 250 characters."},
+                    },
+                    "required": ["topic", "segment", "statement", "value", "value_prior", "unit", "passage_id", "quote"],
+                },
+            }
+        },
+        "required": ["claims"],
+    }
+
+
 @dataclass(frozen=True)
 class Reader:
     name: str
@@ -85,6 +151,28 @@ READERS: dict[str, Reader] = {
                                 "legal", "geopolitical", "financial", "other"], 6),
         min_verified=2,
         corpus="risk_changes",
+    ),
+    "guidance": Reader(
+        name="guidance",
+        task=("Collect management's forward-looking guidance from the latest earnings release and 10-Q: revenue or "
+              "revenue growth, operating income or operating margin, earnings per share and capital expenditure, each "
+              "as a range with its period (next quarter or full year) and whether it is GAAP. When the same sentence "
+              "gives the prior-period figure the outlook is compared with, put it in compared_with. Only outlook "
+              "statements (expects, anticipates, guidance, outlook, targets), never historical results. If the "
+              "documents give no numeric guidance, submit an empty list."),
+        schema=guidance_schema(8),
+        min_verified=0,
+        corpus="guidance",
+    ),
+    "segments": Reader(
+        name="segments",
+        task=("From the segment note of the latest 10-K, collect each reportable segment's revenue and its operating "
+              "income (or segment profit) for the latest fiscal year and the year before: one claim per segment and "
+              "measure, value = latest year and value_prior = the year before, both from the same table row. Skip "
+              "corporate, eliminations and reconciling items. If the company reports a single segment, submit an "
+              "empty list."),
+        schema=segments_schema(10),
+        min_verified=0,
     ),
 }
 

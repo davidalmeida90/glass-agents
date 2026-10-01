@@ -16,7 +16,8 @@ from langchain_core.outputs import LLMResult
 
 # $ per million tokens (input, output). DeepSeek Flash from Glassbench's price table; the input price
 # is charged on every input token, cache hits included, so the estimate errs high.
-PRICES = {"deepseek-flash": (0.14, 0.28)}
+PRICES = {"deepseek-flash": (0.14, 0.28),
+          "gemini-2.5-flash-lite": (0.10, 0.40)}  # Google paid standard tier, ai.google.dev pricing, 2026-10-01
 
 
 class BudgetExceeded(RuntimeError):
@@ -45,8 +46,9 @@ class TokenLedger(BaseCallbackHandler):
     def usd(self) -> float:
         return sum(c["usd"] for c in self.calls)
 
-    def price(self, inp: int, out: int) -> float:
-        pin, pout = PRICES.get(self.model, (0.14, 0.28))
+    def price(self, inp: int, out: int, model: str | None = None) -> float:
+        name = (model or self.model).removeprefix("models/")
+        pin, pout = PRICES.get(name, PRICES.get(self.model, (0.14, 0.28)))
         return inp * pin / 1e6 + out * pout / 1e6
 
     # ------------------------------------------------------------------ callbacks
@@ -72,8 +74,9 @@ class TokenLedger(BaseCallbackHandler):
         cached = int(raw.get("prompt_cache_hit_tokens") or 0)
         reasoning = int((raw.get("completion_tokens_details") or {}).get("reasoning_tokens") or 0)
         tool_calls = [tc.get("name") for tc in (getattr(msg, "tool_calls", None) or [])]
+        served = (getattr(msg, "response_metadata", None) or {}).get("model_name")  # priced by the model that answered
         call = {"n": len(self.calls) + 1, "node": info["node"], "input": inp, "cached": cached, "output": out,
-                "reasoning": reasoning, "usd": self.price(inp, out), "seconds": round(time.time() - info["t0"], 1),
+                "reasoning": reasoning, "usd": self.price(inp, out, served), "model": served, "seconds": round(time.time() - info["t0"], 1),
                 "estimate_in": info["estimate_in"], "tool_calls": tool_calls}
         self.calls.append(call)
         if self.echo:

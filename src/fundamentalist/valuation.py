@@ -24,6 +24,7 @@ from fundamentalist.edgar import sec_get
 from fundamentalist.market import (beta, bottom_up_beta, industry_ev_ebit, industry_pbv, industry_pe, risk_free,
                                    synthetic_rating)
 from fundamentalist.parameters import value as param
+from fundamentalist.forward import apply as forward_apply
 
 REVENUE = ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet",
            "RevenueFromContractWithCustomerIncludingAssessedTax"]
@@ -131,9 +132,22 @@ def _instant(data: dict, concepts: list[str], as_of: str, taxonomy: str = "us-ga
 def _ttm(data: dict, concepts: list[str], as_of: str, near_end: str | None = None) -> dict | None:
     """Trailing twelve months known on as_of: the fiscal year, or last FY + year-to-date - prior year-to-date.
 
-    With *near_end*, the twelve months ending within 10 days of that date instead of the latest ones.
+    With *near_end*, the twelve months ending within 10 days of that date instead of the latest ones. When the
+    newest concept cannot make twelve months (a tag change: in 2018 revenue moved to
+    RevenueFromContractWithCustomerExcludingAssessedTax, so the first 10-Qs held one or two quarters of it), the
+    concepts are merged, the newest one winning where periods overlap.
     """
     concept, rows = _facts(data, concepts, as_of)
+    out = _ttm_rows(rows, concept, near_end)
+    if out is None and len(concepts) > 1:
+        merged: dict[tuple, dict] = {}
+        for c in [c for c in concepts if c != concept] + [concept]:  # the newest concept last, so it wins
+            merged.update({(r.get("start"), r["end"]): r for r in _facts(data, [c], as_of)[1]})
+        out = _ttm_rows(list(merged.values()), f"{concept} merged with older tags", near_end)
+    return out
+
+
+def _ttm_rows(rows: list[dict], concept: str | None, near_end: str | None) -> dict | None:
     flows = [r for r in rows if r.get("start")]
     if near_end:
         target = date.fromisoformat(near_end)
@@ -239,7 +253,8 @@ def fundamentals(ticker: str, as_of: str) -> dict[str, Any]:
     revenue_year_ago = None
     if revenue:
         prior_end = (date.fromisoformat(revenue["end"]) - timedelta(days=364)).isoformat()
-        revenue_year_ago = _ttm(data, [revenue["concept"]], as_of, near_end=prior_end)
+        revenue_year_ago = (_ttm(data, [revenue["concept"]], as_of, near_end=prior_end)  # same tag when it can
+                            or _ttm(data, REVENUE, as_of, near_end=prior_end))
     cash = _instant(data, CASH, as_of)
     securities = _instant(data, SECURITIES, as_of)
     debt_parts = [p for p in (_instant(data, c, as_of) for c in DEBT_PARTS) if p and cash and p["end"] == cash["end"]]
@@ -691,8 +706,30 @@ def ddm_value(d0: float, g1: float, g_t: float, ke: float, years: int = 5) -> fl
     return value + d * (1 + g_t) / (ke - g_t) * discount
 
 
-def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
-    """Fair value range per share, the WACC and inputs behind it, and why it is missing when it is."""
+def _what_must_be_true(x: dcf.Inputs, price: float, rd_adjustment: float, data: dict, f: dict,
+                       as_of: str) -> dict[str, Any]:
+    """The constant operating margin the price needs, on the reported basis, against the company's own history."""
+    implied = dcf.implied_margin(x, price)
+    ebit, rev = _annual(data, EBIT, as_of), _annual(data, [f["revenue"]["concept"]], as_of)
+    hist = sorted(ebit[e] / rev[e] for e in sorted(set(ebit) & set(rev))[-10:] if rev[e] > 0)
+    out: dict[str, Any] = {"implied_margin": round(implied - rd_adjustment, 4) if implied is not None else None,
+                           "margin_history": {"years": len(hist), "min": round(hist[0], 4), "median": round(hist[len(hist) // 2], 4),
+                                              "max": round(hist[-1], 4)} if hist else None}
+    if implied is not None and hist:
+        m = implied - rd_adjustment
+        where = ("above every year" if m > hist[-1] else "below every year" if m < hist[0] else
+                 f"at the {sum(h <= m for h in hist) / len(hist):.0%} point")
+        out["what_must_be_true"] = (f"at the modelled growth the price needs a constant operating margin of {m:.1%} "
+                                    f"(reported basis), {where} of its own {len(hist)}-year range "
+                                    f"({hist[0]:.1%} to {hist[-1]:.1%})")
+    return out
+
+
+def value(ticker: str, as_of: str | None = None, drivers: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Fair value range per share, the WACC and inputs behind it, and why it is missing when it is.
+
+    *drivers* (from forward.drivers on verified reader claims) move the FCFF starting growth and margin path.
+    """
     as_of = as_of or date.today().isoformat()
     price, price_date = last_price(ticker, as_of)
     sic, _ = industry(ticker)
@@ -773,6 +810,7 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
         high_growth_years=param("high_growth_years"),
         fade_years=param("fade_years"), mid_year=param("mid_year"), debt=debt, cash=cash,
         minority=_v(f, "minority"), shares=count)
+    x, driver_notes = forward_apply(x, drivers)
     out["dcf_inputs"] = x
     runs = {name: dcf.value_per_share(dcf.scenario(x, name)) for name in ("bear", "base", "bull")}
     fair = {name: round(r["per_share"], 2) for name, r in runs.items()}
@@ -791,10 +829,12 @@ def value(ticker: str, as_of: str | None = None) -> dict[str, Any]:
         shares_outstanding=count, shares_source=count_source, net_debt=debt - cash, data_notes=data_notes,
         moat=moat_why, terminal_excess_return=excess, roic_history=f["roic_history"],
         cash_conversion=round(_v(f, "operating_cash_flow") / (ebit * (1 - effective)), 3) if ebit > 0 else None,
-        sbc_to_revenue=round(_v(f, "sbc") / revenue, 4), sensitivity=dcf.sensitivity(x),
+        sbc_to_revenue=round(_v(f, "sbc") / revenue, 4), sensitivity=dcf.sensitivity(x), forward=driver_notes,
+        target_margin=round(x.target_margin, 4) if x.target_margin is not None else None,
+        **_what_must_be_true(x, price, rd_margin_adjustment, company_facts(ticker), f, as_of),
         valuation_period=(f"trailing twelve months to {f['ebit']['end']} (revenue growth: twelve months to "
                           f"{f['revenue']['end']} vs to {f['revenue_year_ago']['end']}), from 10-K and 10-Q XBRL; "
-                          f"the readers' evidence comes from the latest 10-K only"))
+                          f"the readers' evidence comes from the latest 10-K, 10-Q and earnings release"))
     peer_industry, multiple = industry_ev_ebit(ticker)
     if multiple:
         reported_ebit = revenue * reported_margin

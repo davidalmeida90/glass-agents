@@ -36,23 +36,29 @@ def _close(a: float, b: float) -> bool:
     return abs(a - b) <= max(1e-6, 0.005 * abs(b)) or abs(abs(a) - abs(b)) <= max(1e-6, 0.005 * abs(b))
 
 
+NUMBER_FIELDS = ("value", "value_prior", "low", "high", "compared_with")
+
+
 def check(claim: dict[str, Any], passage_text: Callable[[str], str | None]) -> dict[str, Any]:
     """Status of one claim: verified, number in passage, unverified or no passage."""
     pid = str(claim.get("passage_id", "")).strip("[] ")
     text = passage_text(pid)
-    value = claim.get("value")
-    try:
-        value = None if value is None else float(value)
-    except (TypeError, ValueError):  # a date or a word in the value field: check the quote alone
-        value = None
+    values = []
+    for key in NUMBER_FIELDS:  # every number the claim states must be printed: a range's ends, last year's figure
+        try:
+            if claim.get(key) is not None:
+                values.append(float(claim[key]))
+        except (TypeError, ValueError):  # a date or a word in a number field: check the quote alone
+            pass
     if text is None:
         return {"status": "no passage", "passage_id": pid}
     quote_ok = bool(claim.get("quote")) and norm(claim["quote"]) in norm(text)
-    in_quote = value is None or any(_close(v, float(value)) for v in numbers(claim.get("quote", "")))
-    in_passage = value is None or any(_close(v, float(value)) for v in numbers(text))
+    q_nums, t_nums = numbers(claim.get("quote", "")), numbers(text)
+    in_quote = all(any(_close(v, x) for v in q_nums) for x in values)
+    in_passage = all(any(_close(v, x) for v in t_nums) for x in values)
     if quote_ok and in_quote:
         status = "verified"
-    elif in_passage and value is not None:
+    elif in_passage and values:
         status = "number in passage"
     else:
         status = "unverified"

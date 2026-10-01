@@ -3,9 +3,12 @@
     python desk.py --tickers MSFT,AAPL --budget-usd 0.50
     python desk.py --tickers MSFT --valuation-only        # free: SEC and Yahoo only, no model calls
 
-Per company: the performance, capital and risk readers run once and the accounting reader --repeats times;
-valuation, flags and the base rating are code; the red team runs once per repeat and can move the rating
-one notch; the noise meter is the agreement of the repeats' final ratings; sizing is code. Budgets: each
+Per company: six readers run once (performance, capital, risks, guidance, segments, accounting) and code
+checks every claim; verified guidance and segment figures move the DCF's starting growth and margin path
+(forward.py); valuation, flags and the base rating are code; the red team runs --repeats times and can move
+the rating one notch; the noise meter is the agreement of the repeats' final ratings; sizing is code. The
+accounting reader ran three times until 2026-10-01: in 42 companies its repeats changed a flag only through
+false positives, at 35% of the cost. Budgets: each
 model run stops at --max-tokens and the whole batch at --budget-usd, checked on every call.
 """
 
@@ -14,14 +17,16 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import time
 from collections import Counter
 from pathlib import Path
 
 from run import HERE, load_keys, preflight, run_reader  # noqa: E402  (run.py sets up sys.path)
 
-ONCE = ["performance", "capital", "risks"]
-PREFIX = {"performance": "PERF", "accounting": "ACC", "capital": "CAP", "risks": "RISK"}
+ONCE = ["performance", "capital", "risks", "guidance", "segments", "accounting"]
+PREFIX = {"performance": "PERF", "accounting": "ACC", "capital": "CAP", "risks": "RISK", "guidance": "GUID",
+          "segments": "SEG"}
 OK = ("verified", "number in passage")
 
 
@@ -31,14 +36,22 @@ def money(v: float | None) -> str:
     return f"{v / 1e9:,.1f}B" if abs(v) >= 1e9 else f"{v / 1e6:,.0f}M"
 
 
-def evidence_lines(evidence: dict[str, list[dict]]) -> tuple[list[str], set[str]]:
-    """Verified claims as short lines with IDs the red team can cite."""
-    lines, ids = [], set()
+def evidence_lines(evidence: dict[str, list[dict]]) -> tuple[list[str], dict[str, dict]]:
+    """Verified claims as short lines with IDs the red team can cite, and the claim behind each ID."""
+    lines, ids = [], {}
     for reader, claims in evidence.items():
         for i, c in enumerate([c for c in claims if c["check"]["status"] in OK], 1):
             cid = f"{PREFIX[reader]}-{i}"
-            ids.add(cid)
-            num = f" (value {c.get('value')} {c.get('unit') or ''}, {c.get('period') or ''})" if c.get("value") is not None else ""
+            ids[cid] = c
+            if c.get("low") is not None or c.get("high") is not None:
+                num = f" (outlook {c.get('low')} to {c.get('high')} {c.get('unit') or ''}, {c.get('period') or ''})"
+            elif c.get("value") is not None:
+                prior = f", prior year {c['value_prior']}" if c.get("value_prior") is not None else ""
+                num = f" (value {c.get('value')}{prior} {c.get('unit') or ''}, {c.get('period') or ''})"
+            else:
+                num = ""
+            if c.get("segment"):
+                num = f" [segment {c['segment']}]" + num
             lines.append(f"[{cid}] {c.get('topic')}: {str(c.get('statement', ''))[:160]}{num}")
     return lines, ids
 
@@ -125,7 +138,7 @@ class Desk:
         """Readers, valuation, rating, red team, noise meter, sizing and audit on one company; returns the memo."""
         from dataclasses import replace
 
-        from fundamentalist import dcf
+        from fundamentalist import dcf, forward
         from fundamentalist.budget import BudgetExceeded
         from fundamentalist.decision import RATINGS, adjust, decide, flags
         from fundamentalist.edgar import RISK_STATS
@@ -135,7 +148,7 @@ class Desk:
         from fundamentalist.sizing import annual_volatility, size
         from fundamentalist.valuation import value
 
-        once, costs, accounting_runs = {}, {}, []
+        once, costs = {}, {}
         if not self.valuation_only:
             for name in ONCE:
                 if not self.room():
@@ -145,43 +158,38 @@ class Desk:
                 except Exception as e:  # noqa: BLE001 - a missing filing skips that reader
                     self.log(f"  {name}: skipped, {e}")
                     self.on_step("finish", name, 1, {"error": str(e)})
-            for i in range(self.repeats):
-                if not self.room():
-                    break
-                try:
-                    claims, cost = await self.read(ticker, "accounting", i + 1)
-                except Exception as e:  # noqa: BLE001 - e.g. no 10-K under this company's CIK
-                    self.log(f"  accounting: skipped, {e}")
-                    self.on_step("finish", "accounting", i + 1, {"error": str(e)})
-                    break
-                accounting_runs.append(claims)
-                costs[f"accounting_{i + 1}"] = cost
+        accounting = once.pop("accounting", None)
+        accounting_runs = [accounting] if accounting is not None else []
+        if "accounting" in costs:
+            costs["accounting_1"] = costs.pop("accounting")
+        drivers = forward.drivers(once)
         self.on_step("start", "valuation", 1, None)
         try:
-            val = value(ticker, as_of)
+            val = value(ticker, as_of, drivers)
             vol = annual_volatility(ticker)
         except Exception as e:  # noqa: BLE001 - no XBRL or no price: no rating
             val, vol = {"ticker": ticker, "price": None, "fair_value": None, "note": f"valuation failed: {e}"}, None
         self.on_step("finish", "valuation", 1, {"valuation": val, "volatility": vol})
 
         repeats = []
-        for i in range(max(len(accounting_runs), 1)):
-            evidence = dict(once, accounting=accounting_runs[i]) if accounting_runs else dict(once)
-            fl = flags(val, evidence, RISK_STATS.get(ticker)) if val.get("price") else {"red": [], "caution": []}
-            base = decide(val, fl, vol) if val.get("price") else {"rating": "No rating", "why": [val["note"]], "upside_to_base": None}
-            if i == 0:
-                self.on_step("start", "rating", 1, None)
-                self.on_step("finish", "rating", 1, {"flags": fl, "base": base})
+        evidence = dict(once, accounting=accounting_runs[0]) if accounting_runs else dict(once)
+        fl = flags(val, evidence, RISK_STATS.get(ticker)) if val.get("price") else {"red": [], "caution": []}
+        base = decide(val, fl, vol) if val.get("price") else {"rating": "No rating", "why": [val["note"]], "upside_to_base": None}
+        self.on_step("start", "rating", 1, None)
+        self.on_step("finish", "rating", 1, {"flags": fl, "base": base})
+        runs = self.repeats if base["rating"] in RATINGS and not self.valuation_only else 1
+        for i in range(runs):
             rt, final = None, base
             if base["rating"] in RATINGS and not self.valuation_only and self.room():
                 self.on_step("start", "red_team", i + 1, None)
                 lines, ids = evidence_lines(evidence)
                 ledger = self.ledger()
-                cfg = {"configurable": dict(self.configurable, max_output_tokens=800),
+                critic = param("red_team_model") if os.environ.get("GEMINI_API_KEY") else self.model_arg
+                cfg = {"configurable": dict(self.configurable, model=critic, max_output_tokens=800),
                        "callbacks": [ledger, self.batch, *self.callbacks], "metadata": {"purpose": "red_team"}}
                 try:
                     rt = await red_team(ticker, val, base, lines, ids, cfg)
-                    fixes = corrections(rt, val.get("operating_margin_reported"))
+                    fixes = corrections(rt, val.get("operating_margin_reported"), ids)
                     x = val.get("dcf_inputs")
                     if fixes and x is not None:
                         g_lo, g_hi = param("growth_bounds")  # corrections pass through the same bounds as every input
@@ -223,7 +231,7 @@ class Desk:
 async def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tickers", required=True)
-    ap.add_argument("--repeats", type=int, default=3, help="noise meter: accounting reader and red team runs")
+    ap.add_argument("--repeats", type=int, default=3, help="noise meter: red team runs")
     ap.add_argument("--budget-usd", type=float, default=0.50)
     ap.add_argument("--max-tokens", type=int, default=40_000)
     ap.add_argument("--model", default="deepseek/deepseek-flash")
