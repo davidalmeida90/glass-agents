@@ -31,18 +31,28 @@ For each company:
 7. **An audit** recomputes each memo (value, equity bridge, WACC, scenario order, share of claims verified) and the batch's median price to fair value.
 8. **A memo** in Markdown per company: rating and why, valuation build-up, sensitivity grid, evidence with quotes, red team, noise, data notes, parameters, cost.
 
-## Evidence, 13 large caps, 2026-10-01
+## Evidence, 21 companies, 2026-10-01
+
+Thirteen large caps plus two REITs, two utilities and four insurers, so every valuation route ran.
 
 | Measure | Result |
 |---|---|
-| Claims checked against the filings | 410 of 410 |
-| Audit | 13 of 13 memos add up |
-| Median price / fair value | 1.00 (consistent with the market on average) |
-| Agreement across 3 repeats | 100% on 10 companies, 67% on 3 |
-| Cost per company | $0.0098, 61,569 tokens, 16 model calls, 60% of input cached |
-| Time per company | about 42 seconds |
+| Claims checked against the filings | 992 of 994 (the code verifier rejected the other 2) |
+| Audit | 21 of 21 memos add up |
+| Median price / fair value | 1.01 (consistent with the market on average) |
+| Agreement across 3 repeats | 100% on 19 companies, 67% on 2 (Visa, Pfizer) |
+| Cost per company | $0.0101, 64,070 tokens, 16 model calls, 63% of input cached |
+| Time per company | about 44 seconds |
 
-Ratings that day: Meta Buy; Visa, JPMorgan, Bank of America Overweight; Microsoft, Nvidia, Alphabet Hold; Apple, Pfizer, Caterpillar Underweight; Amazon, Walmart, Coca-Cola Sell. They are the model's reading under the stated parameters, not investment advice, and no backtest has been run.
+| Rating | Companies |
+|---|---|
+| Buy | Meta, Realty Income |
+| Overweight | Visa, Prologis, NextEra, Chubb |
+| Hold | Microsoft, Nvidia, Alphabet, JPMorgan, Pfizer, Progressive, Travelers |
+| Underweight | Apple, Walmart, Caterpillar, Bank of America, MetLife |
+| Sell | Amazon, Coca-Cola, Duke Energy |
+
+They are the model's reading under the stated parameters, not investment advice, and no backtest has been run. The run found three faults, fixed since: false red flags from 10-K boilerplate (the auditor's PCAOB paragraph, the cover page check boxes), a red team margin correction that was really operating expenses over revenue (Visa, now bounded against the reported margin), and trimmed tool calls sent back to the API (a 400 on Pfizer's risk reader).
 
 ## Run it
 
