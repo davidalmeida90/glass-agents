@@ -49,6 +49,8 @@ def init_model(config: Optional[RunnableConfig] = None) -> BaseChatModel:
             extra_body={"thinking": {"type": "disabled"}},
         )
     if provider == "google":
-        return ChatOpenAI(model=model, base_url=GEMINI_URL, api_key=os.environ["GEMINI_API_KEY"],
+        # the free-tier key first: the paid project's prepaid credit ran out on 2026-10-01 (HTTP 402)
+        key = os.environ.get("FREETIER_API_KEY") or os.environ["GEMINI_API_KEY"]
+        return ChatOpenAI(model=model, base_url=GEMINI_URL, api_key=key,
                           max_tokens=configuration.max_output_tokens, temperature=0, max_retries=2, timeout=120)
     return init_chat_model(model, model_provider=provider or None, max_tokens=configuration.max_output_tokens)

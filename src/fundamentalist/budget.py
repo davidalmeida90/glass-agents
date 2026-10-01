@@ -17,7 +17,8 @@ from langchain_core.outputs import LLMResult
 # $ per million tokens (input, output). DeepSeek Flash from Glassbench's price table; the input price
 # is charged on every input token, cache hits included, so the estimate errs high.
 PRICES = {"deepseek-flash": (0.14, 0.28),
-          "gemini-2.5-flash-lite": (0.10, 0.40)}  # Google paid standard tier, ai.google.dev pricing, 2026-10-01
+          "gemini-2.5-flash-lite": (0.10, 0.40), "gemini-3.1-flash-lite": (0.25, 1.50),
+          "gemini-3.5-flash-lite": (0.30, 2.50)}  # Google paid standard tier, ai.google.dev pricing, 2026-10-01
 
 
 class BudgetExceeded(RuntimeError):

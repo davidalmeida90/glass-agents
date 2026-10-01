@@ -67,6 +67,7 @@ def score(min_days: int) -> None:
         return
     with open(TRACK, encoding="utf-8") as fh:
         rows = list(csv.DictReader(fh))
+    rows = list({(r["date"], r["ticker"]): r for r in rows}.values())  # one rating per company per day: the last run's
     today = date.today()
     due = [r for r in rows if (today - date.fromisoformat(r["date"])).days >= min_days]
     if not due:

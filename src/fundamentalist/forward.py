@@ -3,8 +3,10 @@
 Two drivers, both anchored on the code's own numbers and moved only part of the way (anchor and adjust, as in
 CAME, Wu et al., EMNLP 2026):
 
-- guided growth: management's revenue outlook (a growth range, or a revenue range with the prior-period figure
-  it is compared with) moves the starting growth halfway toward the guided midpoint, at most 5 points;
+- guided growth: management's revenue outlook (a growth range, or a full-year revenue range set against the
+  last fiscal year's revenue from XBRL) moves the starting growth halfway toward the guided midpoint, at most 5
+  points. The comparison base is never the reader's: on Pfizer (2026-10-01) it took the previous guidance for
+  last year's revenue. An outlook for a year already past is ignored;
 - segment mix: each segment grows at its own latest rate with its own margin for 5 years; the change in the
   mix-weighted margin sets a target the consolidated margin converges to by year 5 (Damodaran's Ginzu target
   margin, chosen from the company's own segments instead of by judgment).
@@ -40,21 +42,25 @@ def _scale(unit: str | None) -> float:
     return 1e9 if "billion" in u else 1e6 if "million" in u else 1e3 if "thousand" in u else 1.0
 
 
-def guided_growth(claims: list[dict[str, Any]]) -> tuple[float, str] | None:
+def guided_growth(claims: list[dict[str, Any]], fy_revenue: float | None = None,
+                  year: int | None = None) -> tuple[float, str] | None:
     """Midpoint of the revenue outlook as a growth rate; a full-year outlook wins over a quarter's."""
     found = []
     for c in claims:
         mid = _mid(c)
         if not _ok(c) or mid is None:
             continue
+        years = [int(y) for y in re.findall(r"20\d\d", str(c.get("period") or ""))]
+        if year and years and max(years) < year:
+            continue  # an outlook for a year already over
+        full = bool(FULL_YEAR.search(str(c.get("period") or "")))
         if c.get("topic") == "revenue_growth":
             g = mid / 100 if "%" in str(c.get("unit") or "%") or abs(mid) > 1 else mid
-        elif c.get("topic") == "revenue" and isinstance(c.get("compared_with"), (int, float)) and c["compared_with"] > 0:
-            g = mid / float(c["compared_with"]) - 1
+        elif c.get("topic") == "revenue" and full and fy_revenue:
+            g = mid * _scale(c.get("unit")) / fy_revenue - 1
         else:
             continue
         if abs(g) <= 0.6:
-            full = bool(FULL_YEAR.search(str(c.get("period") or "")))
             found.append((full, g, f"{c.get('period')}: {c.get('statement', '')[:120]} [{c.get('passage_id')}]"))
     if not found:
         return None
@@ -95,22 +101,25 @@ def mix_ratio(claims: list[dict[str, Any]]) -> dict[str, Any] | None:
 
 def drivers(evidence: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     out: dict[str, Any] = {}
-    g = guided_growth(evidence.get("guidance") or [])
-    if g:
-        out["guided_growth"], out["guided_growth_source"] = g
+    guidance = [c for c in evidence.get("guidance") or [] if _ok(c) and c.get("topic") in ("revenue", "revenue_growth")]
+    if guidance:
+        out["guidance"] = guidance
     m = mix_ratio(evidence.get("segments") or [])
     if m:
         out["mix"] = m
     return out
 
 
-def apply(x: dcf.Inputs, drv: dict[str, Any] | None) -> tuple[dcf.Inputs, dict[str, Any]]:
+def apply(x: dcf.Inputs, drv: dict[str, Any] | None, fy_revenue: float | None = None,
+          year: int | None = None) -> tuple[dcf.Inputs, dict[str, Any]]:
     """Move the DCF inputs by the drivers; returns the new inputs and what changed, for the memo."""
     if not drv:
         return x, {}
     cfg = param("forward_drivers")
     notes: dict[str, Any] = {}
-    if "guided_growth" in drv:
+    guided = guided_growth(drv.get("guidance") or [], fy_revenue, year)
+    if guided:
+        drv = dict(drv, guided_growth=guided[0], guided_growth_source=guided[1])
         gap = drv["guided_growth"] - x.growth
         step = max(min(cfg["guidance_weight"] * gap, cfg["guidance_cap"]), -cfg["guidance_cap"])
         lo, hi = param("growth_bounds")

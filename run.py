@@ -31,6 +31,7 @@ def load_keys() -> None:
     os.environ.setdefault("DEEPSEEK_API_KEY", chaves.obter("DEEPSEEK_API_KEY") or "")
     os.environ.setdefault("FRED_API_KEY", chaves.obter("FRED_API_KEY") or "")
     os.environ.setdefault("GEMINI_API_KEY", chaves.obter("GEMINI_API_KEY") or "")  # the red team's model family
+    os.environ.setdefault("FREETIER_API_KEY", chaves.obter("FREETIER_API_KEY") or "")
     email = chaves.obter("SEC_EDGAR_EMAIL") or ""
     os.environ.setdefault("SEC_USER_AGENT", f"David Arias {email}".strip())
     if not os.environ["DEEPSEEK_API_KEY"]:

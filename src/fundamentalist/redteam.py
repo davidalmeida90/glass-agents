@@ -220,6 +220,8 @@ def identity(field: str, formula: str, used: list[dict[str, Any]]) -> str | None
         if shape == "1-X/X" and OPEX.search(text[0]) and REVENUE.search(text[1]):
             return None
         return "an operating margin must be operating income / revenue or 1 - operating expenses / revenue"
+    if any(c.get("segment") or c.get("topic") == "segment" for c in used):
+        return "a growth correction must use company totals, not a segment"
     if all(GROWTH.search(t) for t in text):
         return None
     return "a growth correction may use only revenue or growth figures"

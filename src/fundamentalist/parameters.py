@@ -76,8 +76,11 @@ PARAMS: dict[str, Parameter] = {p.name: p for p in [
               "analyst consensus (not free)"),
     Parameter("growth_bounds", (-0.05, 0.30), "starting revenue growth (the blend below), clipped",
               "own choice", "analyst consensus (not free)"),
-    Parameter("red_team_model", "google/gemini-2.5-flash-lite", "the red team runs on a different model family from "
-              "the readers (DeepSeek); falls back to the readers' model when no Gemini key is set",
+    Parameter("red_team_model", "google/gemini-3.1-flash-lite", "the red team runs on a different model family from "
+              "the readers (DeepSeek), on the free-tier Gemini key (Google may use free-tier prompts; they hold only "
+              "public filing text and the memo); falls back to the readers' model when no Gemini key is set. "
+              "2.5 Flash-Lite is closed to new users; the ledger prices calls at the paid rate ($0.25 / $1.50 per "
+              "million), so the dollar caps stay conservative",
               "deliberation helps only across different models (Schneider and Schramm 2025); voting explains most "
               "debate gains among copies of one model (Choi, Zhu, Li, NeurIPS 2025)", "the readers' model; a larger model"),
     Parameter("margin_correction_band", 0.30, "a red team operating margin correction counts only within 30% "

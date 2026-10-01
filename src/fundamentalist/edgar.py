@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import html
 import json
+from datetime import date, timedelta
 import math
 import os
 import re
@@ -68,14 +69,21 @@ def latest_earnings_release(ticker: str) -> dict:
         raise ValueError(f"unknown ticker {ticker}")
     cik = co["cik_str"]
     rec = json.loads(sec_get(f"https://data.sec.gov/submissions/CIK{cik:010d}.json"))["filings"]["recent"]
+    oldest = (date.today() - timedelta(days=150)).isoformat()  # Visa's and Duke's last Item 2.02 8-Ks were from 2020-21
     for i, form in enumerate(rec["form"]):
         if form != "8-K" or "2.02" not in (rec.get("items", [""] * len(rec["form"]))[i] or ""):
             continue
+        if rec["filingDate"][i] < oldest:
+            break
         acc = rec["accessionNumber"][i]
         folder = f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace('-', '')}"
         listing = json.loads(sec_get(folder + "/index.json", f"{acc}-index.json"))
-        docs = sorted(d["name"] for d in listing["directory"]["item"]
-                      if re.search(r"ex-?99", d["name"], re.I) and d["name"].lower().endswith((".htm", ".html", ".txt")))
+        # exhibits are named freely (amzn-...xex991.htm, q32026earningsrelease.htm, er-...xearningsreleas.htm):
+        # every HTML document but the 8-K cover, the XBRL viewer pages and the indexes, preferring release-like names
+        pages = [d["name"] for d in listing["directory"]["item"] if d["name"].lower().endswith((".htm", ".html"))
+                 and d["name"] != rec["primaryDocument"][i] and not re.match(r"R\d+\.htm$", d["name"])
+                 and "index" not in d["name"].lower()]
+        docs = sorted(n for n in pages if re.search(r"ex-?99|earn|release|press|result", n, re.I)) or sorted(pages)
         if docs:
             return dict(company=co["title"], ticker=ticker.upper(), form="8-K", key=acc, period=rec["reportDate"][i],
                         filed=rec["filingDate"][i], urls=[f"{folder}/{d}" for d in docs])

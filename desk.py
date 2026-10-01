@@ -184,7 +184,8 @@ class Desk:
                 self.on_step("start", "red_team", i + 1, None)
                 lines, ids = evidence_lines(evidence)
                 ledger = self.ledger()
-                critic = param("red_team_model") if os.environ.get("GEMINI_API_KEY") else self.model_arg
+                gemini = os.environ.get("FREETIER_API_KEY") or os.environ.get("GEMINI_API_KEY")
+                critic = param("red_team_model") if gemini else self.model_arg
                 cfg = {"configurable": dict(self.configurable, model=critic, max_output_tokens=800),
                        "callbacks": [ledger, self.batch, *self.callbacks], "metadata": {"purpose": "red_team"}}
                 try:

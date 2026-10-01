@@ -810,7 +810,8 @@ def value(ticker: str, as_of: str | None = None, drivers: dict[str, Any] | None 
         high_growth_years=param("high_growth_years"),
         fade_years=param("fade_years"), mid_year=param("mid_year"), debt=debt, cash=cash,
         minority=_v(f, "minority"), shares=count)
-    x, driver_notes = forward_apply(x, drivers)
+    fy = _annual(company_facts(ticker), REVENUE, as_of)  # last fiscal year's revenue: the base for full-year guidance
+    x, driver_notes = forward_apply(x, drivers, fy[max(fy)] if fy else None, int(as_of[:4]))
     out["dcf_inputs"] = x
     runs = {name: dcf.value_per_share(dcf.scenario(x, name)) for name in ("bear", "base", "bull")}
     fair = {name: round(r["per_share"], 2) for name, r in runs.items()}

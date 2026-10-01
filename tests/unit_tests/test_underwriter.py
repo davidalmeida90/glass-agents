@@ -437,3 +437,18 @@ def test_correction_formulas_are_computed_and_checked():
     assert corrections({"objections": [obj]}, 0.61, claims) == {"growth": 0.11}
     no_formula = dict(obj, correction={"field": "growth", "value": 0.2})
     assert corrections({"objections": [no_formula]}, 0.61, claims) == {}
+
+
+
+def test_guided_growth_uses_xbrl_base_and_skips_past_years():
+    from fundamentalist.forward import guided_growth
+
+    ok = {"status": "verified"}
+    pfe = {"topic": "revenue", "low": 60.5, "high": 62.5, "unit": "USD billions", "period": "full year 2026",
+           "compared_with": 59.5, "check": ok, "statement": "raises full-year revenue guidance", "passage_id": "E002"}
+    g, _ = guided_growth([pfe], fy_revenue=62.6e9, year=2026)  # base = last fiscal year from XBRL, not compared_with
+    assert abs(g - (61.5e9 / 62.6e9 - 1)) < 1e-9
+    old = dict(pfe, period="full year 2020")
+    assert guided_growth([old], fy_revenue=62.6e9, year=2026) is None
+    quarter = dict(pfe, period="Q3 2026")
+    assert guided_growth([quarter], fy_revenue=62.6e9, year=2026) is None  # a quarter's revenue range has no base here
