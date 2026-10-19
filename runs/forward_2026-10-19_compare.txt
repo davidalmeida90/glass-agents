@@ -1,0 +1,64 @@
+overlap: 21 of 21 tickers rated on 2026-10-01 (missing today: [])
+
+A. Ratings. 10-01 code is rebuilt from the 10-01 memo (drivers reverted, LLM flags dropped); 'rule' is the 10-01 final under today's red team formula rule (its 3 moves reverted); '@new px' keeps 10-01 fair value and flags at today's price.
+tick   px chg | 10-01 final rule        full base   @new px     code        @new px     | today code  full base   full final  |  FV chg code FV chg | new filings
+MSFT    +3.1% | Hold        Hold        Hold        Hold        Hold        Hold        | Hold        Hold        Hold        |   +0.0%       +0.0% | -
+AAPL    +3.1% | Underweight Underweight Underweight Sell        Underweight Sell        | Sell        Sell        Sell        |   +0.0%       +0.0% | -
+NVDA    -6.2% | Hold        Underweight Underweight Hold        Hold        Hold        | Hold        Hold        Hold        |   +3.3%       +3.4% | -
+GOOGL   -1.0% | Hold        Hold        Hold        Hold        Hold        Hold        | Hold        Hold        Hold        |   +0.0%       +0.0% | -
+AMZN    +0.3% | Sell        Sell        Sell        Sell        Sell        Sell        | Sell        Sell        Sell        |   -0.3%       -0.3% | -
+META    -2.2% | Buy         Buy         Buy         Buy         Buy         Buy         | Buy         Buy         Buy         |   +0.1%       +0.1% | -
+V      +12.0% | Overweight  Overweight  Overweight  Overweight  Overweight  Overweight  | Overweight  Overweight  Overweight  |   -0.5%       -0.5% | -
+JPM     +2.7% | Underweight Underweight Underweight Underweight Underweight Underweight | Underweight Underweight Underweight |   +0.0%       +0.0% | 8-K 2.02 10-13
+WMT    +14.3% | Underweight Underweight Underweight Sell        Underweight Sell        | Sell        Sell        Sell        |   -0.7%       -0.7% | -
+KO      +9.1% | Sell        Sell        Sell        Sell        Sell        Sell        | Sell        Sell        Sell        |   -0.1%       -0.1% | -
+PFE     +3.7% | Underweight Underweight Underweight Underweight Underweight Sell        | Sell        Underweight Underweight |   -0.4%       -0.4% | -
+CAT     -9.9% | Underweight Underweight Underweight Underweight Underweight Underweight | Underweight Underweight Underweight |   +0.5%       +0.5% | -
+BAC     -5.9% | Underweight Underweight Underweight Hold        Underweight Hold        | Hold        Hold        Hold        |   +0.4%       +0.4% | 8-K 2.02 10-14
+O       +3.3% | Buy         Buy         Buy         Overweight  Buy         Overweight  | Overweight  Overweight  Overweight  |   +0.0%       +0.0% | -
+PLD     -3.2% | Overweight  Overweight  Overweight  Overweight  Overweight  Overweight  | Overweight  Underweight Underweight |   +1.5%       +1.5% | 8-K 2.02 10-15
+NEE     +5.4% | Overweight  Overweight  Overweight  Overweight  Overweight  Overweight  | Overweight  Overweight  Overweight  |   +0.0%       +0.0% | -
+DUK     +6.5% | Hold        Hold        Hold        Underweight Hold        Underweight | Hold        Hold        Hold        |   +1.9%       +1.9% | -
+PGR     +5.4% | Sell        Sell        Sell        Sell        Sell        Sell        | Sell        Sell        Sell        |   +0.0%       +0.0% | 8-K 2.02 10-14
+TRV     +9.3% | Sell        Sell        Sell        Sell        Sell        Sell        | Sell        Sell        Sell        |  -10.9%      -10.9% | 10-Q 10-16, 8-K 2.02 10-16
+CB     +10.6% | Underweight Underweight Underweight Sell        Underweight Sell        | Sell        Sell        Sell        |   +0.0%       +0.0% | -
+MET     +7.0% | Sell        Sell        Sell        Sell        Sell        Sell        | Sell        Sell        Sell        |   +0.0%       +0.0% | -
+
+B. Model layer per company: claims checked / total, red team moves of 3 (Gemini fallbacks), agreement, forward drivers, LLM effect on the base rating (full base minus code base, notches), cost and time
+tick  | claims 10-01     today | RT 10-01   today | agree today | LLM base 10-01 today | tokens 10-01   today |   $ rd/rt 10-01           today |  sec | drivers 10-01 / today
+MSFT  |    38/38       38/38   |   0 (1)    0 (0) |  100%  100% |             +0    +0 |       68,228  70,747 |  0.0067/0.0063   0.0070/0.0074  |   32 | m 48.5%->48.6% / m 48.5%->48.6%
+AAPL  |    42/42       42/42   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       74,313  67,576 |  0.0075/0.0076   0.0065/0.0074  |   48 | m 36.9%->37.1% / m 36.9%->37.1%
+NVDA  |    41/41       41/41   |   2 (0)    0 (0) |   67%  100% |             -1    +0 |       81,653  66,302 |  0.0086/0.0081   0.0063/0.0077  |   32 | g +30.0%->+25.0%, m 70.5%->70.5% / g +30.0%->+25.0%, m 70.5%->70.5%
+GOOGL |    38/38       38/38   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       62,489  63,055 |  0.0058/0.0075   0.0058/0.0076  |  117 | m 38.5%->35.8% / m 38.5%->35.8%
+AMZN  |    37/38       38/38   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       77,755  76,423 |  0.0081/0.0074   0.0079/0.0074  |   32 | g +13.8%->+12.1%, m 12.1%->14.2% / g +13.8%->+12.1%, m 12.1%->14.2%
+META  |    42/42       41/41   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       76,927  70,069 |  0.0080/0.0083   0.0068/0.0083  |   35 | m 52.3%->59.7% / m 52.3%->59.7%
+V     |    32/32       32/32   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       86,469  69,098 |  0.0096/0.0069   0.0068/0.0075  |   31 | - / -
+JPM   |    42/42       41/41   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       79,033  75,172 |  0.0085/0.0067   0.0078/0.0072  |   38 | - / -
+WMT   |    46/46       45/45   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       72,577  71,574 |  0.0072/0.0082   0.0071/0.0077  |   51 | g +5.7%->+4.5%, m 4.4%->4.4% / g +5.7%->+4.5%, m 4.4%->4.4%
+KO    |    46/50       44/49   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       80,458  80,832 |  0.0086/0.0078   0.0087/0.0077  |   41 | g +4.4%->+4.7% / g +4.4%->+4.7%
+PFE   |    42/42       38/38   |   1 (2)    0 (0) |   67%  100% |             +0    +1 |       71,527  67,396 |  0.0073/0.0049   0.0066/0.0073  |   34 | g -5.0%->-3.4% / g -5.0%->-3.4%
+CAT   |    37/38       38/38   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       95,802  84,322 |  0.0110/0.0075   0.0092/0.0076  |   40 | m 18.1%->18.4% / m 18.1%->18.4%
+BAC   |    40/40       40/40   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       75,321  69,898 |  0.0077/0.0074   0.0071/0.0065  |   34 | - / -
+O     |    40/40       38/38   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       74,364  70,849 |  0.0079/0.0064   0.0075/0.0063  |   32 | - / -
+PLD   |    40/40       39/39   |   0 (0)    0 (0) |  100%  100% |             +0    -2 |       65,949  64,838 |  0.0066/0.0068   0.0064/0.0066  |   30 | - / -
+NEE   |    44/48       37/41   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       80,140  83,892 |  0.0088/0.0066   0.0096/0.0063  |   39 | - / -
+DUK   |    36/37       37/37   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       92,317  73,669 |  0.0107/0.0062   0.0079/0.0061  |   35 | - / -
+PGR   |    33/33       31/31   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       63,534  64,531 |  0.0063/0.0068   0.0064/0.0067  |   28 | - / -
+TRV   |    39/39       38/38   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       66,800  68,164 |  0.0067/0.0070   0.0070/0.0063  |   34 | - / -
+CB    |    30/30       33/42   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       65,869  81,229 |  0.0068/0.0061   0.0093/0.0068  |   56 | - / -
+MET   |    43/43       43/43   |   0 (0)    0 (0) |  100%  100% |             +0    +0 |       82,616  67,132 |  0.0091/0.0071   0.0067/0.0073  |   34 | - / -
+
+totals over 21: claims 828/839 (98.7%) on 10-01 vs 812/830 (97.8%) today; red team moves 3 of 63 (fallbacks 3) vs 0 of 63 (fallbacks 0); full agreement 19/21 vs 21/21
+per company: tokens 75,911 vs 71,751; ledger $ readers 0.0080 vs 0.0074, red team 0.0070 vs 0.0071; seconds 58 (batch average) vs 41 (median 34)
+
+C. Final rating changes, 10-01 (under today's rule) to today's full: 7 of 21
+  AAPL: Underweight -> Sell; price alone moves the 10-01 base; code Underweight -> Sell; LLM effect on base +0 -> +0; red team base Sell final Sell; new filings: none
+  NVDA: Underweight -> Hold; price alone moves the 10-01 base; code unchanged (Hold); LLM effect on base -1 -> +0; red team base Hold final Hold; new filings: none
+  WMT: Underweight -> Sell; price alone moves the 10-01 base; code Underweight -> Sell; LLM effect on base +0 -> +0; red team base Sell final Sell; new filings: none
+  BAC: Underweight -> Hold; price alone moves the 10-01 base; code Underweight -> Hold; LLM effect on base +0 -> +0; red team base Hold final Hold; new filings: 8-K 2.02 10-14
+  O: Buy -> Overweight; price alone moves the 10-01 base; code Buy -> Overweight; LLM effect on base +0 -> +0; red team base Overweight final Overweight; new filings: none
+  PLD: Overweight -> Underweight; price alone does not move the 10-01 base; code unchanged (Overweight); LLM effect on base +0 -> -2; red team base Underweight final Underweight; new filings: 8-K 2.02 10-15
+  CB: Underweight -> Sell; price alone moves the 10-01 base; code Underweight -> Sell; LLM effect on base +0 -> +0; red team base Sell final Sell; new filings: none
+
+code rating at today's price on the 10-01 fair value equals today's code rating on 20 of 21
+LLM effect on the base rating identical on both dates for 18 of 21

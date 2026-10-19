@@ -2,6 +2,8 @@
 
     python desk.py --tickers MSFT,AAPL --budget-usd 0.50
     python desk.py --tickers MSFT --valuation-only        # free: SEC and Yahoo only, no model calls
+    python desk.py --universe --budget-usd 0.50           # forward test: the 50 names of data/universe.csv, code then full
+    python desk.py --universe --variants code             # only the free code-only pass
 
 Per company: six readers run once (performance, capital, risks, guidance, segments, accounting) and code
 checks every claim; verified guidance and segment figures move the DCF's starting growth and margin path
@@ -10,12 +12,20 @@ the rating one notch; the noise meter is the agreement of the repeats' final rat
 accounting reader ran three times until 2026-10-01: in 42 companies its repeats changed a flag only through
 false positives, at 35% of the cost. Budgets: each
 model run stops at --max-tokens and the whole batch at --budget-usd, checked on every call.
+
+Every run records its ratings in data/track_record.csv with its variant: `code` (--valuation-only, no model
+call) or `full`, plus the readers' model snapshot (track.SNAPSHOTS; the API names only the alias). The forward
+test rates the fixed universe both ways on the same day, code first, so track.py can score whether the model
+layer adds anything over the code. A company the batch budget cut short is kept in the memo file but not
+recorded as full. The risk factor caution flag (share of new Item 1A sentences) is computed in code but only
+when the risks reader loads its corpus, so it rides with the full variant.
 """
 
 from __future__ import annotations
 
 import argparse
 import asyncio
+import csv
 import json
 import os
 import time
@@ -28,6 +38,7 @@ ONCE = ["performance", "capital", "risks", "guidance", "segments", "accounting"]
 PREFIX = {"performance": "PERF", "accounting": "ACC", "capital": "CAP", "risks": "RISK", "guidance": "GUID",
           "segments": "SEG"}
 OK = ("verified", "number in passage")
+UNIVERSE = HERE / "data" / "universe.csv"
 
 
 def money(v: float | None) -> str:
@@ -173,7 +184,8 @@ class Desk:
 
         repeats = []
         evidence = dict(once, accounting=accounting_runs[0]) if accounting_runs else dict(once)
-        fl = flags(val, evidence, RISK_STATS.get(ticker)) if val.get("price") else {"red": [], "caution": []}
+        risk = None if self.valuation_only else RISK_STATS.get(ticker)  # set only by the risks reader's corpus
+        fl = flags(val, evidence, risk) if val.get("price") else {"red": [], "caution": []}
         base = decide(val, fl, vol) if val.get("price") else {"rating": "No rating", "why": [val["note"]], "upside_to_base": None}
         self.on_step("start", "rating", 1, None)
         self.on_step("finish", "rating", 1, {"flags": fl, "base": base})
@@ -237,23 +249,22 @@ class Desk:
         return memo
 
 
-async def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--tickers", required=True)
-    ap.add_argument("--repeats", type=int, default=3, help="noise meter: red team runs")
-    ap.add_argument("--budget-usd", type=float, default=0.50)
-    ap.add_argument("--max-tokens", type=int, default=40_000)
-    ap.add_argument("--model", default="deepseek/deepseek-flash")
-    ap.add_argument("--valuation-only", action="store_true")
-    args = ap.parse_args()
-    tickers = [t.strip().upper() for t in args.tickers.split(",") if t.strip()]
+def universe(path: Path = UNIVERSE) -> list[str]:
+    """The forward test's fixed list of tickers, in file order (the 21 names rated on 2026-10-01 come first)."""
+    with open(path, encoding="utf-8") as fh:
+        return [r["ticker"].strip().upper() for r in csv.DictReader(fh) if (r.get("ticker") or "").strip()]
 
-    load_keys()
+
+async def run_variant(tickers: list[str], variant: str, args: argparse.Namespace) -> list[dict]:
+    """One pass over *tickers*: `code` (no model call) or `full`. Prints, saves the memos and records the ratings."""
     from fundamentalist.redteam import counts, method_review
+    from track import record, snapshot
 
-    desk = Desk(args.model, args.budget_usd, args.max_tokens, args.repeats, args.valuation_only)
+    valuation_only = variant == "code"
+    print(f"##### variant {variant}: {len(tickers)} companies\n")
+    desk = Desk(args.model, args.budget_usd, args.max_tokens, args.repeats, valuation_only)
     batch = desk.batch
-    if not args.valuation_only:
+    if not valuation_only:
         pre = await desk.preflight()
         print(f"  preflight: forced tool call {'accepted' if pre['tool_choice_any'] else 'NOT accepted'}\n")
 
@@ -261,8 +272,12 @@ async def main() -> int:
     memo_dir = HERE / "runs" / "memos" / time.strftime("%Y%m%d-%H%M%S")
     for ticker in tickers:
         print(f"=== {ticker}")
+        t0 = time.time()
         memo = await desk.company(ticker, memo_dir)
+        memo["seconds"] = round(time.time() - t0, 1)
         memo["memo_file"] = str(Path(memo["memo_file"]).relative_to(HERE))
+        if not valuation_only and not desk.room():
+            memo["cut_by_budget"] = True  # a step may have been refused: kept here, not recorded as a full rating
         memos.append(memo)
         val, vol, repeats, costs = memo["valuation"], memo["volatility"], memo["repeats"], memo["costs"]
         modal, confidence, sized = memo["rating"], memo["confidence"], memo["sizing"]
@@ -285,9 +300,10 @@ async def main() -> int:
                   f" {len(moving)} can move the rating ({', '.join(o['direction'] for o in moving) or 'none'})")
         spent = sum(c["usd"] for c in costs.values())
         toks = sum(c["tokens"] for c in costs.values())
-        print(f"    model spend {toks:,} tokens, ${spent:.4f} | batch ${batch.usd:.4f} of ${args.budget_usd:.2f}\n")
-        if not desk.room():
-            print("batch dollar cap reached")
+        print(f"    model spend {toks:,} tokens, ${spent:.4f}, {memo['seconds']:.0f}s | batch ${batch.usd:.4f} of"
+              f" ${args.budget_usd:.2f}\n")
+        if memo.get("cut_by_budget"):
+            print(f"batch dollar cap reached during {ticker}: its memo is kept, its rating is not recorded")
             break
 
     reviews = [(m["ticker"], a) for m in memos for r in m["repeats"] if r["red_team"] for a in method_review(r["red_team"])]
@@ -327,12 +343,42 @@ async def main() -> int:
     out.mkdir(exist_ok=True)
     stamp = time.strftime('%Y%m%d-%H%M%S')
     path = out / f"memo-{stamp}.json"
-    if not args.valuation_only:
-        from track import record
-        print(f"track record: {record(stamp, memos)} ratings added to data/track_record.csv (score with: python track.py score)")
-    path.write_text(json.dumps({"batch": bs, "budget_usd": args.budget_usd, "repeats": args.repeats, "memos": memos},
-                               indent=1, default=str), encoding="utf-8")
-    print(f"\nsaved {path.relative_to(HERE)}")
+    served = sorted({c["model"] for c in batch.calls if c.get("model") and "deepseek" in c["model"]})
+    snap = "" if valuation_only else (args.model_snapshot or snapshot(served, desk.model))
+    added = record(stamp, memos, variant, snap)
+    print(f"track record: {added} {variant} ratings added to data/track_record.csv"
+          + (f" (readers' snapshot {snap}; the API answered as {', '.join(served) or 'nothing'})" if snap else ""))
+    path.write_text(json.dumps({"variant": variant, "model_snapshot": snap, "served_models": served, "batch": bs,
+                                "budget_usd": args.budget_usd, "repeats": args.repeats, "seconds": round(time.time() - t_batch, 1),
+                                "memos": memos, "calls": batch.calls}, indent=1, default=str), encoding="utf-8")
+    print(f"\nsaved {path.relative_to(HERE)}\n")
+    return memos
+
+
+async def main() -> int:
+    ap = argparse.ArgumentParser()
+    names = ap.add_mutually_exclusive_group(required=True)
+    names.add_argument("--tickers")
+    names.add_argument("--universe", nargs="?", const=str(UNIVERSE), help="a ticker,sector file (default data/universe.csv)")
+    ap.add_argument("--variants", default=None,
+                    help="code, full or code,full (default code,full with --universe; else full, or code with --valuation-only)")
+    ap.add_argument("--repeats", type=int, default=3, help="noise meter: red team runs")
+    ap.add_argument("--budget-usd", type=float, default=0.50)
+    ap.add_argument("--max-tokens", type=int, default=40_000)
+    ap.add_argument("--model", default="deepseek/deepseek-flash")
+    ap.add_argument("--model-snapshot", default=None, help="the readers' snapshot to record (default: track.SNAPSHOTS)")
+    ap.add_argument("--valuation-only", action="store_true", help="same as --variants code")
+    args = ap.parse_args()
+    tickers = universe(Path(args.universe)) if args.universe else [t.strip().upper() for t in args.tickers.split(",") if t.strip()]
+    default = "code" if args.valuation_only else "code,full" if args.universe else "full"
+    variants = [v.strip() for v in (args.variants or default).split(",") if v.strip()]
+    if set(variants) - {"code", "full"} or (args.valuation_only and "full" in variants):
+        ap.error("--variants takes code, full or code,full (and only code with --valuation-only)")
+
+    load_keys()
+    for variant in ("code", "full"):  # code first: same day, and nothing a full pass loads can reach it
+        if variant in variants:
+            await run_variant(tickers, variant, args)
     return 0
 
 

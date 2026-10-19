@@ -1,0 +1,451 @@
+##### variant code: 50 companies
+
+=== MSFT
+
+  MSFT: HOLD (agreement 100%: Hold)  target weight 0.0%  price 529.05  fair value 264.56 / 506.35 / 713.02
+    WACC 9.8% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.279 [Software (System & Application); regression 1.033], ERP 4.1%, Ke 10.1%, rating AAA at coverage 50.88, Kd 5.1%, E/V 96.8%)
+    growth +17.0% (used 17.0%), price implies +19.3%; margin 48.5%, ROIC 23.1%, sales/capital 0.784, SBC 3.7% of revenue; terminal 73.2% of EV; EV/EBIT at base 23.7x vs market 24.7x; volatility 32%
+    - price / base fair value 1.04 at High uncertainty (volatility 32%, range 0.89x base, DCF / industry multiples 0.76): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 5s | batch $0.0000 of $0.50
+
+=== AAPL
+
+  AAPL: SELL (agreement 100%: Sell)  target weight 0.0%  price 343.46  fair value 111.26 / 247.06 / 365.12
+    WACC 10.2% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.344 [Computers/Peripherals; regression 1.053], ERP 4.1%, Ke 10.3%, rating AAA at coverage 39.37, Kd 5.1%, E/V 98.1%)
+    growth +8.0% (used 8.0%), price implies +20.8%; margin 36.9%, ROIC 58.6%, sales/capital 2.207, SBC 2.9% of revenue; terminal 68.9% of EV; EV/EBIT at base 21.1x vs market 29.3x; volatility 24%
+    - price / base fair value 1.39 at Medium uncertainty (volatility 24%, range 1.03x base, DCF / industry multiples 0.80): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== NVDA
+
+  NVDA: HOLD (agreement 100%: Hold)  target weight 0.0%  price 214.13  fair value 146.85 / 281.89 / 404.23
+    WACC 11.0% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.513 [Semiconductor; regression 1.801], ERP 4.1%, Ke 11.0%, rating AAA at coverage 425.82, Kd 5.1%, E/V 99.2%)
+    growth +91.7% (used 30.0%), price implies +15.8%; margin 70.5%, ROIC 62.1%, sales/capital 1.146, SBC 2.4% of revenue; terminal 70.5% of EV; EV/EBIT at base 31.9x vs market 24.2x; volatility 37%
+    - price / base fair value 0.76 at High uncertainty (volatility 37%, range 0.91x base, DCF / industry multiples 0.78): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    - one notch off: cash conversion 0.75 (operating cash flow / NOPAT under 0.8)
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== GOOGL
+
+  GOOGL: HOLD (agreement 100%: Hold)  target weight 0.0%  price 340.59  fair value 195.17 / 365.48 / 511.87
+    WACC 8.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.042 [Software (Entertainment); regression 1.136], ERP 4.1%, Ke 9.1%, rating AAA at coverage 65.55, Kd 5.1%, E/V 97.2%)
+    growth +20.1% (used 20.1%), price implies +16.1%; margin 38.5%, ROIC 22.1%, sales/capital 0.787, SBC 6.3% of revenue; terminal 76.1% of EV; EV/EBIT at base 25.3x vs market 23.5x; volatility 31%
+    - price / base fair value 0.93 at High uncertainty (volatility 31%, range 0.87x base, DCF / industry multiples 1.09): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== AMZN
+
+  AMZN: SELL (agreement 100%: Sell)  target weight 0.0%  price 250.00  fair value 71.23 / 112.96 / 192.39
+    WACC 8.8% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.08 [Retail (General); regression 1.329], ERP 4.1%, Ke 9.2%, rating AAA at coverage 28.13, Kd 5.1%, E/V 92.2%)
+    growth +13.8% (used 13.8%), price implies +75.0%; margin 12.1%, ROIC 11.0%, sales/capital 1.241, SBC 2.5% of revenue; terminal 84.0% of EV; EV/EBIT at base 14.1x vs market 29.9x; volatility 34%
+    - price / base fair value 2.21 at Very High uncertainty (volatility 34%, range 1.07x base, DCF / industry multiples 0.41): Buy at or below 0.50, Overweight to 0.88, Underweight from 1.15, Sell from 1.75
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== META
+
+  META: BUY (agreement 100%: Buy)  target weight 3.0%  price 709.33  fair value 654.03 / 1,312.47 / 1,866.96
+    WACC 8.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.068 [Software (Entertainment); regression 1.172], ERP 4.1%, Ke 9.2%, rating AAA at coverage 45.34, Kd 5.1%, E/V 94.2%)
+    growth +23.8% (used 23.8%), price implies +2.9%; margin 52.3%, ROIC 23.4%, sales/capital 0.617, SBC 11.0% of revenue; terminal 77.9% of EV; EV/EBIT at base 28.4x vs market 15.4x; volatility 42%
+    - price / base fair value 0.54 at High uncertainty (volatility 42%, range 0.92x base, DCF / industry multiples 1.45): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== V
+
+  V: OVERWEIGHT (agreement 100%: Overweight)  target weight 3.4%  price 402.61  fair value 216.12 / 514.57 / 747.83
+    WACC 7.5% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.689 [Financial Svcs. (Non-bank & Insurance); regression 0.878], ERP 4.1%, Ke 7.6%, rating AAA at coverage 42.34, Kd 5.1%, E/V 96.8%)
+    growth +12.7% (used 12.7%), price implies +6.9%; margin 61.1%, ROIC 45.9%, sales/capital 5.0, SBC 2.1% of revenue; terminal 75.4% of EV; EV/EBIT at base 37.2x vs market 29.2x; volatility 22%
+    - price / base fair value 0.78 at High uncertainty (volatility 22%, range 1.03x base, DCF / industry multiples 0.53): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== JPM
+
+  JPM: UNDERWEIGHT (agreement 100%: Underweight)  target weight 0.0%  price 339.72  fair value 160.61 / 271.08 / 346.83
+    bank: ROE 14.9%, price implies ROE 14.1%, book value per share 140.92; cost of equity 8.6% = rf 4.8% + beta 0.761 x ERP 4.1%; volatility 22%
+    - price / base fair value 1.25 at Medium uncertainty (volatility 22%, range 0.69x base, DCF / industry multiples 1.02): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== WMT
+
+  WMT: SELL (agreement 100%: Sell)  target weight 0.0%  price 118.81  fair value 30.67 / 71.54 / 124.70
+    WACC 7.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.823 [Retail (General); regression 0.8], ERP 4.1%, Ke 8.2%, rating AAA at coverage 17.36, Kd 5.1%, E/V 93.4%)
+    growth +5.7% (used 5.7%), price implies +24.7%; margin 4.4%, ROIC 16.1%, sales/capital 5.0, SBC 0.5% of revenue; terminal 75.1% of EV; EV/EBIT at base 19.5x vs market 31.1x; volatility 26%
+    - price / base fair value 1.66 at High uncertainty (volatility 26%, range 1.31x base, DCF / industry multiples 0.58): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== KO
+
+  KO: SELL (agreement 100%: Sell)  target weight 0.0%  price 93.90  fair value 26.34 / 64.86 / 114.36
+    WACC 7.0% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.624 [Beverage (Soft); regression 0.8], ERP 4.1%, Ke 7.3%, rating AAA at coverage 8.81, Kd 5.1%, E/V 89.9%)
+    growth +4.4% (used 4.4%), price implies +12.3%; margin 29.3%, ROIC 17.5%, sales/capital 0.933, SBC 0.5% of revenue; terminal 73.6% of EV; EV/EBIT at base 21.9x vs market 30.5x; volatility 19%
+    - price / base fair value 1.45 at Low uncertainty (volatility 19%, range 1.36x base, DCF / industry multiples 1.10): Buy at or below 0.80, Overweight to 0.95, Underweight from 1.05, Sell from 1.25
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== PFE
+
+  PFE: SELL (agreement 100%: Sell)  target weight 0.0%  price 29.58  fair value 12.19 / 18.59 / 33.91
+    WACC 7.5% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.992 [Drugs (Pharmaceutical); regression 0.8], ERP 4.1%, Ke 8.9%, rating A at coverage 5.12, Kd 5.5%, E/V 72.0%)
+    growth -7.5% (used -5.0%), price implies +4.9%; margin 24.7%, ROIC 7.9%, sales/capital 0.795, SBC 1.5% of revenue; terminal 41.6% of EV; EV/EBIT at base 10.4x vs market 14.4x; volatility 21%
+    - price / base fair value 1.59 at High uncertainty (volatility 21%, range 1.17x base, DCF / industry multiples 0.47): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== CAT
+
+  CAT: UNDERWEIGHT (agreement 100%: Underweight)  target weight 0.0%  price 730.76  fair value 290.84 / 582.96 / 907.17
+    WACC 9.6% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.256 [Construction Supplies; regression 1.42], ERP 4.1%, Ke 10.0%, rating AA at coverage 7.11, Kd 5.3%, E/V 94.4%)
+    growth +11.4% (used 11.4%), price implies +22.8%; margin 18.1%, ROIC 26.6%, sales/capital 2.291, SBC 0.3% of revenue; terminal 71.1% of EV; EV/EBIT at base 20.8x vs market 25.8x; volatility 40%
+    - price / base fair value 1.25 at High uncertainty (volatility 40%, range 1.06x base, DCF / industry multiples 1.02): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== BAC
+
+  BAC: HOLD (agreement 100%: Hold)  target weight 0.0%  price 51.23  fair value 40.41 / 48.39 / 66.91
+    bank: ROE 9.5%, price implies ROE 9.4%, book value per share 43.06; cost of equity 8.7% = rf 4.8% + beta 0.945 x ERP 4.1%; volatility 23%
+    - price / base fair value 1.06 at Medium uncertainty (volatility 23%, range 0.55x base, DCF / industry multiples 0.94): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== O
+
+  O: OVERWEIGHT (agreement 100%: Overweight)  target weight 4.5%  price 56.08  fair value 55.53 / 69.11 / 87.18
+    dividend discount: dividend per share 3.17 (yield 5.7%), growth 2.7% fading to 2.7%, cost of equity 7.4% = rf 4.8% + beta 0.65 x ERP 4.1%; volatility 17%
+    - price / base fair value 0.81 at Low uncertainty (volatility 17%, range 0.46x base): Buy at or below 0.80, Overweight to 0.95, Underweight from 1.05, Sell from 1.25
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== PLD
+
+  PLD: OVERWEIGHT (agreement 100%: Overweight)  target weight 3.5%  price 125.75  fair value 116.03 / 149.64 / 197.39
+    dividend discount: dividend per share 4.10 (yield 3.3%), growth 8.0% fading to 4.8%, cost of equity 8.2% = rf 4.8% + beta 0.843 x ERP 4.1%; volatility 21%
+    - price / base fair value 0.84 at Medium uncertainty (volatility 21%, range 0.54x base): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== NEE
+
+  NEE: OVERWEIGHT (agreement 100%: Overweight)  target weight 3.6%  price 79.80  fair value 76.87 / 101.54 / 138.21
+    dividend discount: dividend per share 2.31 (yield 2.9%), growth 7.0% fading to 4.4%, cost of equity 7.4% = rf n/a + beta None x ERP n/a; volatility 21%
+    - price / base fair value 0.79 at Medium uncertainty (volatility 21%, range 0.60x base, DCF / industry multiples 1.25): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== DUK
+
+  DUK: HOLD (agreement 100%: Hold)  target weight 0.0%  price 121.47  fair value 88.94 / 116.25 / 156.69
+    dividend discount: dividend per share 4.08 (yield 3.4%), growth 5.4% fading to 4.0%, cost of equity 7.0% = rf n/a + beta None x ERP n/a; volatility 16%
+    - price / base fair value 1.04 at Low uncertainty (volatility 16%, range 0.58x base, DCF / industry multiples 0.86): Buy at or below 0.80, Overweight to 0.95, Underweight from 1.05, Sell from 1.25
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== PGR
+
+  PGR: SELL (agreement 100%: Sell)  target weight 0.0%  price 218.49  fair value 80.45 / 145.53 / 172.34
+    bank: ROE 22.5%, price implies ROE 23.7%, book value per share 59.06; cost of equity 9.9% = rf 4.8% + beta 0.642 x ERP 4.1%; volatility 27%
+    - price / base fair value 1.50 at Medium uncertainty (volatility 27%, range 0.63x base, DCF / industry multiples 1.01): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== TRV
+
+  TRV: SELL (agreement 100%: Sell)  target weight 0.0%  price 389.54  fair value 154.11 / 223.39 / 275.85
+    bank: ROE 14.9%, price implies ROE 18.9%, book value per share 141.48; cost of equity 9.9% = rf 4.8% + beta 0.642 x ERP 4.1%; volatility 21%
+    - price / base fair value 1.74 at Medium uncertainty (volatility 21%, range 0.54x base, DCF / industry multiples 0.98): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== CB
+
+  CB: SELL (agreement 100%: Sell)  target weight 0.0%  price 359.79  fair value 199.45 / 275.15 / 343.33
+    bank: ROE 13.7%, price implies ROE 14.4%, book value per share 190.24; cost of equity 9.9% = rf 4.8% + beta 0.642 x ERP 4.1%; volatility 20%
+    - price / base fair value 1.31 at Low uncertainty (volatility 20%, range 0.52x base, DCF / industry multiples 0.97): Buy at or below 0.80, Overweight to 0.95, Underweight from 1.05, Sell from 1.25
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== MET
+
+  MET: SELL (agreement 100%: Sell)  target weight 0.0%  price 100.76  fair value 42.72 / 55.12 / 71.35
+    bank: ROE 11.6%, price implies ROE 15.6%, book value per share 43.18; cost of equity 9.4% = rf 4.8% + beta 0.644 x ERP 4.1%; volatility 24%
+    - price / base fair value 1.83 at Medium uncertainty (volatility 24%, range 0.52x base, DCF / industry multiples 0.99): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== AVGO
+
+  AVGO: HOLD (agreement 100%: Hold)  target weight 0.0%  price 328.75  fair value 175.97 / 308.46 / 460.70
+    WACC 10.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.548 [Semiconductor; regression 1.326], ERP 4.1%, Ke 11.2%, rating AAA at coverage 13.74, Kd 5.1%, E/V 96.3%)
+    growth +36.5% (used 30.0%), price implies +33.3%; margin 54.8%, ROIC 28.5%, sales/capital 2.063, SBC 9.5% of revenue; terminal 65.4% of EV; EV/EBIT at base 30.9x vs market 32.9x; volatility 46%
+    - price / base fair value 1.07 at Very High uncertainty (volatility 46%, range 0.92x base, DCF / industry multiples 0.79): Buy at or below 0.50, Overweight to 0.88, Underweight from 1.15, Sell from 1.75
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== ORCL
+
+  ORCL: HOLD (agreement 100%: Hold)  target weight 0.0%  price 128.23  fair value 43.31 / 81.49 / 168.80
+    WACC 9.3% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.646 [Software (System & Application); regression 1.53], ERP 4.1%, Ke 11.6%, rating A at coverage 4.52, Kd 5.5%, E/V 70.2%)
+    growth +16.1% (used 16.1%), price implies +40.0%; margin 33.6%, ROIC 8.4%, sales/capital 0.483, SBC 6.7% of revenue; terminal 84.3% of EV; EV/EBIT at base 15.5x vs market 21.4x; volatility 57%
+    - price / base fair value 1.57 at Extreme uncertainty (volatility 57%, range 1.54x base, DCF / industry multiples 0.40): Buy at or below 0.25, Overweight to 0.81, Underweight from 1.60, Sell from 4.00
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== CSCO
+
+  CSCO: UNDERWEIGHT (agreement 100%: Underweight)  target weight 0.0%  price 107.39  fair value 43.31 / 88.08 / 136.73
+    WACC 8.3% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.926 [Telecom. Equipment; regression 1.008], ERP 4.1%, Ke 8.6%, rating AAA at coverage 10.45, Kd 5.1%, E/V 94.5%)
+    growth +7.7% (used 7.7%), price implies +13.7%; margin 27.3%, ROIC 16.9%, sales/capital 1.631, SBC 6.0% of revenue; terminal 69.1% of EV; EV/EBIT at base 20.6x vs market 25.0x; volatility 35%
+    - price / base fair value 1.22 at High uncertainty (volatility 35%, range 1.06x base, DCF / industry multiples 0.75): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== ADBE
+
+  ADBE: BUY (agreement 100%: Buy)  target weight 3.0%  price 245.20  fair value 306.24 / 665.80 / 930.04
+    WACC 9.8% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.315 [Software (System & Application); regression 1.257], ERP 4.1%, Ke 10.2%, rating AAA at coverage 35.66, Kd 5.1%, E/V 93.4%)
+    growth +11.3% (used 11.3%), price implies -7.6%; margin 40.4%, ROIC 38.5%, sales/capital 1.899, SBC 8.0% of revenue; terminal 71.7% of EV; EV/EBIT at base 24.8x vs market 9.2x; volatility 41%
+    - price / base fair value 0.37 at High uncertainty (volatility 41%, range 0.94x base, DCF / industry multiples 0.87): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== NFLX
+
+  NFLX: OVERWEIGHT (agreement 100%: Overweight)  target weight 2.0%  price 70.53  fair value 49.63 / 96.25 / 134.68
+    WACC 9.0% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.098 [Entertainment; regression 1.401], ERP 4.1%, Ke 9.3%, rating AAA at coverage 16.94, Kd 5.1%, E/V 94.6%)
+    growth +14.3% (used 14.3%), price implies +6.1%; margin 31.6%, ROIC 28.6%, sales/capital 2.981, SBC 1.0% of revenue; terminal 69.8% of EV; EV/EBIT at base 26.7x vs market 19.7x; volatility 37%
+    - price / base fair value 0.73 at High uncertainty (volatility 37%, range 0.88x base, DCF / industry multiples 0.73): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== DIS
+
+  DIS: HOLD (agreement 100%: Hold)  target weight 0.0%  price 110.59  fair value 65.70 / 102.89 / 216.13
+    WACC 8.2% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.107 [Entertainment; regression 1.303], ERP 4.1%, Ke 9.3%, rating AAA at coverage None, Kd 5.1%, E/V 79.5%)
+    growth +4.5% (used 4.5%), price implies +5.9%; margin 18.4%, ROIC 8.9%, sales/capital 1.419, SBC 1.5% of revenue; terminal 59.7% of EV; EV/EBIT at base 12.5x vs market 13.3x; volatility 27%
+    - price / base fair value 1.07 at High uncertainty (volatility 27%, range 1.46x base, DCF / industry multiples 0.27): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== VZ
+
+  VZ: OVERWEIGHT (agreement 100%: Overweight)  target weight 2.8%  price 44.79  fair value 29.08 / 57.83 / 127.25
+    WACC 5.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.671 [Telecom. Services; regression 0.8], ERP 4.1%, Ke 7.5%, rating A- at coverage 3.88, Kd 5.6%, E/V 49.7%)
+    growth +0.9% (used 0.9%), price implies -4.7%; margin 20.5%, ROIC 7.5%, sales/capital 0.558, SBC 0.3% of revenue; terminal 65.7% of EV; EV/EBIT at base 15.0x vs market 13.1x; volatility 26%
+    - price / base fair value 0.77 at High uncertainty (volatility 26%, range 1.70x base, DCF / industry multiples 1.50): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== HD
+
+  HD: UNDERWEIGHT (agreement 100%: Underweight)  target weight 0.0%  price 309.63  fair value 106.16 / 284.57 / 504.38
+    WACC 8.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.244 [Retail (Building Supply); regression 0.971], ERP 4.1%, Ke 9.9%, rating AAA at coverage 8.7, Kd 5.1%, E/V 83.2%)
+    growth +2.0% (used 2.0%), price implies +3.3%; margin 12.4%, ROIC 20.7%, sales/capital 3.87, SBC 0.3% of revenue; terminal 67.7% of EV; EV/EBIT at base 16.4x vs market 17.6x; volatility 26%
+    - price / base fair value 1.09 at Medium uncertainty (volatility 26%, range 1.40x base, DCF / industry multiples 0.83): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== MCD
+
+  MCD: OVERWEIGHT (agreement 100%: Overweight)  target weight 3.9%  price 242.97  fair value 101.65 / 314.27 / 582.67
+    WACC 7.6% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.969 [Restaurant/Dining; regression 0.8], ERP 4.1%, Ke 8.8%, rating AA at coverage 7.88, Kd 5.3%, E/V 75.9%)
+    growth +5.7% (used 5.7%), price implies +1.6%; margin 46.2%, ROIC 18.2%, sales/capital 0.561, SBC 0.6% of revenue; terminal 76.0% of EV; EV/EBIT at base 21.6x vs market 17.6x; volatility 19%
+    - price / base fair value 0.77 at High uncertainty (volatility 19%, range 1.53x base, DCF / industry multiples 0.67): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== NKE
+
+  NKE: UNDERWEIGHT (agreement 100%: Underweight)  target weight 0.0%  price 37.13  fair value 16.36 / 26.99 / 47.66
+    WACC 8.6% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.151 [Shoe; regression 1.022], ERP 4.1%, Ke 9.5%, rating AAA at coverage 11.78, Kd 5.1%, E/V 83.3%)
+    growth -2.2% (used -2.2%), price implies +5.3%; margin 8.3%, ROIC 15.6%, sales/capital 2.429, SBC 1.5% of revenue; terminal 55.9% of EV; EV/EBIT at base 11.6x vs market 15.6x; volatility 36%
+    - price / base fair value 1.38 at Very High uncertainty (volatility 36%, range 1.16x base, DCF / industry multiples 0.50): Buy at or below 0.50, Overweight to 0.88, Underweight from 1.15, Sell from 1.75
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== PG
+
+  PG: HOLD (agreement 100%: Hold)  target weight 0.0%  price 159.35  fair value 65.19 / 153.60 / 266.13
+    WACC 7.7% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.794 [Household Products; regression 0.8], ERP 4.1%, Ke 8.0%, rating AAA at coverage 22.52, Kd 5.1%, E/V 91.4%)
+    growth +2.6% (used 2.6%), price implies +3.2%; margin 22.8%, ROIC 18.4%, sales/capital 3.69, SBC 0.6% of revenue; terminal 69.0% of EV; EV/EBIT at base 19.3x vs market 19.9x; volatility 20%
+    - price / base fair value 1.04 at Low uncertainty (volatility 20%, range 1.31x base, DCF / industry multiples 1.21): Buy at or below 0.80, Overweight to 0.95, Underweight from 1.05, Sell from 1.25
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== PEP
+
+  PEP: BUY (agreement 100%: Buy)  target weight 6.0%  price 131.49  fair value 81.52 / 210.34 / 377.82
+    WACC 6.8% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.721 [Beverage (Soft); regression 0.8], ERP 4.1%, Ke 7.7%, rating AAA at coverage 13.61, Kd 5.1%, E/V 74.8%)
+    growth +4.6% (used 4.6%), price implies -3.0%; margin 15.3%, ROIC 16.8%, sales/capital 1.904, SBC 0.3% of revenue; terminal 74.1% of EV; EV/EBIT at base 22.3x vs market 15.2x; volatility 21%
+    - price / base fair value 0.63 at Medium uncertainty (volatility 21%, range 1.41x base, DCF / industry multiples 1.13): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== COST
+
+  COST: SELL (agreement 100%: Sell)  target weight 0.0%  price 989.11  fair value 292.71 / 708.69 / 1,060.29
+    WACC 8.0% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.793 [Retail (General); regression 0.906], ERP 4.1%, Ke 8.0%, rating AAA at coverage 80.59, Kd 5.1%, E/V 98.0%)
+    growth +8.9% (used 8.9%), price implies +26.5%; margin 3.9%, ROIC 37.8%, sales/capital 5.0, SBC 0.3% of revenue; terminal 84.3% of EV; EV/EBIT at base 25.8x vs market 36.4x; volatility 20%
+    - price / base fair value 1.40 at Low uncertainty (volatility 20%, range 1.08x base, DCF / industry multiples 0.80): Buy at or below 0.80, Overweight to 0.95, Underweight from 1.05, Sell from 1.25
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== JNJ
+
+  JNJ: SELL (agreement 100%: Sell)  target weight 0.0%  price 255.56  fair value 83.88 / 133.87 / 234.74
+    WACC 8.4% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.971 [Drugs (Pharmaceutical); regression 0.8], ERP 4.1%, Ke 8.8%, rating AAA at coverage 21.51, Kd 5.1%, E/V 92.5%)
+    growth +6.8% (used 6.8%), price implies +39.1%; margin 25.0%, ROIC 10.6%, sales/capital 1.003, SBC 1.4% of revenue; terminal 63.4% of EV; EV/EBIT at base 14.4x vs market 26.4x; volatility 20%
+    - price / base fair value 1.91 at Medium uncertainty (volatility 20%, range 1.13x base, DCF / industry multiples 0.78): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== UNH
+
+  UNH: HOLD (agreement 100%: Hold)  target weight 0.0%  price 401.43  fair value 219.74 / 434.66 / 797.80
+    WACC 7.6% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.86 [Healthcare Support Services; regression 0.8], ERP 4.1%, Ke 8.3%, rating A+ at coverage 5.57, Kd 5.5%, E/V 83.0%)
+    growth +8.9% (used 8.9%), price implies +7.4%; margin 4.8%, ROIC 12.6%, sales/capital 5.0, SBC 0.2% of revenue; terminal 73.1% of EV; EV/EBIT at base 20.2x vs market 18.9x; volatility 36%
+    - price / base fair value 0.92 at High uncertainty (volatility 36%, range 1.33x base, DCF / industry multiples 1.41): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== LLY
+
+  LLY: HOLD (agreement 100%: Hold)  target weight 0.0%  price 1,257.03  fair value 800.64 / 1,553.72 / 2,415.93
+    WACC 8.5% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.948 [Drugs (Pharmaceutical); regression 0.8], ERP 4.1%, Ke 8.7%, rating AAA at coverage 37.58, Kd 5.1%, E/V 95.5%)
+    growth +40.6% (used 30.0%), price implies +19.1%; margin 56.2%, ROIC 29.1%, sales/capital 0.835, SBC 0.8% of revenue; terminal 74.5% of EV; EV/EBIT at base 33.7x vs market 27.5x; volatility 34%
+    - price / base fair value 0.81 at Very High uncertainty (volatility 34%, range 1.04x base, DCF / industry multiples 2.30): Buy at or below 0.50, Overweight to 0.88, Underweight from 1.15, Sell from 1.75
+    - one notch off: cash conversion 0.79 (operating cash flow / NOPAT under 0.8)
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== MRK
+
+  MRK: SELL (agreement 100%: Sell)  target weight 0.0%  price 145.95  fair value 59.50 / 87.22 / 155.89
+    WACC 8.3% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.02 [Drugs (Pharmaceutical); regression 0.8], ERP 4.1%, Ke 9.0%, rating A- at coverage 3.66, Kd 5.6%, E/V 86.7%)
+    growth +3.9% (used 3.9%), price implies +31.4%; margin 35.1%, ROIC 9.0%, sales/capital 0.45, SBC 1.3% of revenue; terminal 62.8% of EV; EV/EBIT at base 11.3x vs market 17.4x; volatility 29%
+    - price / base fair value 1.67 at High uncertainty (volatility 29%, range 1.11x base, DCF / industry multiples 2.64): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== ABBV
+
+  ABBV: SELL (agreement 100%: Sell)  target weight 0.0%  price 285.42  fair value 65.93 / 137.32 / 275.38
+    WACC 8.3% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.998 [Drugs (Biotechnology); regression 0.8], ERP 4.1%, Ke 8.9%, rating A+ at coverage 5.79, Kd 5.5%, E/V 87.5%)
+    growth +6.1% (used 6.1%), price implies +34.0%; margin 30.3%, ROIC 13.9%, sales/capital 1.087, SBC 1.5% of revenue; terminal 65.7% of EV; EV/EBIT at base 15.8x vs market 29.2x; volatility 26%
+    - price / base fair value 2.08 at Very High uncertainty (volatility 26%, range 1.53x base, DCF / industry multiples 0.22): Buy at or below 0.50, Overweight to 0.88, Underweight from 1.15, Sell from 1.75
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== WFC
+
+  WFC: UNDERWEIGHT (agreement 100%: Underweight)  target weight 0.0%  price 83.87  fair value 51.94 / 64.39 / 88.40
+    bank: ROE 9.9%, price implies ROE 10.7%, book value per share 54.51; cost of equity 8.6% = rf 4.8% + beta 0.761 x ERP 4.1%; volatility 26%
+    - price / base fair value 1.30 at Medium uncertainty (volatility 26%, range 0.57x base, DCF / industry multiples 0.95): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== GS
+
+  GS: SELL (agreement 100%: Sell)  target weight 0.0%  price 881.26  fair value 373.63 / 480.48 / 616.68
+    bank: ROE 11.9%, price implies ROE 16.1%, book value per share 376.80; cost of equity 9.6% = rf 4.8% + beta 1.171 x ERP 4.1%; volatility 32%
+    - price / base fair value 1.83 at High uncertainty (volatility 32%, range 0.51x base, DCF / industry multiples 0.68): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== HON
+
+  HON: OVERWEIGHT (agreement 100%: Overweight)  target weight 2.8%  price 211.41  fair value 222.03 / 548.21 / 968.46
+    WACC 7.7% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.173 [Diversified; regression 0.89], ERP 4.1%, Ke 9.6%, rating A+ at coverage 5.8, Kd 5.5%, E/V 65.7%)
+    growth +6.4% (used 6.4%), price implies -8.5%; margin 23.5%, ROIC 14.6%, sales/capital 1.675, SBC 0.5% of revenue; terminal 72.7% of EV; EV/EBIT at base 22.3x vs market 10.4x; volatility 27%
+    - price / base fair value 0.39 at High uncertainty (volatility 27%, range 1.36x base, DCF / industry multiples 1.99): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    - one notch off: cash conversion 0.71 (operating cash flow / NOPAT under 0.8)
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== UNP
+
+  UNP: UNDERWEIGHT (agreement 100%: Underweight)  target weight 0.0%  price 289.04  fair value 95.42 / 225.94 / 399.70
+    WACC 7.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.925 [Transportation (Railroads); regression 0.907], ERP 4.1%, Ke 8.6%, rating AA at coverage 7.92, Kd 5.3%, E/V 84.6%)
+    growth +1.8% (used 1.8%), price implies +6.5%; margin 40.0%, ROIC 15.6%, sales/capital 0.506, SBC 0.5% of revenue; terminal 69.2% of EV; EV/EBIT at base 16.1x vs market 19.8x; volatility 22%
+    - price / base fair value 1.28 at Medium uncertainty (volatility 22%, range 1.35x base, DCF / industry multiples 0.89): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== RTX
+
+  RTX: SELL (agreement 100%: Sell)  target weight 0.0%  price 193.92  fair value 69.99 / 108.94 / 175.19
+    WACC 8.2% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.966 [Aerospace/Defense; regression 0.8], ERP 4.1%, Ke 8.8%, rating A+ at coverage 5.63, Kd 5.5%, E/V 87.1%)
+    growth +10.8% (used 10.8%), price implies +39.1%; margin 11.3%, ROIC 8.2%, sales/capital 3.439, SBC 0.6% of revenue; terminal 61.8% of EV; EV/EBIT at base 16.9x vs market 27.7x; volatility 26%
+    - price / base fair value 1.78 at High uncertainty (volatility 26%, range 0.97x base, DCF / industry multiples 0.44): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== DE
+
+  DE: UNDERWEIGHT (agreement 100%: Underweight)  target weight 0.0%  price 641.86  fair value 101.14 / 176.82 / 410.76
+    WACC 7.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 1.082 [Farming/Agriculture; regression 0.929], ERP 4.1%, Ke 9.2%, rating A- at coverage 3.11, Kd 5.6%, E/V 72.8%)
+    growth +1.7% (used 1.7%), price implies n/a; margin 19.8%, ROIC 7.9%, sales/capital 0.566, SBC 0.3% of revenue; terminal 61.6% of EV; EV/EBIT at base 10.9x vs market 24.1x; volatility 32%
+    - price / base fair value 3.63 at Extreme uncertainty (volatility 32%, range 1.75x base, DCF / industry multiples 0.30): Buy at or below 0.25, Overweight to 0.81, Underweight from 1.60, Sell from 4.00
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== CVX
+
+  CVX: UNDERWEIGHT (agreement 100%: Underweight)  target weight 0.0%  price 224.99  fair value 116.32 / 176.89 / 323.40
+    WACC 7.2% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.65 [Oil/Gas (Integrated); regression 0.8], ERP 4.1%, Ke 7.4%, rating AAA at coverage 20.04, Kd 5.1%, E/V 92.3%)
+    growth +1.7% (used 1.7%), price implies +8.8%; margin 13.7%, ROIC 9.9%, sales/capital 0.981, SBC 0.0% of revenue; terminal 65.4% of EV; EV/EBIT at base 13.4x vs market 16.7x; volatility 24%
+    - price / base fair value 1.27 at Medium uncertainty (volatility 24%, range 1.17x base, DCF / industry multiples 0.87): Buy at or below 0.70, Overweight to 0.93, Underweight from 1.07, Sell from 1.35
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== COP
+
+  COP: OVERWEIGHT (agreement 100%: Overweight)  target weight 2.4%  price 146.51  fair value 100.38 / 178.43 / 335.68
+    WACC 7.0% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.638 [Oil/Gas (Production and Exploration); regression 0.8], ERP 4.1%, Ke 7.4%, rating AAA at coverage 18.34, Kd 5.1%, E/V 87.9%)
+    growth +2.0% (used 2.0%), price implies -2.8%; margin 26.0%, ROIC 13.4%, sales/capital 0.688, SBC 0.6% of revenue; terminal 68.4% of EV; EV/EBIT at base 15.8x vs market 13.2x; volatility 31%
+    - price / base fair value 0.82 at Very High uncertainty (volatility 31%, range 1.32x base, DCF / industry multiples 1.60): Buy at or below 0.50, Overweight to 0.88, Underweight from 1.15, Sell from 1.75
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== LIN
+
+  LIN: SELL (agreement 100%: Sell)  target weight 0.0%  price 498.43  fair value 116.46 / 222.11 / 451.20
+    WACC 7.9% (rf 4.8% 2026-09-01 (rate in Damodaran's ERP computation), beta 0.914 [Chemical (Specialty); regression 0.8], ERP 4.1%, Ke 8.5%, rating AAA at coverage 37.36, Kd 5.1%, E/V 87.3%)
+    growth +3.6% (used 3.6%), price implies +30.8%; margin 26.5%, ROIC 10.8%, sales/capital 1.261, SBC 0.4% of revenue; terminal 61.3% of EV; EV/EBIT at base 14.1x vs market 27.7x; volatility 19%
+    - price / base fair value 2.24 at High uncertainty (volatility 19%, range 1.51x base, DCF / industry multiples 0.60): Buy at or below 0.60, Overweight to 0.90, Underweight from 1.11, Sell from 1.55
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+=== SO
+
+  SO: HOLD (agreement 100%: Hold)  target weight 0.0%  price 91.18  fair value 71.74 / 94.26 / 127.66
+    dividend discount: dividend per share 2.71 (yield 3.0%), growth 6.3% fading to 4.4%, cost of equity 7.4% = rf n/a + beta None x ERP n/a; volatility 17%
+    - price / base fair value 0.97 at Low uncertainty (volatility 17%, range 0.59x base, DCF / industry multiples 1.17): Buy at or below 0.80, Overweight to 0.95, Underweight from 1.05, Sell from 1.25
+    model spend 0 tokens, $0.0000, 2s | batch $0.0000 of $0.50
+
+=== AMT
+
+  AMT: NO RATING (agreement 100%: No rating)  target weight 0.0%  price 185.27
+    - dividends, share count or revenue history not available from XBRL
+    model spend 0 tokens, $0.0000, 1s | batch $0.0000 of $0.50
+
+audit: 50 of 50 memos add up
+market consistency: median price / fair value 1.22 over 49 companies (consistent with the market on average)
+memos: runs\memos\20261019-122917
+batch: 50 companies in 83s, 0 model calls, 0 tokens (0 cached), $0.0000 of $0.50
+
+ticker rating      agree weight     price      bear      base      bull  upside  key figure
+MSFT   Hold         100%   0.0%    529.05    264.56    506.35    713.02     -4%  WACC 9.8%, growth 17.0% vs implied +19.3%
+AAPL   Sell         100%   0.0%    343.46    111.26    247.06    365.12    -28%  WACC 10.2%, growth 8.0% vs implied +20.8%
+NVDA   Hold         100%   0.0%    214.13    146.85    281.89    404.23    +32%  WACC 11.0%, growth 30.0% vs implied +15.8%
+GOOGL  Hold         100%   0.0%    340.59    195.17    365.48    511.87     +7%  WACC 8.9%, growth 20.1% vs implied +16.1%
+AMZN   Sell         100%   0.0%    250.00     71.23    112.96    192.39    -55%  WACC 8.8%, growth 13.8% vs implied +75.0%
+META   Buy          100%   3.0%    709.33    654.03  1,312.47  1,866.96    +85%  WACC 8.9%, growth 23.8% vs implied +2.9%
+V      Overweight   100%   3.4%    402.61    216.12    514.57    747.83    +28%  WACC 7.5%, growth 12.7% vs implied +6.9%
+JPM    Underweight  100%   0.0%    339.72    160.61    271.08    346.83    -20%  ROE 14.9% vs implied 14.1%
+WMT    Sell         100%   0.0%    118.81     30.67     71.54    124.70    -40%  WACC 7.9%, growth 5.7% vs implied +24.7%
+KO     Sell         100%   0.0%     93.90     26.34     64.86    114.36    -31%  WACC 7.0%, growth 4.4% vs implied +12.3%
+PFE    Sell         100%   0.0%     29.58     12.19     18.59     33.91    -37%  WACC 7.5%, growth -5.0% vs implied +4.9%
+CAT    Underweight  100%   0.0%    730.76    290.84    582.96    907.17    -20%  WACC 9.6%, growth 11.4% vs implied +22.8%
+BAC    Hold         100%   0.0%     51.23     40.41     48.39     66.91     -6%  ROE 9.5% vs implied 9.4%
+O      Overweight   100%   4.5%     56.08     55.53     69.11     87.18    +23%  DDM: yield 5.7%, growth 2.7%, Ke 7.4%
+PLD    Overweight   100%   3.5%    125.75    116.03    149.64    197.39    +19%  DDM: yield 3.3%, growth 8.0%, Ke 8.2%
+NEE    Overweight   100%   3.6%     79.80     76.87    101.54    138.21    +27%  DDM: yield 2.9%, growth 7.0%, Ke 7.4%
+DUK    Hold         100%   0.0%    121.47     88.94    116.25    156.69     -4%  DDM: yield 3.4%, growth 5.4%, Ke 7.0%
+PGR    Sell         100%   0.0%    218.49     80.45    145.53    172.34    -33%  ROE 22.5% vs implied 23.7%
+TRV    Sell         100%   0.0%    389.54    154.11    223.39    275.85    -43%  ROE 14.9% vs implied 18.9%
+CB     Sell         100%   0.0%    359.79    199.45    275.15    343.33    -24%  ROE 13.7% vs implied 14.4%
+MET    Sell         100%   0.0%    100.76     42.72     55.12     71.35    -45%  ROE 11.6% vs implied 15.6%
+AVGO   Hold         100%   0.0%    328.75    175.97    308.46    460.70     -6%  WACC 10.9%, growth 30.0% vs implied +33.3%
+ORCL   Hold         100%   0.0%    128.23     43.31     81.49    168.80    -36%  WACC 9.3%, growth 16.1% vs implied +40.0%
+CSCO   Underweight  100%   0.0%    107.39     43.31     88.08    136.73    -18%  WACC 8.3%, growth 7.7% vs implied +13.7%
+ADBE   Buy          100%   3.0%    245.20    306.24    665.80    930.04   +172%  WACC 9.8%, growth 11.3% vs implied -7.6%
+NFLX   Overweight   100%   2.0%     70.53     49.63     96.25    134.68    +36%  WACC 9.0%, growth 14.3% vs implied +6.1%
+DIS    Hold         100%   0.0%    110.59     65.70    102.89    216.13     -7%  WACC 8.2%, growth 4.5% vs implied +5.9%
+VZ     Overweight   100%   2.8%     44.79     29.08     57.83    127.25    +29%  WACC 5.9%, growth 0.9% vs implied -4.7%
+HD     Underweight  100%   0.0%    309.63    106.16    284.57    504.38     -8%  WACC 8.9%, growth 2.0% vs implied +3.3%
+MCD    Overweight   100%   3.9%    242.97    101.65    314.27    582.67    +29%  WACC 7.6%, growth 5.7% vs implied +1.6%
+NKE    Underweight  100%   0.0%     37.13     16.36     26.99     47.66    -27%  WACC 8.6%, growth -2.2% vs implied +5.3%
+PG     Hold         100%   0.0%    159.35     65.19    153.60    266.13     -4%  WACC 7.7%, growth 2.6% vs implied +3.2%
+PEP    Buy          100%   6.0%    131.49     81.52    210.34    377.82    +60%  WACC 6.8%, growth 4.6% vs implied -3.0%
+COST   Sell         100%   0.0%    989.11    292.71    708.69  1,060.29    -28%  WACC 8.0%, growth 8.9% vs implied +26.5%
+JNJ    Sell         100%   0.0%    255.56     83.88    133.87    234.74    -48%  WACC 8.4%, growth 6.8% vs implied +39.1%
+UNH    Hold         100%   0.0%    401.43    219.74    434.66    797.80     +8%  WACC 7.6%, growth 8.9% vs implied +7.4%
+LLY    Hold         100%   0.0%  1,257.03    800.64  1,553.72  2,415.93    +24%  WACC 8.5%, growth 30.0% vs implied +19.1%
+MRK    Sell         100%   0.0%    145.95     59.50     87.22    155.89    -40%  WACC 8.3%, growth 3.9% vs implied +31.4%
+ABBV   Sell         100%   0.0%    285.42     65.93    137.32    275.38    -52%  WACC 8.3%, growth 6.1% vs implied +34.0%
+WFC    Underweight  100%   0.0%     83.87     51.94     64.39     88.40    -23%  ROE 9.9% vs implied 10.7%
+GS     Sell         100%   0.0%    881.26    373.63    480.48    616.68    -45%  ROE 11.9% vs implied 16.1%
+HON    Overweight   100%   2.8%    211.41    222.03    548.21    968.46   +159%  WACC 7.7%, growth 6.4% vs implied -8.5%
+UNP    Underweight  100%   0.0%    289.04     95.42    225.94    399.70    -22%  WACC 7.9%, growth 1.8% vs implied +6.5%
+RTX    Sell         100%   0.0%    193.92     69.99    108.94    175.19    -44%  WACC 8.2%, growth 10.8% vs implied +39.1%
+DE     Underweight  100%   0.0%    641.86    101.14    176.82    410.76    -72%  WACC 7.9%, growth 1.7% vs implied n/a
+CVX    Underweight  100%   0.0%    224.99    116.32    176.89    323.40    -21%  WACC 7.2%, growth 1.7% vs implied +8.8%
+COP    Overweight   100%   2.4%    146.51    100.38    178.43    335.68    +22%  WACC 7.0%, growth 2.0% vs implied -2.8%
+LIN    Sell         100%   0.0%    498.43    116.46    222.11    451.20    -55%  WACC 7.9%, growth 3.6% vs implied +30.8%
+SO     Hold         100%   0.0%     91.18     71.74     94.26    127.66     +3%  DDM: yield 3.0%, growth 6.3%, Ke 7.4%
+AMT    No rating    100%   0.0%    185.27                                        dividends, share count or revenue history not available from
+track record: 49 code ratings added to data/track_record.csv
+
+saved runs\memo-20261019-123040.json
+
+exit 0

@@ -76,19 +76,39 @@ A lesson from building it: with the January 2026 industry tables applied to ever
 
 Leaks left: industry betas and rating spreads are the 2026 vintage; SIC codes and industry mapping are today's; companies that left the index are missing. The readers and the red team cannot be backtested, since they read today's filings; their effect is measured by the forward track record only.
 
+## Forward test, from 2026-10-19
+
+One question: does the model layer (readers, forward drivers, red team, noise meter) add anything over the code-only valuation? `data/universe.csv` fixes 50 US large caps across all eleven sectors, the 21 names rated on 2026-10-01 first, with banks, insurers, utilities and REITs on every valuation route. `python desk.py --universe` rates them twice on the same day, code first (`--valuation-only`, no model call), then the full desk, and records both in `data/track_record.csv` with two columns: `variant` (`code` or `full`) and `model_snapshot`. DeepSeek's API answers with the alias `deepseek-flash` only, so the snapshot is declared in `track.SNAPSHOTS` (`deepseek-v4.1-flash-1017` since 2026-10-17), and an alias move starts a new series. Rows recorded before 2026-10-19 read as full, snapshot `deepseek-v4.1-flash-0910` (V4.1 Flash as served before the 17 October update).
+
+`python track.py score` reports each series (variant and snapshot) at 90, 180 and 365 days: the equal-weight excess return over SPY of Buy and Overweight minus that of Underweight and Sell, hit counts, the split by rating day, and each full series against the code ratings of the same companies on the same days. Nothing is due before 2026-12-29.
+
+| First batch, 2026-10-19, off-peak | code | full |
+|---|---|---|
+| Rated and recorded | 49 of 50 (American Tower: dividend or share history missing from XBRL) | 27 (the $0.40 ledger cap was reached during Verizon, whose memo is kept but not recorded) |
+| Time | 83 s | 1,087 s, 35 s median a company |
+| Model use | none | 454 calls, 1.98 million tokens; 30% of DeepSeek input served from cache |
+| Ledger | $0 | $0.401: DeepSeek $0.204, Gemini red team $0.196 at the paid rate (it ran on the free tier) |
+| DeepSeek at V4.1 Flash off-peak list prices ($0.15 cache miss, $0.003 hit, $0.60 output per million; the ledger charges $0.14 on every input token and $0.28 output) | $0 | $0.214 |
+| Audit | 50 of 50 | 26 of 28 (Coca-Cola and Chubb: segment table rows the verifier rejects) |
+| Full rating differs from code | | 4 of 27: Pfizer and Cisco one notch up (guidance growth), Oracle one down (new risk factor share), Prologis two down (a false red flag, below) |
+
+Against 2026-10-01 on the 21 shared names, 6 final ratings changed. Price moves alone account for 5 (Apple, Walmart, Chubb down a notch, Bank of America up, Realty Income down): the 2026-10-01 fair value at today's price gives the same code rating as today's run on 20 of 21. The sixth is Prologis, Overweight to Underweight: the new snapshot quoted a different internal control sentence ("no significant changes ... corrective actions with regard to significant deficiencies and material weaknesses"), which the red flag pattern reads as a weakness. Every forward driver came out with the same numbers on both dates. Claims checked 812 of 830 against 828 of 839; red team moves 0 of 63 against 3 of 63 (all three fail the formula rule added after that run, which also rejected all 15 corrections proposed today on the 27 names). Readers' tokens served from cache fell from 59% to 27% of the total.
+
 ## Run it
 
 ```
 python desk.py --tickers MSFT,AAPL --budget-usd 0.50       # full desk, memos in runs/memos/
 python desk.py --tickers MSFT --valuation-only             # free: SEC, FRED and Yahoo only
+python desk.py --universe --budget-usd 0.50                # forward test: data/universe.csv, code-only pass then full desk
+python desk.py --universe --variants code                  # forward test, the free code-only pass alone
 python backtest.py fetch && python backtest.py run          # free: point-in-time replay of the code core
 python run.py --tickers MSFT --readers performance         # one reader, for testing
-python track.py show                                       # ratings recorded by full runs
-python track.py score --min-days 90                         # excess return vs SPY by rating, once they age
+python track.py show                                       # ratings recorded, with variant and model snapshot
+python track.py score                                      # long-short excess return vs SPY at 90, 180, 365 days, by variant
 python -m pytest tests/unit_tests                           # offline tests, no key, no cost
 ```
 
-Every full run appends its ratings to `data/track_record.csv`. They are scored later against SPY, so the track record builds forward, without a backtest and without the look-ahead a backtest on today's filings would carry.
+Every run appends its ratings to `data/track_record.csv` with its variant (`code` for `--valuation-only`, `full` for the desk) and the readers' model snapshot. They are scored later against SPY, so the track record builds forward, without a backtest and without the look-ahead a backtest on today's filings would carry.
 
 Glassbench (the local run viewer next to TradingAgents and AI Hedge Fund) drives the same `Desk.company()` through its own driver and shows each reader, the valuation, the red team and the noise meter as lanes on the run page.
 
