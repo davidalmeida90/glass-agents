@@ -1,6 +1,8 @@
-# Fundamentalist Agents
+# Glass Agents
 
-A first-pass equity underwriting memo for any US-listed company, in about 40 seconds and one cent: evidence read from its own SEC filings and checked against them in code, a sourced valuation, a rating a person can recompute, and the points where it could be wrong.
+A firm of financial analysts, built from agents. Six analyst agents each cover one part of a company's own SEC filings (financial performance, accounting quality, capital allocation, this year's new risk factors, management's guidance, segments), and every number they quote is checked against the filing in code. Code then values the company and rates it, a red team on a different model family argues the other side, and the firm hands back a first-pass memo for any US-listed company in about 40 seconds and one cent: the evidence, a sourced valuation, a rating a person can recompute, and the points where it could be wrong.
+
+Agents read and quote; code checks and calculates. Glass because every step is open to inspection: each claim carries its quote and passage, each valuation input its source, each rating its arithmetic.
 
 ## The problem it solves
 

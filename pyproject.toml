@@ -1,7 +1,7 @@
 [project]
-name = "fundamentalist-agents"
+name = "glass-agents"
 version = "0.0.1"
-description = "Evidence readers over SEC filings, started from LangChain's data-enrichment template"
+description = "A firm of financial analysts built from agents: LLM readers quote the SEC filings, code checks every claim, values the company and rates it"
 authors = [
     { name = "David Arias" },
 ]
