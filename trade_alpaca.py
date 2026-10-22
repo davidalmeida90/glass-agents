@@ -145,10 +145,10 @@ def main() -> int:
         batch, path = loaded[0], paths[0]
         stamp = path.stem.replace("memo-", "")
     else:                                                       # Glassbench run memos, one company each
-        batch = {"variant": "glassbench runs", "model_snapshot": "deepseek-flash",
+        batch = {"variant": "agent runs", "model_snapshot": "deepseek-flash",
                  "memos": [m for d in loaded for m in (d["memos"] if "memos" in d else [d])]}
         stamp = "gb-" + time.strftime("%Y%m%d-%H%M%S")
-        path = Path(f"{len(paths)} Glassbench runs")
+        path = Path(f"{len(paths)} agent runs")
     acct = api.get("/account").json()
     equity = float(acct["equity"])
     positions = {p["symbol"]: p for p in api.get("/positions").json()}
