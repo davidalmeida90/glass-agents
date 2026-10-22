@@ -30,7 +30,13 @@ def key_reader():
     (copy .env.example), then the environment. Values go to the program and are never printed."""
     try:
         import chaves  # David's key reader: returns values to the program, prints nothing
-        return chaves.obter, True
+
+        def get(name):
+            try:
+                return chaves.obter(name)
+            except RuntimeError:  # chaves raises on a missing key; here a missing key reads as empty
+                return ""
+        return get, True
     except ImportError:
         from dotenv import dotenv_values
         values = dotenv_values(HERE / ".env")
