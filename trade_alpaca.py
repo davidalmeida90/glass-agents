@@ -3,7 +3,6 @@
   python trade_alpaca.py                     plan only: the orders the latest full batch implies, nothing sent
   python trade_alpaca.py --send              send them (asks y/N; --yes skips the question)
   python trade_alpaca.py --memo runs/memo-....json --send --yes
-  python trade_alpaca.py --memo "..	rading_agents\desk\data
   python trade_alpaca.py --memo "../trading_agents/desk/data/runs/20261022-*/memo.json"   Glassbench run memos
   python trade_alpaca.py --status            account, positions and open orders
 
