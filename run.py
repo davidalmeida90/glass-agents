@@ -25,17 +25,29 @@ sys.path.insert(0, str(HERE / "src"))
 sys.path.insert(0, str(HERE.parent / "FIDCS" / "backend"))
 
 
-def load_keys() -> None:
-    import chaves  # David's key reader: returns values to the program, prints nothing
+def key_reader():
+    """Where keys come from: David's chaves when it is there (his machine), otherwise a .env file in this folder
+    (copy .env.example), then the environment. Values go to the program and are never printed."""
+    try:
+        import chaves  # David's key reader: returns values to the program, prints nothing
+        return chaves.obter, True
+    except ImportError:
+        from dotenv import dotenv_values
+        values = dotenv_values(HERE / ".env")
+        return (lambda name: os.environ.get(name) or values.get(name) or ""), False
 
-    os.environ.setdefault("DEEPSEEK_API_KEY", chaves.obter("DEEPSEEK_API_KEY") or "")
-    os.environ.setdefault("FRED_API_KEY", chaves.obter("FRED_API_KEY") or "")
-    os.environ.setdefault("GEMINI_API_KEY", chaves.obter("GEMINI_API_KEY") or "")  # the red team's model family
-    os.environ.setdefault("FREETIER_API_KEY", chaves.obter("FREETIER_API_KEY") or "")
-    email = chaves.obter("SEC_EDGAR_EMAIL") or ""
-    os.environ.setdefault("SEC_USER_AGENT", f"David Arias {email}".strip())
+
+def load_keys() -> None:
+    get, own = key_reader()
+    os.environ.setdefault("DEEPSEEK_API_KEY", get("DEEPSEEK_API_KEY") or "")
+    os.environ.setdefault("FRED_API_KEY", get("FRED_API_KEY") or "")
+    os.environ.setdefault("GEMINI_API_KEY", get("GEMINI_API_KEY") or "")  # the red team's model family
+    os.environ.setdefault("FREETIER_API_KEY", get("FREETIER_API_KEY") or "")
+    email = get("SEC_EDGAR_EMAIL") or ""
+    name = get("SEC_EDGAR_NAME") or ("David Arias" if own else "Glass Agents user")
+    os.environ.setdefault("SEC_USER_AGENT", f"{name} {email}".strip())
     if not os.environ["DEEPSEEK_API_KEY"]:
-        sys.exit("DEEPSEEK_API_KEY is missing from Agents_model/.env")
+        sys.exit("DEEPSEEK_API_KEY is missing: copy .env.example to .env and fill it in")
 
 
 async def preflight(callbacks, model_name: str) -> dict:

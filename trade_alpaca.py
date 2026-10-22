@@ -3,6 +3,8 @@
   python trade_alpaca.py                     plan only: the orders the latest full batch implies, nothing sent
   python trade_alpaca.py --send              send them (asks y/N; --yes skips the question)
   python trade_alpaca.py --memo runs/memo-....json --send --yes
+  python trade_alpaca.py --memo "..	rading_agents\desk\data
+  python trade_alpaca.py --memo "../trading_agents/desk/data/runs/20261022-*/memo.json"   Glassbench run memos
   python trade_alpaca.py --status            account, positions and open orders
 
 What becomes an order (long only, sized by the desk's own rule in sizing.py):
@@ -15,13 +17,14 @@ them for the next open.
 
 Safety: paper keys only (they start with PK) on the paper endpoint, one order per stock per batch (the client
 order ID carries the batch stamp, so a second --send of the same batch is refused by Alpaca), a symbol with a
-working order is skipped, no order above MAX_ORDER of equity. Keys come from Agents_model/.env through
-FIDCS/backend/chaves.py and are never printed. Every order sent is appended to runs/orders.jsonl.
+working order is skipped, no order above MAX_ORDER of equity. Keys come from .env (see .env.example) and are never
+printed. Every order sent is appended to runs/orders.jsonl.
 """
 
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import math
 import sys
@@ -42,11 +45,12 @@ ORDERS_LOG = HERE / "runs" / "orders.jsonl"
 
 
 def client() -> httpx.Client:
-    import chaves  # David's key reader: returns values to the program, prints nothing
+    from run import key_reader  # chaves on David's machine, else .env in this folder, else the environment
 
-    key, secret = chaves.obter("ALPACA_API_KEY") or "", chaves.obter("ALPACA_SECRET_KEY") or ""
+    get, _ = key_reader()
+    key, secret = get("ALPACA_API_KEY") or "", get("ALPACA_SECRET_KEY") or ""
     if not key or not secret:
-        sys.exit("ALPACA_API_KEY / ALPACA_SECRET_KEY missing from Agents_model/.env")
+        sys.exit("ALPACA_API_KEY / ALPACA_SECRET_KEY missing: add your paper keys to .env (see .env.example)")
     if not key.startswith("PK"):
         sys.exit("These look like live keys (paper keys start with PK). This script only trades paper accounts.")
     return httpx.Client(base_url=PAPER, timeout=15,
@@ -126,7 +130,7 @@ def status(api: httpx.Client) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
-    ap.add_argument("--memo", type=Path, help="a desk batch file, runs/memo-*.json (default: the latest full batch)")
+    ap.add_argument("--memo", nargs="+", help="a desk batch file (runs/memo-*.json) or Glassbench run memos (memo.json), wildcards allowed (default: the latest full batch)")
     ap.add_argument("--send", action="store_true", help="send the orders (default: plan only)")
     ap.add_argument("--yes", action="store_true", help="do not ask before sending")
     ap.add_argument("--status", action="store_true", help="account, positions and open orders, then exit")
@@ -136,9 +140,16 @@ def main() -> int:
     if args.status:
         status(api)
         return 0
-    path = args.memo or latest_full_batch()
-    batch = json.loads(path.read_text(encoding="utf-8"))
-    stamp = path.stem.replace("memo-", "")
+    paths = [Path(f) for pat in (args.memo or []) for f in sorted(glob.glob(pat))] or [latest_full_batch()]
+    loaded = [json.loads(p.read_text(encoding="utf-8")) for p in paths]
+    if len(loaded) == 1 and "memos" in loaded[0]:               # one desk batch
+        batch, path = loaded[0], paths[0]
+        stamp = path.stem.replace("memo-", "")
+    else:                                                       # Glassbench run memos, one company each
+        batch = {"variant": "glassbench runs", "model_snapshot": "deepseek-flash",
+                 "memos": [m for d in loaded for m in (d["memos"] if "memos" in d else [d])]}
+        stamp = "gb-" + time.strftime("%Y%m%d-%H%M%S")
+        path = Path(f"{len(paths)} Glassbench runs")
     acct = api.get("/account").json()
     equity = float(acct["equity"])
     positions = {p["symbol"]: p for p in api.get("/positions").json()}
