@@ -4,6 +4,10 @@ A firm of financial analysts, built from agents. Six analyst agents each cover o
 
 Agents read and quote; code checks and calculates. Glass because every step is open to inspection: each claim carries its quote and passage, each valuation input its source, each rating its arithmetic.
 
+[![Build Your Own AI Finance Agents with LangGraph (Open Source), the full walkthrough on YouTube](https://img.youtube.com/vi/um4ygp9nlrM/maxresdefault.jpg)](https://youtu.be/um4ygp9nlrM)
+
+*Video walkthrough: [Build Your Own AI Finance Agents with LangGraph](https://youtu.be/um4ygp9nlrM), from a plain LLM test to a paper order, with the code behind each step.*
+
 ## The problem it solves
 
 LLM trading agents give a rating you cannot check, cannot afford at scale and cannot trust twice:
