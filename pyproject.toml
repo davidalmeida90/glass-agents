@@ -1,6 +1,6 @@
 [project]
 name = "glass-agents"
-version = "0.0.1"
+version = "0.1.0"
 description = "A firm of financial analysts built from agents: LLM readers quote the SEC filings, code checks every claim, values the company and rates it"
 authors = [
     { name = "David Arias" },
