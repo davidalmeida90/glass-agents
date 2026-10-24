@@ -15,16 +15,22 @@ large cap a Sell; an owner earnings DCF at a flat 9% then made capex-heavy compa
 from __future__ import annotations
 
 import json
-from dataclasses import replace
 from datetime import date, timedelta
 from typing import Any
 
 from fundamentalist import dcf
 from fundamentalist.edgar import sec_get
-from fundamentalist.market import (beta, bottom_up_beta, industry_ev_ebit, industry_pbv, industry_pe, risk_free,
-                                   synthetic_rating)
-from fundamentalist.parameters import value as param
 from fundamentalist.forward import apply as forward_apply
+from fundamentalist.market import (
+    beta,
+    bottom_up_beta,
+    industry_ev_ebit,
+    industry_pbv,
+    industry_pe,
+    risk_free,
+    synthetic_rating,
+)
+from fundamentalist.parameters import value as param
 
 REVENUE = ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet",
            "RevenueFromContractWithCustomerIncludingAssessedTax"]

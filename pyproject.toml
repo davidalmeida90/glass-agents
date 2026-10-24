@@ -36,11 +36,10 @@ lint.select = [
     "E",    # pycodestyle
     "F",    # pyflakes
     "I",    # isort
-    "D",    # pydocstyle
-    "D401", # First line should be in imperative mood
-    "T201",
     "UP",
 ]
+# The template's docstring rules (D, D401) and its no-print rule (T201) are dropped: run.py, desk.py and the
+# backtests are command-line tools that print by design, and docstrings are written where they explain something.
 include = ["*.py", "*.pyi", "*.ipynb"]
 lint.ignore = ["UP006", "UP007", "UP035", "UP045", "D417", "E501"]
 [tool.ruff.lint.per-file-ignores]

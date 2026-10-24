@@ -44,7 +44,9 @@ ORDERS_LOG = HERE / "runs" / "orders.jsonl"
 
 
 def client() -> httpx.Client:
-    from run import key_reader  # chaves on David's machine, else .env in this folder, else the environment
+    from run import (
+        key_reader,  # chaves on David's machine, else .env in this folder, else the environment
+    )
 
     get, _ = key_reader()
     key, secret = get("ALPACA_API_KEY") or "", get("ALPACA_SECRET_KEY") or ""

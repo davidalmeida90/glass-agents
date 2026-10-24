@@ -26,14 +26,13 @@ import gzip
 import json
 import math
 import os
-import pickle
+import subprocess
 import sys
 import time
 import types
 import urllib.request
 from datetime import date, timedelta
 from functools import lru_cache
-import subprocess
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -131,7 +130,6 @@ _ORIG: dict = {}
 
 def _vintage(year: int) -> None:
     """Point the industry tables at Damodaran's January file for *year* (the 2026 one when there is none)."""
-    from fundamentalist import market as M
 
     h = _HIST.get(str(year))
     if h is None:
@@ -154,7 +152,9 @@ def _install() -> None:
     sys.modules["yfinance"] = stub
     os.environ.setdefault("FRED_API_KEY", "unused-in-backtest")  # risk_free() checks the key before the ERP branch
 
-    from fundamentalist import market as M, sizing as S, valuation as V
+    from fundamentalist import market as M
+    from fundamentalist import sizing as S
+    from fundamentalist import valuation as V
 
     _P.update(pd.read_pickle(CACHE / "prices.pkl"))
     with open(HERE / "data" / "damodaran_implied_erp_history.csv", encoding="utf-8") as fh:
@@ -243,7 +243,8 @@ def _vol(ticker: str, as_of: str | None = None) -> float | None:
 def _value_one(args: tuple[str, list[str]]) -> list[dict]:
     """Every month end for one company (one worker, one company's facts in memory at a time)."""
     ticker, dates = args
-    from fundamentalist import market as M, parameters as P
+    from fundamentalist import market as M
+    from fundamentalist import parameters as P
     from fundamentalist.decision import decide, flags
     from fundamentalist.valuation import EQUITY, _instant, value
 

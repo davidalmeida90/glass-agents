@@ -1,12 +1,19 @@
 version: 2
 updates:
+  # one grouped pull request a month instead of one per package every week
   - package-ecosystem: "uv"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     versioning-strategy: "increase"
+    groups:
+      python-packages:
+        patterns: ["*"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
+    groups:
+      github-actions:
+        patterns: ["*"]

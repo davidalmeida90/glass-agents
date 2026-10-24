@@ -8,7 +8,7 @@ primary source on `as_of`; unverified values are printed as such.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 

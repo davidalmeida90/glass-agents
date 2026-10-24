@@ -114,7 +114,7 @@ async def main() -> int:
         ap.error("give a ticker or --tickers")
 
     load_keys()
-    from fundamentalist.budget import BudgetExceeded, TokenLedger
+    from fundamentalist.budget import TokenLedger
     from fundamentalist.edgar import load_index
     from fundamentalist.schemas import READERS
     from fundamentalist.verifier import verify

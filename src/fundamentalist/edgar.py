@@ -8,13 +8,13 @@ from __future__ import annotations
 
 import html
 import json
-from datetime import date, timedelta
 import math
 import os
 import re
 import urllib.request
 from collections import Counter
 from dataclasses import dataclass, field
+from datetime import date, timedelta
 from pathlib import Path
 
 CACHE = Path(__file__).resolve().parents[2] / "cache"

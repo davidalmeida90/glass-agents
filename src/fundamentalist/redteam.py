@@ -24,9 +24,8 @@ from typing import Any
 
 from langchain_core.messages import HumanMessage
 
-from fundamentalist.utils import init_model
-
 from fundamentalist.parameters import PARAMS
+from fundamentalist.utils import init_model
 
 VALUATION_FIELDS = ["price", "fair_value", "growth_used", "revenue_growth", "implied_growth", "wacc", "operating_margin",
                     "operating_margin_reported", "rd_margin_adjustment",
